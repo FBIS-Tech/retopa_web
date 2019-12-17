@@ -1,0 +1,13 @@
+.container {
+  width: 90%;
+  //   background-color: red;
+  margin: auto;
+  padding-top: 84px;
+  padding-bottom: 47px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 76%;
+  }
+}

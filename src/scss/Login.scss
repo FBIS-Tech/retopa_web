@@ -1,0 +1,70 @@
+.Login_container {
+  max-width: 602px;
+  width: 90%;
+  margin: auto;
+  .end {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    display: flex;
+    align-items: flex-end;
+    letter-spacing: -0.02em;
+    color: #959d9e;
+    margin-top: 24px;
+    span {
+      font-weight: 600;
+      color: #3c546c;
+      cursor: pointer;
+    }
+  }
+}
+.welcome {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 34px;
+  line-height: 41px;
+  color: #2f3a45;
+}
+
+.login_text {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  color: #3e3e3e;
+  padding: 40px 0px 53px 0px;
+  // max-width: 400px;
+}
+.login_text_reset {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 29px;
+  color: #3e3e3e;
+  padding: 40px 0px 53px 0px;
+  max-width: 400px;
+}
+
+.Login_card {
+  background: #ffffff;
+  border: 1px solid #d7e2e4;
+  box-sizing: border-box;
+  box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.02);
+  border-radius: 10px;
+}
+
+.check {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  display: inline;
+  letter-spacing: -0.02em;
+  color: #959d9e;
+  span {
+    font-weight: 600;
+    color: #3c546c;
+    cursor: pointer;
+  }
+}
