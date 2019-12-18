@@ -2,7 +2,7 @@ import React from "react"
 import "../scss/LoginCard.scss"
 import "../scss/SuccessCard.scss"
 import { Link } from "gatsby"
-import { Input, Button } from "antd"
+import { Button } from "antd"
 
 const SuccessCard = ({ active, activate1, activate2 }) => {
   return (

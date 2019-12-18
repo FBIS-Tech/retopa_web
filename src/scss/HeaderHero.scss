@@ -1,0 +1,51 @@
+.hero_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.hero_left {
+  h3 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 61px;
+    width: 210px;
+    color: #03363c;
+  }
+  p {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    margin-top: 15px;
+    color: #03363c;
+    max-width: 372px;
+  }
+  .stores {
+    width: 100%;
+    max-width: 341px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 48px;
+    flex-wrap: wrap;
+  }
+}
+
+.hero_right {
+  svg {
+    width: 300px;
+  }
+  margin: auto;
+}
+@media (min-width: 1024px) {
+  .hero_right {
+    svg {
+      width: 510px;
+    }
+    margin: 0;
+  }
+}

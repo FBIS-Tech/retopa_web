@@ -1,9 +1,6 @@
 import React from "react"
 import "../scss/LoginCard.scss"
-import { Link } from "gatsby"
 import { Input, Button } from "antd"
-import Face from "../../assets/colorfb.svg"
-import Google from "../../assets/google.svg"
 
 const ResetCard = ({ active, activate1, activate2 }) => {
   return (

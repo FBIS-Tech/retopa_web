@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import RegLayout from "../components/RegistrationLayout/RegLayout"
 import "../scss/Login.scss"
-import { Form, Icon, Input, Button, Checkbox } from "antd"
+import { Checkbox } from "antd"
 import SignUpCard from "../components/SignupCard"
 
 const SignUp = () => {
