@@ -150,6 +150,7 @@
   }
 }
 .Trusted_cards {
+  //   width: 90%;
   margin: auto;
   display: flex;
   flex-direction: row;
@@ -252,6 +253,7 @@
     width: 90%;
     margin: auto;
     padding-top: 100px;
+    padding-bottom: 60px;
     .Testimony_title {
       h4 {
         font-style: normal;
@@ -269,6 +271,38 @@
         max-width: 584px;
         color: #1c484e;
         margin-top: 23px;
+        margin-bottom: 40px;
+      }
+    }
+    .IndexCarousel {
+      text-align: center;
+    }
+  }
+}
+.Privacy_container {
+  background: #fbfbfb;
+  .privacy_group {
+    width: 90%;
+    margin: auto;
+    padding: 25px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .Privacy_text {
+      margin-left: 56px;
+      .title {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 26px;
+        line-height: 32px;
+        color: #03363c;
+      }
+      .title_text {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 19px;
+        max-width: 620px;
       }
     }
   }
@@ -282,7 +316,8 @@
   .trusted_group,
   .partner_group,
   .testimony_group,
-  .index_list_text {
+  .index_list_text,
+  .privacy_group {
     max-width: 76.4%;
     margin: auto;
   }

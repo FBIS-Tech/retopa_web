@@ -4,6 +4,8 @@ import Footer from "../Footer"
 import "./Layout.scss"
 import TopScreen from "./Top"
 import Navbar from "../Navbar"
+import Play from "../../../assets/playStoreW.svg"
+import IOS from "../../../assets/AppStoreW.svg"
 const Layout = ({ children }) => {
   return (
     <>
@@ -12,6 +14,18 @@ const Layout = ({ children }) => {
         <Navbar />
         <div>
           <main>{children}</main>
+        </div>
+      </div>
+      <div className="application">
+        <div className="app_group">
+          <div className="app_info">
+            <h3 className="get">Get the app</h3>
+            <h3 className="get_text">Fast download</h3>
+            <div className="get_store">
+              <Play />
+              <IOS />
+            </div>
+          </div>
         </div>
       </div>
       <footer>

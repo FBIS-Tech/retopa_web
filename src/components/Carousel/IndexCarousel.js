@@ -1,36 +1,57 @@
 import React from "react"
-import AliceCarousel from "react-alice-carousel"
-import "react-alice-carousel/lib/alice-carousel.css"
-
+import Slider from "react-slick"
+import { Carousel } from "../Constants/indexPage"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
+import "../../scss/CarouselCard.scss"
 export default function IndexCarousel() {
-  const handleOnDragStart = e => e.preventDefault()
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  }
   return (
-    <AliceCarousel mouseTrackingEnabled itemsInSlide={3}>
-      <img
-        src="/img1"
-        onDragStart={handleOnDragStart}
-        className="yours-custom-class"
-      />
-      <img
-        src="/img2"
-        onDragStart={handleOnDragStart}
-        className="yours-custom-class"
-      />
-      <img
-        src="/img3"
-        onDragStart={handleOnDragStart}
-        className="yours-custom-class"
-      />
-      <img
-        src="/img4"
-        onDragStart={handleOnDragStart}
-        className="yours-custom-class"
-      />
-      <img
-        src="/img5"
-        onDragStart={handleOnDragStart}
-        className="yours-custom-class"
-      />
-    </AliceCarousel>
+    <Slider className="slider" {...settings}>
+      {Carousel.map(data => {
+        return (
+          <div className="carouselCard">
+            <div className="carousel_card_group">
+              <img src={data.image} />
+              <h3>{data.name}</h3>
+              <p>{data.Text}</p>
+              <p className="carousel_date">{data.date}</p>
+            </div>
+          </div>
+        )
+      })}
+    </Slider>
   )
 }

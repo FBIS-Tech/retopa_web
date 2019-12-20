@@ -16,6 +16,9 @@ import Xamp from "../../images/Xamp.png"
 import Net from "../../images/Netapp.png"
 import Mtn from "../../images/mtn.png"
 import Glo from "../../images//glo.png"
+import Olawale from "../../images/olawale.png"
+import Richard from "../../images/richard.png"
+import Omoni from "../../images/omoni.png"
 // import first
 export const FirstCardSectionText =
   "RETOPA is	one	that is	created	to	address	the	fast	and	insatiable	hunger	for airtime	and	data seamless	experience, with RETOPA a user	can	simply	purchase	airtime / data in less than	10	seconds with just	a	tap	to	simplify the	day - to - day need."
@@ -28,18 +31,21 @@ export const FirstCardInfo = [
     title: "Merchants(Operators or Dealers)",
     text:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore Lorem ipsum dolor sit amet",
+    Link: "Merchants",
   },
   {
     svg: <Airtime />,
     title: "Airtime, Data & Bills Paymnet",
     text:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore Lorem ipsum dolor sit amet",
+    Link: "Airtime",
   },
   {
     svg: <NFC />,
     title: "NFC (Near field communication)",
     text:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore Lorem ipsum dolor sit amet",
+    Link: "NFC",
   },
 ]
 export const SecondCardInfo = [
@@ -96,6 +102,47 @@ export const ThirdCardInfo = [
 export const LogoOne = [Net, Xamp, Mtn, Glo]
 export const Logo = [Net, Xamp, Mtn, Glo, Xamp, Mtn]
 
-// export const Carousel=[{
-//   image:
-// }]
+export const Carousel = [
+  {
+    image: Olawale,
+    name: "Olawale Olayinka",
+    Text:
+      "Lorem ipsum dolor sit amet, consectetur adiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.",
+    date: "Monday, 26/08/19  10:30am",
+  },
+  {
+    image: Richard,
+    name: "Richard Raymond",
+    Text:
+      "Lorem ipsum dolor sit amet, consectetur adiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.",
+    date: "Monday, 26/08/19  10:30am",
+  },
+  {
+    image: Omoni,
+    name: "Rachel Omoni",
+    Text:
+      "Lorem ipsum dolor sit amet, consectetur adiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.",
+    date: "Monday, 26/08/19  10:30am",
+  },
+  {
+    image: Olawale,
+    name: "Olawale Olayinka",
+    Text:
+      "Lorem ipsum dolor sit amet, consectetur adiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.",
+    date: "Monday, 26/08/19  10:30am",
+  },
+  {
+    image: Richard,
+    name: "Richard Raymond",
+    Text:
+      "Lorem ipsum dolor sit amet, consectetur adiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.",
+    date: "Monday, 26/08/19  10:30am",
+  },
+  {
+    image: Omoni,
+    name: "Rachel Omoni",
+    Text:
+      "Lorem ipsum dolor sit amet, consectetur adiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.",
+    date: "Monday, 26/08/19  10:30am",
+  },
+]

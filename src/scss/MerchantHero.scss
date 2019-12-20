@@ -1,0 +1,103 @@
+.hero {
+  background-color: #fbfbfb;
+  padding-bottom: 30px;
+}
+.hero_merchant_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 90%;
+  margin: 0px auto;
+}
+
+.merchant_hero_left {
+  h3 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 61px;
+    width: 210px;
+
+    color: #03363c;
+  }
+  p {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    margin-top: 15px;
+    color: #03363c;
+    max-width: 372px;
+  }
+  .stores {
+    button.ant-btn {
+      background: #227f00;
+      border-radius: 7px;
+      color: white;
+      width: 226px;
+      height: 50px;
+      margin-top: 38px;
+    }
+  }
+}
+
+.hero_right {
+  margin-right: 10%;
+}
+
+.numbers {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 1) 00%,
+    rgba(195, 211, 189, 0.3) 65%,
+    #ffffff 100%
+  );
+}
+.numbersGroup {
+  width: 90%;
+  margin: auto;
+  h3 {
+    text-align: center;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 38px;
+    color: #505978;
+    margin-bottom: 50px;
+  }
+}
+
+@media (min-width: 768px) {
+  .merchant_hero_left h3 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 61px;
+    width: 368px;
+  }
+
+  .hero_merchant_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 90%;
+    margin: 0px auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero_merchant_container,
+  .numbersGroup {
+    max-width: 76.4%;
+  }
+}
+@media (min-width: 1440px) {
+  .hero_right {
+    margin-right: 6%;
+  }
+}
+// max-width: 76.4%;

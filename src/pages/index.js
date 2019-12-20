@@ -16,6 +16,8 @@ import {
 } from "../components/Constants/indexPage"
 import HowtoSection from "../components/HowtoSection"
 import { Button } from "antd"
+import IndexCarousel from "../components/Carousel/IndexCarousel"
+import Privacy from "../../assets/privacy.svg"
 
 export default function index() {
   return (
@@ -129,7 +131,7 @@ export default function index() {
           </div>
         </div>
       </div>
-      {/* <div className="testimony_container">
+      <div className="testimony_container">
         <div className="testimony_group">
           <div className="Testimony_title">
             <h4>What people are saying about us</h4>
@@ -139,9 +141,24 @@ export default function index() {
               sed do eiusmod tempor incididunt ut labore et dolore{" "}
             </p>
           </div>
-          <IndexCarousel />
+          <div className="IndexCarousel">
+            <IndexCarousel />
+          </div>
         </div>
-      </div> */}
+      </div>
+      <div className="Privacy_container">
+        <div className="privacy_group">
+          <Privacy />
+          <div className="Privacy_text">
+            <h3 className="title">Your Security is our Priority</h3>
+            <h3 className="title_text">
+              Fund9ja uses the highest levels of Internet Security, and it is
+              secured by 256 bits SSL security encryption to ensure that your
+              information is completely protected from fraud.
+            </h3>
+          </div>
+        </div>
+      </div>
     </Layout>
   )
 }

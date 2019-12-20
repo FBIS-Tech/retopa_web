@@ -13,7 +13,12 @@ const CardSections = ({ title, text, CardInfo }) => {
         {CardInfo.map(data => {
           return (
             <Fragment key={data.svg}>
-              <SectCard svg={data.svg} title={data.title} text={data.text} />
+              <SectCard
+                svg={data.svg}
+                title={data.title}
+                text={data.text}
+                Links={data.Link}
+              />
             </Fragment>
           )
         })}
