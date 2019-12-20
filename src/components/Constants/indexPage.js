@@ -16,6 +16,7 @@ import Xamp from "../../images/Xamp.png"
 import Net from "../../images/Netapp.png"
 import Mtn from "../../images/mtn.png"
 import Glo from "../../images//glo.png"
+// import first
 export const FirstCardSectionText =
   "RETOPA is	one	that is	created	to	address	the	fast	and	insatiable	hunger	for airtime	and	data seamless	experience, with RETOPA a user	can	simply	purchase	airtime / data in less than	10	seconds with just	a	tap	to	simplify the	day - to - day need."
 export const SecondCardSectionText =
@@ -94,3 +95,9 @@ export const ThirdCardInfo = [
 
 export const LogoOne = [Net, Xamp, Mtn, Glo]
 export const Logo = [Net, Xamp, Mtn, Glo, Xamp, Mtn]
+
+
+
+export const Carousel=[{
+  image:
+}]

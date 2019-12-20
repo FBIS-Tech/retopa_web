@@ -78,10 +78,15 @@ export default function index() {
               </div>
             )
           })}
+        </div>
+        <div className="index_list_text">
           <h3>
             We offer a seamless experience by making every step as easy as
-            possible, Once you log in, create an account, fund fund your wallet
-            and start making transactions easily
+            possible,
+          </h3>
+          <h3>
+            Once you log in, create an account, fund fund your wallet and start
+            making transactions easily
           </h3>
         </div>
       </div>
