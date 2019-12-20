@@ -96,8 +96,6 @@ export const ThirdCardInfo = [
 export const LogoOne = [Net, Xamp, Mtn, Glo]
 export const Logo = [Net, Xamp, Mtn, Glo, Xamp, Mtn]
 
-
-
-export const Carousel=[{
-  image:
-}]
+// export const Carousel=[{
+//   image:
+// }]
