@@ -1,9 +1,14 @@
+.hero {
+  background-color: #fbfbfb;
+}
 .hero_container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
+  width: 90%;
+  margin: 0px auto;
 }
 
 .hero_left {
@@ -48,4 +53,8 @@
     }
     margin: 0;
   }
+  .hero_container {
+    max-width: 76.4%;
+  }
 }
+// max-width: 76.4%;

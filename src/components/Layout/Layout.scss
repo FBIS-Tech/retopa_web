@@ -34,7 +34,7 @@ li {
 }
 
 .Layout_container {
-  width: 90%;
+  // width: 90%;
   margin: 0px auto;
 }
 
@@ -44,17 +44,21 @@ li {
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin: 21px 0;
+  margin: 21px auto;
+  width: 90%;
 }
 
 // Navbar
 .nav_container {
   padding: 34px 0;
+  background: linear-gradient(180deg, #f6f9f4 0%, rgba(255, 255, 255, 0) 100%);
 }
 .drawer_top {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 90%;
+  margin: auto;
   .main_nav {
     display: none;
     .login_btn {
@@ -91,10 +95,11 @@ li {
 }
 
 @media (min-width: 1100px) {
-  .Layout_container {
+  .top_container {
     max-width: 76.4%;
   }
   .drawer_top {
+    max-width: 76.4%;
     .main_nav {
       justify-content: space-between;
       max-width: 58%;
