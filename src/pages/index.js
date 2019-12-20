@@ -2,10 +2,6 @@ import React from "react"
 import Layout from "../components/Layout/Layout"
 import HederHero from "../components/HederHero"
 import "../scss/index.scss"
-import Net from "../../assets/Netapp.svg"
-import Xamp from "../../assets/Xamp.svg"
-import Mtn from "../../assets/mtn.svg"
-import Glo from "../../assets/glo.svg"
 import Watch from "../../assets/watch.svg"
 import CardSections from "../components/CardSections"
 import {
@@ -20,7 +16,6 @@ import {
 } from "../components/Constants/indexPage"
 import HowtoSection from "../components/HowtoSection"
 import { Button } from "antd"
-import IndexCarousel from "../components/Carousel/IndexCarousel"
 
 export default function index() {
   return (
@@ -134,7 +129,7 @@ export default function index() {
           </div>
         </div>
       </div>
-      <div className="testimony_container">
+      {/* <div className="testimony_container">
         <div className="testimony_group">
           <div className="Testimony_title">
             <h4>What people are saying about us</h4>
@@ -146,7 +141,7 @@ export default function index() {
           </div>
           <IndexCarousel />
         </div>
-      </div>
+      </div> */}
     </Layout>
   )
 }
