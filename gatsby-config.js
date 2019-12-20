@@ -11,6 +11,13 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
+      resolve: "gatsby-plugin-netlify-cms",
+      options: {
+        modulePath: `${__dirname}/src/cms/index.js`,
+      },
+    },
+    `gatsby-plugin-netlify`,
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
