@@ -8,7 +8,7 @@ import Start from "../../../assets/start.svg"
 import Download from "../../../assets/download.svg"
 import Create from "../../../assets/create.svg"
 import StartList from "../../../assets/startlist.svg"
-import FundList from "../../../assets/fundlist.svg"
+import FundList from "../../../assets/fundList.svg"
 import FAQ from "../../../assets/faqs.svg"
 import Support from "../../../assets/support.svg"
 import Card from "../../../assets/Card.svg"
@@ -147,14 +147,16 @@ export const Carousel = [
   },
 ]
 
-export const Howto={
-  main_title:"Simple, Easy and fast way to topup",
-  main_text:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore Lorem ipsum dolor st, sed do eiusmod tempor incididuet dolore ",
-  sub_text:"Start Retoping in less than 10 seconds",
-  titleOne:"Create an account",
-  textOne:"Sign up for an account with your name, email and phone number",
-  titleTwo:"Fund your wallet",
-  textTwo:"Using your debit card, bank account, USSD setup your payment plan ",
-  titleThree:"Start transacting",
-  textThree:"Start enjoying RETOPA by Recharging your phone, Buying Airtime and paying bills in less than 10 seconds",
+export const Howto = {
+  main_title: "Simple, Easy and fast way to topup",
+  main_text:
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore Lorem ipsum dolor st, sed do eiusmod tempor incididuet dolore ",
+  sub_text: "Start Retoping in less than 10 seconds",
+  titleOne: "Create an account",
+  textOne: "Sign up for an account with your name, email and phone number",
+  titleTwo: "Fund your wallet",
+  textTwo: "Using your debit card, bank account, USSD setup your payment plan ",
+  titleThree: "Start transacting",
+  textThree:
+    "Start enjoying RETOPA by Recharging your phone, Buying Airtime and paying bills in less than 10 seconds",
 }
