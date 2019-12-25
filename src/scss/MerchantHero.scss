@@ -10,6 +10,9 @@
   align-items: center;
   width: 90%;
   margin: 0px auto;
+  .hero_right {
+    margin-right: 10%;
+  }
 }
 
 .merchant_hero_left {
@@ -45,10 +48,6 @@
       margin-left: 27px;
     }
   }
-}
-
-.hero_right {
-  margin-right: 10%;
 }
 
 .numbers {

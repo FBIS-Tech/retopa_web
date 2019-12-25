@@ -62,13 +62,7 @@ export default function HowtoSection({
             </div>
           </div>
           {titleOne === "Request" ? (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                marginTop: "63px",
-              }}
-            >
+            <div className="nfc_store">
               <div style={{ marginRight: "18px" }}>
                 <Playstore />
               </div>

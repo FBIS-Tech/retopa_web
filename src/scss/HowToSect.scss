@@ -24,6 +24,10 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  .HowTo_sect_left {
+    width: 100%;
+    margin: auto;
+  }
   .HowTo_sect_right {
     .steps_title {
       font-style: normal;
@@ -104,4 +108,25 @@
   line-height: 17px !important;
   color: #1c484e;
   max-width: 400px !important;
+}
+.nfc_store {
+  display: flex;
+  flex-direction: row;
+  margin-top: 63px;
+  flex-flow: wrap;
+}
+
+@media (min-width: 768px) {
+  .how_to_position {
+    flex-wrap: nowrap;
+  }
+  .HowTo_sect_left {
+    width: 100%;
+    margin: auto;
+  }
+  .nfc_store {
+    display: flex;
+    flex-direction: row;
+    flex-flow: nowrap;
+  }
 }
