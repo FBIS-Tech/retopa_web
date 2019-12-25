@@ -146,3 +146,15 @@ export const Carousel = [
     date: "Monday, 26/08/19  10:30am",
   },
 ]
+
+export const Howto={
+  main_title:"Simple, Easy and fast way to topup",
+  main_text:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore Lorem ipsum dolor st, sed do eiusmod tempor incididuet dolore ",
+  sub_text:"Start Retoping in less than 10 seconds",
+  titleOne:"Create an account",
+  textOne:"Sign up for an account with your name, email and phone number",
+  titleTwo:"Fund your wallet",
+  textTwo:"Using your debit card, bank account, USSD setup your payment plan ",
+  titleThree:"Start transacting",
+  textThree:"Start enjoying RETOPA by Recharging your phone, Buying Airtime and paying bills in less than 10 seconds",
+}

@@ -12,17 +12,30 @@ import {
   IndexList,
   ThirdCardInfo,
   Logo,
-  LogoOne,
+  LogoOne,Howto
 } from "../components/Constants/indexPage"
 import HowtoSection from "../components/HowtoSection"
 import { Button } from "antd"
 import IndexCarousel from "../components/Carousel/IndexCarousel"
 import Privacy from "../../assets/privacy.svg"
 
+const{main_title,
+main_text,
+sub_text,
+titleOne,
+textOne,
+titleTwo,
+textTwo,
+titleThree,
+textThree}=Howto
 export default function index() {
   return (
     <Layout>
-      <HederHero />
+      <HederHero
+        title="Fast Recharge"
+        text=" Recharge your phone anywhere and anytime using your ATM card. Load
+            or send recharge pin with a single button."
+      />
       <div className="businesses_container">
         <div className="business_group">
           <div className="business_left">
@@ -53,7 +66,16 @@ export default function index() {
       </div>
       <div className="HowTo_container">
         <div className="HowtoSection">
-          <HowtoSection />
+          <HowtoSection main_title={main_title}
+            main_text={main_text}
+            sub_text={sub_text}
+            titleOne={titleOne}
+            textOne={textOne}
+            titleTwo={titleTwo}
+            textTwo={textTwo}
+            titleThree={titleThree}
+            textThree={textThree}
+           />
         </div>
       </div>
       <div className="cardSection_container_two">

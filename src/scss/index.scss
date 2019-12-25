@@ -274,9 +274,9 @@
         margin-bottom: 40px;
       }
     }
-    .IndexCarousel {
-      text-align: center;
-    }
+    // .IndexCarousel {
+    //   text-align: center;
+    // }
   }
 }
 .Privacy_container {
@@ -318,7 +318,8 @@
   .testimony_group,
   .index_list_text,
   .privacy_group {
-    max-width: 76.4%;
+    // max-width: 76.4%;
+    max-width: 66.1%;
     margin: auto;
   }
 }

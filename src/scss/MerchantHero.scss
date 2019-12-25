@@ -18,7 +18,7 @@
     font-weight: bold;
     font-size: 50px;
     line-height: 61px;
-    width: 210px;
+    // width: 210px;
 
     color: #03363c;
   }
@@ -29,7 +29,7 @@
     line-height: 20px;
     margin-top: 15px;
     color: #03363c;
-    max-width: 372px;
+    max-width: 513px;
   }
   .stores {
     button.ant-btn {
@@ -39,6 +39,10 @@
       width: 226px;
       height: 50px;
       margin-top: 38px;
+    }
+    .ant-btn > .anticon + span,
+    .ant-btn > span + .anticon {
+      margin-left: 27px;
     }
   }
 }
@@ -58,6 +62,7 @@
 .numbersGroup {
   width: 90%;
   margin: auto;
+  padding: 80px 0;
   h3 {
     text-align: center;
     font-style: normal;
@@ -65,7 +70,64 @@
     font-size: 30px;
     line-height: 38px;
     color: #505978;
-    margin-bottom: 50px;
+    padding-bottom: 50px;
+  }
+}
+
+.numbers_list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.card_number_container {
+  background: #ffffff;
+  border: 1px solid #e3e3e3;
+  box-sizing: border-box;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 280px;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  .card_number_group {
+    padding: 15px;
+    align-items: center;
+    .image {
+      background: #ffffff;
+      border: 1px solid #30656d;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 50px;
+      width: 50px;
+      margin: auto;
+      border-radius: 50px;
+      -webkit-border-radius: 50px;
+      -moz-border-radius: 50px;
+      -ms-border-radius: 50px;
+      -o-border-radius: 50px;
+      margin-bottom: 10px;
+    }
+    h4 {
+      text-align: center;
+    }
+    .cardNumber {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 20px;
+      margin-bottom: 10px;
+      color: #00434d;
+    }
+    .cardText {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 20px;
+      color: #879799;
+    }
   }
 }
 
@@ -75,7 +137,8 @@
     font-weight: bold;
     font-size: 50px;
     line-height: 61px;
-    width: 368px;
+    width: 100%;
+    max-width: 534px;
   }
 
   .hero_merchant_container {
@@ -87,17 +150,345 @@
     width: 90%;
     margin: 0px auto;
   }
+
+  .numbers_list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
+.recruit_container {
+  background: #ffffff;
+  .recruit_group {
+    padding: 80px 0px;
+    width: 90%;
+    margin: auto;
+  }
+  .recruit_title {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 38px;
+    color: #505978;
+    max-width: 627px;
+    margin-bottom: 30px;
+  }
+  .recruit_text {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 23px;
+    max-width: 724px;
+    color: #505978;
+    margin-bottom: 60px;
+  }
+  .recruitCard {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .recruit_container {
+    background: #ffffff;
+    border: 1px solid #d7eff2;
+    box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-top: 20px;
+    max-width: 335px;
+    margin: 20px auto;
+  }
+
+  .recruitCard_group {
+    padding: 50px 13% 93px 16%;
+
+    .cardTitle {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 23px;
+      margin-top: 30px;
+      margin-bottom: 10px;
+
+      color: #252527;
+    }
+    .cardText {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 18px;
+      color: #808080;
+      max-width: 256px;
+    }
+  }
+}
+
+.features_container {
+  background: linear-gradient(
+    180deg,
+    #edf4f0 -4.97%,
+    rgba(255, 255, 255, 1) 112.63%
+  );
+  .features_group {
+    width: 90%;
+    margin: auto;
+    padding: 80px 0;
+    .features_title {
+      font-family: Muli;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 30px;
+      line-height: 38px;
+      color: #505978;
+    }
+    .features_text {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 18px;
+      max-width: 776px;
+      color: #505978;
+      padding-top: 22px;
+      padding-bottom: 46px;
+    }
+    .feature_illustration {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      .illustration_left {
+        height: auto;
+        width: 500px; // margin: auto;
+        svg {
+          width: 100%;
+          height: auto;
+        }
+      }
+      .illustration_right {
+        .illustration_title {
+          font-style: normal;
+          font-weight: bold;
+          font-size: 22px;
+          line-height: 28px;
+          margin-bottom: 24px;
+          color: #03363c;
+          max-width: 344px;
+        }
+        p {
+          font-style: normal;
+          font-weight: normal;
+          font-size: 16px;
+          line-height: 20px;
+          max-width: 493px;
+          color: #636363;
+          margin-bottom: 22px;
+        }
+      }
+    }
+  }
+}
+.two {
+  background: #ffffff !important;
+  .features_group {
+    padding: 0 0 80px 0;
+  }
+}
+
+.merchant_faq {
+  background: linear-gradient(
+    180deg,
+    #f8f9f5 0%,
+    rgba(241, 242, 241, 0.0001) 100%
+  );
+  .merchant_faq_group {
+    width: 90%;
+    margin: auto;
+    padding: 80px 0;
+    .merchant_faq_title {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 30px;
+      line-height: 37px;
+      text-align: center;
+      color: #03363c;
+      max-width: 574px;
+      margin: auto;
+    }
+    .merchant_faq_text {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 17px;
+      text-align: center;
+      max-width: 585px;
+      color: #1c484e;
+      padding-top: 23px;
+      margin: auto;
+    }
+  }
+}
+.merchant_accordion_container {
+  background: #ffffff;
+  border: 1px solid #d7e2e4;
+  box-sizing: border-box;
+  box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin-top: 70px;
+  .merchant_accordion_group {
+    padding: 19px 19px 49px 21px;
+    button.ant-btn {
+      background: #ffffff;
+      border: 1px solid #ececec;
+      border-radius: 8px;
+      border-left: 7px solid #3cbd74;
+      width: 218px;
+      height: 64px;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 20px;
+      color: #03363c;
+      text-align: left;
+    }
+    .accordion_view {
+      .accordion_view_title {
+        height: 64px;
+        display: flex;
+        align-items: center;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 18px;
+        color: #516568;
+      }
+    }
+  }
+  .accordion {
+    max-width: 580px;
+    .ant-collapse-content-box {
+      border-top: 0.5px solid #d7e2e4;
+      margin: 0 20px;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .ant-collapse-content.ant-collapse-content-active {
+      height: 171px;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .merchant_accordion_group {
+    display: flex;
+    justify-content: space-between;
+  }
+  .merchant_accordion_container .accordion {
+    width: 400px;
+  }
 }
 
 @media (min-width: 1024px) {
   .hero_merchant_container,
-  .numbersGroup {
-    max-width: 76.4%;
+  .numbersGroup,
+  .recruit_group,
+  .features_group {
+    max-width: 66.1%;
+    // max-width: 76.4%;
+  }
+  .recruit_container .recruitCard {
+    justify-content: space-between;
+  }
+  .recruit_container .recruit_container {
+    margin: 0;
+  }
+  .features_container .features_group .feature_illustration {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .merchant_faq .merchant_faq_group {
+    width: 65.3%;
+    margin: auto;
   }
 }
+
+@media (min-width: 1200px) {
+  .merchant_accordion_container .merchant_accordion_group {
+    padding: 19px 60px 49px 21px;
+  }
+}
+
 @media (min-width: 1440px) {
   .hero_right {
     margin-right: 6%;
   }
+  .card_number_container {
+    margin: 0px;
+  }
+  .numbers_list {
+    justify-content: space-between;
+  }
+  .merchant_accordion_container .accordion {
+    width: 580px;
+  }
 }
+
 // max-width: 76.4%;
+
+// element.style {
+// }
+.accordion__button {
+  background-color: #fff !important;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  height: 50px;
+  text-align: left;
+  border: 1px solid #d7e2e4 !important ;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 21px;
+  color: #03363c;
+  box-sizing: border-box;
+  outline-color: #227f00;
+}
+
+.accordion {
+  border: 0 !important;
+}
+.accordion__button:after {
+  display: flex;
+  content: "";
+  height: 10px;
+  width: 10px;
+  margin-right: 0px !important;
+  border-bottom: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  transform: rotate(-45deg);
+  /* margin-left: auto; */
+}
+.accordion__button:before {
+  display: none !important;
+}
+
+.accordion__item {
+  background: #ffffff;
+  border: 1px solid #d7e2e4;
+  box-sizing: border-box;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.merchant_accordion_container .merchant_accordion_group .accordion_view p {
+  height: auto;
+  display: flex;
+  align-items: center;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: #516568;
+}

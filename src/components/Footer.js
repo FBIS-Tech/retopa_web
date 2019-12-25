@@ -7,6 +7,7 @@ import Twit from "../../assets/twitter.svg"
 import Linkd from "../../assets/linkdn.svg"
 import Android from "../../assets/android.svg"
 import Ios from "../../assets/ios.svg"
+import { Link } from "gatsby"
 export default function Footer() {
   return (
     <div className="footer_container">
@@ -28,8 +29,12 @@ export default function Footer() {
         <div className="legal">
           <h3 className="footer_title">Legal</h3>
           <div>
-            <h4>Terms and Conditions</h4>
-            <h4>Privacy / Policy</h4>
+            <Link to="Terms&Conditions">
+              <h4>Terms and Conditions</h4>
+            </Link>
+            <Link to="Privacy">
+              <h4>Privacy / Policy</h4>
+            </Link>
           </div>
         </div>
         <div className="contact">

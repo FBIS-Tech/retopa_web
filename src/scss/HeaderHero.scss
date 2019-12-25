@@ -20,6 +20,15 @@
     width: 210px;
     color: #03363c;
   }
+  .nfc {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 61px;
+    width: 100%;
+    max-width:369px;
+    color: #03363c;
+  }
   p {
     font-style: normal;
     font-weight: normal;
@@ -54,7 +63,8 @@
     margin: 0;
   }
   .hero_container {
-    max-width: 76.4%;
+    // max-width: 76.4%;
+    max-width: 66.1%;
   }
 }
 // max-width: 76.4%;

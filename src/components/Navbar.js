@@ -41,8 +41,13 @@ export default function Navbar() {
             <Link>
               <h3>Contact us</h3>
             </Link>
-            <Button className="login_btn">Log In</Button>
-            <Button className="signup_btn">Sign Up</Button>
+
+            <Button className="login_btn">
+              <Link to="Login">Log In</Link>
+            </Button>
+            <Button className="signup_btn">
+              <Link to="SignUp">Sign Up</Link>
+            </Button>
           </div>
         </div>
 

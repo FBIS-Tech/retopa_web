@@ -135,13 +135,21 @@ li {
   }
 }
 
+@media (min-width: 1024px) {
+  .app_group {
+    // max-width: 76.4%;
+    max-width: 66.1%;
+  }
+}
 @media (min-width: 1100px) {
   .top_container,
   .app_group {
-    max-width: 76.4%;
+    // max-width: 76.4%;
+    max-width: 66.1%;
   }
   .drawer_top {
-    max-width: 76.4%;
+    // max-width: 76.4%;
+    max-width: 66.1%;
     .main_nav {
       justify-content: space-between;
       max-width: 58%;
