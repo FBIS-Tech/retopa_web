@@ -65,9 +65,131 @@
   }
 }
 
+.terms_contact_container {
+  background: linear-gradient(180deg, #fbfffd 0%, #f3fcf7 100%);
+  .terms_contact_group {
+    width: 90%;
+    margin: auto;
+  }
+  .terms_form {
+    width: 100%;
+    max-width: 524px;
+  }
+}
+.terms_contact_form_container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-bottom: 60px;
+}
+.terms_contact_title {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 32px;
+  text-align: center;
+  color: #03363c;
+  padding: 65px 0 60px 0;
+}
+.terms_contact {
+  width: 100%;
+  max-width: 371px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .faqCard {
+    background: #29322d;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 8px;
+    margin-top: 20px;
+    .faqCard_group {
+      padding: 11px;
+      border: 1px dashed #717975;
+      border-radius: 10px;
+      h4 {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 22px;
+        color: #ffffff;
+        padding: 11px 0 13px 0;
+      }
+      p {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 20px;
+        padding-bottom: 14px;
+        color: #ffffff;
+      }
+      button.ant-btn {
+        height: 50px;
+        width: 100%;
+        text-align: left;
+        border-radius: 5px;
+
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 22px;
+        color: #528568;
+        padding-left: 80px;
+      }
+    }
+  }
+}
+.contact_info {
+  background: #ffffff;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 100%;
+  max-width: 371px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 0 21px 0;
+  margin-top: 20px;
+  .contact_name {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 27px;
+    text-align: center;
+    color: #5f5f5f;
+    padding: 24px 0 18px 0;
+  }
+  .contact_number {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 27px;
+    text-align: center;
+    color: #558c6c;
+    padding-bottom: 18px;
+    padding-top: 18px;
+  }
+}
+
+@media (min-width: 768px) {
+  .terms_contact_form_container {
+    flex-wrap: nowrap;
+  }
+  .contact_info {
+    margin-top: 0px;
+  }
+  .terms_contact {
+    margin-left: 10px;
+  }
+  .terms_contact .faqCard {
+    margin-top: 0px;
+  }
+}
 @media (min-width: 1024px) {
   .terms_header_group,
-  .terms_details_group {
+  .terms_details_group,
+  .terms_contact_group {
     // max-width: 76.4%;
     max-width: 66.1%;
     margin: auto;

@@ -130,3 +130,14 @@
     flex-flow: nowrap;
   }
 }
+@media (min-width: 1232px) {
+  .step_text.third {
+    margin-left: 20%;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-size: 14px !important;
+    line-height: 17px !important;
+    color: #1c484e;
+    width: 362px !important;
+  }
+}

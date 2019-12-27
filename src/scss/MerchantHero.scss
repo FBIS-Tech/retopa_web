@@ -10,9 +10,6 @@
   align-items: center;
   width: 90%;
   margin: 0px auto;
-  .hero_right {
-    margin-right: 10%;
-  }
 }
 
 .merchant_hero_left {
@@ -416,9 +413,6 @@
 }
 
 @media (min-width: 1440px) {
-  .hero_right {
-    margin-right: 6%;
-  }
   .card_number_container {
     margin: 0px;
   }
@@ -478,7 +472,7 @@
   box-sizing: border-box;
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.08);
   border-radius: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .merchant_accordion_container .merchant_accordion_group .accordion_view p {

@@ -33,7 +33,7 @@ const Merchants = () => {
               <Button>Fund Wallet</Button>
             </div>
           </div>
-          <div className="hero_right">
+          <div className="hero_right hero_right_merchant">
             <img src={LadyHero} />
           </div>
         </div>

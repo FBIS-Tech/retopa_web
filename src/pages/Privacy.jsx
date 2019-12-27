@@ -2,6 +2,10 @@ import React from "react"
 import Layout from "../components/Layout/Layout"
 import "../scss/Terms.scss"
 import Logo from "../../assets/logo.svg"
+import TermsForm from "../components/TermsForm"
+import Call from "../../assets/call.svg"
+import { Button } from "antd"
+import { Link } from "gatsby"
 
 const Terms_Conditions = () => {
   return (
@@ -113,6 +117,40 @@ const Terms_Conditions = () => {
                 ipsciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor
                 sit amet, consectetur, adipiscm.
               </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="terms_contact_container">
+        <div className="terms_contact_group">
+          <h4 className="terms_contact_title">Have any questions for?</h4>
+          <div className="terms_contact_form_container">
+            <div className="terms_form">
+              <TermsForm />
+            </div>
+            <div className="terms_contact">
+              <div className="terms_contact_grouped">
+                <div className="contact_info">
+                  <Call />
+                  <h4 className="contact_name">Retopa</h4>
+                  <p>12, Landbrude Ave, Oniru, VI, Lagos</p>
+                  <h4 className="contact_number">+23490675643</h4>
+                  <p style={{ paddingBottom: "18px" }}>info@retopa.com</p>
+                  <p>Intercom 24/7</p>
+                </div>
+              </div>
+              <div className="faqCard">
+                <div className="faqCard_group">
+                  <h4>Help Center</h4>
+                  <p>
+                    If you prefer finding information on your own, please kindly
+                    visit our FAQ
+                  </p>
+                  <Button>
+                    <Link to="FAQ">FAQ</Link>
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

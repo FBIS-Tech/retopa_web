@@ -26,7 +26,8 @@ h3 {
 h4,
 label,
 p,
-li {
+li,
+a {
   font-family: "Montserrat", sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -155,8 +156,14 @@ li {
       max-width: 58%;
       .login_btn,
       .signup_btn {
-        width: 13.5%;
+        width: 118px;
       }
     }
+  }
+}
+@media (min-width: 1232px) {
+  .drawer_top .main_nav {
+    justify-content: space-between;
+    max-width: 70%;
   }
 }

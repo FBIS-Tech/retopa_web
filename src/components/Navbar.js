@@ -17,7 +17,9 @@ export default function Navbar() {
     <>
       <div className="nav_container">
         <div className="drawer_top">
-          <Logo />
+          <Link>
+            <Logo />
+          </Link>
           <div className="menu">
             <Icon
               type={!visible ? "menu" : "close"}
@@ -35,10 +37,10 @@ export default function Navbar() {
             <Link>
               <h3>Plans</h3>
             </Link>
-            <Link>
+            <Link to="FAQ">
               <h3>FAQ</h3>
             </Link>
-            <Link>
+            <Link to="ContactUs">
               <h3>Contact us</h3>
             </Link>
 
