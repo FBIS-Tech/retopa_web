@@ -4,7 +4,9 @@ import "../scss/MerchantHero.scss"
 import "../scss/AirTime.scss"
 import { Button, Icon } from "antd"
 import LadyHero from "../images/Untitled-1@3x 1.png"
+import LadyHero_airtime from "../images/airtime_hero.png"
 import Imac from "../../assets/icon_iMac.svg"
+import Arrow from "../../assets/arrow.svg"
 import {
   Accordion,
   AccordionItem,
@@ -18,8 +20,8 @@ import { Accordion_Airtime } from "../components/Constants/AirtimePage"
 const Airtime = () => {
   return (
     <Layout>
-      <div className="hero">
-        <div className="hero_merchant_container">
+      <div className="hero hero_airtime">
+        <div className="hero_merchant_container ">
           <div className="merchant_hero_left">
             <h3>Airtime/Data Recharge & Bills Payment</h3>
             <p>
@@ -28,12 +30,16 @@ const Airtime = () => {
             </p>
             <div className="stores">
               <Button>
-                Get started <Icon type="arrow-right" />
+                Get started{" "}
+                <span style={{ marginLeft: "27px" }}>
+                  <Arrow />
+                </span>
               </Button>
             </div>
           </div>
           <div className="hero_right">
-            <img src={LadyHero} alt="hero_pic" />
+            <img src={LadyHero} alt="hero_pic" className="ladyOne" />
+            <img src={LadyHero_airtime} alt="hero_pic" className="ladyTwo" />
           </div>
         </div>
       </div>

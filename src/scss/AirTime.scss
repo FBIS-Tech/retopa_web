@@ -1,3 +1,10 @@
+.hero_airtime {
+  background: #f5fbf8;
+}
+.ladyTwo {
+  display: none;
+  margin: 0;
+}
 .airtime_group {
   .airTime_title {
     font-style: normal;
@@ -51,4 +58,16 @@
   max-width: 456px !important;
   color: #636363;
   margin-bottom: 40px !important;
+}
+
+@media (min-width: 1232px) {
+  .ladyOne {
+    display: none;
+  }
+  .ladyTwo {
+    display: block;
+    position: relative;
+    left: 19%;
+    overflow: hidden;
+  }
 }
