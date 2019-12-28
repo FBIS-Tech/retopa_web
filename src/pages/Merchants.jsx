@@ -34,7 +34,7 @@ const Merchants = () => {
             </div>
           </div>
           <div className="hero_right hero_right_merchant">
-            <img src={LadyHero} />
+            <img src={LadyHero} alt="hero_pic" />
           </div>
         </div>
       </div>

@@ -33,7 +33,7 @@ const Airtime = () => {
             </div>
           </div>
           <div className="hero_right">
-            <img src={LadyHero} />
+            <img src={LadyHero} alt="hero_pic" />
           </div>
         </div>
       </div>

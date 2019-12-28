@@ -44,7 +44,7 @@ export default function IndexCarousel() {
         return (
           <div className="carouselCard">
             <div className="carousel_card_group">
-              <img src={data.image} />
+              <img src={data.image} alt="carousel_image" />
               <h3>{data.name}</h3>
               <p>{data.Text}</p>
               <p className="carousel_date">{data.date}</p>

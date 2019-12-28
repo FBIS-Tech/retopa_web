@@ -25,7 +25,7 @@ export default function HowtoSection({
       </div>
       <div className="how_to_position">
         <div className="HowTo_sect_left">
-          <img src={Hand} style={{ margin: "0px" }} />
+          <img src={Hand} style={{ margin: "0px" }} alt="hand" />
         </div>
         <div className="HowTo_sect_right">
           <h4

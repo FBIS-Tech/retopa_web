@@ -12,22 +12,25 @@ import {
   IndexList,
   ThirdCardInfo,
   Logo,
-  LogoOne,Howto
+  LogoOne,
+  Howto,
 } from "../components/Constants/indexPage"
 import HowtoSection from "../components/HowtoSection"
 import { Button } from "antd"
 import IndexCarousel from "../components/Carousel/IndexCarousel"
 import Privacy from "../../assets/privacy.svg"
 
-const{main_title,
-main_text,
-sub_text,
-titleOne,
-textOne,
-titleTwo,
-textTwo,
-titleThree,
-textThree}=Howto
+const {
+  main_title,
+  main_text,
+  sub_text,
+  titleOne,
+  textOne,
+  titleTwo,
+  textTwo,
+  titleThree,
+  textThree,
+} = Howto
 export default function index() {
   return (
     <Layout>
@@ -42,7 +45,7 @@ export default function index() {
             <h4>Trusted by over 1,000 businesses</h4>
             <div className="business_logo">
               {LogoOne.map(data => {
-                return <img src={data} />
+                return <img src={data} alt="logo" />
               })}
             </div>
           </div>
@@ -66,7 +69,8 @@ export default function index() {
       </div>
       <div className="HowTo_container">
         <div className="HowtoSection">
-          <HowtoSection main_title={main_title}
+          <HowtoSection
+            main_title={main_title}
             main_text={main_text}
             sub_text={sub_text}
             titleOne={titleOne}
@@ -75,7 +79,7 @@ export default function index() {
             textTwo={textTwo}
             titleThree={titleThree}
             textThree={textThree}
-           />
+          />
         </div>
       </div>
       <div className="cardSection_container_two">
@@ -143,12 +147,12 @@ export default function index() {
           </p>
           <div className="Patners_logo">
             {Logo.map(data => {
-              return <img src={data} />
+              return <img src={data} alt="logo" />
             })}
           </div>
           <div className="Patners_logo">
             {Logo.map(data => {
-              return <img src={data} />
+              return <img src={data} alt="logo" />
             })}
           </div>
         </div>
