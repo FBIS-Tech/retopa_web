@@ -2,7 +2,10 @@ import React, { useState } from "react"
 import { Drawer, Button, Icon } from "antd"
 import Logo from "../../assets/logo.svg"
 import "./Layout/Layout.scss"
-import { Link } from "gatsby"
+// import { Link } from "gatsby"
+import AniLink from "gatsby-plugin-transition-link/AniLink"
+import TransitionLink from "gatsby-plugin-transition-link"
+import Link from "gatsby-plugin-transition-link"
 
 export default function Navbar() {
   const [visible, setVisible] = useState(false)
@@ -17,9 +20,9 @@ export default function Navbar() {
     <>
       <div className="nav_container">
         <div className="drawer_top">
-          <Link>
+          <AniLink swipe top="exit" duration={0.45} to="/">
             <Logo />
-          </Link>
+          </AniLink>
           <div className="menu">
             <Icon
               type={!visible ? "menu" : "close"}
@@ -28,27 +31,31 @@ export default function Navbar() {
             />
           </div>
           <div className="main_nav">
-            <Link>
+            <AniLink swipe top="exit" duration={0.45} to="/">
               <h3>Home</h3>
-            </Link>
-            <Link>
+            </AniLink>
+            <AniLink swipe top="exit" duration={0.45}>
               <h3>About us</h3>
-            </Link>
-            <Link>
+            </AniLink>
+            <AniLink swipe top="exit" duration={0.45}>
               <h3>Plans</h3>
-            </Link>
-            <Link to="FAQ">
+            </AniLink>
+            <AniLink swipe top="exit" duration={0.45} to="FAQ">
               <h3>FAQ</h3>
-            </Link>
-            <Link to="ContactUs">
+            </AniLink>
+            <AniLink swipe top="exit" duration={0.45} to="ContactUs">
               <h3>Contact us</h3>
-            </Link>
+            </AniLink>
 
             <Button className="login_btn">
-              <Link to="Login">Log In</Link>
+              <AniLink swipe top="exit" duration={0.45} to="Login">
+                Log In
+              </AniLink>
             </Button>
             <Button className="signup_btn">
-              <Link to="SignUp">Sign Up</Link>
+              <AniLink swipe top="exit" duration={0.45} to="SignUp">
+                Sign Up
+              </AniLink>
             </Button>
           </div>
         </div>

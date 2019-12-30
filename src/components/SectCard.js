@@ -1,7 +1,8 @@
 import React from "react"
 import "../scss/SectCard.scss"
 import Learn from "../../assets/learn.svg"
-import { Link } from "gatsby"
+import Link from "gatsby-plugin-transition-link"
+import AniLink from "gatsby-plugin-transition-link"
 
 export default function SectCard({ svg, title, text, Links }) {
   return (
@@ -10,10 +11,17 @@ export default function SectCard({ svg, title, text, Links }) {
         <div className="sect_card_image">{svg}</div>
         <h4 className="sect_card_title">{title}</h4>
         <h4 className="sect_card_text">{text}</h4>
-        <Link to={Links} className="sect_card_learn">
+        <AniLink
+          swipe
+          top="exit"
+          direction="down"
+          duration={0.45}
+          to={Links}
+          className="sect_card_learn"
+        >
           <Learn />
           <h4>Learn more</h4>
-        </Link>
+        </AniLink>
       </div>
     </div>
   )
