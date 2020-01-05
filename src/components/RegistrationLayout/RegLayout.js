@@ -28,10 +28,10 @@ const RegLayout = ({ children }) => {
     <>
       <RegHeader />
       <div>
-        <main>{children}</main>
-        <footer>
+        <main style={{ paddingBottom: "44px" }}>{children}</main>
+        {/* <footer>
           <Footer />
-        </footer>
+        </footer> */}
       </div>
     </>
   )
