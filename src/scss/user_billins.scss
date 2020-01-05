@@ -1,0 +1,74 @@
+.billings_container {
+  padding-bottom: 30px;
+  .billings_left {
+    width: 26%;
+    background: #fbfbfa;
+    border: 1px solid hsl(0, 0%, 87%);
+    box-sizing: border-box;
+    .billings_search {
+      padding: 20px 30px;
+      background: #e9eae7;
+      .ant-input-affix-wrapper .ant-input-suffix {
+        display: none;
+      }
+      .ant-input-affix-wrapper .ant-input-prefix {
+        left: 5px;
+      }
+      .ant-input:placeholder-shown {
+        padding: 0px 25px;
+      }
+      input.ant-input {
+        padding: 0px 25px;
+        outline-color: green;
+        background: #ffffff;
+        border: 1px solid #dddddd;
+        box-shadow: 0px 4px 12px rgba(140, 172, 120, 0.1);
+        border-radius: 5px;
+        height: 33px;
+        z-index: 1;
+      }
+      .ant-input-affix-wrapper:hover .ant-input:not(.ant-input-disabled) {
+        border-color: green;
+        border-right-width: 1px !important;
+      }
+    }
+  }
+}
+.bill_list_container {
+  background: #fbfbfa;
+  border: 1px solid #dedede;
+  box-sizing: border-box;
+  padding: 20px 30px;
+  .billGroupContainer {
+    background: #fafafa;
+    border: 1px solid #dddddd;
+    box-sizing: border-box;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    padding: 13px 10px;
+    align-items: center;
+    margin-bottom: 20px;
+    img {
+      margin: 0px;
+    }
+    .bill_text {
+      margin-left: 11px;
+      h4 {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 20px;
+        color: #404040;
+        margin-bottom: 6px;
+      }
+      p {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 18px;
+        color: #5b5b5b;
+      }
+    }
+  }
+}

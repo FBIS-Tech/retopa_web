@@ -32,6 +32,7 @@ const DashLayout = ({
   handleHistory,
   handlePayment,
   title,
+  handleBilling,
 }) => {
   return (
     <Layout>
@@ -64,7 +65,7 @@ const DashLayout = ({
             <Dash_airtime_icon />
             <span className="nav-text">Airtime & Data</span>
           </Menu.Item>
-          <Menu.Item key="3">
+          <Menu.Item key="3" onClick={handleBilling}>
             <Dash_bill_icon />
             <span className="nav-text">Bills Payment</span>
           </Menu.Item>

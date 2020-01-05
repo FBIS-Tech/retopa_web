@@ -6,6 +6,7 @@ import displayHooks from "./hook/displayHooks"
 import User_Airtime from "./User_Airtime"
 import Dash_history from "./Dash_history"
 import User_Payment from "./User_Payment"
+import User_billing from "./User_billing"
 
 const Dashboard = () => {
   const [
@@ -14,10 +15,12 @@ const Dashboard = () => {
     airtime,
     history,
     payment,
+    billing,
     selectHome,
     selectAirtime,
     selectHistory,
     selectPayment,
+    selectBilling,
   ] = displayHooks()
   return (
     <DashLayout
@@ -26,6 +29,7 @@ const Dashboard = () => {
       handleAirtime={selectAirtime}
       handleHistory={selectHistory}
       handlePayment={selectPayment}
+      handleBilling={selectBilling}
     >
       <div className={home ? "user_home" : "hide"}>
         <User_Home />
@@ -38,6 +42,9 @@ const Dashboard = () => {
       </div>
       <div className={payment ? "user_payment" : "hide"}>
         <User_Payment />
+      </div>
+      <div className={billing ? "user_payment" : "hide"}>
+        <User_billing />
       </div>
     </DashLayout>
   )

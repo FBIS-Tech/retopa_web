@@ -6,6 +6,7 @@ export default () => {
   const [airtime, setAirtime] = useState(false)
   const [history, setHistory] = useState(false)
   const [payment, setPayment] = useState(false)
+  const [billing, setBilling] = useState(false)
 
   const selectHome = () => {
     setTitle("Home")
@@ -13,6 +14,7 @@ export default () => {
     setAirtime(false)
     setHistory(false)
     setPayment(false)
+    setBilling(false)
   }
   const selectAirtime = () => {
     setTitle("Airtime & Data")
@@ -20,6 +22,7 @@ export default () => {
     setAirtime(true)
     setHistory(false)
     setPayment(false)
+    setBilling(false)
   }
   const selectHistory = () => {
     setTitle("History")
@@ -27,6 +30,7 @@ export default () => {
     setAirtime(false)
     setHistory(true)
     setPayment(false)
+    setBilling(false)
   }
   const selectPayment = () => {
     setTitle("Add Card")
@@ -34,6 +38,15 @@ export default () => {
     setAirtime(false)
     setHistory(false)
     setPayment(true)
+    setBilling(false)
+  }
+  const selectBilling = () => {
+    setTitle("Bills Payment")
+    setHome(false)
+    setAirtime(false)
+    setHistory(false)
+    setPayment(false)
+    setBilling(true)
   }
 
   return [
@@ -42,9 +55,11 @@ export default () => {
     airtime,
     history,
     payment,
+    billing,
     selectHome,
     selectAirtime,
     selectHistory,
     selectPayment,
+    selectBilling,
   ]
 }
