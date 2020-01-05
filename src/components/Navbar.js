@@ -4,7 +4,6 @@ import Logo from "../../assets/logo.svg"
 import "./Layout/Layout.scss"
 // import { Link } from "gatsby"
 import AniLink from "gatsby-plugin-transition-link/AniLink"
-import TransitionLink from "gatsby-plugin-transition-link"
 import Link from "gatsby-plugin-transition-link"
 
 export default function Navbar() {
@@ -67,14 +66,31 @@ export default function Navbar() {
           onClose={onClose}
           visible={visible}
         >
-          <Link>
-            <Icon type="home" /> Home
-          </Link>
-          <h3>About us</h3>
-          <h3>Plans</h3>
-          <h3>FAQ</h3>
-          <h3>Log In</h3>
-          <h3>Sign Up</h3>
+          <div className="drawer_links">
+            <Link to="/">
+              <h6>Home</h6>
+            </Link>
+            <Link>
+              <h6>About us</h6>
+            </Link>
+            <Link>
+              <h6>Plans</h6>
+            </Link>
+            <Link to="FAQ">
+              <h6>FAQ</h6>
+            </Link>
+            <Link to="ContactUs">
+              <h6>Contact us</h6>
+            </Link>
+
+            <Link to="Login">
+              <h6>Log In</h6>
+            </Link>
+
+            <Link to="SignUp">
+              <h6>Sign Up</h6>
+            </Link>
+          </div>
         </Drawer>
       </div>
     </>

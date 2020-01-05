@@ -17,6 +17,7 @@
       line-height: 22px;
       color: #252527;
       margin-bottom: 14px;
+      text-align: justify;
     }
     p {
       margin-bottom: 33px;
@@ -27,6 +28,7 @@
       line-height: 17px;
       color: #808080;
       margin-bottom: 48px;
+      text-align: left;
     }
     .carousel_date {
       margin-bottom: 5px !important;
@@ -40,6 +42,7 @@
 }
 .testimony_container .testimony_group .IndexCarousel {
   width: 100%;
+  text-align: center;
 }
 
 .slick-dots li.slick-active button:before {
