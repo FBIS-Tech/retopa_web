@@ -1,6 +1,7 @@
 import React from "react"
 import "../scss/HowToSect.scss"
 import Hand from "../images/Hand.png"
+import Scroll from "../images/screencapture-localhost-8000-2020-01-06-11_54_43.png"
 import { Button } from "antd"
 import "../scss/HeaderHero.scss"
 import Playstore from "../../assets/playStore.svg"
@@ -26,6 +27,9 @@ export default function HowtoSection({
       <div className="how_to_position">
         <div className="HowTo_sect_left">
           <img src={Hand} style={{ margin: "0px" }} alt="hand" />
+          <div className="scrollImage">
+            <img src={Scroll} style={{ margin: "0px" }} alt="hand" />
+          </div>
         </div>
         <div className="HowTo_sect_right">
           <h4

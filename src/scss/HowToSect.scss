@@ -25,6 +25,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   .HowTo_sect_left {
+    position: relative;
     width: 100%;
     margin: auto;
   }
@@ -115,6 +116,19 @@
   margin-top: 63px;
   flex-flow: wrap;
 }
+.scrollImage {
+  width: 29%;
+  height: 40%;
+  overflow: auto;
+  position: absolute;
+  top: 29%;
+  left: 34%;
+  overflow-y: hidden;
+  img {
+    position: relative;
+    top: 0px;
+  }
+}
 
 @media (min-width: 768px) {
   .how_to_position {
@@ -145,5 +159,17 @@
   }
   .HowTo_sect_right {
     padding-left: 0px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .scrollImage {
+    width: 146px;
+    height: 263px;
+    overflow: auto;
+    position: absolute;
+    top: 183px;
+    left: 166px;
+    overflow-y: hidden;
   }
 }
