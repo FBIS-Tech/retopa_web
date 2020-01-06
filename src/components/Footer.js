@@ -29,10 +29,13 @@ export default function Footer() {
         <div className="legal">
           <h3 className="footer_title">Legal</h3>
           <div>
-            <Link to="Terms&Conditions">
-              <h4>Terms and Conditions</h4>
-            </Link>
-            <Link to="Privacy">
+            <h4>
+              <Link style={{ color: "inherit" }} to="Terms&Conditions">
+                Terms and Conditions
+              </Link>
+            </h4>
+
+            <Link style={{ color: "inherit" }} to="Privacy">
               <h4>Privacy / Policy</h4>
             </Link>
           </div>

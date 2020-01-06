@@ -3,6 +3,10 @@
   font-family: "Proxima Nova";
   src: url("../../../assets/font/ProximaNova-Regular.otf");
 }
+
+html {
+  --antd-wave-shadow-color: #227f00;
+}
 h3 {
   font-family: "Proxima Nova", sans-serif;
   color: #03363c;

@@ -19,6 +19,7 @@ import HowtoSection from "../components/HowtoSection"
 import { Button } from "antd"
 import IndexCarousel from "../components/Carousel/IndexCarousel"
 import Privacy from "../../assets/privacy.svg"
+import { Link } from "gatsby"
 
 const {
   main_title,
@@ -129,7 +130,9 @@ export default function index() {
                     <h4 className="trust_title">{data.title}</h4>
                     <h3>{data.text}</h3>
                   </div>
-                  <Button>Get started </Button>
+                  <Button>
+                    <Link to="Login">Get started</Link>
+                  </Button>
                 </div>
               )
             })}

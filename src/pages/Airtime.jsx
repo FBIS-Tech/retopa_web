@@ -16,6 +16,7 @@ import {
 } from "react-accessible-accordion"
 import "react-accessible-accordion/dist/fancy-example.css"
 import { Accordion_Airtime } from "../components/Constants/AirtimePage"
+import { Link } from "gatsby"
 
 const Airtime = () => {
   return (
@@ -30,7 +31,7 @@ const Airtime = () => {
             </p>
             <div className="stores">
               <Button>
-                Get started{" "}
+                <Link to="Login">Get started</Link>
                 <span style={{ marginLeft: "27px" }}>
                   <Arrow />
                 </span>
@@ -70,7 +71,9 @@ const Airtime = () => {
                 You can pay all kinds of bills with retopa, ranges from DSTV,
                 GOTV, Startime PHCN Bill, Waste bills, and many more.
               </p>
-              <Button>Get Started</Button>
+              <Button>
+                <Link to="Login">Get started</Link>
+              </Button>
             </div>
             <div className="illustration_left">
               <Imac />

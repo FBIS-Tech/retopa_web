@@ -124,6 +124,9 @@
     width: 100%;
     margin: auto;
   }
+  .HowTo_sect_right {
+    padding-left: 20px;
+  }
   .nfc_store {
     display: flex;
     flex-direction: row;
@@ -139,5 +142,8 @@
     line-height: 17px !important;
     color: #1c484e;
     width: 362px !important;
+  }
+  .HowTo_sect_right {
+    padding-left: 0px;
   }
 }

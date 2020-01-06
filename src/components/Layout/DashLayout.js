@@ -54,7 +54,7 @@ const DashLayout = ({
           </div>
         </div>
         <div className="user_name">
-          hello <span>Kehinde</span>
+          <span>Hello</span> <span>Kehinde</span>
         </div>
         <Menu mode="inline" defaultSelectedKeys={["1"]}>
           <Menu.Item key="1" onClick={handleHome}>
