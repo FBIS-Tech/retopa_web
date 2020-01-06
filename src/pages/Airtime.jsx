@@ -31,7 +31,9 @@ const Airtime = () => {
             </p>
             <div className="stores">
               <Button>
-                <Link to="Login">Get started</Link>
+                <Link style={{ color: "inherit" }} to="Login">
+                  Get started
+                </Link>
                 <span style={{ marginLeft: "27px" }}>
                   <Arrow />
                 </span>

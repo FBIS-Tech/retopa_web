@@ -48,7 +48,7 @@ const DashLayout = ({
       >
         <div className="logo">
           <div className="logo_content">
-            <Link>
+            <Link to="/">
               <Logo />
             </Link>
           </div>
