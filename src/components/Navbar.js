@@ -1,13 +1,23 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Drawer, Button, Icon } from "antd"
 import Logo from "../../assets/logo.svg"
 import "./Layout/Layout.scss"
 // import { Link } from "gatsby"
 import AniLink from "gatsby-plugin-transition-link/AniLink"
 import Link from "gatsby-plugin-transition-link"
-
+const windowGlobal = typeof window !== "undefined" && window
 export default function Navbar() {
   const [visible, setVisible] = useState(false)
+  const [position, setPosition] = useState("")
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll)
+  }, [])
+
+  const handleScroll = () => {
+    console.log(windowGlobal.pageYOffset)
+    setPosition(windowGlobal.pageYOffset)
+  }
 
   const showDrawer = () => {
     setVisible(true)
@@ -17,11 +27,14 @@ export default function Navbar() {
   }
   return (
     <>
-      <div className="nav_container">
+      <div
+        className={position > 15.2 ? "nav_container_fixed" : "nav_container"}
+      >
         <div className="drawer_top">
           <AniLink swipe top="exit" duration={0.45} to="/">
             <Logo />
           </AniLink>
+
           <div className="menu">
             <Icon
               type={!visible ? "menu" : "close"}

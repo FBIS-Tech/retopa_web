@@ -54,6 +54,20 @@ a {
   padding: 34px 0;
   background: linear-gradient(180deg, #f6f9f4 0%, rgba(255, 255, 255, 0) 100%);
 }
+.nav_container_fixed {
+  position: fixed;
+  width: 100%;
+  // background: #fff;
+  background: linear-gradient(180deg, #f6f9f4 0%, rgba(255, 255, 255, 1) 100%);
+  padding: 14px 0;
+  top: 0;
+  z-index: 1;
+  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.tl-wrapper > .Layout_container > .nav_container_fixed {
+  animation: pfadeInUp 600ms both;
+  -webkit-animation: pfadeInUp 600ms both;
+}
 .drawer_top {
   display: flex;
   align-items: center;
@@ -195,5 +209,23 @@ a {
     .signup_btn {
       width: 118px;
     }
+  }
+}
+.tl-wrapper > .Layout_container > .nav_container {
+  animation: pfadeInDown 600ms both;
+  -webkit-animation: pfadeInDown 600ms both;
+}
+
+@keyframes pfadeInUp {
+  from {
+    opacity: 0.3;
+    transform: translateY(100%);
+  }
+}
+
+@keyframes pfadeInDown {
+  from {
+    opacity: 0.3;
+    transform: translateY(-100%);
   }
 }
