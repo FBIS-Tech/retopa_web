@@ -162,7 +162,8 @@ a {
 }
 
 @media (min-width: 1024px) {
-  .app_group {
+  .app_group,
+  .drawer_top {
     // max-width: 76.4%;
     max-width: 66.1%;
   }
@@ -178,10 +179,10 @@ a {
     max-width: 66.1%;
     .main_nav {
       justify-content: space-between;
-      max-width: 58%;
+      max-width: 81%;
       .login_btn,
       .signup_btn {
-        width: 118px;
+        // width: 118px;
       }
     }
   }
@@ -190,5 +191,9 @@ a {
   .drawer_top .main_nav {
     justify-content: space-between;
     max-width: 70%;
+    .login_btn,
+    .signup_btn {
+      width: 118px;
+    }
   }
 }

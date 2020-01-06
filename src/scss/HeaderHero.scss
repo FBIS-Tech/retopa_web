@@ -12,6 +12,7 @@
 }
 
 .hero_left {
+  flex: 1;
   h3 {
     font-style: normal;
     font-weight: bold;
@@ -50,6 +51,7 @@
 }
 
 .hero_right {
+  flex: 1;
   svg {
     width: 300px;
   }
