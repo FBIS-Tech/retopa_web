@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import "../scss/HowToSect.scss"
 import Hand from "../images/Hand.png"
 import Scroll from "../images/screencapture-localhost-8000-2020-01-06-11_54_43.png"
@@ -6,6 +6,7 @@ import { Button } from "antd"
 import "../scss/HeaderHero.scss"
 import Playstore from "../../assets/playStore.svg"
 import AppStore from "../../assets/AppStore.svg"
+const windowGlobal = typeof window !== "undefined" && window
 
 export default function HowtoSection({
   main_title,
@@ -18,6 +19,22 @@ export default function HowtoSection({
   titleThree,
   textThree,
 }) {
+  const [top, setTop] = useState("0")
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll)
+  }, [])
+
+  const handleScroll = () => {
+    console.log(windowGlobal.pageYOffset)
+    if (windowGlobal.pageYOffset >= 1391.199951171875) {
+      for (let index = 0; index < 100; index++) {
+        setTop(index)
+      }
+    } else if (windowGlobal.pageYOffset <= 1391.199951171875) {
+      setTop(0)
+    }
+  }
   return (
     <div className="HowToSectionGroup">
       <div className="HowTo_sect_top">
@@ -26,9 +43,22 @@ export default function HowtoSection({
       </div>
       <div className="how_to_position">
         <div className="HowTo_sect_left">
-          <img src={Hand} style={{ margin: "0px" }} alt="hand" />
+          <img
+            className="handImage"
+            src={Hand}
+            style={{ margin: "0px" }}
+            alt="hand"
+          />
           <div className="scrollImage">
-            <img src={Scroll} style={{ margin: "0px" }} alt="hand" />
+            <img
+              src={Scroll}
+              style={{
+                margin: "0px",
+                position: "relative",
+                bottom: `${top}px`,
+              }}
+              alt="hand"
+            />
           </div>
         </div>
         <div className="HowTo_sect_right">

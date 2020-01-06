@@ -15,7 +15,6 @@ export default function Navbar() {
   }, [])
 
   const handleScroll = () => {
-    console.log(windowGlobal.pageYOffset)
     setPosition(windowGlobal.pageYOffset)
   }
 
@@ -27,9 +26,7 @@ export default function Navbar() {
   }
   return (
     <>
-      <div
-        className={position > 15.2 ? "nav_container_fixed" : "nav_container"}
-      >
+      <div className={position > 57 ? "nav_container_fixed" : "nav_container"}>
         <div className="drawer_top">
           <AniLink swipe top="exit" duration={0.45} to="/">
             <Logo />
