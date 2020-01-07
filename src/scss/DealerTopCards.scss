@@ -1,0 +1,103 @@
+.dealer_card_container {
+  width: 100%;
+  max-width: 370px;
+  height: 140px;
+  margin-bottom: 30px;
+  .dealer_card_group {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #bcc4d5;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 7px;
+
+    padding: 22px 20px;
+  }
+  .dealerCardImage {
+    flex-shrink: 1;
+    .imgee {
+      position: relative;
+      h4.circle_data {
+        position: absolute;
+        left: 37%;
+        top: 36%;
+        margin: 0px;
+      }
+    }
+    img {
+      margin: 0;
+      width: 74px;
+    }
+  }
+  .dealer_card_details {
+    text-align: center;
+    flex-grow: 2;
+    h4 {
+      margin-bottom: 0px;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 28px;
+      line-height: 35px;
+      padding-bottom: 10px;
+      color: #1e2d3b;
+    }
+    p {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 23px;
+      color: #898989;
+    }
+  }
+}
+
+.activities_dealer {
+  width: 100%;
+  max-width: 344px;
+  background: #ffffff;
+  border: 1px solid #e4e4e4;
+  border-radius: 7px;
+  margin-bottom: 30px;
+  .activity_title {
+    background: #227f00;
+    border-radius: 7px 7px 0px 0px;
+    width: 100%;
+    padding: 13px 25px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+    color: #ffffff;
+    margin: 0px;
+  }
+  p {
+    margin: 0;
+  }
+  .activity_price {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 30px;
+    padding: 25px;
+    color: #1e2d3b;
+    font-weight: bold;
+  }
+  .view_activity {
+    background: #f7f6f6;
+    border: 1px solid #e4e4e4;
+    border-radius: 0px 0px 7px 7px;
+    width: 100%;
+    padding: 10px 25px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    p {
+      margin-left: 8px;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 20px;
+      color: #676767;
+    }
+  }
+}

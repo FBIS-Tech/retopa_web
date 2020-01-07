@@ -76,6 +76,7 @@
         font-size: 14px;
         line-height: 18px;
         color: #5b5b5b;
+        margin-bottom: 0px;
       }
     }
   }
@@ -92,6 +93,13 @@
     mix-blend-mode: normal;
     opacity: 0.8;
     margin-bottom: 30px;
+  }
+  p,
+  h4 {
+    margin-bottom: 0px;
+    :hover {
+      color: inherit !important;
+    }
   }
   .bills_list_group {
     display: flex;

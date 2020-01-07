@@ -18,7 +18,7 @@
     font-weight: bold;
     font-size: 41px;
     line-height: 61px;
-    width: 210px;
+    width: 225px;
     color: #03363c;
   }
   .nfc {
@@ -27,7 +27,7 @@
     font-size: 41px;
     line-height: 61px;
     width: 100%;
-    max-width: 369px;
+    max-width: 390px;
     color: #03363c;
   }
   p {
@@ -68,8 +68,10 @@
   .hero_right {
     svg {
       width: 510px;
+      margin: 0;
     }
-    margin: 0;
+
+    text-align: right;
   }
   .hero_container {
     padding-left: 11.9%;

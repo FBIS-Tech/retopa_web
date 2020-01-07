@@ -4,6 +4,13 @@
   src: url("../../../assets/font/ProximaNova-Regular.otf");
 }
 
+.ant-btn:hover,
+.ant-btn:focus {
+  color: inherit;
+  background-color: #fff;
+  border-color: #227f00;
+}
+
 html {
   --antd-wave-shadow-color: #227f00;
 }
@@ -25,12 +32,11 @@ li,
 a,
 span,
 button {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   font-size: 14px;
   font-weight: 500;
   margin: 0px;
 }
-
 .logo {
   height: 70px;
   background: white;
@@ -158,6 +164,37 @@ main.ant-layout-content {
   width: 100%;
   z-index: 1;
 }
+.dealer_header {
+  header.ant-layout-header {
+    padding: 0px 25px;
+  }
+  span.ant-input-affix-wrapper {
+    border-bottom: 1px solid #979797;
+    input.ant-input {
+      border: none;
+      width: 100%;
+      max-width: 364px;
+      margin-left: 10px;
+      :focus-visible {
+        border: none;
+      }
+    }
+  }
+}
+.ant-input-affix-wrapper:hover .ant-input:not(.ant-input-disabled) {
+  border-color: transparent !important;
+  border-right-width: 1px !important;
+}
+
+.dealerDashDate {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 25px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  color: #000000;
+}
 
 header.ant-layout-header {
   height: 70px;
@@ -180,6 +217,18 @@ header.ant-layout-header {
       color: #444444;
       mix-blend-mode: normal;
       margin-left: 30px;
+      margin-bottom: 0;
+    }
+  }
+  .dealerHeader {
+    h4 {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 20px;
+      color: #444857;
+      margin-bottom: 0;
+      margin-left: 0px;
     }
   }
   .header_right {
@@ -194,6 +243,7 @@ header.ant-layout-header {
       line-height: 22px;
       color: #4f4f4f;
       margin-right: 21px;
+      margin-bottom: 0;
     }
     i.anticon.anticon-caret-down {
       width: 10px;
@@ -216,6 +266,7 @@ header.sub_header.ant-layout-header {
       color: #444444;
       mix-blend-mode: normal;
       opacity: 0.8;
+      margin-bottom: 0px;
     }
   }
   .sub_header_right {
@@ -229,6 +280,19 @@ header.sub_header.ant-layout-header {
       color: white;
     }
   }
+}
+.dealer_title {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 25px;
+  color: #000000;
+  border: 1px solid #f5f5f5;
+  background-color: #f3f3f1;
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 5px 18px;
+  font-weight: 500;
 }
 
 span.ant-layout-sider-zero-width-trigger.ant-layout-sider-zero-width-trigger-left {
@@ -264,6 +328,12 @@ span.ant-layout-sider-zero-width-trigger.ant-layout-sider-zero-width-trigger-lef
   width: 200px;
 }
 
+.dealer_header {
+  header.ant-layout-header {
+    padding: 0px 50px;
+  }
+}
+
 ul.ant-menu.ant-menu-light.ant-menu-inline-collapsed.ant-menu-root.ant-menu-vertical {
   display: none;
 }
@@ -293,6 +363,22 @@ ul.ant-menu.ant-menu-light.ant-menu-root.ant-menu-inline {
     height: 100vh;
     z-index: 1;
   }
+  aside.dealer_layout_side.ant-layout-sider.ant-layout-sider-dark {
+    flex: 0 0 219px !important;
+    max-width: 219px !important;
+    min-width: 219px;
+    width: 219px !important;
+    position: fixed;
+    height: 100vh;
+    z-index: 1;
+    .ant-layout-sider-children {
+      height: 100vh;
+      margin-top: -0.1px;
+      padding-top: 0.1px;
+      position: fixed;
+      width: 219px;
+    }
+  }
   .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
     width: 180px;
   }
@@ -301,15 +387,36 @@ ul.ant-menu.ant-menu-light.ant-menu-root.ant-menu-inline {
     margin-left: 240px;
     margin-top: 152px;
   }
+  .dealer_children {
+    margin-left: 219px;
+    margin-top: 152px;
+  }
   .headersss {
     position: fixed;
     width: calc(100% - 240px);
     margin-left: 240px;
   }
+  .dealer_header {
+    position: fixed;
+    width: calc(100% - 218px);
+    margin-left: 218px;
+  }
   .header_right,
   .sub_header_right {
     margin-right: 50px;
   }
+  .dealer_header {
+    header.ant-layout-header {
+      padding: 0px 25px;
+    }
+    .header_right {
+      margin-right: 17px !important;
+    }
+    .sub_header_right {
+      margin-right: 2px;
+    }
+  }
+
   .ant-layout-sider-children {
     height: 100vh;
     margin-top: -0.1px;

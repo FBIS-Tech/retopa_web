@@ -18,8 +18,7 @@
     font-weight: bold;
     font-size: 50px;
     line-height: 61px;
-    // width: 210px;
-
+    margin: 0;
     color: #03363c;
   }
   p {
@@ -30,6 +29,7 @@
     margin-top: 15px;
     color: #03363c;
     max-width: 513px;
+    margin-bottom: 0;
   }
   .stores {
     button.ant-btn {
@@ -67,6 +67,7 @@
     line-height: 38px;
     color: #505978;
     padding-bottom: 50px;
+    margin-bottom: 0px;
   }
 }
 
@@ -123,6 +124,7 @@
       font-size: 16px;
       line-height: 20px;
       color: #879799;
+      margin-bottom: 0px;
     }
   }
 }
@@ -213,6 +215,7 @@
       line-height: 18px;
       color: #808080;
       max-width: 256px;
+      margin-bottom: 0;
     }
   }
 }
@@ -234,6 +237,7 @@
       font-size: 30px;
       line-height: 38px;
       color: #505978;
+      margin-bottom: 0;
     }
     .features_text {
       font-style: normal;
@@ -244,6 +248,7 @@
       color: #505978;
       padding-top: 22px;
       padding-bottom: 46px;
+      margin-bottom: 0;
     }
     .feature_illustration {
       display: flex;

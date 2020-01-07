@@ -27,7 +27,8 @@ h4,
 label,
 p,
 li,
-a {
+a,
+div {
   font-family: "Montserrat", sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -47,6 +48,15 @@ a {
   flex-wrap: wrap;
   margin: 21px auto;
   width: 90%;
+  h4 {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    margin: 0;
+
+    color: #5a6f72;
+  }
 }
 
 // Navbar
@@ -76,6 +86,14 @@ a {
   margin: auto;
   .main_nav {
     display: none;
+    h3 {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 17px;
+      color: #03363c;
+      margin-bottom: 0;
+    }
     .login_btn {
       border-color: #227f00;
       color: #227f00;
@@ -114,6 +132,7 @@ a {
       font-size: 30px;
       line-height: 37px;
       color: #ffffff;
+      margin-bottom: 0;
     }
     .get_text {
       font-style: normal;
