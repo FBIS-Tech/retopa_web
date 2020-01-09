@@ -72,6 +72,35 @@
   .active {
     border-left: 7px solid #3cbd74;
   }
+  .ant-anchor-link-active > .ant-anchor-link-title {
+    color: #3cbd74;
+    border-left: 6.61px solid #3cbd74;
+  }
+}
+span.ant-anchor-ink-ball.visible {
+  top: 61px !important;
+}
+.ant-anchor-ink-ball {
+  position: absolute;
+  left: 50%;
+  display: none;
+  width: 4px;
+  height: 61px;
+  background-color: #fff;
+  border: 2px solid #3cbd74;
+  border-radius: 8px;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  -webkit-transition: top 0.3s ease-in-out;
+  transition: top 0.3s ease-in-out;
+}
+
+// .ant-anchor-wrapper {
+//   max-height: 897px !important;
+// }
+.ant-anchor-link {
+  padding: 0;
+  line-height: 1.143;
 }
 
 @media (min-width: 768px) {
