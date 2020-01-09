@@ -2,17 +2,19 @@ import React from "react"
 import DealerLayout from "../../components/Layout/DealerLayout"
 import useDisplayHooks from "./hooks/useDisplayHooks"
 import Dealer_Home from "./Dealer_Home"
+import Retailer from "./Retailer"
+import RetailerList from "./RetailerList"
 
 const Dashboard = () => {
   const [
     title,
     home,
-    airtime,
+    retailer,
     history,
     payment,
     billing,
     selectHome,
-    selectAirtime,
+    selectRetailer,
     selectHistory,
     selectPayment,
     selectBilling,
@@ -21,7 +23,7 @@ const Dashboard = () => {
     <DealerLayout
       title={title}
       handleHome={selectHome}
-      handleAirtime={selectAirtime}
+      handleRetailer={selectRetailer}
       handleHistory={selectHistory}
       handlePayment={selectPayment}
       handleBilling={selectBilling}
@@ -31,6 +33,18 @@ const Dashboard = () => {
         className={home ? "dealers_dashboard" : "hide"}
       >
         <Dealer_Home />
+      </div>
+      <div
+        style={{ padding: "20px", backgroundColor: "#FBFBFA", border: "none" }}
+        className={retailer ? "dealers_retail" : "hide"}
+      >
+        <RetailerList />
+      </div>
+      <div
+        style={{ padding: "20px", backgroundColor: "#FBFBFA", border: "none" }}
+        className={billing ? "dealers_retail" : "hide"}
+      >
+        <Retailer />
       </div>
     </DealerLayout>
   )

@@ -29,7 +29,7 @@ const Dash_logout_icon = props => <Icon component={LogoutIcon} {...props} />
 const DealerLayout = ({
   children,
   handleHome,
-  handleAirtime,
+  handleRetailer,
   handleHistory,
   handlePayment,
   title,
@@ -60,7 +60,7 @@ const DealerLayout = ({
             <Dash_home_icon />
             <span className="nav-text">Home</span>
           </Menu.Item>
-          <Menu.Item key="2" onClick={handleAirtime}>
+          <Menu.Item key="2" onClick={handleRetailer}>
             <Dash_airtime_icon />
             <span className="nav-text">Retailer</span>
           </Menu.Item>
