@@ -19,18 +19,18 @@ export default function HowtoSection({
   titleThree,
   textThree,
 }) {
-  const [top, setTop] = useState("0")
+  const [top, setTop] = useState(0)
+  const [position, setPosition] = useState("0")
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll)
   }, [])
 
   const handleScroll = () => {
-    console.log(windowGlobal.pageYOffset)
-    if (windowGlobal.pageYOffset >= 1391.199951171875) {
-      for (let index = 0; index < 100; index++) {
-        setTop(index)
-      }
+    // console.log(windowGlobal.pageYOffset)
+    let positiond = windowGlobal.pageYOffset
+    if (positiond >= 1391.199951171875) {
+      // setTop(windowGlobal.pageYOffset)
     } else if (windowGlobal.pageYOffset <= 1391.199951171875) {
       setTop(0)
     }

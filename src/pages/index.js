@@ -181,7 +181,7 @@ export default function index() {
           <div className="Privacy_text">
             <h3 className="title">Your Security is our Priority</h3>
             <h3 className="title_text">
-              Fund9ja uses the highest levels of Internet Security, and it is
+              Retopa uses the highest levels of Internet Security, and it is
               secured by 256 bits SSL security encryption to ensure that your
               information is completely protected from fraud.
             </h3>
