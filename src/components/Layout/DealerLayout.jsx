@@ -15,12 +15,14 @@ import {
   HistoryIcon,
   PaymentIcon,
   LogoutIcon,
+  RetailIcon,
+  WalletIcon,
 } from "../CustomIcons"
 const { Header, Content, Sider } = Layout
 
 const Dash_home_icon = props => <Icon component={HomeIcon} {...props} />
-const Dash_airtime_icon = props => <Icon component={AirtimeIcon} {...props} />
-const Dash_bill_icon = props => <Icon component={BillIcon} {...props} />
+const Dash_airtime_icon = props => <Icon component={RetailIcon} {...props} />
+const Dash_bill_icon = props => <Icon component={WalletIcon} {...props} />
 const Dash_voucher_icon = props => <Icon component={VoucherIcon} {...props} />
 const Dash_history_icon = props => <Icon component={HistoryIcon} {...props} />
 const Dash_payment_icon = props => <Icon component={PaymentIcon} {...props} />

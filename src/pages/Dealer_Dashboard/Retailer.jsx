@@ -1,5 +1,5 @@
 import React from "react"
-import { Table, Icon, Input, Select, Pagination } from "antd"
+import { Table, Icon, Input, Select, Pagination, Button } from "antd"
 import { Columns, TableOne } from "../../components/Constants/Tableone"
 import "../../scss/Retailer.scss"
 
@@ -15,17 +15,7 @@ const Retailer = () => {
         <div className="table_Group">
           <div className="table_header">
             <div className="rowShow">
-              <Select
-                defaultValue="10"
-                style={{ width: 70 }}
-                // onChange={handleChange}
-              >
-                <Option value="10">10</Option>
-                <Option value="15">15</Option>
-                <Option value="20">20</Option>
-                <Option value="25">25</Option>
-              </Select>
-              <h4>Records per page</h4>
+              <Button>Fund Wallet</Button>
             </div>
             <div className="searchTable">
               <Input
