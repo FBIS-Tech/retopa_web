@@ -1,6 +1,9 @@
 import React from "react"
 import Green from "../../../assets/green.svg"
 import Red from "../../../assets/red.svg"
+import { Popover, Button } from "antd"
+import "../../scss/Table.scss"
+
 export const TableOne = [
   {
     name: "Emmanuel",
@@ -251,15 +254,11 @@ export const Columns = [
     title: "Network",
     dataIndex: "network",
     key: "network",
-
-    // align: "right",
   },
   {
     title: "Created at",
     dataIndex: "date",
     key: "date",
-
-    // align: "right",
   },
 ]
 export const ColumnsTwo = [
@@ -342,5 +341,33 @@ export const ColumnsTwo = [
     key: "date",
 
     // align: "right",
+  },
+  {
+    title: "Action",
+    key: "action",
+    render: (text, record) => (
+      <Popover
+        content={
+          <div className="pop_content">
+            <p>Send Token</p>
+            <p>Edit</p>
+          </div>
+        }
+        placement="bottom"
+        //  title="Title"
+        trigger="click"
+      >
+        <span
+          style={{
+            color: "#9A9DB4",
+            fontSize: "30px",
+            fontWeight: "bold",
+            cursor: "pointer",
+          }}
+        >
+          ...
+        </span>
+      </Popover>
+    ),
   },
 ]

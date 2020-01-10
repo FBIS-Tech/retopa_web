@@ -19,7 +19,7 @@ const { Link } = Anchor
 const FAQ = () => {
   const [focus, setFocus] = useState(undefined)
   useEffect(() => {
-    setFocus(window.innerHeight / 1.5)
+    setFocus(window.innerHeight / 4)
   }, [])
   return (
     <Layout>

@@ -4,6 +4,7 @@ import useDisplayHooks from "./hooks/useDisplayHooks"
 import Dealer_Home from "./Dealer_Home"
 import Retailer from "./Retailer"
 import RetailerList from "./RetailerList"
+import RetailerHistory from "./RetailerHistory"
 
 const Dashboard = () => {
   const [
@@ -45,6 +46,12 @@ const Dashboard = () => {
         className={billing ? "dealers_retail" : "hide"}
       >
         <Retailer />
+      </div>
+      <div
+        style={{ padding: "20px", backgroundColor: "#FBFBFA", border: "none" }}
+        className={history ? "dealers_retail" : "hide"}
+      >
+        <RetailerHistory />
       </div>
     </DealerLayout>
   )

@@ -1,0 +1,22 @@
+.pop_content {
+  p {
+    margin-bottom: 0;
+    text-align: right;
+    padding: 9px 15px 9px 24px;
+    cursor: pointer;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+    color: #313131;
+    &:hover {
+      background: #d8f2db;
+      border: 1px solid #f4f4fc;
+      border-radius: 5px 5px 0px 0px;
+    }
+  }
+}
+.ant-popover-inner-content {
+  color: rgba(0, 0, 0, 0.65);
+  padding: 0;
+}

@@ -20,6 +20,10 @@ thead.ant-table-thead {
   color: #9a9db4;
 }
 
+table {
+  margin-bottom: 0px;
+}
+
 tbody.ant-table-tbody {
   tr {
     background: #ffffff;
@@ -40,12 +44,15 @@ tbody.ant-table-tbody {
     -o-border-radius: 10px !important;
   }
 }
+table {
+  margin-bottom: 0px !important;
+}
 td {
   font-size: 14px;
   line-height: 18px;
   color: #313131;
   padding: 15px 8px !important;
-  text-align: center;
+  // text-align: center;
 }
 th:first-child,
 td:first-child {
@@ -98,4 +105,9 @@ td:first-child {
     font-weight: 600;
     margin-bottom: 0px;
   }
+}
+.ant-table-wrapper {
+  width: 100%;
+  overflow: hidden;
+  overflow-x: auto;
 }

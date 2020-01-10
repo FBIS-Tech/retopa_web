@@ -2,10 +2,11 @@ import React from "react"
 import { Table, Icon, Input, Select, Pagination } from "antd"
 import { ColumnsTwo, TableTwo } from "../../components/Constants/Tableone"
 import "../../scss/Retailer.scss"
+import { HistoryColumn, History } from "../../components/Constants/historyTable"
 
 const { Option } = Select
 
-const RetailerList = () => {
+const RetailerHistory = () => {
   return (
     <div>
       <div
@@ -35,8 +36,8 @@ const RetailerList = () => {
             </div>
           </div>
           <Table
-            columns={ColumnsTwo}
-            dataSource={TableTwo}
+            columns={HistoryColumn}
+            dataSource={History}
             bordered
             size="small"
           />
@@ -54,4 +55,4 @@ const RetailerList = () => {
   )
 }
 
-export default RetailerList
+export default RetailerHistory
