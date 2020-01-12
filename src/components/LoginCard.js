@@ -5,7 +5,13 @@ import { Input, Button } from "antd"
 import Face from "../../assets/colorfb.svg"
 import Google from "../../assets/google.svg"
 
-const LoginCard = ({ active, activate1, activate2 }) => {
+const LoginCard = ({
+  active,
+  activate1,
+  activate2,
+  getEmail_Number,
+  getPassword,
+}) => {
   return (
     <div className="Login_card">
       <div className="method">
@@ -20,11 +26,14 @@ const LoginCard = ({ active, activate1, activate2 }) => {
         <form>
           <div className="input">
             <label>Email/Phone number</label>
-            <Input placeholder="Enter email or Phone number" />
+            <Input
+              placeholder="Enter email or Phone number"
+              onChange={getEmail_Number}
+            />
           </div>
           <div>
             <label>Password</label>
-            <Input.Password placeholder="Password" />
+            <Input.Password placeholder="Password" onChange={getPassword} />
           </div>
           <Link to="PasswordReset">
             <h4 className="forgotPassword">Forgot Password?</h4>

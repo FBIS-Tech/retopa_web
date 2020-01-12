@@ -11,12 +11,14 @@ import {
   LogoutIcon,
   WalletIcon,
   RetailIcon,
+  AdminIcon,
 } from "../../../components/CustomIcons"
 // const { Header, Content, Sider } = Layout
 
 const Dash_home_icon = props => <Icon component={HomeIcon} {...props} />
 const Dash_airtime_icon = props => <Icon component={RetailIcon} {...props} />
 const Dash_bill_icon = props => <Icon component={WalletIcon} {...props} />
+const Dash_admin_icon = props => <Icon component={AdminIcon} {...props} />
 const Dash_voucher_icon = props => <Icon component={VoucherIcon} {...props} />
 const Dash_history_icon = props => <Icon component={HistoryIcon} {...props} />
 const Dash_payment_icon = props => <Icon component={PaymentIcon} {...props} />
@@ -34,6 +36,7 @@ export default () => {
   const [history, setHistory] = useState(false)
   const [payment, setPayment] = useState(false)
   const [billing, setBilling] = useState(false)
+  const [admin, setAdmin] = useState(false)
 
   const selectHome = () => {
     setTitle(
@@ -47,6 +50,7 @@ export default () => {
     setHistory(false)
     setPayment(false)
     setBilling(false)
+    setAdmin(false)
   }
   const selectRetailer = () => {
     setTitle(
@@ -60,14 +64,21 @@ export default () => {
     setHistory(false)
     setPayment(false)
     setBilling(false)
+    setAdmin(false)
   }
   const selectHistory = () => {
-    setTitle("Retailer Wallet")
+    setTitle(
+      <h4>
+        <Dash_airtime_icon style={{ marginRight: "10px" }} />
+        Retailer Transactions
+      </h4>
+    )
     setHome(false)
     setRetailer(false)
     setHistory(true)
     setPayment(false)
     setBilling(false)
+    setAdmin(false)
   }
   const selectPayment = () => {
     setTitle("Add Card")
@@ -76,12 +87,13 @@ export default () => {
     setHistory(false)
     setPayment(true)
     setBilling(false)
+    setAdmin(false)
   }
   const selectBilling = () => {
     setTitle(
       <h4>
         <Dash_bill_icon style={{ marginRight: "10px" }} />
-        Retailer Wallet
+        Wallet
       </h4>
     )
     setHome(false)
@@ -89,6 +101,21 @@ export default () => {
     setHistory(false)
     setPayment(false)
     setBilling(true)
+    setAdmin(false)
+  }
+  const selectAdmin = () => {
+    setTitle(
+      <h4>
+        <Dash_admin_icon style={{ marginRight: "10px" }} />
+        Admin
+      </h4>
+    )
+    setHome(false)
+    setRetailer(false)
+    setHistory(false)
+    setPayment(false)
+    setBilling(false)
+    setAdmin(true)
   }
 
   return [
@@ -98,10 +125,12 @@ export default () => {
     history,
     payment,
     billing,
+    admin,
     selectHome,
     selectRetailer,
     selectHistory,
     selectPayment,
     selectBilling,
+    selectAdmin,
   ]
 }

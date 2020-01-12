@@ -17,6 +17,7 @@ import {
   LogoutIcon,
   RetailIcon,
   WalletIcon,
+  AdminIcon,
 } from "../CustomIcons"
 const { Header, Content, Sider } = Layout
 
@@ -27,6 +28,7 @@ const Dash_voucher_icon = props => <Icon component={VoucherIcon} {...props} />
 const Dash_history_icon = props => <Icon component={HistoryIcon} {...props} />
 const Dash_payment_icon = props => <Icon component={PaymentIcon} {...props} />
 const Dash_logout_icon = props => <Icon component={LogoutIcon} {...props} />
+const Dash_admin_icon = props => <Icon component={AdminIcon} {...props} />
 
 const DealerLayout = ({
   children,
@@ -34,6 +36,7 @@ const DealerLayout = ({
   handleRetailer,
   handleHistory,
   handlePayment,
+  handleAdmin,
   title,
   handleBilling,
 }) => {
@@ -61,6 +64,10 @@ const DealerLayout = ({
           <Menu.Item key="1" onClick={handleHome}>
             <Dash_home_icon />
             <span className="nav-text">Home</span>
+          </Menu.Item>
+          <Menu.Item key="8" onClick={handleAdmin}>
+            <Dash_admin_icon />
+            <span className="nav-text">Admin</span>
           </Menu.Item>
           <Menu.Item key="2" onClick={handleRetailer}>
             <Dash_airtime_icon />

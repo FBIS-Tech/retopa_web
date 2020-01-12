@@ -1,8 +1,10 @@
-import React from "react"
+import React, { useEffect } from "react"
 import Green from "../../../assets/green.svg"
 import Red from "../../../assets/red.svg"
 import { Popover, Button } from "antd"
 import "../../scss/Table.scss"
+import { useDispatch } from "react-redux"
+import { openTokenForm } from "../../Actions/Actions"
 
 export const TableOne = [
   {
@@ -349,7 +351,7 @@ export const ColumnsTwo = [
       <Popover
         content={
           <div className="pop_content">
-            <p>Send Token</p>
+            <p onClick={openTokenForm()}>Send Token</p>
             <p>Edit</p>
           </div>
         }
