@@ -6,6 +6,7 @@ import Retailer from "./Wallet"
 import RetailerList from "./RetailerList"
 import RetailerHistory from "./RetailerHistory"
 import Admin from "./Admin"
+import Export from "./Export"
 
 const Dashboard = () => {
   const [
@@ -16,12 +17,14 @@ const Dashboard = () => {
     payment,
     billing,
     admin,
+    exxport,
     selectHome,
     selectRetailer,
     selectHistory,
     selectPayment,
     selectBilling,
     selectAdmin,
+    selectExport,
   ] = useDisplayHooks()
   return (
     <DealerLayout
@@ -32,6 +35,7 @@ const Dashboard = () => {
       handlePayment={selectPayment}
       handleBilling={selectBilling}
       handleAdmin={selectAdmin}
+      handleExport={selectExport}
     >
       <div
         style={{ padding: "20px" }}
@@ -62,6 +66,12 @@ const Dashboard = () => {
         className={history ? "dealers_retail" : "hide"}
       >
         <RetailerHistory />
+      </div>
+      <div
+        style={{ padding: "20px", backgroundColor: "#FBFBFA", border: "none" }}
+        className={exxport ? "dealers_retail" : "hide"}
+      >
+        <Export />
       </div>
     </DealerLayout>
   )

@@ -12,6 +12,7 @@ import {
   WalletIcon,
   RetailIcon,
   AdminIcon,
+  ExportIcon,
 } from "../../../components/CustomIcons"
 // const { Header, Content, Sider } = Layout
 
@@ -21,6 +22,7 @@ const Dash_bill_icon = props => <Icon component={WalletIcon} {...props} />
 const Dash_admin_icon = props => <Icon component={AdminIcon} {...props} />
 const Dash_voucher_icon = props => <Icon component={VoucherIcon} {...props} />
 const Dash_history_icon = props => <Icon component={HistoryIcon} {...props} />
+const Dash_export_icon = props => <Icon component={ExportIcon} {...props} />
 const Dash_payment_icon = props => <Icon component={PaymentIcon} {...props} />
 const Dash_logout_icon = props => <Icon component={LogoutIcon} {...props} />
 
@@ -37,6 +39,7 @@ export default () => {
   const [payment, setPayment] = useState(false)
   const [billing, setBilling] = useState(false)
   const [admin, setAdmin] = useState(false)
+  const [exxport, setExport] = useState(false)
 
   const selectHome = () => {
     setTitle(
@@ -51,6 +54,7 @@ export default () => {
     setPayment(false)
     setBilling(false)
     setAdmin(false)
+    setExport(false)
   }
   const selectRetailer = () => {
     setTitle(
@@ -65,6 +69,7 @@ export default () => {
     setPayment(false)
     setBilling(false)
     setAdmin(false)
+    setExport(false)
   }
   const selectHistory = () => {
     setTitle(
@@ -79,6 +84,7 @@ export default () => {
     setPayment(false)
     setBilling(false)
     setAdmin(false)
+    setExport(false)
   }
   const selectPayment = () => {
     setTitle("Add Card")
@@ -88,6 +94,7 @@ export default () => {
     setPayment(true)
     setBilling(false)
     setAdmin(false)
+    setExport(false)
   }
   const selectBilling = () => {
     setTitle(
@@ -102,6 +109,7 @@ export default () => {
     setPayment(false)
     setBilling(true)
     setAdmin(false)
+    setExport(false)
   }
   const selectAdmin = () => {
     setTitle(
@@ -116,6 +124,22 @@ export default () => {
     setPayment(false)
     setBilling(false)
     setAdmin(true)
+    setExport(false)
+  }
+  const selectExport = () => {
+    setTitle(
+      <h4>
+        <Dash_export_icon style={{ marginRight: "10px" }} />
+        Export Data
+      </h4>
+    )
+    setHome(false)
+    setRetailer(false)
+    setHistory(false)
+    setPayment(false)
+    setBilling(false)
+    setAdmin(false)
+    setExport(true)
   }
 
   return [
@@ -126,11 +150,13 @@ export default () => {
     payment,
     billing,
     admin,
+    exxport,
     selectHome,
     selectRetailer,
     selectHistory,
     selectPayment,
     selectBilling,
     selectAdmin,
+    selectExport,
   ]
 }

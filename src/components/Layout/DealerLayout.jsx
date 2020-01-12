@@ -18,6 +18,7 @@ import {
   RetailIcon,
   WalletIcon,
   AdminIcon,
+  ExportIcon,
 } from "../CustomIcons"
 const { Header, Content, Sider } = Layout
 
@@ -29,6 +30,7 @@ const Dash_history_icon = props => <Icon component={HistoryIcon} {...props} />
 const Dash_payment_icon = props => <Icon component={PaymentIcon} {...props} />
 const Dash_logout_icon = props => <Icon component={LogoutIcon} {...props} />
 const Dash_admin_icon = props => <Icon component={AdminIcon} {...props} />
+const Dash_export_icon = props => <Icon component={ExportIcon} {...props} />
 
 const DealerLayout = ({
   children,
@@ -39,6 +41,7 @@ const DealerLayout = ({
   handleAdmin,
   title,
   handleBilling,
+  handleExport,
 }) => {
   // setting date
   let today = new Date()
@@ -88,6 +91,10 @@ const DealerLayout = ({
           <Menu.Item key="6" onClick={handlePayment}>
             <Dash_payment_icon />
             <span className="nav-text">Payment</span>
+          </Menu.Item>
+          <Menu.Item key="9" onClick={handleExport}>
+            <Dash_export_icon />
+            <span className="nav-text">Export Data</span>
           </Menu.Item>
           <Menu.Item key="7">
             <Dash_logout_icon />

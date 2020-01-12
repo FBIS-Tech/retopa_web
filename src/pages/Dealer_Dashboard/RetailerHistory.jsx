@@ -1,5 +1,5 @@
 import React from "react"
-import { Table, Icon, Input, Select, Pagination } from "antd"
+import { Table, Icon, Input, Select, Pagination, Tabs } from "antd"
 import { ColumnsTwo, TableTwo } from "../../components/Constants/Tableone"
 import "../../scss/Retailer.scss"
 import { HistoryColumn, History } from "../../components/Constants/historyTable"
@@ -11,7 +11,9 @@ const RetailerHistory = () => {
     <div>
       <div
         className="table_container"
-        style={TableTwo.length <= 9 ? { height: "100vh" } : { height: "auto" }}
+        style={
+          HistoryColumn.length <= 9 ? { height: "100vh" } : { height: "auto" }
+        }
       >
         <div className="table_Group">
           <div className="table_header">
