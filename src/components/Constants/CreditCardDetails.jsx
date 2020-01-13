@@ -1,5 +1,6 @@
 import React from "react"
 import "../../scss/Carddetails.scss"
+import Master from "../../../assets/master.svg"
 
 const CardDetails = ({ number, title, image }) => {
   return (
@@ -7,9 +8,12 @@ const CardDetails = ({ number, title, image }) => {
       <div className="creditContainer">
         <div className="creditGroup">
           <h4 style={{ marginBottom: "0px" }}>{number}</h4>
-          <div className="carBottom">
-            <h4 style={{ marginBottom: "0px" }}>{title}</h4>
-            <img scr={image} style={{ marginBottom: "0px" }} />
+          <div className="cardBottom">
+            <p style={{ marginBottom: "0px" }}>{title}</p>
+            <div className="logoImage">
+              {/* <img scr={Master} style={{ marginBottom: "0px" }} /> */}
+              <Master />
+            </div>
           </div>
         </div>
       </div>

@@ -24,3 +24,48 @@
     }
   }
 }
+
+button.ant-btn.ant-btn-default {
+  background: #227f00 !important;
+  border-radius: 10px;
+  width: 123px;
+  height: 45px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 19px;
+  color: #ffffff !important;
+}
+.ant-modal-footer {
+  button.ant-btn {
+    border: none;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 19px;
+    color: #227f00;
+  }
+}
+
+.ant-modal-mask {
+  background: linear-gradient(0deg, #d8f2db, #d8f2db),
+    linear-gradient(0deg, #d8f2db, #d8f2db),
+    linear-gradient(0deg, #d8f2db, #d8f2db), #d8f2db;
+  opacity: 0.3 !important;
+}
+
+.ant-modal-title {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  color: #262626;
+}
+
+.ant-modal-body {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 19px;
+  color: #03363c;
+}

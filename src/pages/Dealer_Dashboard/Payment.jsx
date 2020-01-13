@@ -1,11 +1,25 @@
 import React, { useState } from "react"
 import "../../scss/Retailer.scss"
 import "../../scss/merchantPayment.scss"
-import { Tabs, Button } from "antd"
+import { Tabs, Button, Modal } from "antd"
 import CardDetails from "../../components/Constants/CreditCardDetails"
+import Master from "../../images/masterCard.png"
 const { TabPane } = Tabs
 
 const Payment = () => {
+  const [visible, setVisible] = useState(false)
+  const showModal = () => {
+    setVisible(true)
+  }
+
+  const handleOk = () => {
+    setVisible(false)
+  }
+
+  const handleCancel = () => {
+    setVisible(false)
+  }
+
   return (
     <>
       <div className="cardPageContainer">
@@ -21,12 +35,16 @@ const Payment = () => {
                     <div className="cardsGroup">
                       <div className="viewCards">
                         <div className="cardBtn">
-                          <Button>
+                          <Button onClick={showModal}>
                             <p>+</p>
                             <p>Add Card</p>
                           </Button>
                         </div>
-                        <CardDetails />
+                        <CardDetails
+                          number="**** 7268"
+                          title="Expires Mar 2022"
+                          image={Master}
+                        />
                       </div>
                     </div>
                   </div>
@@ -38,6 +56,19 @@ const Payment = () => {
             </Tabs>
           </div>
         </div>
+      </div>
+      <div className="modal">
+        <Modal
+          title="Add Card"
+          visible={visible}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          okText="Proceed"
+          okType="default"
+          centered
+        >
+          To add and verify card N100 will be charged and saved into your wallet
+        </Modal>
       </div>
     </>
   )
