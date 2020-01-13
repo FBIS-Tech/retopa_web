@@ -87,7 +87,12 @@ export default () => {
     setExport(false)
   }
   const selectPayment = () => {
-    setTitle("Add Card")
+    setTitle(
+      <h4>
+        <Dash_payment_icon style={{ marginRight: "10px", fontSize: "16px" }} />
+        Payment
+      </h4>
+    )
     setHome(false)
     setRetailer(false)
     setHistory(false)

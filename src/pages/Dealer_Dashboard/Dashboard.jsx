@@ -7,6 +7,7 @@ import RetailerList from "./RetailerList"
 import RetailerHistory from "./RetailerHistory"
 import Admin from "./Admin"
 import Export from "./Export"
+import Payment from "./Payment"
 
 const Dashboard = () => {
   const [
@@ -72,6 +73,12 @@ const Dashboard = () => {
         className={exxport ? "dealers_retail" : "hide"}
       >
         <Export />
+      </div>
+      <div
+        style={{ padding: "20px", backgroundColor: "#FBFBFA", border: "none" }}
+        className={payment ? "dealers_retail" : "hide"}
+      >
+        <Payment />
       </div>
     </DealerLayout>
   )

@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import "../../scss/Retailer.scss"
 import "../../scss/Admin.scss"
+import "../../scss/Export.scss"
 import { Input, Button, Tabs } from "antd"
 const { TabPane } = Tabs
 
@@ -18,7 +19,7 @@ const Export = () => {
                   </div>
                   <div className="formGroup">
                     <div className="adminForm">
-                      <div className="formInput">
+                      <div className="formInput exportInput">
                         <label htmlFor="name">From</label>
                         <Input
                           placeholder="Enter name here..."
@@ -26,15 +27,15 @@ const Export = () => {
                         />
                       </div>
 
-                      <div className="formInput">
+                      <div className="formInput exportInput">
                         <label htmlFor="name">To</label>
                         <Input placeholder="Enter email here..." />
                       </div>
-                      <div className="formInput">
+                      <div className="formInput exportInput">
                         <label htmlFor="name">Email</label>
                         <Input placeholder="****" className="inputBack" />
                       </div>
-                      <div className="formInput">
+                      <div className="formInput exportInput">
                         <label htmlFor="name">Token</label>
                         <Input placeholder="Confirm Password..." />
                       </div>

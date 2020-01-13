@@ -1,0 +1,26 @@
+.cardsContainer {
+  padding: 50px 30px;
+  background: #ffffff;
+  border: 1px solid #f0f0f0;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.100279);
+}
+
+.cardBtn {
+  button.ant-btn {
+    padding: 62px 147px;
+    background: #fdfdfd;
+    border: 1px solid #ade0ad;
+    box-sizing: border-box;
+    box-shadow: 0px 6px 12px rgba(126, 155, 129, 0.1);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 371px;
+    height: 173px;
+    p {
+      font-size: 15px;
+      line-height: 19px;
+      color: #227f00;
+      margin-bottom: 0;
+    }
+  }
+}
