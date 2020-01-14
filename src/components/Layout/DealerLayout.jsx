@@ -42,6 +42,7 @@ const DealerLayout = ({
   title,
   handleBilling,
   handleExport,
+  handleVoucher,
 }) => {
   // setting date
   let today = new Date()
@@ -80,7 +81,7 @@ const DealerLayout = ({
             <Dash_bill_icon />
             <span className="nav-text">Wallet</span>
           </Menu.Item>
-          <Menu.Item key="4">
+          <Menu.Item key="4" onClick={handleVoucher}>
             <Dash_voucher_icon />
             <span className="nav-text">Voucher</span>
           </Menu.Item>

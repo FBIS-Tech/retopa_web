@@ -6,7 +6,7 @@
     border-radius: 0px 0px 10px 10px;
     .btngroup {
       width: 90%;
-      max-width: 578px;
+      max-width: 640px;
       margin: auto;
       text-align: end;
     }
@@ -111,6 +111,11 @@
     align-items: center;
     label {
       width: 250px;
+    }
+  }
+  .adminForm {
+    .formInput {
+      width: 100%;
     }
   }
 }

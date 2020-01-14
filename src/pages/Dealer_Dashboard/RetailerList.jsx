@@ -177,6 +177,34 @@ const RetailerList = () => {
             </div>
           </div>
         </TabPane>
+        <TabPane tab="Add Retailer" key="2">
+          <div className="formContainer">
+            <div className="formTitle">
+              <p>Add Retailer</p>
+            </div>
+            <div className="formGroup">
+              <div className="adminForm">
+                <div className="formInput VTUInput">
+                  <label htmlFor="name">Network</label>
+                  <Input
+                    placeholder="Enter name here..."
+                    className="inputBack"
+                  />
+                </div>
+
+                <div className="formInput VTUInput">
+                  <label htmlFor="name">VTU Line</label>
+                  <Input placeholder="500" />
+                </div>
+              </div>
+            </div>
+            <div className="adminFormBtn">
+              <div className="btngroup">
+                <Button>Submit</Button>
+              </div>
+            </div>
+          </div>
+        </TabPane>
       </Tabs>
     </div>
   )

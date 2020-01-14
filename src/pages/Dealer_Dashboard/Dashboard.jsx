@@ -8,6 +8,7 @@ import RetailerHistory from "./RetailerHistory"
 import Admin from "./Admin"
 import Export from "./Export"
 import Payment from "./Payment"
+import Voucher from "./Voucher"
 
 const Dashboard = () => {
   const [
@@ -19,6 +20,7 @@ const Dashboard = () => {
     billing,
     admin,
     exxport,
+    voucher,
     selectHome,
     selectRetailer,
     selectHistory,
@@ -26,6 +28,7 @@ const Dashboard = () => {
     selectBilling,
     selectAdmin,
     selectExport,
+    selectVoucher,
   ] = useDisplayHooks()
   return (
     <DealerLayout
@@ -37,6 +40,7 @@ const Dashboard = () => {
       handleBilling={selectBilling}
       handleAdmin={selectAdmin}
       handleExport={selectExport}
+      handleVoucher={selectVoucher}
     >
       <div
         style={{ padding: "20px" }}
@@ -79,6 +83,12 @@ const Dashboard = () => {
         className={payment ? "dealers_retail" : "hide"}
       >
         <Payment />
+      </div>
+      <div
+        style={{ padding: "20px", backgroundColor: "#FBFBFA", border: "none" }}
+        className={voucher ? "dealers_retail" : "hide"}
+      >
+        <Voucher />
       </div>
     </DealerLayout>
   )

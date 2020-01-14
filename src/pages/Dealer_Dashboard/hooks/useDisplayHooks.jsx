@@ -40,6 +40,7 @@ export default () => {
   const [billing, setBilling] = useState(false)
   const [admin, setAdmin] = useState(false)
   const [exxport, setExport] = useState(false)
+  const [voucher, setVoucher] = useState(false)
 
   const selectHome = () => {
     setTitle(
@@ -55,6 +56,7 @@ export default () => {
     setBilling(false)
     setAdmin(false)
     setExport(false)
+    setVoucher(false)
   }
   const selectRetailer = () => {
     setTitle(
@@ -70,6 +72,7 @@ export default () => {
     setBilling(false)
     setAdmin(false)
     setExport(false)
+    setVoucher(false)
   }
   const selectHistory = () => {
     setTitle(
@@ -85,6 +88,7 @@ export default () => {
     setBilling(false)
     setAdmin(false)
     setExport(false)
+    setVoucher(false)
   }
   const selectPayment = () => {
     setTitle(
@@ -100,6 +104,7 @@ export default () => {
     setBilling(false)
     setAdmin(false)
     setExport(false)
+    setVoucher(false)
   }
   const selectBilling = () => {
     setTitle(
@@ -115,6 +120,7 @@ export default () => {
     setBilling(true)
     setAdmin(false)
     setExport(false)
+    setVoucher(false)
   }
   const selectAdmin = () => {
     setTitle(
@@ -130,6 +136,7 @@ export default () => {
     setBilling(false)
     setAdmin(true)
     setExport(false)
+    setVoucher(false)
   }
   const selectExport = () => {
     setTitle(
@@ -145,6 +152,23 @@ export default () => {
     setBilling(false)
     setAdmin(false)
     setExport(true)
+    setVoucher(false)
+  }
+  const selectVoucher = () => {
+    setTitle(
+      <h4>
+        <Dash_voucher_icon style={{ marginRight: "10px" }} />
+        Voucher
+      </h4>
+    )
+    setHome(false)
+    setRetailer(false)
+    setHistory(false)
+    setPayment(false)
+    setBilling(false)
+    setAdmin(false)
+    setExport(false)
+    setVoucher(true)
   }
 
   return [
@@ -156,6 +180,7 @@ export default () => {
     billing,
     admin,
     exxport,
+    voucher,
     selectHome,
     selectRetailer,
     selectHistory,
@@ -163,5 +188,6 @@ export default () => {
     selectBilling,
     selectAdmin,
     selectExport,
+    selectVoucher,
   ]
 }

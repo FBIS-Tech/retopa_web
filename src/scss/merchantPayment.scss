@@ -6,8 +6,10 @@
 }
 
 .cardBtn {
+  width: 100%;
+  max-width: 371px;
+  height: 173px;
   button.ant-btn {
-    padding: 62px 147px;
     background: #fdfdfd;
     border: 1px solid #ade0ad;
     box-sizing: border-box;

@@ -1,10 +1,10 @@
 .creditContainer {
   width: 371px;
-  height: 173px;
   background-image: url("../images/card.png");
   background-position: center;
   background-size: contain;
   margin-left: 30px;
+  background-repeat: no-repeat;
   .creditGroup {
     padding: 81px 30px 30px 30px;
     h4 {
@@ -31,8 +31,8 @@
 .viewCards {
   display: flex;
   align-items: center;
+  justify-content: space-evenly;
 }
-
 .logoImage {
   width: 54px;
   height: 30px;
