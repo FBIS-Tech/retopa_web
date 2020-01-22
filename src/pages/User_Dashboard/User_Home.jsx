@@ -1,5 +1,4 @@
 import React from "react"
-import DashLayout from "../../components/Layout/DashLayout"
 import "../../scss/User_dashboard.scss"
 import { Divider } from "antd"
 import Mtn from "../../images/dash_mtn.png"
@@ -7,6 +6,9 @@ import Glo from "../../images/dash_glo.png"
 import Eti from "../../images/dash_eti.png"
 import Airtel from "../../images/dash_airtel.png"
 import { Link } from "gatsby"
+import Refresh from "../../../assets/refresh.svg"
+import DashTable from "../../components/Constants/DashTable"
+import { DashContent } from "../../components/Constants/DashContent"
 
 export default function User_Home() {
   return (
@@ -59,6 +61,22 @@ export default function User_Home() {
                 </p>
               </div>
             </div>
+          </div>
+          <div className="user_group_right" id="style-1">
+            <div className="user_group_right_head">
+              <h4>Recent Transactions</h4>
+              <Refresh />
+            </div>
+            {DashContent.map(data => {
+              return (
+                <DashTable
+                  title={data.title}
+                  detail={data.detail}
+                  status={data.status}
+                  amount={data.amount}
+                />
+              )
+            })}
           </div>
         </div>
       </div>

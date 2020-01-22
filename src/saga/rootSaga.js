@@ -8,14 +8,14 @@ import {
 } from "redux-saga/effects"
 import Instance from "../Api/Instance"
 
-import { actionType } from "../actions/ActionType"
+// import { actionType } from "../actions/ActionType"
 import {
   registrationSuccess,
   registrationError,
   loginError,
   loginSuccess,
-} from "../actions/Actions"
-
+} from "../Actions/Actions.js"
+import { actionType } from "../Actions/ActionsType"
 const { REGISTER_USER, LOGIN_USER } = actionType
 
 function* registerUsers({ payload }) {
@@ -41,8 +41,10 @@ function* registerUsers({ payload }) {
 }
 
 function* userLogin({ payload }) {
+  console.log(payload)
   try {
     const request = yield Instance.post("user/login", payload)
+
     if (request.status === 200) {
       let data = request.data
       let s = data.statuscode

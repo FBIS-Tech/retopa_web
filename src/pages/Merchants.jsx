@@ -9,6 +9,9 @@ import {
   AccordionInfo,
 } from "../components/Constants/MerchantPage"
 import Imac from "../../assets/icon_iMac.svg"
+import DashImac from "../../assets/dashicon_iMac.svg"
+import RetailImac from "../../assets/retailicon_iMac.svg"
+import LastIconImac from "../../assets/Lasticon_iMac.svg"
 import {
   Accordion,
   AccordionItem,
@@ -91,7 +94,7 @@ const Merchants = () => {
           </p>
           <div className="feature_illustration">
             <div className="illustration_left">
-              <Imac />
+              <DashImac />
             </div>
             <div className="illustration_right">
               <h4 className="illustration_title">
@@ -142,7 +145,7 @@ const Merchants = () => {
               </p>
             </div>
             <div className="illustration_left">
-              <Imac />
+              <RetailImac />
             </div>
           </div>
         </div>
@@ -151,7 +154,7 @@ const Merchants = () => {
         <div className="features_group">
           <div className="feature_illustration">
             <div className="illustration_left">
-              <Imac />
+              <LastIconImac />
             </div>
             <div className="illustration_right">
               <h4 className="illustration_title">

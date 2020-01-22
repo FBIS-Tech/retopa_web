@@ -3,11 +3,21 @@ import { useDispatch, useSelector } from "react-redux"
 import RegLayout from "../components/RegistrationLayout/RegLayout"
 import "../scss/Login.scss"
 import LoginCard from "../components/LoginCard"
-
+import { UserLogin } from "../actions/Actions"
+import { actionType } from "../Actions/ActionsType"
+const { LOGIN_USER } = actionType
 const Login = () => {
   const [active, setActive] = useState(true)
-  const handleEmail = e => {
-    console.log(e.target.value)
+  const [inputChange, setInput] = useState({})
+
+  const { loginInfo } = useSelector(state => state)
+  const dispatch = useDispatch()
+
+  const handleInputChange = e => {
+    setInput({
+      ...inputChange,
+      [e.currentTarget.name]: e.currentTarget.value,
+    })
   }
   return (
     <RegLayout>
@@ -23,8 +33,10 @@ const Login = () => {
             activate2={() => {
               setActive(false)
             }}
-            getEmail_Number={handleEmail}
+            getInput={handleInputChange}
+            handleSubmit={() => dispatch(UserLogin(inputChange))}
           />
+          {loginInfo}
         </div>
         <h4 className="end">
           Having trouble signing in?<span>Contact support</span>

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
 @font-face {
   font-family: "Proxima Nova";
   src: url("../../../assets/font/ProximaNova-Regular.otf");
@@ -29,7 +29,7 @@ p,
 li,
 a,
 div {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Muli", sans-serif;
   font-size: 14px;
   font-weight: 500;
   margin: 0px;
@@ -71,7 +71,7 @@ div {
   background: linear-gradient(180deg, #f6f9f4 0%, rgba(255, 255, 255, 1) 100%);
   padding: 14px 0;
   top: 0;
-  z-index: 1;
+  z-index: 1000;
   box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
 }
 .tl-wrapper > .Layout_container > .nav_container_fixed {
@@ -89,8 +89,8 @@ div {
     h3 {
       font-style: normal;
       font-weight: 600;
-      font-size: 14px;
-      line-height: 17px;
+      font-size: 16px;
+      line-height: 20px;
       color: #03363c;
       margin-bottom: 0;
     }

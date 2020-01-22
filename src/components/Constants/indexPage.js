@@ -1,5 +1,6 @@
 import React from "react"
 import Merchant from "../../../assets/merchant.svg"
+import Merchant2 from "../../../assets/merchant2.svg"
 import Airtime from "../../../assets/Airtime.svg"
 import NFC from "../../../assets/NFC.svg"
 import Lunch from "../../../assets/lunch.svg"
@@ -30,21 +31,21 @@ export const FirstCardInfo = [
     svg: <Merchant />,
     title: "Merchants(Operators or Dealers)",
     text:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore Lorem ipsum dolor sit amet",
+      "A merchant on RETOPA  can be a wholesaler or a retailer who sells airtime, data and helps with the payment of utility bills as requested by the customer. ",
     Link: "Merchants",
   },
   {
     svg: <Airtime />,
-    title: "Airtime, Data & Bills Paymnet",
+    title: "Airtime, Data & Bills Payment",
     text:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore Lorem ipsum dolor sit amet",
+      "RETOPA Technology has the capacity to generate Voucher (PINs) for data and airtime,it also allows for other bill payment",
     Link: "Airtime",
   },
   {
     svg: <NFC />,
     title: "NFC (Near field communication)",
     text:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore Lorem ipsum dolor sit amet",
+      "RETOPA devices are NFC enabled, which allows seamless and easy transactions between our devices",
     Link: "NFC",
   },
 ]
@@ -80,7 +81,7 @@ export const IndexList = [
 
 export const ThirdCardInfo = [
   {
-    svg: <Merchant />,
+    svg: <Merchant2 />,
     title: "Merchants(Operators or Dealers)",
     text:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore Lorem ipsum dolor sit amet",

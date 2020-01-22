@@ -84,7 +84,7 @@ export default function index() {
         </div>
       </div>
       <div className="cardSection_container_two">
-        <div className="CardSection">
+        <div className="CardSection worksSection">
           <CardSections
             title="Wondering how it works"
             text={SecondCardSectionText}

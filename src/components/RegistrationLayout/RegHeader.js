@@ -6,7 +6,7 @@ import { Link } from "gatsby"
 export default function RegHeader() {
   return (
     <div className="container">
-      <Link>
+      <Link to="/">
         <Logo />
       </Link>
     </div>

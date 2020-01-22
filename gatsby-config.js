@@ -1,6 +1,7 @@
+const path = require("path")
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
+    title: `Retopa`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
     author: `@gatsbyjs`,
   },
@@ -38,6 +39,14 @@ module.exports = {
         rule: {
           include: /assets/,
         },
+      },
+    },
+    {
+      resolve: "gatsby-plugin-root-import",
+      options: {
+        reducers: path.join(__dirname, "./src/Reducers/rootReducer.js"),
+        sagas: path.join(__dirname, "./src/saga/rootSaga.js"),
+        store: path.join(__dirname, "./src/Reducers/ReduxWrapper.js"),
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

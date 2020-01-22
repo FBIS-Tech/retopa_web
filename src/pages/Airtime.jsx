@@ -5,7 +5,9 @@ import "../scss/AirTime.scss"
 import { Button, Icon } from "antd"
 import LadyHero from "../images/Untitled-1@3x 1.png"
 import LadyHero_airtime from "../images/airtime_hero.png"
+import Iphone from "../images/iphone.png"
 import Imac from "../../assets/icon_iMac.svg"
+import Phone from "../images/airtimeFeature.png"
 import Arrow from "../../assets/arrow.svg"
 import {
   Accordion,
@@ -40,11 +42,12 @@ const Airtime = () => {
               </Button>
             </div>
           </div>
-          <div className="hero_right">
-            <img src={LadyHero} alt="hero_pic" className="ladyOne" />
-            <img src={LadyHero_airtime} alt="hero_pic" className="ladyTwo" />
+          <div className="hero_right hero_airtime_right">
+            <img src={Iphone} alt="hero_pic" style={{ marginBottom: "0px" }} />
+            {/* <img src={LadyHero_airtime} alt="hero_pic" className="ladyTwo" /> */}
           </div>
         </div>
+        <div className="heroBottomAirtime"></div>
       </div>
       <div className="features_container two">
         <div className="features_group airtime_group">
@@ -78,7 +81,7 @@ const Airtime = () => {
               </Button>
             </div>
             <div className="illustration_left">
-              <Imac />
+              <img src={Phone} />
             </div>
           </div>
         </div>

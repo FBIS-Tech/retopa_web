@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import PropTypes from "prop-types"
 import Footer from "../Footer"
 import "./Layout.scss"
@@ -6,15 +6,16 @@ import TopScreen from "./Top"
 import Navbar from "../Navbar"
 import Play from "../../../assets/playStoreW.svg"
 import IOS from "../../../assets/AppStoreW.svg"
+import Helmet from "react-helmet"
+import Favicon from "../../images/favicon.ico"
+
 const Layout = ({ children }) => {
-  const [position, setPosition] = useState("yes")
-  const handleScroll = () => {
-    let scroll = window.pageYOffset
-    setPosition(scroll)
-  }
   return (
     <>
-      <div className="Layout_container" onScroll={handleScroll}>
+      <Helmet>
+        <link rel="icon" href={Favicon} />
+      </Helmet>
+      <div className="Layout_container">
         <TopScreen />
         <Navbar />
         <div>

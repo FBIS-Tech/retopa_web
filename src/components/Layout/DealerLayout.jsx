@@ -7,6 +7,8 @@ import "./DashLayout.scss"
 import Dash from "../../../assets/dash.svg"
 import Avatar from "../../../assets/avatartwo.svg"
 import Setting from "../../../assets/settings.svg"
+import Helmet from "react-helmet"
+import Favicon from "../../images/favicon.ico"
 import {
   HomeIcon,
   AirtimeIcon,
@@ -53,6 +55,9 @@ const DealerLayout = ({
   today = dd + "/" + mm + "/" + yyyy
   return (
     <Layout>
+      <Helmet>
+        <link rel="icon" href={Favicon} />
+      </Helmet>
       <Sider breakpoint="lg" collapsedWidth="0" className="dealer_layout_side">
         <div className="logo">
           <div className="logo_content">

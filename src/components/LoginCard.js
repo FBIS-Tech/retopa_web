@@ -9,8 +9,8 @@ const LoginCard = ({
   active,
   activate1,
   activate2,
-  getEmail_Number,
-  getPassword,
+  getInput,
+  handleSubmit,
 }) => {
   return (
     <div className="Login_card">
@@ -28,21 +28,26 @@ const LoginCard = ({
             <label>Email/Phone number</label>
             <Input
               placeholder="Enter email or Phone number"
-              onChange={getEmail_Number}
+              onChange={getInput}
+              name="email"
             />
           </div>
           <div>
             <label>Password</label>
-            <Input.Password placeholder="Password" onChange={getPassword} />
+            <Input.Password
+              placeholder="Password"
+              onChange={getInput}
+              name="password"
+            />
           </div>
-          <Link to="PasswordReset">
+          <Link to="/PasswordReset">
             <h4 className="forgotPassword">Forgot Password?</h4>
           </Link>
-          <div class className="form_bottom">
+          <div className="form_bottom">
             <h4>
-              New user? <Link to="SignUp">Create an account</Link>
+              New user? <Link to="/SignUp">Create an account</Link>
             </h4>
-            <Button>Login</Button>
+            <Button onClick={handleSubmit}>Login</Button>
           </div>
           <h4 className="socials">Log In through socials</h4>
           <div className="social-logo">

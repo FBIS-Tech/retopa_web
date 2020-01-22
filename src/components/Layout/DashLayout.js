@@ -6,6 +6,8 @@ import Logo from "../../../assets/logo.svg"
 import "./DashLayout.scss"
 import Dash from "../../../assets/dash.svg"
 import Avatar from "../../../assets/avatar.svg"
+import Favicon from "../../images/favicon.ico"
+import Helmet from "react-helmet"
 import {
   HomeIcon,
   AirtimeIcon,
@@ -36,6 +38,9 @@ const DashLayout = ({
 }) => {
   return (
     <Layout>
+      <Helmet>
+        <link rel="icon" href={Favicon} />
+      </Helmet>
       <Sider
         breakpoint="lg"
         collapsedWidth="0"

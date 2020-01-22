@@ -7,6 +7,7 @@ const {
   LOGIN_ERROR,
   LOGIN_SUCCESS,
   TOKEN_FORM,
+  LOGIN_USER,
 } = actionType
 
 const initialState = {
@@ -31,6 +32,8 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return { ...state, userData: payload, isLogged: true }
     case TOKEN_FORM:
       return { ...state, tokenForm: true }
+    // case LOGIN_USER:
+    //   console.log(payload)
     default:
       return state
   }

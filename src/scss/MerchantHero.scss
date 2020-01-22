@@ -16,7 +16,7 @@
   h3 {
     font-style: normal;
     font-weight: bold;
-    font-size: 50px;
+    font-size: 40px;
     line-height: 61px;
     margin: 0;
     color: #03363c;
@@ -39,6 +39,7 @@
       width: 226px;
       height: 50px;
       margin-top: 38px;
+      z-index: 1;
     }
     .ant-btn > .anticon + span,
     .ant-btn > span + .anticon {

@@ -72,6 +72,14 @@
     padding-top: 117px;
   }
 }
+
+.CardSection.worksSection {
+  .sect_card_container .sect_card_group {
+    height: 290px;
+    padding: 19px 20px;
+  }
+}
+
 .indexList {
   background: white;
 }
@@ -119,10 +127,10 @@
   h3 {
     font-style: normal;
     font-weight: normal;
-    font-size: 16px;
-    line-height: 19px;
+    font-size: 18px;
+    line-height: 22px;
     text-align: center;
-    max-width: 680px;
+    max-width: 765px;
     margin: 0 auto;
     color: #303b3c;
   }
@@ -146,8 +154,8 @@
   p {
     font-style: normal;
     font-weight: normal;
-    font-size: 16px;
-    line-height: 20px;
+    font-size: 18px;
+    line-height: 22px;
     max-width: 526px;
     color: #303b3c;
     margin-top: 20px;
@@ -205,8 +213,8 @@
   h3 {
     font-style: normal;
     font-weight: normal;
-    font-size: 14px;
-    line-height: 17px;
+    font-size: 16px;
+    line-height: 20px;
     max-width: 227px;
     color: #1c484e;
     padding-bottom: 49px;
@@ -230,8 +238,8 @@
     p {
       font-style: normal;
       font-weight: normal;
-      font-size: 14px;
-      line-height: 17px;
+      font-size: 18px;
+      line-height: 22px;
       max-width: 557px;
       color: #1c484e;
       margin-top: 20px;
@@ -273,8 +281,8 @@
       p {
         font-style: normal;
         font-weight: normal;
-        font-size: 14px;
-        line-height: 17px;
+        font-size: 18px;
+        line-height: 22px;
         max-width: 584px;
         color: #1c484e;
         margin-top: 23px;
@@ -308,8 +316,8 @@
       .title_text {
         font-style: normal;
         font-weight: normal;
-        font-size: 16px;
-        line-height: 19px;
+        font-size: 18px;
+        line-height: 22px;
         max-width: 620px;
         margin-bottom: 0;
       }

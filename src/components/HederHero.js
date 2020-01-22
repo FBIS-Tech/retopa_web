@@ -3,13 +3,18 @@ import "../scss/HeaderHero.scss"
 import Playstore from "../../assets/playStore.svg"
 import AppStore from "../../assets/AppStore.svg"
 import Image from "../../assets/landingPageone.svg"
+import Phone from "../images/iphone2.png"
 
-const HederHero = ({ title, text }) => {
+const HederHero = ({ title, text, page }) => {
   return (
     <div className="hero">
       <div className="hero_container">
         <div className="hero_left">
-          <h3 className={title==="NFC (Near field communication)"? "nfc":""}>{title}</h3>
+          <h3
+            className={title === "NFC (Near field communication)" ? "nfc" : ""}
+          >
+            {title}
+          </h3>
           <p>{text}</p>
           <div className="stores">
             <div>
@@ -21,7 +26,18 @@ const HederHero = ({ title, text }) => {
           </div>
         </div>
         <div className="hero_right">
-          <Image />
+          {title !== "NFC (Near field communication)" ? (
+            <Image />
+          ) : (
+            <img
+              src={Phone}
+              style={{
+                position: "relative",
+                top: "55px",
+                // left: "-7%",
+              }}
+            />
+          )}
         </div>
       </div>
     </div>

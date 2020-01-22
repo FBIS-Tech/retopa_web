@@ -116,6 +116,51 @@
     }
   }
 }
+.user_dash_group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.user_group_right {
+  width: 100%;
+  max-width: 522px;
+  max-height: 779px;
+  overflow: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  background: #ffffff;
+  border: 1px solid #cfcfcf;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+#style-1::-webkit-scrollbar {
+  width: 2px;
+  height: 500px;
+  background-color: #d8f2db;
+}
+#style-1::-webkit-scrollbar-thumb {
+  background-color: #00aa00;
+}
+
+.user_group_right_head {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 24px 34px;
+  align-items: center;
+  border-bottom: 1px solid #e4e4e4;
+  h4 {
+    margin-bottom: 0px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    color: #03363c;
+  }
+}
 
 @media (min-width: 425px) {
   .account_referral_container .account_referral_group p {
@@ -135,6 +180,17 @@
 @media (min-width: 1024px) {
   .user_home {
     padding: 50px 105px 42px 44px;
+  }
+}
+@media (min-width: 1232px) {
+  .user_dash_group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .user_group_right {
+    margin-top: 0;
   }
 }
 
