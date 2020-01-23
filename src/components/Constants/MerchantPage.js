@@ -14,20 +14,19 @@ export const NumbersCard = [
 export const RecruitCard = [
   {
     image: <Fast />,
-    title: "80% faster ",
+    title: "Get Started ",
     text:
       "Make your first round of screening 80% faster with on-demand video interviews",
   },
   {
     image: <Gauge />,
-    title: "Gauge soft skills",
-    text:
-      "Gauge soft skills, body language, and culture fit early in the process",
+    title: "Onboard your Retailers",
+    text: "Logs into the RETOPA dashboard and onboard the retailers",
   },
   {
     image: <Time />,
     title: "Reduce time",
-    text: "Reduce time and resources spent on interviewing by up to 70%",
+    text: "Reduce time and resources spent on topping up, by up to 70%",
   },
 ]
 

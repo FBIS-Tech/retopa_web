@@ -1,7 +1,7 @@
 export const Howto = {
   main_title: "Simple, Easy and fast way to topup via NFC",
   main_text:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore Lorem ipsum dolor st, sed do eiusmod tempor incididuet dolore ",
+    " Improving customer experience is our core priority; hence the invention of POT and adoption of NFC technology, which will make transaction easy as customer will hold up their phones/tags to get recharge just like Bluetooth, the NFC tags/App and the Retailer’s NFC App communicates offline to top up.",
   sub_text: "Process Flow	(Retailer to	Consumer) via	NFC	tags",
   titleOne: "Request",
   textOne:

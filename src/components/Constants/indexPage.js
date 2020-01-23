@@ -24,7 +24,7 @@ import Omoni from "../../images/omoni.png"
 export const FirstCardSectionText =
   "RETOPA is	one	that is	created	to	address	the	fast	and	insatiable	hunger	for airtime	and	data seamless	experience, with RETOPA a user	can	simply	purchase	airtime / data in less than	10	seconds with just	a	tap	to	simplify the	day - to - day need."
 export const SecondCardSectionText =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore "
+  "The Process Flow from Operators or Major Dealers to Retailer is quite easy "
 
 export const FirstCardInfo = [
   {
@@ -52,21 +52,21 @@ export const FirstCardInfo = [
 export const SecondCardInfo = [
   {
     svg: <Lunch />,
-    title: "Launch Retopa App",
+    title: "Locate a dealer",
     text:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore Lorem ipsum dolor sit amet",
+      "Retailers can simply walk to the dealer nearby , and pay cash into his RETOPA Wallet.",
   },
   {
     svg: <Fund />,
-    title: "A Fund Your Account",
+    title: "Fund Your Account",
     text:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore Lorem ipsum dolor sit amet",
+      "The dealer logs into the RETOPA dashboard and credits the retailer’s wallet with the paid amount.",
   },
   {
     svg: <Start />,
     title: "Start Your Transactions",
     text:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore Lorem ipsum dolor sit amet",
+      "The Retailer receives credit alert of the paid amount on his/her RETOPA device, and starts transactions",
   },
 ]
 
@@ -151,7 +151,7 @@ export const Carousel = [
 export const Howto = {
   main_title: "Simple, Easy and fast way to topup",
   main_text:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore Lorem ipsum dolor st, sed do eiusmod tempor incididuet dolore ",
+    "RETOPA is a chip tag-type contact-less solution based on our Proprietary Offline Technology (POT) and NFC (Near Field Communication) technology that enable users fast, simple and secured means to top-up airtime and data bundles offline, no long voucher PIN required, an easily accessible channel for both vendors and consumers to transact easily. ",
   sub_text: "Start Retoping in less than 10 seconds",
   titleOne: "Create an account",
   textOne: "Sign up for an account with your name, email and phone number",

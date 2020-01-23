@@ -143,10 +143,8 @@ export default function index() {
         <div className="partner_group">
           <div className="partner_title">Our partners</div>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore Lorem ipsum dolor sit
-            amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-            ut labore et dolore
+            We are constantly satisfied to take part in association with
+            organizations that offer our vision to give quality Services
           </p>
           <div className="Patners_logo">
             {Logo.map(data => {
@@ -165,9 +163,9 @@ export default function index() {
           <div className="Testimony_title">
             <h4>What people are saying about us</h4>
             <p>
-              Lorem ipsum dolor sit amet, conusmod tempor incididunt ut labore
-              et dolore Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore{" "}
+              We don't care to boast, yet we wouldn't fret when our customers
+              do. Here are a portion of the tributes we have gotten in the wake
+              of working with these brilliant people.
             </p>
           </div>
           <div className="IndexCarousel">

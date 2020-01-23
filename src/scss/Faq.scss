@@ -28,7 +28,18 @@
 
   .accordion_view {
     width: 100%;
+    p {
+      font-size: 16px;
+      line-height: 20px;
+      margin-bottom: 0;
+    }
   }
+}
+
+.merchant_accordion_container .merchant_accordion_group .accordion_view p {
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 0;
 }
 .faq_main_questions {
   display: flex;

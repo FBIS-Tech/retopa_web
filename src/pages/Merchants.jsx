@@ -62,11 +62,12 @@ const Merchants = () => {
       <div className="recruit_container">
         <div className="recruit_group">
           <h4 className="recruit_title">
-            Expediate Recruitment with video Interviewing
+            How Retopa Merchants works in Simple, easy and fastest way to please
+            your Retailer
           </h4>
           <p className="recruit_text">
-            Don’t let cumbersome and lengthy interviews slow down your
-            recruitment process.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et
           </p>
           <div className="recruitCard">
             {RecruitCard.map(data => {
