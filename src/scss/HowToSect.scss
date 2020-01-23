@@ -139,6 +139,9 @@
   -moz-transform: translate(0%, -1.8983%) translate3d(0px, 0px, 0px);
   -ms-transform: translate(0%, -1.8983%) translate3d(0px, 0px, 0px);
   -o-transform: translate(0%, -1.8983%) translate3d(0px, 0px, 0px);
+  img {
+    width: 100%;
+  }
 }
 
 @media (min-width: 768px) {
