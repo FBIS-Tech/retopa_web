@@ -4,6 +4,7 @@ import RegLayout from "../components/RegistrationLayout/RegLayout"
 import "../scss/Login.scss"
 import LoginCard from "../components/LoginCard"
 import { UserLogin } from "../Actions/Actions"
+
 const Login = () => {
   const [active, setActive] = useState(true)
   const [inputChange, setInput] = useState({})
