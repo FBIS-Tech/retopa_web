@@ -9,6 +9,7 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     "gatsby-plugin-antd",
     `gatsby-plugin-sass`,
+    `gatsby-plugin-split-css`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-transition-link`,
