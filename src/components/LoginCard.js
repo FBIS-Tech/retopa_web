@@ -29,7 +29,7 @@ const LoginCard = ({
             <Input
               placeholder="Enter email or Phone number"
               onChange={getInput}
-              name="email"
+              name="username"
             />
           </div>
           <div>

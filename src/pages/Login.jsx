@@ -1,15 +1,16 @@
-import React, { useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import React, { useState, useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
 import RegLayout from "../components/RegistrationLayout/RegLayout"
 import "../scss/Login.scss"
 import LoginCard from "../components/LoginCard"
 import { UserLogin } from "../Actions/Actions"
+import Cryptr from "cryptr"
 
 const Login = () => {
   const [active, setActive] = useState(true)
-  const [inputChange, setInput] = useState({})
+  const [inputChange, setInput] = useState({ serviceCode: "LGN" })
 
-  const { loginInfo } = useSelector(state => state)
+  const { logError, authError, isError } = useSelector(state => state)
   const dispatch = useDispatch()
 
   const handleInputChange = e => {
@@ -18,11 +19,21 @@ const Login = () => {
       [e.currentTarget.name]: e.currentTarget.value,
     })
   }
+
   return (
     <RegLayout>
       <div className="Login_container">
         <h4 className="welcome">Welcome back!</h4>
+
         <h4 className="login_text">Log In to continue</h4>
+        {logError.map(data => {
+          return (
+            <div key={data} className="error">
+              {data}
+            </div>
+          )
+        })}
+        <div className={!isError ? "hide" : "error"}>{authError}</div>
         <div>
           <LoginCard
             active={active}
@@ -35,7 +46,6 @@ const Login = () => {
             getInput={handleInputChange}
             handleSubmit={() => dispatch(UserLogin(inputChange))}
           />
-          {loginInfo}
         </div>
         <h4 className="end">
           Having trouble signing in?<span>Contact support</span>

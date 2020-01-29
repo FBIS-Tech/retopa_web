@@ -9,11 +9,21 @@ const windowGlobal = typeof window !== "undefined" && window
 export default function Navbar() {
   const [visible, setVisible] = useState(false)
   const [position, setPosition] = useState("")
+  const [logged, setLogged] = useState(false)
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll)
-  }, [])
+    let onLogged = sessionStorage.getItem("persist:root")
+      ? JSON.parse(sessionStorage.getItem("persist:root"))
+      : []
+    let status = onLogged.isLogged
 
+    if (status === "true") {
+      // navigate("/Login")
+      setLogged(true)
+      return false
+    }
+  }, [])
   const handleScroll = () => {
     setPosition(windowGlobal.pageYOffset)
   }
@@ -56,14 +66,29 @@ export default function Navbar() {
               <h3>Contact us</h3>
             </AniLink>
 
-            <Button className="login_btn">
+            <Button className={!logged ? "login_btn" : "hide"}>
               <AniLink swipe top="exit" duration={0.45} to="Login">
                 Log In
               </AniLink>
             </Button>
-            <Button className="signup_btn">
+            <Button className={!logged ? "signup_btn" : "hide"}>
               <AniLink swipe top="exit" duration={0.45} to="SignUp">
                 Sign Up
+              </AniLink>
+            </Button>
+            <Button className={logged ? "login_btn" : "hide"}>
+              <AniLink
+                swipe
+                top="exit"
+                duration={0.45}
+                to="Dealer_Dashboard/Dashboard/"
+              >
+                Dashboard
+              </AniLink>
+            </Button>
+            <Button className={logged ? "signup_btn" : "hide"}>
+              <AniLink swipe top="exit" duration={0.45} to="Login">
+                Logout
               </AniLink>
             </Button>
           </div>

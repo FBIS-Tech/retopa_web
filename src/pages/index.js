@@ -4,6 +4,8 @@ import HederHero from "../components/HederHero"
 import "../scss/index.scss"
 import Watch from "../../assets/watch.svg"
 import CardSections from "../components/CardSections"
+import ScrollAnimation from "react-animate-on-scroll"
+import "animate.css/animate.min.css"
 import {
   FirstCardInfo,
   FirstCardSectionText,
@@ -121,7 +123,7 @@ export default function index() {
             Thousands of organization of all sizes trust Retopa in recharging
             and paying of bills of there business.
           </p>
-          <div className="Trusted_cards">
+          <ScrollAnimation animateIn="zoomIn" className="Trusted_cards">
             {ThirdCardInfo.map(data => {
               return (
                 <div className="card_group" key={data.title}>
@@ -136,7 +138,7 @@ export default function index() {
                 </div>
               )
             })}
-          </div>
+          </ScrollAnimation>
         </div>
       </div>
       <div className="patners-container">

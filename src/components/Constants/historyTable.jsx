@@ -66,22 +66,22 @@ export const History = [
 ]
 
 export const HistoryColumn = [
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
+  // {
+  //   title: "Name",
+  //   dataIndex: "name",
+  //   key: "name",
 
-    // render: text => <a>{text}</a>,
+  //   // render: text => <a>{text}</a>,
+  // },
+  {
+    title: "Source",
+    dataIndex: "source",
+    key: "source",
   },
   {
-    title: "Retailer number",
-    dataIndex: "retailerNumber",
-    key: "retailerNumber",
-  },
-  {
-    title: "Product name",
-    dataIndex: "productName",
-    key: "productName",
+    title: "Destination",
+    dataIndex: "destination",
+    key: "destination",
   },
 
   {
@@ -89,18 +89,18 @@ export const HistoryColumn = [
     dataIndex: "amount",
     key: "amount",
   },
+  // {
+  //   title: "Description",
+  //   dataIndex: "desc",
+  //   key: "desc",
+  // },
   {
-    title: "Description",
-    dataIndex: "desc",
-    key: "desc",
-  },
-  {
-    title: "Status",
-    dataIndex: "status",
-    key: "status",
+    title: "Type",
+    dataIndex: "type",
+    key: "type",
 
     render: text =>
-      text === "successful" ? (
+      text === "CREDIT" ? (
         <p
           style={{
             color: "#00AA00",
@@ -144,12 +144,12 @@ export const HistoryColumn = [
   },
   {
     title: "Transaction ref",
-    dataIndex: "reference",
-    key: "reference",
+    dataIndex: "ref",
+    key: "ref",
   },
   {
     title: "Created at",
-    dataIndex: "date",
-    key: "date",
+    dataIndex: "created_at",
+    key: "created_at",
   },
 ]

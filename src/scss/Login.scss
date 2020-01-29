@@ -26,6 +26,28 @@
   line-height: 41px;
   color: #2f3a45;
 }
+.error {
+  background: #e99a9a80;
+  color: red;
+  text-align: center;
+  padding: 10px;
+  border-radius: 7px;
+  margin-bottom: 10px;
+}
+.errors {
+  color: red;
+  text-align: center;
+  // padding: 12.5px;
+  // border-radius: 7px;
+  margin-bottom: 10px;
+}
+.msg {
+  color: green;
+  text-align: center;
+  // padding: 12.5px;
+  // border-radius: 7px;
+  margin-bottom: 10px;
+}
 
 .login_text {
   font-style: normal;

@@ -6,4 +6,5 @@ export const actionType = {
   TOKEN_FORM: "TOKEN_FORM",
   LOGIN_USER: "LOGIN_USER",
   REGISTER_USER: "REGISTER_USER",
+  AUTH_ERROR: "AUTH_ERROR",
 }

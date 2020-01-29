@@ -77,8 +77,8 @@ export default () => {
   const selectHistory = () => {
     setTitle(
       <h4>
-        <Dash_airtime_icon style={{ marginRight: "10px" }} />
-        Retailer Transactions
+        <Dash_history_icon style={{ marginRight: "10px" }} />
+        History
       </h4>
     )
     setHome(false)

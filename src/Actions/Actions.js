@@ -1,5 +1,7 @@
 import { actionType } from "./ActionsType"
 
+import { toast } from "react-toastify"
+
 const {
   REGISTER_USER,
   REGISTRATION_SUCCESS,
@@ -8,6 +10,7 @@ const {
   LOGIN_ERROR,
   LOGIN_SUCCESS,
   TOKEN_FORM,
+  AUTH_ERROR,
 } = actionType
 
 export const registerUser = payload => ({
@@ -30,6 +33,10 @@ export const UserLogin = payload => ({
 
 export const loginError = payload => ({
   type: LOGIN_ERROR,
+  payload,
+})
+export const AuthError = payload => ({
+  type: AUTH_ERROR,
   payload,
 })
 export const loginSuccess = payload => ({

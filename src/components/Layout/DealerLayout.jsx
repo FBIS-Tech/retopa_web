@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { Layout, Menu, Icon, Button, Input } from "antd"
 import { Link } from "gatsby"
@@ -9,6 +9,8 @@ import Avatar from "../../../assets/avatartwo.svg"
 import Setting from "../../../assets/settings.svg"
 import Helmet from "react-helmet"
 import Favicon from "../../images/favicon.ico"
+import { navigate } from "gatsby"
+import Cryptr from "cryptr"
 import {
   HomeIcon,
   AirtimeIcon,
@@ -22,6 +24,7 @@ import {
   AdminIcon,
   ExportIcon,
 } from "../CustomIcons"
+import Instance from "../../Api/Instance"
 const { Header, Content, Sider } = Layout
 
 const Dash_home_icon = props => <Icon component={HomeIcon} {...props} />
@@ -46,6 +49,31 @@ const DealerLayout = ({
   handleExport,
   handleVoucher,
 }) => {
+  const [user, setUser] = useState({})
+  const cryptr = new Cryptr("retopaToken")
+  useEffect(() => {
+    let data = sessionStorage.getItem("topup")
+      ? JSON.parse(sessionStorage.getItem("topup"))
+      : []
+    const username = cryptr.decrypt(data.TOKEN_ONE)
+    const password = cryptr.decrypt(data.TOKEN_TWO)
+    const req = { serviceCode: "SHP", username, password, user_id: "1" }
+    const profile = new Promise(res => {
+      res(Instance.post("", req))
+    })
+    profile.then(({ data }) => {
+      let user = data.user
+      setUser(user)
+    })
+  }, [])
+
+  // handle logout
+  const handleLogout = () => {
+    localStorage.clear()
+    sessionStorage.clear()
+    navigate("/Login")
+  }
+
   // setting date
   let today = new Date()
   let dd = String(today.getDate()).padStart(2, "0")
@@ -67,7 +95,7 @@ const DealerLayout = ({
           </div>
         </div>
         <div className="user_name">
-          <span>Hello</span> <span>Kehinde</span>
+          <span>Hello</span> <span>{user.username}</span>
         </div>
         <Menu mode="inline" defaultSelectedKeys={["1"]}>
           <Menu.Item key="1" onClick={handleHome}>
@@ -102,7 +130,7 @@ const DealerLayout = ({
             <Dash_export_icon />
             <span className="nav-text">Export Data</span>
           </Menu.Item>
-          <Menu.Item key="7">
+          <Menu.Item key="7" onClick={handleLogout}>
             <Dash_logout_icon />
             <span className="nav-text">Logout</span>
           </Menu.Item>
@@ -120,6 +148,11 @@ const DealerLayout = ({
                 prefix={<Icon type="search" />}
               />
               <Avatar style={{ marginLeft: "50px" }} />
+              {/* <img
+                src={user.logo}
+                alt="user logo"
+                style={{ width: "36.49px", height: "55px", margin: 0 }}
+              /> */}
               <Setting style={{ marginLeft: "30px" }} />
             </div>
           </Header>

@@ -6,6 +6,8 @@ import { Button } from "antd"
 import "../scss/HeaderHero.scss"
 import Playstore from "../../assets/playStore.svg"
 import AppStore from "../../assets/AppStore.svg"
+import ScrollAnimation from "react-animate-on-scroll"
+import "animate.css/animate.min.css"
 const windowGlobal = typeof window !== "undefined" && window
 
 export default function HowtoSection({
@@ -42,7 +44,7 @@ export default function HowtoSection({
         <p>{main_text}</p>
       </div>
       <div className="how_to_position">
-        <div className="HowTo_sect_left">
+        <ScrollAnimation animateIn="fadeInLeft" className="HowTo_sect_left">
           <img
             className="handImage"
             src={Hand}
@@ -60,8 +62,8 @@ export default function HowtoSection({
               alt="hand"
             />
           </div>
-        </div>
-        <div className="HowTo_sect_right">
+        </ScrollAnimation>
+        <ScrollAnimation animateIn="fadeInRight" className="HowTo_sect_right">
           <h4
             className={
               titleOne === "Request" ? "steps_title_nfc" : "steps_title"
@@ -107,7 +109,7 @@ export default function HowtoSection({
           ) : (
             <Button>Get Started</Button>
           )}
-        </div>
+        </ScrollAnimation>
       </div>
     </div>
   )
