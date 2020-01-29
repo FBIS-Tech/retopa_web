@@ -43,9 +43,15 @@ export const rootReducer = (state = initialState, { type, payload }) => {
       const TOKEN_ONE = Base64.encode(tokenOne)
       const TOKEN_TWO = Base64.encode(tokenTwo)
       const token = { TOKEN_ONE, TOKEN_TWO }
-      console.log(token)
+
       sessionStorage.setItem("topup", JSON.stringify(token))
-      return { ...state, loginDets: payload }
+      return {
+        ...state,
+        loginDets: payload,
+        isError: false,
+        authError: "",
+        logError: [],
+      }
     case LOGIN_ERROR:
       return { ...state, logError: payload }
     case AUTH_ERROR:

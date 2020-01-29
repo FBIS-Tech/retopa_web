@@ -9,6 +9,7 @@ const {
   LOGIN_SUCCESS,
   TOKEN_FORM,
   AUTH_ERROR,
+  CLEAR,
 } = actionType
 
 export const registerUser = payload => ({

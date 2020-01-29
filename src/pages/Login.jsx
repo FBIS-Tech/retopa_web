@@ -3,8 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import RegLayout from "../components/RegistrationLayout/RegLayout"
 import "../scss/Login.scss"
 import LoginCard from "../components/LoginCard"
-import { UserLogin, clearError } from "../Actions/Actions"
-import Cryptr from "cryptr"
+import { UserLogin } from "../Actions/Actions"
 
 const Login = () => {
   const [active, setActive] = useState(true)
@@ -26,14 +25,8 @@ const Login = () => {
     setLoading(true)
   }
 
-  useMemo(() => {
-    setLoading(false)
-    clearError()
-  }, [logError])
-  useMemo(() => {
-    setLoading(false)
-    clearError()
-  }, [authError])
+  useMemo(() => setLoading(false), [logError])
+  useMemo(() => setLoading(false), [authError])
 
   return (
     <RegLayout>
