@@ -48,7 +48,7 @@ const Dashboard = () => {
     selectVoucher,
   ] = useDisplayHooks()
   return (
-    <div>
+    <div className={!logged ? "hide" : ""}>
       <DealerLayout
         title={title}
         handleHome={selectHome}

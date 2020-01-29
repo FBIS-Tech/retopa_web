@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import Layout from "../components/Layout/Layout"
 import HederHero from "../components/HederHero"
 import "../scss/index.scss"
