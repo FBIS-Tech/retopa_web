@@ -10,7 +10,7 @@ import Setting from "../../../assets/settings.svg"
 import Helmet from "react-helmet"
 import Favicon from "../../images/favicon.ico"
 import { navigate } from "gatsby"
-import Cryptr from "cryptr"
+import { Base64 } from "js-base64"
 import {
   HomeIcon,
   AirtimeIcon,
@@ -50,13 +50,12 @@ const DealerLayout = ({
   handleVoucher,
 }) => {
   const [user, setUser] = useState({})
-  const cryptr = new Cryptr("retopaToken")
   useEffect(() => {
     let data = sessionStorage.getItem("topup")
       ? JSON.parse(sessionStorage.getItem("topup"))
       : []
-    const username = cryptr.decrypt(data.TOKEN_ONE)
-    const password = cryptr.decrypt(data.TOKEN_TWO)
+    const username = Base64.decode(data.TOKEN_ONE)
+    const password = Base64.decode(data.TOKEN_TWO)
     const req = { serviceCode: "SHP", username, password, user_id: "1" }
     const profile = new Promise(res => {
       res(Instance.post("", req))

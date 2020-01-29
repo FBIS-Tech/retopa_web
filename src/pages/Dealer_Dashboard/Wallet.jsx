@@ -6,14 +6,13 @@ import "../../scss/Dealer_home.scss"
 import { History, HistoryColumn } from "../../components/Constants/historyTable"
 import RetailerHistory from "./RetailerHistory"
 import DealerActivities from "../../components/DealerActivities"
-import Cryptr from "cryptr"
 import Instance from "../../Api/Instance"
+import { Base64 } from "js-base64"
 const { Option } = Select
 const { TabPane } = Tabs
 
 const Retailer = () => {
   const [balance, setBalance] = useState("0")
-  const cryptr = new Cryptr("retopaToken")
   useEffect(() => {
     //gets user details
     let onLogged = sessionStorage.getItem("persist:root")
@@ -25,8 +24,8 @@ const Retailer = () => {
     let data = sessionStorage.getItem("topup")
       ? JSON.parse(sessionStorage.getItem("topup"))
       : []
-    const username = cryptr.decrypt(data.TOKEN_ONE)
-    const password = cryptr.decrypt(data.TOKEN_TWO)
+    const username = Base64.decode(data.TOKEN_ONE)
+    const password = Base64.decode(data.TOKEN_TWO)
     const req = {
       serviceCode: "CHB",
       username,

@@ -86,7 +86,13 @@ export default function Navbar() {
                 Dashboard
               </AniLink>
             </Button>
-            <Button className={logged ? "signup_btn" : "hide"}>
+            <Button
+              className={logged ? "signup_btn" : "hide"}
+              onClick={() => {
+                localStorage.clear()
+                sessionStorage.clear()
+              }}
+            >
               <AniLink swipe top="exit" duration={0.45} to="Login">
                 Logout
               </AniLink>

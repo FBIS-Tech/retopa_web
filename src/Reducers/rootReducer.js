@@ -1,9 +1,9 @@
 import { actionType } from "../Actions/ActionsType"
 import { combineReducers } from "redux"
 import { notification } from "antd"
-// const Cryptr = require("cryptr")
-import Cryptr from "cryptr"
-const cryptr = new Cryptr("retopaToken")
+import { Base64 } from "js-base64"
+// import Cryptr from "cryptr"
+// const cryptr = new Cryptr("retopaToken")
 
 const {
   REGISTRATION_SUCCESS,
@@ -12,6 +12,7 @@ const {
   LOGIN_SUCCESS,
   AUTH_ERROR,
   LOGIN_USER,
+  CLEAR,
 } = actionType
 
 const initialState = {
@@ -30,6 +31,8 @@ const initialState = {
 
 export const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case CLEAR:
+      return { ...state, isError: false, authError: "", logError: [] }
     case REGISTRATION_SUCCESS:
       return { ...state, registrationMessage: payload, registration: true }
     case REGISTRATION_ERROR:
@@ -37,19 +40,27 @@ export const rootReducer = (state = initialState, { type, payload }) => {
     case LOGIN_USER:
       let tokenOne = payload.username
       let tokenTwo = payload.password
-      const TOKEN_ONE = cryptr.encrypt(tokenOne)
-      const TOKEN_TWO = cryptr.encrypt(tokenTwo)
+      const TOKEN_ONE = Base64.encode(tokenOne)
+      const TOKEN_TWO = Base64.encode(tokenTwo)
       const token = { TOKEN_ONE, TOKEN_TWO }
+      console.log(token)
       sessionStorage.setItem("topup", JSON.stringify(token))
       return { ...state, loginDets: payload }
     case LOGIN_ERROR:
-      return { ...state, logError: payload, isError: true }
+      return { ...state, logError: payload }
     case AUTH_ERROR:
       return { ...state, authError: payload, isError: true }
     case LOGIN_SUCCESS:
       localStorage.setItem("userData", JSON.stringify(payload))
       window.location = "/Dealer_Dashboard/Dashboard/"
-      return { ...state, userData: payload, isLogged: true }
+      return {
+        ...state,
+        userData: payload,
+        isLogged: true,
+        logError: [],
+        authError: "",
+        isError: false,
+      }
 
     default:
       return state

@@ -15,7 +15,7 @@ import { TableTwo } from "../../components/Constants/Tableone"
 import "../../scss/Retailer.scss"
 import Green from "../../../assets/green.svg"
 import Red from "../../../assets/red.svg"
-import Cryptr from "cryptr"
+import { Base64 } from "js-base64"
 
 import { openTokenForm } from "../../Actions/ActionsType"
 import Instance from "../../Api/Instance"
@@ -44,7 +44,7 @@ const RetailerList = () => {
   const [inputChange, setInput] = useState({ serviceCode: "AVT" })
   const [inputRetailChange, setInputRetail] = useState({ serviceCode: "ADR" })
 
-  const cryptr = new Cryptr("retopaToken")
+  // const cryptr = new Cryptr("retopaToken")
 
   useEffect(() => {
     //gets user details
@@ -59,8 +59,8 @@ const RetailerList = () => {
     let data = sessionStorage.getItem("topup")
       ? JSON.parse(sessionStorage.getItem("topup"))
       : []
-    const username = cryptr.decrypt(data.TOKEN_ONE)
-    const password = cryptr.decrypt(data.TOKEN_TWO)
+    const username = Base64.decode(data.TOKEN_ONE)
+    const password = Base64.decode(data.TOKEN_TWO)
     const req = { serviceCode: "RTL", username, password, user_id }
 
     // inputs for adding vtu line

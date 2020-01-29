@@ -1,7 +1,5 @@
 import { actionType } from "./ActionsType"
 
-import { toast } from "react-toastify"
-
 const {
   REGISTER_USER,
   REGISTRATION_SUCCESS,
@@ -45,4 +43,7 @@ export const loginSuccess = payload => ({
 })
 export const openTokenForm = payload => ({
   type: TOKEN_FORM,
+})
+export const clearError = payload => ({
+  type: CLEAR,
 })

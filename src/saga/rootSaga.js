@@ -55,6 +55,11 @@ function* userLogin({ payload }) {
       yield put(loginError(m))
     } else {
       yield put(AuthError(ae))
+      yield put(
+        setTimeout(() => {
+          AuthError(" ")
+        }, 3000)
+      )
     }
   } catch (err) {
     console.log(err)

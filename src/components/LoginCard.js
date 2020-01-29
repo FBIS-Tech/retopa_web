@@ -11,6 +11,7 @@ const LoginCard = ({
   activate2,
   getInput,
   handleSubmit,
+  loading,
 }) => {
   return (
     <div className="Login_card">
@@ -47,7 +48,9 @@ const LoginCard = ({
             <h4>
               New user? <Link to="/SignUp">Create an account</Link>
             </h4>
-            <Button onClick={handleSubmit}>Login</Button>
+            <Button onClick={handleSubmit} loading={loading ? true : false}>
+              Login
+            </Button>
           </div>
           <h4 className="socials">Log In through socials</h4>
           <div className="social-logo">

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, Suspense } from "react"
 import DealerLayout from "../../components/Layout/DealerLayout"
 import useDisplayHooks from "./hooks/useDisplayHooks"
-import Dealer_Home from "./Dealer_Home"
+// import Dealer_Home from "./Dealer_Home"
 import { navigate } from "gatsby"
 import Retailer from "./Wallet"
 import RetailerList from "./RetailerList"
@@ -10,11 +10,10 @@ import Admin from "./Admin"
 import Export from "./Export"
 import Payment from "./Payment"
 import Voucher from "./Voucher"
-import Cryptr from "cryptr"
+const Dealer_Home = React.lazy(() => import("./Dealer_Home"))
 
 const Dashboard = () => {
   const [logged, setLogged] = useState(true)
-  const cryptr = new Cryptr("retopaToken")
   useEffect(() => {
     let onLogged = sessionStorage.getItem("persist:root")
       ? JSON.parse(sessionStorage.getItem("persist:root"))
@@ -64,8 +63,11 @@ const Dashboard = () => {
           style={{ padding: "20px", minWidth: "320px" }}
           className={home ? "dealers_dashboard" : "hide"}
         >
-          <Dealer_Home />
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <Dealer_Home />
+          </Suspense>
         </div>
+
         <div
           style={{
             padding: "20px",

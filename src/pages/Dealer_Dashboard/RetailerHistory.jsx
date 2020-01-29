@@ -4,13 +4,13 @@ import { ColumnsTwo, TableTwo } from "../../components/Constants/Tableone"
 import "../../scss/Retailer.scss"
 import { HistoryColumn, History } from "../../components/Constants/historyTable"
 import Instance from "../../Api/Instance"
-import Cryptr from "cryptr"
+import { Base64 } from "js-base64"
 const { TabPane } = Tabs
 const { Option } = Select
 
 const RetailerHistory = () => {
   const [history, setHistory] = useState([])
-  const cryptr = new Cryptr("retopaToken")
+
   useEffect(() => {
     let onLogged = sessionStorage.getItem("persist:root")
       ? JSON.parse(sessionStorage.getItem("persist:root"))
@@ -22,8 +22,8 @@ const RetailerHistory = () => {
       ? JSON.parse(sessionStorage.getItem("topup"))
       : []
 
-    const username = cryptr.decrypt(data.TOKEN_ONE)
-    const password = cryptr.decrypt(data.TOKEN_TWO)
+    const username = Base64.decode(data.TOKEN_ONE)
+    const password = Base64.decode(data.TOKEN_TWO)
     const req = { serviceCode: "SHR", username, password, user_id }
 
     const request = new Promise(res => {

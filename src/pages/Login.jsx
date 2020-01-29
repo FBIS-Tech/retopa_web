@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useMemo } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import RegLayout from "../components/RegistrationLayout/RegLayout"
 import "../scss/Login.scss"
 import LoginCard from "../components/LoginCard"
-import { UserLogin } from "../Actions/Actions"
+import { UserLogin, clearError } from "../Actions/Actions"
 import Cryptr from "cryptr"
 
 const Login = () => {
   const [active, setActive] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [inputChange, setInput] = useState({ serviceCode: "LGN" })
 
   const { logError, authError, isError } = useSelector(state => state)
@@ -19,6 +20,20 @@ const Login = () => {
       [e.currentTarget.name]: e.currentTarget.value,
     })
   }
+
+  const handleDispatch = () => {
+    dispatch(UserLogin(inputChange))
+    setLoading(true)
+  }
+
+  useMemo(() => {
+    setLoading(false)
+    clearError()
+  }, [logError])
+  useMemo(() => {
+    setLoading(false)
+    clearError()
+  }, [authError])
 
   return (
     <RegLayout>
@@ -36,6 +51,7 @@ const Login = () => {
         <div className={!isError ? "hide" : "error"}>{authError}</div>
         <div>
           <LoginCard
+            loading={loading}
             active={active}
             activate1={() => {
               setActive(true)
@@ -44,7 +60,7 @@ const Login = () => {
               setActive(false)
             }}
             getInput={handleInputChange}
-            handleSubmit={() => dispatch(UserLogin(inputChange))}
+            handleSubmit={handleDispatch}
           />
         </div>
         <h4 className="end">
