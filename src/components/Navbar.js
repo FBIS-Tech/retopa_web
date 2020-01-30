@@ -81,7 +81,7 @@ export default function Navbar() {
                 swipe
                 top="exit"
                 duration={0.45}
-                to="Dealer_Dashboard/Dashboard/"
+                to="Dealer_Dashboard/Dashboard"
               >
                 Dashboard
               </AniLink>

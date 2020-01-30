@@ -524,7 +524,6 @@ const RetailerList = () => {
                   <label htmlFor="name">Type</label>
                   <Select
                     style={{ width: "100%" }}
-                    className="inputBack"
                     defaultValue="Select Type"
                     onChange={handleRetailer}
                   >
@@ -572,7 +571,6 @@ const RetailerList = () => {
                   <label htmlFor="name">Network</label>
                   <Select
                     style={{ width: "100%" }}
-                    className="inputBack"
                     name="network"
                     defaultValue="Select Network"
                     onChange={handleNetwork}
