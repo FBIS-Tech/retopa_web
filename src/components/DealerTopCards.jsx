@@ -4,7 +4,7 @@ import Circle from "../images/dasg_circle.png"
 import Voucher from "../../assets/dash-info-voucher.svg"
 import Direct from "../../assets/dash-info-direct.svg"
 
-const DealerTopCards = ({ number, description }) => {
+const DealerTopCards = ({ number, description, voucher, direct }) => {
   return (
     <>
       <div className="dealer_card_container">
@@ -22,7 +22,13 @@ const DealerTopCards = ({ number, description }) => {
             )}
           </div>
           <div className="dealer_card_details">
-            <h4>{number}</h4>
+            <h4>
+              {description === "Voucher Count"
+                ? voucher
+                : description === "Direct top up count"
+                ? direct
+                : number}
+            </h4>
             <p>{description}</p>
           </div>
         </div>
