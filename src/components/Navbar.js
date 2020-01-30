@@ -5,6 +5,7 @@ import "./Layout/Layout.scss"
 // import { Link } from "gatsby"
 import AniLink from "gatsby-plugin-transition-link/AniLink"
 import Link from "gatsby-plugin-transition-link"
+import { navigate } from "gatsby"
 const windowGlobal = typeof window !== "undefined" && window
 export default function Navbar() {
   const [visible, setVisible] = useState(false)
@@ -33,6 +34,10 @@ export default function Navbar() {
   }
   const onClose = () => {
     setVisible(false)
+  }
+
+  const navigateDashboard = () => {
+    navigate("/Dealer_Dashboard/Dashboard/")
   }
   return (
     <>
@@ -76,12 +81,15 @@ export default function Navbar() {
                 Sign Up
               </AniLink>
             </Button>
-            <Button className={logged ? "login_btn" : "hide"}>
+            <Button
+              onClick={navigateDashboard}
+              className={logged ? "login_btn" : "hide"}
+            >
               <AniLink
                 swipe
                 top="exit"
                 duration={0.45}
-                to="Dealer_Dashboard/Dashboard"
+                to="/Dealer_Dashboard/Dashboard/"
               >
                 Dashboard
               </AniLink>
