@@ -20,6 +20,9 @@ import { Base64 } from "js-base64"
 import { openTokenForm } from "../../Actions/ActionsType"
 import Instance from "../../Api/Instance"
 import { useSelector, useDispatch } from "react-redux"
+import DealerLayout from "../../components/Layout/DealerLayout"
+import { RetailIcon } from "../../components/CustomIcons"
+const Dash_retail_icon = props => <Icon component={RetailIcon} {...props} />
 
 const { TabPane } = Tabs
 
@@ -29,9 +32,11 @@ const RetailerList = () => {
   const [openToken, setOpenToken] = useState(false)
   const [retailer, setRetailer] = useState([])
   const [message, setMessage] = useState("")
+  const [messageAct, setMessageAct] = useState("")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState([])
   const [name, setName] = useState("")
+  const [activate, setActivate] = useState("Activate")
   const [activateRetailer, setActivateRetailer] = useState({
     serviceCode: "ACT",
   })
@@ -41,7 +46,7 @@ const RetailerList = () => {
   const [fund, setFund] = useState({
     serviceCode: "FUD",
   })
-  const [inputChange, setInput] = useState({ serviceCode: "AVT" })
+  const [inputChange, setInput] = useState({ serviceCode: "ACR" })
   const [inputRetailChange, setInputRetail] = useState({ serviceCode: "ADR" })
 
   // const cryptr = new Cryptr("retopaToken")
@@ -101,8 +106,10 @@ const RetailerList = () => {
     const request = new Promise(res => {
       res(Instance.post("", req))
     })
+    console.log(request)
     request.then(({ data }) => {
       if (data.status === "200") {
+        console.log(data.retailer)
         setRetailer(data.retailer)
       }
     })
@@ -110,9 +117,9 @@ const RetailerList = () => {
 
   const ColumnsTwo = [
     {
-      title: "Type",
-      dataIndex: "type",
-      key: "type",
+      title: "Username",
+      dataIndex: "username",
+      key: "username",
 
       // render: text => <a>{text}</a>,
     },
@@ -122,15 +129,29 @@ const RetailerList = () => {
       key: "name",
     },
     {
+      title: "Type",
+      dataIndex: "type",
+      key: "type",
+
+      // render: text => <a>{text}</a>,
+    },
+
+    {
       title: "Retailer number",
       dataIndex: "phone",
       key: "phone",
     },
 
     {
-      title: "Token",
+      title: "USSD Code",
       dataIndex: "code",
       key: "code",
+      render: (text, record) => (
+        <div>
+          {record.tp_no}
+          {record.code}
+        </div>
+      ),
 
       // align: "right",
     },
@@ -178,14 +199,14 @@ const RetailerList = () => {
               >
                 Send Fund
               </p>
-              <p>Edit</p>
+              {/* <p>Edit</p> */}
               <p id={record.id} title={record.type} onClick={ActivateRetailer}>
-                {record.status === 1 ? "Deactivate" : "Activate"}
+                {record.status === 1 ? "Deactivate POS" : "Activate POS"}
               </p>
+              {/* <p>Activate USSD</p> */}
             </div>
           }
           placement="bottom"
-          //  title="Title"
           trigger="click"
         >
           <span className="popover">...</span>
@@ -199,12 +220,11 @@ const RetailerList = () => {
     setOpenToken(false)
   }
 
-  // select network
-  function handleNetwork(value) {
-    // setNetwork(value)
+  // select user type
+  function handleType(value) {
     setInput({
       ...inputChange,
-      network: value,
+      type: value,
     })
   }
   const handleChange = e => {
@@ -214,15 +234,17 @@ const RetailerList = () => {
     })
   }
 
-  // handle vtu Submit
+  // handle ussd activation Submit
   const handleVTUSubmit = () => {
     setLoading(true)
     const submitRequest = new Promise(res => {
       res(Instance.post("", inputChange))
     })
     submitRequest.then(({ data }) => {
+      console.log(submitRequest)
       let fields = data.required_fields
       let m = data.message
+      console.log(submitRequest)
       if (data.status === "301") {
         setLoading(false)
         setError(fields)
@@ -231,9 +253,15 @@ const RetailerList = () => {
         }, 3000)
       } else if (data.status === "200") {
         setLoading(false)
-        setMessage(m)
+        setMessageAct(m)
+        // setTimeout(() => {
+        //   setMessage("")
+        // }, 3000)
+      } else if (data.status === "300") {
+        setLoading(false)
+        setMessageAct(m)
         setTimeout(() => {
-          setMessage("")
+          setMessageAct("")
         }, 3000)
       }
     })
@@ -294,7 +322,8 @@ const RetailerList = () => {
     let { password } = activateRetailer
     const Data = { serviceCode, username, password, type, user_id }
     const DataTwo = { serviceCode: "DEA", username, password, type, user_id }
-    if (status === "Activate") {
+    if (status === "Activate POS") {
+      e.target.innerHTML = "Activating..."
       const submitRequest = new Promise(res => {
         res(Instance.post("", Data))
       })
@@ -304,26 +333,28 @@ const RetailerList = () => {
         if (data.status === "301") {
           setLoading(false)
           setError(fields)
+          e.target.innerHTML = "Activate"
           setTimeout(() => {
             setError([])
-            window.location.reload(true)
           }, 3000)
         } else if (data.status === "200") {
           setLoading(false)
           setMessage(m)
           setTimeout(() => {
             setMessage("")
-            window.location.reload(true)
+            window.location.reload(false)
           }, 3000)
         } else {
           setLoading(false)
           setMessage(m)
+          e.target.innerHTML = "Activate"
           setTimeout(() => {
             setMessage("")
           }, 3000)
         }
       })
-    } else if (status === "Deactivate") {
+    } else if (status === "Deactivate POS") {
+      e.target.innerHTML = "Deactivating..."
       const submitRequest = new Promise(res => {
         res(Instance.post("", DataTwo))
       })
@@ -333,23 +364,23 @@ const RetailerList = () => {
         if (data.status === "301") {
           setLoading(false)
           setError(fields)
+          e.target.innerHTML = "Deactivate"
           setTimeout(() => {
             setError([])
-            window.location.reload(true)
           }, 3000)
         } else if (data.status === "200") {
           setLoading(false)
           setMessage(m)
           setTimeout(() => {
             setMessage("")
-            window.location.reload(true)
+            window.location.reload(false)
           }, 3000)
         } else {
           setLoading(false)
           setMessage(m)
+          e.target.innerHTML = "Deactivate"
           setTimeout(() => {
             setMessage("")
-            window.location.reload(true)
           }, 3000)
         }
       })
@@ -392,55 +423,116 @@ const RetailerList = () => {
       }
     })
   }
+
+  const title = (
+    <h4>
+      <Dash_retail_icon style={{ marginRight: "10px" }} />
+      Retailer List
+    </h4>
+  )
   return (
-    <div>
-      <Tabs defaultActiveKey="1" onTabClick={handleRetailTab}>
-        <TabPane tab="Retailer List" key="1">
-          <div
-            className={openToken ? "hide" : "table_container"}
-            style={
-              TableTwo.length <= 9 ? { height: "100vh" } : { height: "auto" }
-            }
-          >
-            <div className="table_Group">
-              <div className="table_header">
-                <div className="rowShow">
-                  <Button>Fund Wallet</Button>
+    <DealerLayout title={title} position={["2"]}>
+      <div>
+        <Tabs defaultActiveKey="1" onTabClick={handleRetailTab}>
+          <TabPane tab="Retailer List" key="1">
+            <div
+              className={openToken ? "hide" : "table_container"}
+              style={
+                TableTwo.length <= 9 ? { height: "100vh" } : { height: "auto" }
+              }
+            >
+              <div className="table_Group">
+                <div className="table_header">
+                  <div className="rowShow">
+                    <Button>Fund Wallet</Button>
+                  </div>
+                  <div className="msg">{message}</div>
+                  <div className="searchTable">
+                    <Input
+                      placeholder="Search Retailer…"
+                      prefix={
+                        <Icon type="search" style={{ color: "#D8D8D8" }} />
+                      }
+                    />
+                  </div>
                 </div>
-                <div className="msg">{message}</div>
-                <div className="searchTable">
-                  <Input
-                    placeholder="Search Retailer…"
-                    prefix={<Icon type="search" style={{ color: "#D8D8D8" }} />}
-                  />
-                </div>
+                <Table
+                  columns={ColumnsTwo}
+                  dataSource={retailer}
+                  bordered
+                  size="small"
+                />
               </div>
-              <Table
-                columns={ColumnsTwo}
-                dataSource={retailer}
-                bordered
-                size="small"
-              />
             </div>
-          </div>
-          <div className={openToken ? "sendTokenContainer" : "hide"}>
-            <div className="sendTokenGroup">
-              <div className="tokenTitle">
-                <h4>
-                  Send Funds to{" "}
-                  <span
-                    style={{
-                      color: "Green",
-                      fontWeight: "bold",
-                      fontSize: "16px",
-                    }}
+            <div className={openToken ? "sendTokenContainer" : "hide"}>
+              <div className="sendTokenGroup">
+                <div className="tokenTitle">
+                  <h4>
+                    Send Funds to{" "}
+                    <span
+                      style={{
+                        color: "Green",
+                        fontWeight: "bold",
+                        fontSize: "16px",
+                      }}
+                    >
+                      {name}
+                    </span>
+                  </h4>
+                </div>
+                <div className="tokenForm">
+                  <Form layout="vertical">
+                    {error.map(data => (
+                      <div key={data} className="errors">
+                        {data}
+                      </div>
+                    ))}
+                    <div
+                      className={
+                        message === "Invalid Secret Key...Try again later!"
+                          ? "errors"
+                          : "msg"
+                      }
+                    >
+                      {message}
+                    </div>
+                    <Form.Item label="AMOUNT">
+                      <Input
+                        name="amount"
+                        type="number"
+                        placeholder="N 1000"
+                        onChange={handleFund}
+                      />
+                    </Form.Item>
+                    <Form.Item label="Pin">
+                      <Input
+                        name="pin"
+                        type="password"
+                        placeholder="****"
+                        onChange={handleFund}
+                      />
+                    </Form.Item>
+                  </Form>
+                </div>
+                <div className="btnTokenGroup"></div>
+                <div className="tokenBtn">
+                  <Button
+                    onClick={handleFundTransfer}
+                    loading={!loading ? false : true}
                   >
-                    {name}
-                  </span>
-                </h4>
+                    Send Fund
+                  </Button>
+                </div>
               </div>
-              <div className="tokenForm">
-                <Form layout="vertical">
+            </div>
+          </TabPane>
+          <TabPane tab="Add Retailer" key="2">
+            <div className="formContainer">
+              <div className="formTitle">
+                <p>Add Retailer</p>
+              </div>
+              <div className="formGroup">
+                <div className="adminForm">
                   {error.map(data => (
                     <div key={data} className="errors">
                       {data}
@@ -455,155 +547,131 @@ const RetailerList = () => {
                   >
                     {message}
                   </div>
-                  {/* <Form.Item label="Phone Number">
-                    <Input placeholder="2346208675" />
-                  </Form.Item>
-                  <Form.Item label="Amount">
-                    <Input placeholder="Enter Amount Here" />
-                  </Form.Item> */}
-                  <Form.Item label="AMOUNT">
+                  <div className="formInput VTUInput">
+                    <label htmlFor="name">Name</label>
                     <Input
-                      name="amount"
-                      type="number"
-                      placeholder="N 1000"
-                      onChange={handleFund}
+                      placeholder="Enter Full Name"
+                      name="name"
+                      onChange={handleRetailChange}
                     />
-                  </Form.Item>
-                  <Form.Item label="Pin">
+                  </div>
+                  <div className="formInput VTUInput">
+                    <label htmlFor="type">Type</label>
+                    <Select
+                      style={{ width: "100%" }}
+                      defaultValue="Select Type"
+                      onChange={handleRetailer}
+                    >
+                      <Option value="REGULAR">REGULAR</Option>
+                      <Option value="SUB DEALER">SUB DEALER</Option>
+                    </Select>
+                  </div>
+
+                  <div className="formInput VTUInput">
+                    <label htmlFor="name">Pin</label>
                     <Input
-                      name="pin"
                       type="password"
                       placeholder="****"
-                      onChange={handleFund}
+                      name="pin"
+                      onChange={handleRetailChange}
                     />
-                  </Form.Item>
-                </Form>
-              </div>
-              <div className="btnTokenGroup"></div>
-              <div className="tokenBtn">
-                <Button
-                  onClick={handleFundTransfer}
-                  loading={!loading ? false : true}
-                >
-                  Send Fund
-                </Button>
-              </div>
-            </div>
-          </div>
-        </TabPane>
-        <TabPane tab="Add Retailer" key="2">
-          <div className="formContainer">
-            <div className="formTitle">
-              <p>Add Retailer</p>
-            </div>
-            <div className="formGroup">
-              <div className="adminForm">
-                {error.map(data => (
-                  <div key={data} className="errors">
-                    {data}
                   </div>
-                ))}
-                <div
-                  className={
-                    message === "Invalid Secret Key...Try again later!"
-                      ? "errors"
-                      : "msg"
-                  }
-                >
-                  {message}
                 </div>
-                <div className="formInput VTUInput">
-                  <label htmlFor="name">Name</label>
-                  <Input
-                    placeholder="Enter Full Name"
-                    name="name"
-                    onChange={handleRetailChange}
-                  />
-                </div>
-                <div className="formInput VTUInput">
-                  <label htmlFor="name">Type</label>
-                  <Select
-                    style={{ width: "100%" }}
-                    defaultValue="Select Type"
-                    onChange={handleRetailer}
+              </div>
+              <div className="adminFormBtn">
+                <div className="btngroup">
+                  <Button
+                    onClick={handleRetailerSubmit}
+                    loading={!loading ? false : true}
                   >
-                    <Option value="REGULAR">REGULAR</Option>
-                  </Select>
-                </div>
-
-                <div className="formInput VTUInput">
-                  <label htmlFor="name">Pin</label>
-                  <Input
-                    type="password"
-                    placeholder="****"
-                    name="pin"
-                    onChange={handleRetailChange}
-                  />
+                    Submit
+                  </Button>
                 </div>
               </div>
             </div>
-            <div className="adminFormBtn">
-              <div className="btngroup">
-                <Button
-                  onClick={handleRetailerSubmit}
-                  loading={!loading ? false : true}
-                >
-                  Submit
-                </Button>
+          </TabPane>
+          <TabPane tab="Activate USSD" key="3">
+            <div className="formContainer">
+              <div className="formTitle">
+                <p>Activate USSD</p>
               </div>
-            </div>
-          </div>
-        </TabPane>
-        <TabPane tab="Add VTU Line" key="3">
-          <div className="formContainer">
-            <div className="formTitle">
-              <p>Add VTU Line</p>
-            </div>
-            <div className="formGroup">
-              <div className="adminForm">
-                {error.map(data => (
-                  <div key={data} className="errors">
-                    {data}
+              <div className="formGroup">
+                <div className="adminForm">
+                  {error.map(data => (
+                    <div key={data} className="errors">
+                      {data}
+                    </div>
+                  ))}
+                  <div
+                    className={
+                      messageAct === "Invalid Secret Key...Try again later!"
+                        ? "errors"
+                        : "msg"
+                    }
+                  >
+                    {messageAct}
                   </div>
-                ))}
-                <div className="msg">{message}</div>
-                <div className="formInput VTUInput">
-                  <label htmlFor="name">Network</label>
-                  <Select
-                    style={{ width: "100%" }}
-                    name="network"
-                    defaultValue="Select Network"
-                    onChange={handleNetwork}
-                  >
-                    <Option value="MTN">MTN</Option>
-                  </Select>
-                </div>
+                  <div className="formInput VTUInput">
+                    <label htmlFor="name">Username</label>
+                    <Input
+                      placeholder="Enter Username e.g. 123434"
+                      name="username"
+                      onChange={handleChange}
+                    />
+                  </div>
 
-                <div className="formInput VTUInput">
-                  <label htmlFor="name">VTU Line</label>
-                  <Input
-                    type="number"
-                    placeholder="080********"
-                    name="vtu_line"
-                    onChange={handleChange}
-                  />
+                  <div className="formInput VTUInput">
+                    <label htmlFor="name">Number</label>
+                    <Input
+                      placeholder="23480********"
+                      name="phone"
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="formInput VTUInput">
+                    <label htmlFor="name">Name</label>
+                    <Input
+                      placeholder="Enter User's Name"
+                      name="name"
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="formInput VTUInput">
+                    <label htmlFor="name">Type</label>
+                    <Select
+                      style={{ width: "100%" }}
+                      defaultValue="Select Type"
+                      onChange={handleType}
+                    >
+                      <Option value="REGULAR">REGULAR</Option>
+                      <Option value="SUB DEALER">SUB DEALER</Option>
+                    </Select>
+                  </div>
+                  <div className="formInput VTUInput">
+                    <label htmlFor="pin">Pin</label>
+                    <Input
+                      placeholder="****"
+                      name="pin"
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="adminFormBtn">
+                <div className="btngroup">
+                  <Button
+                    onClick={handleVTUSubmit}
+                    loading={!loading ? false : true}
+                  >
+                    Submit
+                  </Button>
                 </div>
               </div>
             </div>
-            <div className="adminFormBtn">
-              <div className="btngroup">
-                <Button
-                  onClick={handleVTUSubmit}
-                  loading={!loading ? false : true}
-                >
-                  Submit
-                </Button>
-              </div>
-            </div>
-          </div>
-        </TabPane>
-      </Tabs>
-    </div>
+          </TabPane>
+        </Tabs>
+      </div>
+    </DealerLayout>
   )
 }
 

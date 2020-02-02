@@ -9,6 +9,7 @@ import { Button } from "antd"
 import DealerActivities from "../../components/DealerActivities"
 import Instance from "../../Api/Instance"
 import { Base64 } from "js-base64"
+import DealerLayout from "../../components/Layout/DealerLayout"
 
 const Dealer_Home = () => {
   const [retailer, setRetailer] = useState([])
@@ -49,7 +50,7 @@ const Dealer_Home = () => {
     profile.then(({ data }) => {
       let user = data.user
       setUser(user)
-      setCounter(user.count)
+      setCounter(user.counter)
     })
   }, [])
   console.log(user)

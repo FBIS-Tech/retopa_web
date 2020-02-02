@@ -100,6 +100,16 @@ span.nav-text {
       color: inherit;
     }
   }
+  &::selection {
+    color: #227f00;
+    background: #f7f9f7;
+  }
+}
+
+//
+
+a:hover {
+  color: #227f00;
 }
 .ant-menu-vertical .ant-menu-item:not(:last-child),
 .ant-menu-vertical-left .ant-menu-item:not(:last-child),
@@ -389,6 +399,9 @@ ul.ant-menu.ant-menu-light.ant-menu-root.ant-menu-inline {
   .dealer_children {
     margin-left: 219px;
     margin-top: 152px;
+    padding: 30px;
+    min-width: 320px;
+    background-color: #f7f9f7 !important;
   }
   .headersss {
     position: fixed;

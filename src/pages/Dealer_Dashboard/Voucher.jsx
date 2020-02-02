@@ -3,7 +3,10 @@ import "../../scss/Retailer.scss"
 import "../../scss/Admin.scss"
 import "../../scss/Export.scss"
 import { Input, Button, Tabs, Popover, Icon, Table } from "antd"
+import DealerLayout from "../../components/Layout/DealerLayout"
+import { VoucherIcon } from "../../components/CustomIcons"
 const { TabPane } = Tabs
+const Dash_voucher_icon = props => <Icon component={VoucherIcon} {...props} />
 
 const Voucher = () => {
   const data = [
@@ -74,8 +77,14 @@ const Voucher = () => {
       ),
     },
   ]
+  const title = (
+    <h4>
+      <Dash_voucher_icon style={{ marginRight: "10px" }} />
+      Voucher
+    </h4>
+  )
   return (
-    <>
+    <DealerLayout title={title} position={["4"]}>
       <div className="adminContainer">
         <div className="adminGroup">
           <div className="admin">
@@ -174,7 +183,7 @@ const Voucher = () => {
           </div>
         </div>
       </div>
-    </>
+    </DealerLayout>
   )
 }
 

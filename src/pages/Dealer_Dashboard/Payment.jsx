@@ -3,7 +3,13 @@ import "../../scss/Retailer.scss"
 import "../../scss/merchantPayment.scss"
 import { Tabs, Button, Modal } from "antd"
 import CardDetails from "../../components/Constants/CreditCardDetails"
+import DealerLayout from "../../components/Layout/DealerLayout"
 import Master from "../../images/masterCard.png"
+import { Icon } from "antd"
+import { PaymentIcon } from "../../components/CustomIcons"
+// const { Header, Content, Sider } = Layout
+
+const Dash_payment_icon = props => <Icon component={PaymentIcon} {...props} />
 const { TabPane } = Tabs
 
 const Payment = () => {
@@ -19,9 +25,14 @@ const Payment = () => {
   const handleCancel = () => {
     setVisible(false)
   }
-
+  const title = (
+    <h4>
+      <Dash_payment_icon style={{ marginRight: "10px", fontSize: "16px" }} />
+      Payment
+    </h4>
+  )
   return (
-    <>
+    <DealerLayout title={title} position={["6"]}>
       <div className="cardPageContainer">
         <div className="cardPageGroup">
           <div className="payment admin">
@@ -70,7 +81,7 @@ const Payment = () => {
           To add and verify card N100 will be charged and saved into your wallet
         </Modal>
       </div>
-    </>
+    </DealerLayout>
   )
 }
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { Layout, Menu, Icon, Button, Input } from "antd"
-import { Link } from "gatsby"
+import { Link, navigateTo } from "gatsby"
 import Logo from "../../../assets/logo.svg"
 import "./DashLayout.scss"
 import Dash from "../../../assets/dash.svg"
@@ -48,6 +48,7 @@ const DealerLayout = ({
   handleBilling,
   handleExport,
   handleVoucher,
+  position,
 }) => {
   const [user, setUser] = useState({})
   useEffect(() => {
@@ -96,36 +97,77 @@ const DealerLayout = ({
         <div className="user_name">
           <span>Hello</span> <span>{user.username}</span>
         </div>
-        <Menu mode="inline" defaultSelectedKeys={["1"]}>
-          <Menu.Item key="1" onClick={handleHome}>
+        <Menu mode="inline" defaultSelectedKeys={position}>
+          <Menu.Item
+            key="1"
+            onClick={() => {
+              navigateTo("/Dealer_Dashboard/Dashboard")
+            }}
+          >
             <Dash_home_icon />
             <span className="nav-text">Home</span>
           </Menu.Item>
-          <Menu.Item key="8" onClick={handleAdmin}>
+
+          <Menu.Item
+            key="8"
+            onClick={() => {
+              navigateTo("/Dealer_Dashboard/Admin")
+            }}
+          >
             <Dash_admin_icon />
             <span className="nav-text">Admin</span>
           </Menu.Item>
-          <Menu.Item key="2" onClick={handleRetailer}>
+          <Menu.Item
+            key="2"
+            onClick={() => {
+              navigateTo("/Dealer_Dashboard/Retailer")
+            }}
+          >
             <Dash_airtime_icon />
             <span className="nav-text">Retailer</span>
           </Menu.Item>
-          <Menu.Item key="3" onClick={handleBilling}>
+          <Menu.Item
+            key="3"
+            onClick={() => {
+              navigateTo("/Dealer_Dashboard/Wallet")
+            }}
+          >
             <Dash_bill_icon />
             <span className="nav-text">Wallet</span>
           </Menu.Item>
-          <Menu.Item key="4" onClick={handleVoucher}>
+          <Menu.Item
+            key="4"
+            onClick={() => {
+              navigateTo("/Dealer_Dashboard/Voucher")
+            }}
+          >
             <Dash_voucher_icon />
             <span className="nav-text">Voucher</span>
           </Menu.Item>
-          <Menu.Item key="5" onClick={handleHistory}>
+          <Menu.Item
+            key="5"
+            onClick={() => {
+              navigateTo("/Dealer_Dashboard/History")
+            }}
+          >
             <Dash_history_icon />
             <span className="nav-text">History</span>
           </Menu.Item>
-          <Menu.Item key="6" onClick={handlePayment}>
+          <Menu.Item
+            key="6"
+            onClick={() => {
+              navigateTo("/Dealer_Dashboard/Payment")
+            }}
+          >
             <Dash_payment_icon />
             <span className="nav-text">Payment</span>
           </Menu.Item>
-          <Menu.Item key="9" onClick={handleExport}>
+          <Menu.Item
+            key="9"
+            onClick={() => {
+              navigateTo("/Dealer_Dashboard/Export")
+            }}
+          >
             <Dash_export_icon />
             <span className="nav-text">Export Data</span>
           </Menu.Item>

@@ -12,10 +12,13 @@ import {
   Popover,
   Form,
 } from "antd"
+import { AdminIcon } from "../../components/CustomIcons"
 import Green from "../../../assets/green.svg"
 import Red from "../../../assets/red.svg"
 import { AdminMember } from "../../components/Constants/AdminPage"
+import DealerLayout from "../../components/Layout/DealerLayout"
 const { TabPane } = Tabs
+const Dash_admin_icon = props => <Icon component={AdminIcon} {...props} />
 
 const Admin = () => {
   const [openForm, setOpenForm] = useState(false)
@@ -80,8 +83,15 @@ const Admin = () => {
   const handleDefault = () => {
     setOpenForm(false)
   }
+
+  const title = (
+    <h4>
+      <Dash_admin_icon style={{ marginRight: "10px" }} />
+      Admin
+    </h4>
+  )
   return (
-    <>
+    <DealerLayout title={title} position={["8"]}>
       <div
         className={AdminMember.length <= 9 ? "tableheight" : "adminContainer"}
       >
@@ -188,7 +198,7 @@ const Admin = () => {
           </div>
         </div>
       </div>
-    </>
+    </DealerLayout>
   )
 }
 

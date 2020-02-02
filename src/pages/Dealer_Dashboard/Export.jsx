@@ -2,12 +2,21 @@ import React, { useState } from "react"
 import "../../scss/Retailer.scss"
 import "../../scss/Admin.scss"
 import "../../scss/Export.scss"
-import { Input, Button, Tabs } from "antd"
+import { Input, Button, Tabs, Icon } from "antd"
+import DealerLayout from "../../components/Layout/DealerLayout"
+import { ExportIcon } from "../../components/CustomIcons"
+const Dash_export_icon = props => <Icon component={ExportIcon} {...props} />
 const { TabPane } = Tabs
 
 const Export = () => {
+  const title = (
+    <h4>
+      <Dash_export_icon style={{ marginRight: "10px" }} />
+      Export Data
+    </h4>
+  )
   return (
-    <>
+    <DealerLayout title={title} position={["9"]}>
       <div className="adminContainer">
         <div className="adminGroup">
           <div className="admin">
@@ -52,7 +61,7 @@ const Export = () => {
           </div>
         </div>
       </div>
-    </>
+    </DealerLayout>
   )
 }
 
