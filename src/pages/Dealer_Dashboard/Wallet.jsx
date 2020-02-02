@@ -120,7 +120,7 @@ const Retailer = () => {
           /> */}
               </div>
             </TabPane>
-
+            {/* 
             <TabPane tab="Transactions" key="3">
               <div
                 className="table_container"
@@ -160,17 +160,17 @@ const Retailer = () => {
                     bordered
                     size="small"
                   />
-                  {/* <Pagination
+                  <Pagination
             total={TableOne.length}
             showTotal={(total, range) =>
               `${range[0]}-${range[1]} of ${total} items`
             }
             pageSize={10}
             defaultCurrent={1}
-          /> */}
+          />
                 </div>
               </div>
-            </TabPane>
+            </TabPane> */}
           </Tabs>
         </div>
       </div>
