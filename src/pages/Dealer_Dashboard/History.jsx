@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Table, Icon, Input, Select, Pagination, Tabs } from "antd"
 import { ColumnsTwo, TableTwo } from "../../components/Constants/Tableone"
 import "../../scss/Retailer.scss"
-import { HistoryColumn, History } from "../../components/Constants/historyTable"
+// import { HistoryColumn, History } from "../../components/Constants/historyTable"
 import Instance from "../../Api/Instance"
 import { Base64 } from "js-base64"
 import DealerLayout from "../../components/Layout/DealerLayout"
@@ -14,6 +14,7 @@ const Dash_history_icon = props => <Icon component={HistoryIcon} {...props} />
 const RetailerHistory = () => {
   const [history, setHistory] = useState([])
   const [historyCredit, setHistoryDebit] = useState([])
+  const [usernameH, setUsernameH] = useState([])
 
   useEffect(() => {
     let onLogged = sessionStorage.getItem("persist:root")
@@ -22,6 +23,7 @@ const RetailerHistory = () => {
     const { userData } = onLogged
     let allData = JSON.parse(userData)
     const { user_id } = allData
+    setUsernameH(allData.username)
     let data = sessionStorage.getItem("topup")
       ? JSON.parse(sessionStorage.getItem("topup"))
       : []
@@ -49,6 +51,41 @@ const RetailerHistory = () => {
       }
     })
   }, [])
+  const HistoryColumn = [
+    {
+      title: "Source",
+      dataIndex: "source",
+      key: "source",
+      render: (text, record) => (
+        <p style={{ marginBottom: "0px" }}>
+          {record.source === 1 ? usernameH : "ADMIN"}
+        </p>
+      ),
+    },
+    {
+      title: "Retailer Name",
+      dataIndex: "destination",
+      key: "destination",
+    },
+
+    {
+      title: "Amount",
+      dataIndex: "amount",
+      key: "amount",
+    },
+
+    {
+      title: "Transaction ref",
+      dataIndex: "ref",
+      key: "ref",
+    },
+    {
+      title: "Created at",
+      dataIndex: "time",
+      key: "time",
+    },
+  ]
+
   const title = (
     <h4>
       <Dash_history_icon style={{ marginRight: "10px" }} />
