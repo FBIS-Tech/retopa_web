@@ -162,7 +162,7 @@ const DealerLayout = ({
             <Dash_payment_icon />
             <span className="nav-text">Payment</span>
           </Menu.Item>
-          <Menu.Item
+          {/* <Menu.Item
             key="9"
             onClick={() => {
               navigateTo("/Dealer_Dashboard/Export")
@@ -170,7 +170,7 @@ const DealerLayout = ({
           >
             <Dash_export_icon />
             <span className="nav-text">Export Data</span>
-          </Menu.Item>
+          </Menu.Item> */}
           <Menu.Item key="7" onClick={handleLogout}>
             <Dash_logout_icon />
             <span className="nav-text">Logout</span>

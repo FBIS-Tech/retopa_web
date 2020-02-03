@@ -535,7 +535,7 @@ const RetailerList = () => {
                         onChange={handleFund}
                       />
                     </Form.Item>
-                    <Form.Item label="Pin">
+                    <Form.Item label="Dealer Pin">
                       <Input
                         name="pin"
                         type="password"
@@ -599,7 +599,7 @@ const RetailerList = () => {
                   </div>
 
                   <div className="formInput VTUInput">
-                    <label htmlFor="name">Pin</label>
+                    <label htmlFor="name">Dealer Pin</label>
                     <Input
                       type="password"
                       placeholder="****"
@@ -679,7 +679,7 @@ const RetailerList = () => {
                     </Select>
                   </div>
                   <div className="formInput VTUInput">
-                    <label htmlFor="pin">Pin</label>
+                    <label htmlFor="pin">Dealer Pin</label>
                     <Input
                       placeholder="****"
                       name="pin"
