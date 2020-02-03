@@ -16,7 +16,7 @@ import "../../scss/Retailer.scss"
 import Green from "../../../assets/green.svg"
 import Red from "../../../assets/red.svg"
 import { Base64 } from "js-base64"
-
+import { CSVLink, CSVDownload } from "react-csv"
 import { openTokenForm } from "../../Actions/ActionsType"
 import Instance from "../../Api/Instance"
 import { useSelector, useDispatch } from "react-redux"
@@ -37,6 +37,7 @@ const RetailerList = () => {
   const [error, setError] = useState([])
   const [name, setName] = useState("")
   const [activate, setActivate] = useState("Activate")
+  const [filterText, setFilterText] = useState("")
   const [activateRetailer, setActivateRetailer] = useState({
     serviceCode: "ACT",
   })
@@ -423,6 +424,12 @@ const RetailerList = () => {
       }
     })
   }
+  ////////////////////retailer search////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  const filteredItems = retailer.filter(
+    item =>
+      item.name.toLocaleLowerCase().includes(filterText.toLocaleLowerCase()) ||
+      item.username.toLocaleLowerCase().includes(filterText.toLocaleLowerCase())
+  )
 
   const title = (
     <h4>
@@ -430,6 +437,17 @@ const RetailerList = () => {
       Retailer List
     </h4>
   )
+  ///////////export to csv///////////////////////////////////////////////////
+  const headers = [
+    { label: "Username", key: "username" },
+    { label: "Full Name", key: "name" },
+    { label: "Type", key: "type" },
+    { label: "Retailer Number", key: "phone" },
+    { label: "USSD Code", key: "code" },
+    { label: "Status", key: "status" },
+    { label: "Created at", key: "created_at" },
+  ]
+
   return (
     <DealerLayout title={title} position={["2"]}>
       <div>
@@ -444,12 +462,25 @@ const RetailerList = () => {
               <div className="table_Group">
                 <div className="table_header">
                   <div className="rowShow">
-                    <Button>Fund Wallet</Button>
+                    <Button>
+                      <CSVLink
+                        data={retailer}
+                        filename={"Retailers.csv"}
+                        headers={headers}
+                        style={{ color: "white" }}
+                      >
+                        Export to CSV
+                      </CSVLink>
+                    </Button>
                   </div>
                   <div className="msg">{message}</div>
                   <div className="searchTable">
                     <Input
                       placeholder="Search Retailer…"
+                      value={filterText}
+                      onChange={e => {
+                        setFilterText(e.target.value)
+                      }}
                       prefix={
                         <Icon type="search" style={{ color: "#D8D8D8" }} />
                       }
@@ -458,7 +489,7 @@ const RetailerList = () => {
                 </div>
                 <Table
                   columns={ColumnsTwo}
-                  dataSource={retailer}
+                  dataSource={filteredItems}
                   bordered
                   size="small"
                 />

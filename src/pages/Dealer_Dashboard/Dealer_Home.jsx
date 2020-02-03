@@ -53,7 +53,7 @@ const Dealer_Home = () => {
       setCounter(user.counter)
     })
   }, [])
-  console.log(user)
+
   return (
     <>
       <div className="dealer_home_container">
@@ -72,7 +72,7 @@ const Dealer_Home = () => {
           <div className="activity_container">
             <div className="top_activity_container">
               <h4>Activities</h4>
-              <Button>Add Retailer</Button>
+              {/* <Button>Add Retailer</Button> */}
             </div>
             <div className="all_activities_container">
               <div className="allActivityGroup">

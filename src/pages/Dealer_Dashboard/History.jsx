@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react"
-import { Table, Icon, Input, Select, Pagination, Tabs } from "antd"
+import { Table, Icon, Input, Select, Pagination, Tabs, Button } from "antd"
 import { ColumnsTwo, TableTwo } from "../../components/Constants/Tableone"
+import "../../scss/Table.scss"
 import "../../scss/Retailer.scss"
-// import { HistoryColumn, History } from "../../components/Constants/historyTable"
+import { CSVLink, CSVDownload } from "react-csv"
 import Instance from "../../Api/Instance"
 import { Base64 } from "js-base64"
 import DealerLayout from "../../components/Layout/DealerLayout"
@@ -15,6 +16,8 @@ const RetailerHistory = () => {
   const [history, setHistory] = useState([])
   const [historyCredit, setHistoryDebit] = useState([])
   const [usernameH, setUsernameH] = useState([])
+  const [filteredCredit, setFilteredCredit] = useState("")
+  const [filteredDebit, setFilteredDebit] = useState("")
 
   useEffect(() => {
     let onLogged = sessionStorage.getItem("persist:root")
@@ -86,12 +89,33 @@ const RetailerHistory = () => {
     },
   ]
 
+  const filteredDebitItems = history.filter(item =>
+    item.ref.includes(filteredDebit.toLocaleLowerCase())
+  )
+  const filteredCreditItems = historyCredit.filter(item =>
+    item.ref.includes(filteredCredit.toLocaleLowerCase())
+  )
+
   const title = (
     <h4>
       <Dash_history_icon style={{ marginRight: "10px" }} />
       History
     </h4>
   )
+  const headerCredit = [
+    { label: "Source", key: "source" },
+    { label: "Retailer Name", key: "destination" },
+    { label: "Amount", key: "amount" },
+    { label: "Transaction ref", key: "ref" },
+    { label: "Created at", key: "created_at" },
+  ]
+  const headerDebit = [
+    { label: "Source", key: "source" },
+    { label: "Retailer Name", key: "destination" },
+    { label: "Amount", key: "amount" },
+    { label: "Transaction ref", key: "ref" },
+    { label: "Created at", key: "time" },
+  ]
   return (
     <DealerLayout title={title} position={["5"]}>
       <div>
@@ -106,21 +130,24 @@ const RetailerHistory = () => {
               <div className="table_Group">
                 <div className="table_header">
                   <div className="rowShow">
-                    <Select
-                      defaultValue="10"
-                      style={{ width: 70 }}
-                      // onChange={handleChange}
-                    >
-                      <Option value="10">10</Option>
-                      <Option value="15">15</Option>
-                      <Option value="20">20</Option>
-                      <Option value="25">25</Option>
-                    </Select>
-                    <h4>Records per page</h4>
+                    <Button>
+                      <CSVLink
+                        data={historyCredit}
+                        filename={"Wallet credits.csv"}
+                        headers={headerCredit}
+                        style={{ color: "white" }}
+                      >
+                        Export to CSV
+                      </CSVLink>
+                    </Button>
                   </div>
                   <div className="searchTable">
                     <Input
-                      placeholder="Search Retailer…"
+                      placeholder="Search Credit Wallet…"
+                      value={filteredCredit}
+                      onChange={e => {
+                        setFilteredCredit(e.target.value)
+                      }}
                       prefix={
                         <Icon type="search" style={{ color: "#D8D8D8" }} />
                       }
@@ -129,7 +156,7 @@ const RetailerHistory = () => {
                 </div>
                 <Table
                   columns={HistoryColumn}
-                  dataSource={historyCredit}
+                  dataSource={filteredCreditItems}
                   bordered
                   size="small"
                 />
@@ -139,21 +166,24 @@ const RetailerHistory = () => {
               <div className="table_Group">
                 <div className="table_header">
                   <div className="rowShow">
-                    <Select
-                      defaultValue="10"
-                      style={{ width: 70 }}
-                      // onChange={handleChange}
-                    >
-                      <Option value="10">10</Option>
-                      <Option value="15">15</Option>
-                      <Option value="20">20</Option>
-                      <Option value="25">25</Option>
-                    </Select>
-                    <h4>Records per page</h4>
+                    <Button>
+                      <CSVLink
+                        data={history}
+                        filename={"Wallet Debits.csv"}
+                        headers={headerDebit}
+                        style={{ color: "white" }}
+                      >
+                        Export to CSV
+                      </CSVLink>
+                    </Button>
                   </div>
                   <div className="searchTable">
                     <Input
-                      placeholder="Search Retailer…"
+                      placeholder="Search Debit History…"
+                      value={filteredDebit}
+                      onChange={e => {
+                        setFilteredDebit(e.target.value)
+                      }}
                       prefix={
                         <Icon type="search" style={{ color: "#D8D8D8" }} />
                       }
@@ -162,7 +192,7 @@ const RetailerHistory = () => {
                 </div>
                 <Table
                   columns={HistoryColumn}
-                  dataSource={history}
+                  dataSource={filteredDebitItems}
                   bordered
                   size="small"
                 />
