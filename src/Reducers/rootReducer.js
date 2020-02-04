@@ -13,6 +13,7 @@ const {
   AUTH_ERROR,
   LOGIN_USER,
   CLEAR,
+  RETAILER,
 } = actionType
 
 const initialState = {
@@ -27,6 +28,7 @@ const initialState = {
   logError: [],
   tripDetsOne: {},
   tripDetsTwo: {},
+  retailer: {},
 }
 
 export const rootReducer = (state = initialState, { type, payload }) => {
@@ -67,6 +69,8 @@ export const rootReducer = (state = initialState, { type, payload }) => {
         authError: "",
         isError: false,
       }
+    case RETAILER:
+      return { ...state, retailer: payload }
 
     default:
       return state

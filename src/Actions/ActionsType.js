@@ -8,4 +8,5 @@ export const actionType = {
   REGISTER_USER: "REGISTER_USER",
   AUTH_ERROR: "AUTH_ERROR",
   CLEAR: "CLEAR",
+  RETAILER: "RETAILER",
 }

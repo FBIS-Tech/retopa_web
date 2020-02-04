@@ -30,19 +30,20 @@ const Retailer = () => {
     const username = Base64.decode(data.TOKEN_ONE)
     const password = Base64.decode(data.TOKEN_TWO)
     const req = {
-      serviceCode: "CHB",
+      serviceCode: "TPB",
       username,
       password,
       user_id,
+      type: "VOD",
     }
     const request = new Promise(res => {
       res(Instance.post("", req))
     })
     request.then(({ data }) => {
-      // console.log(data)
-      // if (data.status === "200") {
-      //   setBalance(data.history)
-      // }
+      console.log(data)
+      if (data.status === "200") {
+        setBalance(data.balance)
+      }
     })
   }, [])
   const title = (
@@ -79,7 +80,7 @@ const Retailer = () => {
                 </div>
               </div>
             </TabPane>
-            <TabPane tab="Wallet History" key="2">
+            {/* <TabPane tab="Wallet History" key="2">
               <div className="table_Group">
                 <div className="table_header">
                   <div className="rowShow">
@@ -110,16 +111,8 @@ const Retailer = () => {
                   size="small"
                   bordered
                 />
-                {/* <Pagination
-            total={TableOne.length}
-            showTotal={(total, range) =>
-              `${range[0]}-${range[1]} of ${total} items`
-            }
-            pageSize={10}
-            defaultCurrent={1}
-          /> */}
               </div>
-            </TabPane>
+            </TabPane> */}
             {/* 
             <TabPane tab="Transactions" key="3">
               <div

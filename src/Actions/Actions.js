@@ -10,6 +10,7 @@ const {
   TOKEN_FORM,
   AUTH_ERROR,
   CLEAR,
+  RETAILER,
 } = actionType
 
 export const registerUser = payload => ({
@@ -47,4 +48,8 @@ export const openTokenForm = payload => ({
 })
 export const clearError = payload => ({
   type: CLEAR,
+})
+export const retailerDetails = payload => ({
+  type: RETAILER,
+  payload,
 })

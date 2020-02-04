@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { useDispatch } from "react-redux"
 import {
   Table,
   Icon,
@@ -19,9 +20,11 @@ import { Base64 } from "js-base64"
 import { CSVLink, CSVDownload } from "react-csv"
 import { openTokenForm } from "../../Actions/ActionsType"
 import Instance from "../../Api/Instance"
-import { useSelector, useDispatch } from "react-redux"
+// import { useSelector, useDispatch } from "react-redux"
 import DealerLayout from "../../components/Layout/DealerLayout"
 import { RetailIcon } from "../../components/CustomIcons"
+import { Link, navigateTo } from "gatsby"
+import { retailerDetails } from "../../Actions/Actions"
 const Dash_retail_icon = props => <Icon component={RetailIcon} {...props} />
 
 const { TabPane } = Tabs
@@ -50,7 +53,7 @@ const RetailerList = () => {
   const [inputChange, setInput] = useState({ serviceCode: "ACR" })
   const [inputRetailChange, setInputRetail] = useState({ serviceCode: "ADR" })
 
-  // const cryptr = new Cryptr("retopaToken")
+  const dispatch = useDispatch()
 
   useEffect(() => {
     //gets user details
@@ -204,7 +207,20 @@ const RetailerList = () => {
               <p id={record.id} title={record.type} onClick={ActivateRetailer}>
                 {record.status === 1 ? "Deactivate POS" : "Activate POS"}
               </p>
-              {/* <p>Activate USSD</p> */}
+              <p
+                id={record.id}
+                title={record.name}
+                onClick={e => {
+                  let details = {
+                    user_id: e.currentTarget.id,
+                    name: e.currentTarget.title,
+                  }
+                  dispatch(retailerDetails(details))
+                  navigateTo(`/Dealer_Dashboard/RetailerHistory`)
+                }}
+              >
+                Retailer's history
+              </p>
             </div>
           }
           placement="bottom"
