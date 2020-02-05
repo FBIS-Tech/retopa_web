@@ -106,9 +106,9 @@ span.ant-anchor-ink-ball.visible {
   transition: top 0.3s ease-in-out;
 }
 
-// .ant-anchor-wrapper {
-//   max-height: 897px !important;
-// }
+.ant-anchor-wrapper {
+  max-height: 94vh !important;
+}
 .ant-anchor-link {
   padding: 0;
   line-height: 1.143;
@@ -124,6 +124,9 @@ span.ant-anchor-ink-ball.visible {
   }
   .faq_navlinks {
     margin: 0;
+  }
+  .ant-anchor-wrapper {
+    max-height: auto !important;
   }
 }
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Drawer, Button, Icon } from "antd"
+import { Drawer, Button, Icon, Menu, Dropdown } from "antd"
 import Logo from "../../assets/logo.svg"
 import "./Layout/Layout.scss"
 // import { Link } from "gatsby"
@@ -39,6 +39,26 @@ export default function Navbar() {
   const navigateDashboard = () => {
     navigate("/Dealer_Dashboard/Dashboard/")
   }
+
+  const menu = (
+    <Menu>
+      <Menu.Item>
+        <AniLink swipe top="exit" to="/Merchants" duration={0.45}>
+          <p>Merchants(Operators or Dealers)</p>
+        </AniLink>
+      </Menu.Item>
+      <Menu.Item>
+        <AniLink swipe top="exit" to="//Airtime" duration={0.45}>
+          <p>Airtime, Data & Bills Payment</p>
+        </AniLink>
+      </Menu.Item>
+      <Menu.Item>
+        <AniLink swipe top="exit" to="/NFC" duration={0.45}>
+          <p>NFC (Near field communication)</p>
+        </AniLink>
+      </Menu.Item>
+    </Menu>
+  )
   return (
     <>
       <div className={position > 57 ? "nav_container_fixed" : "nav_container"}>
@@ -58,12 +78,15 @@ export default function Navbar() {
             <AniLink swipe top="exit" duration={0.45} to="/">
               <h3>Home</h3>
             </AniLink>
-            <AniLink swipe top="exit" duration={0.45}>
+            {/* <AniLink swipe top="exit" duration={0.45}>
               <h3>About us</h3>
-            </AniLink>
-            <AniLink swipe top="exit" duration={0.45}>
-              <h3>Plans</h3>
-            </AniLink>
+            </AniLink> */}
+            <Dropdown overlay={menu}>
+              <a className="ant-dropdown-link" href="#">
+                <h3>Plans</h3>
+              </a>
+            </Dropdown>
+
             <AniLink swipe top="exit" duration={0.45} to="FAQ">
               <h3>FAQ</h3>
             </AniLink>
@@ -119,12 +142,14 @@ export default function Navbar() {
             <Link to="/">
               <h6>Home</h6>
             </Link>
-            <Link>
+            {/* <Link>
               <h6>About us</h6>
-            </Link>
-            <Link>
-              <h6>Plans</h6>
-            </Link>
+            </Link> */}
+            <Dropdown overlay={menu}>
+              <a className="ant-dropdown-link" href="#">
+                <h6>Plans</h6>
+              </a>
+            </Dropdown>
             <Link to="FAQ">
               <h6>FAQ</h6>
             </Link>
