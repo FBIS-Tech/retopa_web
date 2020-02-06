@@ -148,17 +148,12 @@ const RetailerHistory = () => {
       History
     </h4>
   )
-  const headerCredit = [
-    { label: "Source", key: "source" },
-    { label: "Retailer Name", key: "destination" },
-    { label: "Amount", key: "amount" },
-    { label: "Transaction ref", key: "ref" },
-    { label: "Created at", key: "created_at" },
-  ]
+
   const headerDebit = [
     { label: "Source", key: "source" },
     { label: "Retailer Name", key: "destination" },
     { label: "Amount", key: "amount" },
+    { label: "Type", key: "type" },
     { label: "Transaction ref", key: "ref" },
     { label: "Created at", key: "time" },
   ]
