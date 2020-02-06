@@ -11,6 +11,8 @@ const {
   AUTH_ERROR,
   CLEAR,
   RETAILER,
+  LOGIN_DEALER,
+  LOGIN_SUCCESS_DEALER,
 } = actionType
 
 export const registerUser = payload => ({
@@ -30,6 +32,10 @@ export const UserLogin = payload => ({
   type: LOGIN_USER,
   payload,
 })
+export const DealerLogin = payload => ({
+  type: LOGIN_DEALER,
+  payload,
+})
 
 export const loginError = payload => ({
   type: LOGIN_ERROR,
@@ -41,6 +47,10 @@ export const AuthError = payload => ({
 })
 export const loginSuccess = payload => ({
   type: LOGIN_SUCCESS,
+  payload,
+})
+export const loginDealerSuccess = payload => ({
+  type: LOGIN_SUCCESS_DEALER,
   payload,
 })
 export const openTokenForm = payload => ({

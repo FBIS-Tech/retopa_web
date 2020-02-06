@@ -10,6 +10,7 @@ import { HistoryIcon } from "../../components/CustomIcons"
 import { useSelector } from "react-redux"
 import Green from "../../../assets/green.svg"
 import Red from "../../../assets/red.svg"
+import SubDealerLayout from "../../components/Layout/SubDealerLayout"
 const { TabPane } = Tabs
 const { Option } = Select
 const Dash_history_icon = props => <Icon component={HistoryIcon} {...props} />
@@ -183,7 +184,7 @@ const RetailerSingleHistory = () => {
     { label: "Created at", key: "time" },
   ]
   return (
-    <DealerLayout title={title} position={["5"]}>
+    <SubDealerLayout title={title} position={["5"]}>
       <div>
         <div
           className="table_container"
@@ -339,7 +340,7 @@ const RetailerSingleHistory = () => {
           </Tabs>
         </div>
       </div>
-    </DealerLayout>
+    </SubDealerLayout>
   )
 }
 

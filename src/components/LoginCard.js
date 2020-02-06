@@ -17,10 +17,10 @@ const LoginCard = ({
     <div className="Login_card">
       <div className="method">
         <h4 className={active ? "active" : ""} onClick={activate1}>
-          Log In as a Dealer{" "}
+          Log In as a Partner{" "}
         </h4>
         <h4 className={active ? "" : "active"} onClick={activate2}>
-          Log In as a consumer
+          Log In as a Sub Dealer
         </h4>
       </div>
       <div className="content">

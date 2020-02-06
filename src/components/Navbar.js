@@ -11,12 +11,18 @@ export default function Navbar() {
   const [visible, setVisible] = useState(false)
   const [position, setPosition] = useState("")
   const [logged, setLogged] = useState(false)
+  const [type, setType] = useState("")
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll)
     let onLogged = sessionStorage.getItem("persist:root")
       ? JSON.parse(sessionStorage.getItem("persist:root"))
       : []
+    let data = localStorage.getItem("userData")
+      ? JSON.parse(localStorage.getItem("userData"))
+      : []
+    let type = data.type
+    setType(type)
     let status = onLogged.isLogged
 
     if (status === "true") {
@@ -37,7 +43,11 @@ export default function Navbar() {
   }
 
   const navigateDashboard = () => {
-    navigate("/Dealer_Dashboard/Dashboard/")
+    if (type === "subDealer") {
+      navigate("/Sub_Dealer/Dashboard/")
+    } else {
+      navigate("/Dealer_Dashboard/Dashboard/")
+    }
   }
 
   const menu = (
@@ -112,7 +122,11 @@ export default function Navbar() {
                 swipe
                 top="exit"
                 duration={0.45}
-                to="/Dealer_Dashboard/Dashboard/"
+                to={
+                  type === "subDealer"
+                    ? "/Sub_Dealer/Dashboard"
+                    : "/Dealer_Dashboard/Dashboard/"
+                }
               >
                 Dashboard
               </AniLink>

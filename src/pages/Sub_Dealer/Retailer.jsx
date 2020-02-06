@@ -25,7 +25,7 @@ import DealerLayout from "../../components/Layout/DealerLayout"
 import { RetailIcon } from "../../components/CustomIcons"
 import { Link, navigateTo } from "gatsby"
 import { retailerDetails } from "../../Actions/Actions"
-import { array } from "prop-types"
+import SubDealerLayout from "../../components/Layout/SubDealerLayout"
 const Dash_retail_icon = props => <Icon component={RetailIcon} {...props} />
 
 const { TabPane } = Tabs
@@ -49,7 +49,7 @@ const RetailerList = () => {
     serviceCode: "DEA",
   })
   const [fund, setFund] = useState({
-    serviceCode: "FUD",
+    serviceCode: "FUR",
   })
   const [inputChange, setInput] = useState({ serviceCode: "ACR" })
   const [inputRetailChange, setInputRetail] = useState({ serviceCode: "ADR" })
@@ -71,7 +71,15 @@ const RetailerList = () => {
       : []
     const username = Base64.decode(data.TOKEN_ONE)
     const password = Base64.decode(data.TOKEN_TWO)
-    const req = { serviceCode: "RTL", username, password, user_id }
+    // const req = { serviceCode: "RTL", username, password, user_id }
+    const req = {
+      serviceCode: "DHL",
+      username,
+      password,
+      user_id,
+      rt_id: user_id,
+      d_id: user_id,
+    }
 
     // inputs for adding vtu line
     setInput({
@@ -105,17 +113,16 @@ const RetailerList = () => {
       username,
       password,
       user_id,
+      d_id: user_id,
     })
 
     // request for retailer list
     const request = new Promise(res => {
       res(Instance.post("", req))
     })
-    //console.log(request)
     request.then(({ data }) => {
       if (data.status === "200") {
-        //console.log(data.retailer)
-        setRetailer(data.retailer)
+        setRetailer(data.sub_dealers)
       }
     })
   }, [])
@@ -161,7 +168,7 @@ const RetailerList = () => {
       // align: "right",
     },
     {
-      title: "POS Status",
+      title: "Status",
       dataIndex: "status",
       key: "status",
 
@@ -178,12 +185,7 @@ const RetailerList = () => {
           </p>
         ),
     },
-    {
-      title: "Dealer",
-      dataIndex: "d_id",
-      key: "d_id",
-      // align: "right",
-    },
+
     {
       title: "Created at",
       dataIndex: "created_at",
@@ -199,12 +201,13 @@ const RetailerList = () => {
           content={
             <div className="pop_content">
               <p
-                id={record.username}
+                id={record.id}
                 title={record.name}
                 onClick={e => {
-                  let id = e.target.id
+                  let rt_id = e.target.id
+                  let d_id = e.target.tagName
                   setOpenToken(!openToken)
-                  setFund({ ...fund, id })
+                  setFund({ ...fund, rt_id, type: "VTU" })
                   setName(e.currentTarget.title)
                 }}
               >
@@ -223,7 +226,7 @@ const RetailerList = () => {
                     name: e.currentTarget.title,
                   }
                   dispatch(retailerDetails(details))
-                  navigateTo(`/Dealer_Dashboard/RetailerHistory`)
+                  navigateTo(`/Sub_Dealer/RetailerHistory`)
                 }}
               >
                 Retailer's history
@@ -417,7 +420,6 @@ const RetailerList = () => {
   const handleFund = e => {
     setFund({ ...fund, [e.currentTarget.name]: e.currentTarget.value })
   }
-
   const handleFundTransfer = () => {
     setLoading(true)
     const sendRequest = new Promise(res => {
@@ -472,7 +474,7 @@ const RetailerList = () => {
   ]
 
   return (
-    <DealerLayout title={title} position={["2"]}>
+    <SubDealerLayout title={title} position={["2"]}>
       <div>
         <Tabs defaultActiveKey="1" onTabClick={handleRetailTab}>
           <TabPane tab="Retailer List" key="1">
@@ -558,14 +560,14 @@ const RetailerList = () => {
                         onChange={handleFund}
                       />
                     </Form.Item>
-                    <Form.Item label="Dealer Pin">
+                    {/* <Form.Item label="Dealer Pin">
                       <Input
                         name="pin"
                         type="password"
                         placeholder="****"
                         onChange={handleFund}
                       />
-                    </Form.Item>
+                    </Form.Item> */}
                   </Form>
                 </div>
                 <div className="btnTokenGroup"></div>
@@ -580,7 +582,7 @@ const RetailerList = () => {
               </div>
             </div>
           </TabPane>
-          <TabPane tab="Add Retailer" key="2">
+          {/* <TabPane tab="Add Retailer" key="2">
             <div className="formContainer">
               <div className="formTitle">
                 <p>Add Retailer</p>
@@ -722,10 +724,10 @@ const RetailerList = () => {
                 </div>
               </div>
             </div>
-          </TabPane>
+          </TabPane> */}
         </Tabs>
       </div>
-    </DealerLayout>
+    </SubDealerLayout>
   )
 }
 

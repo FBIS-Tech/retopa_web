@@ -29,7 +29,6 @@ export default function HowtoSection({
   }, [])
 
   const handleScroll = () => {
-    // console.log(windowGlobal.pageYOffset)
     let positiond = windowGlobal.pageYOffset
     if (positiond >= 1391.199951171875) {
       // setTop(windowGlobal.pageYOffset)

@@ -15,10 +15,12 @@ import {
   loginError,
   loginSuccess,
   AuthError,
+  loginDealerSuccess,
 } from "../Actions/Actions.js"
 import { actionType } from "../Actions/ActionsType"
 import { Base64 } from "js-base64"
-const { REGISTER_USER, LOGIN_USER } = actionType
+import axios from "axios"
+const { REGISTER_USER, LOGIN_USER, LOGIN_DEALER } = actionType
 
 function* registerUsers({ payload }) {
   try {
@@ -36,7 +38,7 @@ function* registerUsers({ payload }) {
       }
     }
   } catch (err) {
-    console.log(err)
+    //console.log(err)
     yield put({ type: "ERROR" })
     alert("something went wrong, Please check that you are connected")
   }
@@ -45,7 +47,7 @@ function* registerUsers({ payload }) {
 function* userLogin({ payload }) {
   try {
     const request = yield Instance.post("", payload)
-    // console.log(request)
+    // //console.log(request)
     // return false
     let s = request.data.status
     let d = request.data
@@ -64,7 +66,37 @@ function* userLogin({ payload }) {
       )
     }
   } catch (err) {
-    console.log(err)
+    //console.log(err)
+    yield put({ type: "ERROR" })
+    // alert("something went wrong, Please check that you are connected")
+  }
+}
+function* dealerLogin({ payload }) {
+  try {
+    const request = yield axios.post(
+      "https://retopin.com/retopa/public/api/d_login",
+      payload
+    )
+    //console.log(request)
+    // return false
+    let s = request.data.status
+    let d = request.data
+    let ae = request.data.message
+    let m = request.data.required_fields
+    if (s === "200") {
+      yield put(loginDealerSuccess(d))
+    } else if (s === "301") {
+      yield put(loginError(m))
+    } else {
+      yield put(AuthError(ae))
+      yield put(
+        setTimeout(() => {
+          AuthError(" ")
+        }, 3000)
+      )
+    }
+  } catch (err) {
+    //console.log(err)
     yield put({ type: "ERROR" })
     // alert("something went wrong, Please check that you are connected")
   }
@@ -73,5 +105,6 @@ function* userLogin({ payload }) {
 export default function* saga() {
   yield takeEvery(REGISTER_USER, registerUsers)
   yield takeEvery(LOGIN_USER, userLogin)
+  yield takeEvery(LOGIN_DEALER, dealerLogin)
   // yield fork(startListener)
 }

@@ -13,8 +13,6 @@ import { navigate } from "gatsby"
 import { Base64 } from "js-base64"
 import {
   HomeIcon,
-  AirtimeIcon,
-  BillIcon,
   VoucherIcon,
   HistoryIcon,
   PaymentIcon,
@@ -37,34 +35,23 @@ const Dash_logout_icon = props => <Icon component={LogoutIcon} {...props} />
 const Dash_admin_icon = props => <Icon component={AdminIcon} {...props} />
 const Dash_export_icon = props => <Icon component={ExportIcon} {...props} />
 
-const DealerLayout = ({
-  children,
-  handleHome,
-  handleRetailer,
-  handleHistory,
-  handlePayment,
-  handleAdmin,
-  title,
-  handleBilling,
-  handleExport,
-  handleVoucher,
-  position,
-}) => {
-  const [user, setUser] = useState({})
+const SubDealerLayout = ({ children, title, position }) => {
+  const [user, setUser] = useState("")
+  const [Logged, setLogged] = useState(true)
   useEffect(() => {
-    let data = sessionStorage.getItem("topup")
-      ? JSON.parse(sessionStorage.getItem("topup"))
+    let data = localStorage.getItem("userData")
+      ? JSON.parse(localStorage.getItem("userData"))
       : []
-    const username = Base64.decode(data.TOKEN_ONE)
-    const password = Base64.decode(data.TOKEN_TWO)
-    const req = { serviceCode: "SHP", username, password, user_id: "1" }
-    const profile = new Promise(res => {
-      res(Instance.post("", req))
-    })
-    profile.then(({ data }) => {
-      let user = data.user
-      setUser(user)
-    })
+    let type = data.type
+    // let name = data.payload.name
+
+    if (type !== "subDealer") {
+      navigate("/Login")
+      setLogged(false)
+      return false
+    } else {
+      setUser(data.payload.name)
+    }
   }, [])
 
   // handle logout
@@ -82,7 +69,7 @@ const DealerLayout = ({
 
   today = dd + "/" + mm + "/" + yyyy
   return (
-    <Layout>
+    <Layout className={!Logged ? "hide" : ""}>
       <Helmet>
         <link rel="icon" href={Favicon} />
       </Helmet>
@@ -95,13 +82,13 @@ const DealerLayout = ({
           </div>
         </div>
         <div className="user_name">
-          <span>Hello</span> <span>{user.username}</span>
+          <span>Hello</span> <span>{user}</span>
         </div>
         <Menu mode="inline" defaultSelectedKeys={position}>
           <Menu.Item
             key="1"
             onClick={() => {
-              navigateTo("/Dealer_Dashboard/Dashboard")
+              navigateTo("/Sub_Dealer/Dashboard/")
             }}
           >
             <Dash_home_icon />
@@ -109,77 +96,34 @@ const DealerLayout = ({
           </Menu.Item>
 
           <Menu.Item
-            key="8"
-            onClick={() => {
-              navigateTo("/Dealer_Dashboard/Admin")
-            }}
-          >
-            <Dash_admin_icon />
-            <span className="nav-text">Admin</span>
-          </Menu.Item>
-          <Menu.Item
             key="2"
             onClick={() => {
-              navigateTo("/Dealer_Dashboard/Retailer")
+              navigateTo("/Sub_Dealer/Retailer")
             }}
           >
             <Dash_airtime_icon />
             <span className="nav-text">Retailer</span>
           </Menu.Item>
-          <Menu.Item
-            key="9"
-            onClick={() => {
-              navigateTo("/Dealer_Dashboard/SubDealers")
-            }}
-          >
-            <Dash_airtime_icon />
-            <span className="nav-text">Sub Dealers</span>
-          </Menu.Item>
+
           <Menu.Item
             key="3"
             onClick={() => {
-              navigateTo("/Dealer_Dashboard/Wallet")
+              navigateTo("/Sub_Dealer/Wallet")
             }}
           >
             <Dash_bill_icon />
             <span className="nav-text">Wallet</span>
           </Menu.Item>
-          <Menu.Item
-            key="4"
-            onClick={() => {
-              navigateTo("/Dealer_Dashboard/Voucher")
-            }}
-          >
-            <Dash_voucher_icon />
-            <span className="nav-text">Voucher</span>
-          </Menu.Item>
+
           <Menu.Item
             key="5"
             onClick={() => {
-              navigateTo("/Dealer_Dashboard/History")
+              navigateTo("/Sub_Dealer/History")
             }}
           >
             <Dash_history_icon />
             <span className="nav-text">History</span>
           </Menu.Item>
-          <Menu.Item
-            key="6"
-            onClick={() => {
-              navigateTo("/Dealer_Dashboard/Payment")
-            }}
-          >
-            <Dash_payment_icon />
-            <span className="nav-text">Payment</span>
-          </Menu.Item>
-          {/* <Menu.Item
-            key="9"
-            onClick={() => {
-              navigateTo("/Dealer_Dashboard/Export")
-            }}
-          >
-            <Dash_export_icon />
-            <span className="nav-text">Export Data</span>
-          </Menu.Item> */}
           <Menu.Item key="7" onClick={handleLogout}>
             <Dash_logout_icon />
             <span className="nav-text">Logout</span>
@@ -190,7 +134,7 @@ const DealerLayout = ({
         <div className="headersss dealer_header">
           <Header>
             <div className="header_left dealerHeader">
-              <h4>Administrative Dashboard</h4>
+              <h4>Sub Dealer Dashboard</h4>
             </div>
             <div className="header_right">
               <Input
@@ -214,15 +158,17 @@ const DealerLayout = ({
           </Header>
         </div>
         <Content>
-          <div className="dash_children dealer_children">{children}</div>
+          <div className={!Logged ? "hide" : "dash_children dealer_children"}>
+            {children}
+          </div>
         </Content>
       </Layout>
     </Layout>
   )
 }
 
-DealerLayout.propTypes = {
+SubDealerLayout.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-export default DealerLayout
+export default SubDealerLayout

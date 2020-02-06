@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import RegLayout from "../components/RegistrationLayout/RegLayout"
 import "../scss/Login.scss"
 import LoginCard from "../components/LoginCard"
-import { UserLogin } from "../Actions/Actions"
+import { UserLogin, DealerLogin } from "../Actions/Actions"
 
 const Login = () => {
   const [active, setActive] = useState(true)
@@ -21,8 +21,13 @@ const Login = () => {
   }
 
   const handleDispatch = () => {
-    dispatch(UserLogin(inputChange))
-    setLoading(true)
+    if (active) {
+      dispatch(UserLogin(inputChange))
+      setLoading(true)
+    } else {
+      dispatch(DealerLogin(inputChange))
+      setLoading(true)
+    }
   }
 
   useMemo(() => setLoading(false), [logError])

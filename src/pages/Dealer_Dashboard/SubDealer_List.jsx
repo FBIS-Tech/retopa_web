@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import { Table, Icon, Input, Select, Pagination, Tabs, Button } from "antd"
-import { ColumnsTwo, TableTwo } from "../../components/Constants/Tableone"
 import "../../scss/Table.scss"
 import "../../scss/Retailer.scss"
 import { CSVLink, CSVDownload } from "react-csv"
@@ -8,16 +7,24 @@ import Instance from "../../Api/Instance"
 import { Base64 } from "js-base64"
 import DealerLayout from "../../components/Layout/DealerLayout"
 import { HistoryIcon } from "../../components/CustomIcons"
+import { useSelector } from "react-redux"
+import Green from "../../../assets/green.svg"
+import Red from "../../../assets/red.svg"
 const { TabPane } = Tabs
 const { Option } = Select
 const Dash_history_icon = props => <Icon component={HistoryIcon} {...props} />
 
-const RetailerHistory = () => {
-  const [history, setHistory] = useState([])
+const SubDealerList = () => {
+  const [VODHistory, setVODHistory] = useState([])
+  const [DataHistory, setDataHistory] = useState([])
+  const [AwufHistory, setAwufHistory] = useState([])
+  const [VtuHistory, setVtuHistory] = useState([])
   const [historyCredit, setHistoryDebit] = useState([])
   const [usernameH, setUsernameH] = useState([])
   const [filteredCredit, setFilteredCredit] = useState("")
   const [filteredDebit, setFilteredDebit] = useState("")
+
+  const { retailer } = useSelector(state => state)
 
   useEffect(() => {
     let onLogged = sessionStorage.getItem("persist:root")
@@ -33,73 +40,109 @@ const RetailerHistory = () => {
 
     const username = Base64.decode(data.TOKEN_ONE)
     const password = Base64.decode(data.TOKEN_TWO)
-    const req = { serviceCode: "SMM", username, password, user_id }
-    const reqDebit = { serviceCode: "SMH", username, password, user_id }
 
-    const request = new Promise(res => {
-      res(Instance.post("", req))
+    ////////////AWUF history/////////////////
+    const VTU = {
+      serviceCode: "DHL",
+      username,
+      type: "VTU",
+      password,
+      user_id,
+      rt_id: retailer.user_id,
+      d_id: retailer.user_id,
+    }
+    const requestVtu = new Promise(res => {
+      res(Instance.post("", VTU))
     })
-    request.then(({ data }) => {
+    //console.log(requestVtu)
+    requestVtu.then(({ data }) => {
       if (data.status === "200") {
-        setHistory(data.history)
-      }
-    })
-    const requestCredit = new Promise(res => {
-      res(Instance.post("", reqDebit))
-    })
-    //console.log(requestCredit)
-    requestCredit.then(({ data }) => {
-      if (data.status === "200") {
-        setHistoryDebit(data.history)
+        //console.log("yes")
       }
     })
   }, [])
-  const HistoryColumn = [
+
+  const ColumnsTwo = [
     {
-      title: "Source",
-      dataIndex: "source",
-      key: "source",
+      title: "Username",
+      dataIndex: "username",
+      key: "username",
+
+      // render: text => <a>{text}</a>,
+    },
+    {
+      title: "Full name",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "Type",
+      dataIndex: "type",
+      key: "type",
+
+      // render: text => <a>{text}</a>,
+    },
+
+    {
+      title: "Retailer number",
+      dataIndex: "phone",
+      key: "phone",
+    },
+
+    {
+      title: "USSD Code",
+      dataIndex: "code",
+      key: "code",
       render: (text, record) => (
-        <p style={{ marginBottom: "0px" }}>
-          {record.source === 1 ? usernameH : "ADMIN"}
-        </p>
+        <div>
+          {record.tp_no}
+          {record.code}
+        </div>
       ),
-    },
-    {
-      title: "Retailer Name",
-      dataIndex: "destination",
-      key: "destination",
-    },
 
-    {
-      title: "Amount",
-      dataIndex: "amount",
-      key: "amount",
+      // align: "right",
     },
-
     {
-      title: "Transaction ref",
-      dataIndex: "ref",
-      key: "ref",
+      title: "POS Status",
+      dataIndex: "status",
+      key: "status",
+
+      render: text =>
+        text === 1 ? (
+          <p className="enabled">
+            <Green className="dotPosition" />
+            Enable
+          </p>
+        ) : (
+          <p className="disabled">
+            <Red className="dotPosition" />
+            Disabled
+          </p>
+        ),
+    },
+    {
+      title: "Dealer",
+      dataIndex: "d_id",
+      key: "d_id",
+      // align: "right",
     },
     {
       title: "Created at",
-      dataIndex: "time",
-      key: "time",
+      dataIndex: "created_at",
+      key: "created_at",
+
+      // align: "right",
     },
   ]
 
-  const filteredDebitItems = history.filter(item =>
-    item.ref.includes(filteredDebit.toLocaleLowerCase())
-  )
-  const filteredCreditItems = historyCredit.filter(item =>
+  const filteredVTUItems = VtuHistory.filter(item =>
     item.ref.includes(filteredCredit.toLocaleLowerCase())
   )
 
   const title = (
     <h4>
       <Dash_history_icon style={{ marginRight: "10px" }} />
-      History
+      {retailer.name}'s Retailer List
     </h4>
   )
   const headerCredit = [
@@ -122,17 +165,17 @@ const RetailerHistory = () => {
         <div
           className="table_container"
           style={
-            HistoryColumn.length <= 9 ? { height: "100vh" } : { height: "auto" }
+            ColumnsTwo.length <= 9 ? { height: "100vh" } : { height: "auto" }
           }
         >
           <Tabs defaultActiveKey="1">
-            <TabPane tab="Credit History" key="1">
+            <TabPane tab="Retailer List" key="1">
               <div className="table_Group">
                 <div className="table_header">
                   <div className="rowShow">
                     <Button>
                       <CSVLink
-                        data={historyCredit}
+                        data={VtuHistory}
                         filename={"Wallet credits.csv"}
                         headers={headerCredit}
                         style={{ color: "white" }}
@@ -155,55 +198,11 @@ const RetailerHistory = () => {
                   </div>
                 </div>
                 <Table
-                  columns={HistoryColumn}
-                  dataSource={filteredCreditItems}
+                  columns={ColumnsTwo}
+                  dataSource={filteredVTUItems}
                   bordered
                   size="small"
                 />
-              </div>
-            </TabPane>
-            <TabPane tab="Debit History" key="2">
-              <div className="table_Group">
-                <div className="table_header">
-                  <div className="rowShow">
-                    <Button>
-                      <CSVLink
-                        data={history}
-                        filename={"Wallet Debits.csv"}
-                        headers={headerDebit}
-                        style={{ color: "white" }}
-                      >
-                        Export to CSV
-                      </CSVLink>
-                    </Button>
-                  </div>
-                  <div className="searchTable">
-                    <Input
-                      placeholder="Search Debit History…"
-                      value={filteredDebit}
-                      onChange={e => {
-                        setFilteredDebit(e.target.value)
-                      }}
-                      prefix={
-                        <Icon type="search" style={{ color: "#D8D8D8" }} />
-                      }
-                    />
-                  </div>
-                </div>
-                <Table
-                  columns={HistoryColumn}
-                  dataSource={filteredDebitItems}
-                  bordered
-                  size="small"
-                />
-                {/* <Pagination
-            total={TableOne.length}
-            showTotal={(total, range) =>
-              `${range[0]}-${range[1]} of ${total} items`
-            }
-            pageSize={10}
-            defaultCurrent={1}
-          /> */}
               </div>
             </TabPane>
           </Tabs>
@@ -213,4 +212,4 @@ const RetailerHistory = () => {
   )
 }
 
-export default RetailerHistory
+export default SubDealerList

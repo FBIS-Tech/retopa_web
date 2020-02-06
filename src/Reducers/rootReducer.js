@@ -14,6 +14,7 @@ const {
   LOGIN_USER,
   CLEAR,
   RETAILER,
+  LOGIN_SUCCESS_DEALER,
 } = actionType
 
 const initialState = {
@@ -29,6 +30,7 @@ const initialState = {
   tripDetsOne: {},
   tripDetsTwo: {},
   retailer: {},
+  type: "",
 }
 
 export const rootReducer = (state = initialState, { type, payload }) => {
@@ -61,6 +63,19 @@ export const rootReducer = (state = initialState, { type, payload }) => {
     case LOGIN_SUCCESS:
       localStorage.setItem("userData", JSON.stringify(payload))
       window.location = "/Dealer_Dashboard/Dashboard/"
+      return {
+        ...state,
+        userData: payload,
+        isLogged: true,
+        logError: [],
+        authError: "",
+        isError: false,
+        type: "patner",
+      }
+    case LOGIN_SUCCESS_DEALER:
+      const data = { payload, type: "subDealer" }
+      localStorage.setItem("userData", JSON.stringify(data))
+      window.location = "/Sub_Dealer/Dashboard/"
       return {
         ...state,
         userData: payload,

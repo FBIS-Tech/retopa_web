@@ -25,16 +25,16 @@ import DealerLayout from "../../components/Layout/DealerLayout"
 import { RetailIcon } from "../../components/CustomIcons"
 import { Link, navigateTo } from "gatsby"
 import { retailerDetails } from "../../Actions/Actions"
-import { array } from "prop-types"
 const Dash_retail_icon = props => <Icon component={RetailIcon} {...props} />
 
 const { TabPane } = Tabs
 
 const { Option } = Select
 
-const RetailerList = () => {
+const SubDealer = () => {
   const [openToken, setOpenToken] = useState(false)
   const [retailer, setRetailer] = useState([])
+  const [SelectRetailer, setSelectRetailer] = useState([])
   const [message, setMessage] = useState("")
   const [messageAct, setMessageAct] = useState("")
   const [loading, setLoading] = useState(false)
@@ -48,11 +48,11 @@ const RetailerList = () => {
   const [deactivateRetailer, setDeactivateRetailer] = useState({
     serviceCode: "DEA",
   })
-  const [fund, setFund] = useState({
+  const [assign, setAssign] = useState({
     serviceCode: "FUD",
   })
   const [inputChange, setInput] = useState({ serviceCode: "ACR" })
-  const [inputRetailChange, setInputRetail] = useState({ serviceCode: "ADR" })
+  const [inputRetailChange, setInputRetail] = useState({ serviceCode: "ARL" })
 
   const dispatch = useDispatch()
 
@@ -100,8 +100,8 @@ const RetailerList = () => {
       password,
     })
     // inputs for funding retailers
-    setFund({
-      ...fund,
+    setAssign({
+      ...assign,
       username,
       password,
       user_id,
@@ -111,11 +111,29 @@ const RetailerList = () => {
     const request = new Promise(res => {
       res(Instance.post("", req))
     })
-    //console.log(request)
     request.then(({ data }) => {
       if (data.status === "200") {
-        //console.log(data.retailer)
-        setRetailer(data.retailer)
+        let allRetailers = data.retailer
+        setSelectRetailer(allRetailers)
+        // to query sub dealers only
+        allRetailers.forEach(data => {
+          if (data.type === "SUB DEALER") {
+            setRetailer([
+              ...retailer,
+              {
+                username: data.username,
+                name: data.name,
+                type: data.type,
+                phone: data.phone,
+                code: data.code,
+                tp_no: data.tp_no,
+                status: data.status,
+                created_at: data.created_at,
+                id: data.id,
+              },
+            ])
+          }
+        })
       }
     })
   }, [])
@@ -161,7 +179,7 @@ const RetailerList = () => {
       // align: "right",
     },
     {
-      title: "POS Status",
+      title: "Status",
       dataIndex: "status",
       key: "status",
 
@@ -179,12 +197,6 @@ const RetailerList = () => {
         ),
     },
     {
-      title: "Dealer",
-      dataIndex: "d_id",
-      key: "d_id",
-      // align: "right",
-    },
-    {
       title: "Created at",
       dataIndex: "created_at",
       key: "created_at",
@@ -199,16 +211,16 @@ const RetailerList = () => {
           content={
             <div className="pop_content">
               <p
-                id={record.username}
+                id={record.id}
                 title={record.name}
                 onClick={e => {
-                  let id = e.target.id
+                  let d_id = e.currentTarget.id
                   setOpenToken(!openToken)
-                  setFund({ ...fund, id })
+                  setInputRetail({ ...inputRetailChange, d_id })
                   setName(e.currentTarget.title)
                 }}
               >
-                Send Fund
+                Assign Retailer
               </p>
               {/* <p>Edit</p> */}
               <p id={record.id} title={record.type} onClick={ActivateRetailer}>
@@ -223,10 +235,10 @@ const RetailerList = () => {
                     name: e.currentTarget.title,
                   }
                   dispatch(retailerDetails(details))
-                  navigateTo(`/Dealer_Dashboard/RetailerHistory`)
+                  navigateTo(`/Dealer_Dashboard/SubDealer_List`)
                 }}
               >
-                Retailer's history
+                Retailer List
               </p>
             </div>
           }
@@ -265,10 +277,8 @@ const RetailerList = () => {
       res(Instance.post("", inputChange))
     })
     submitRequest.then(({ data }) => {
-      //console.log(submitRequest)
       let fields = data.required_fields
       let m = data.message
-      //console.log(submitRequest)
       if (data.status === "301") {
         setLoading(false)
         setError(fields)
@@ -301,9 +311,10 @@ const RetailerList = () => {
   function handleRetailer(value) {
     setInputRetail({
       ...inputRetailChange,
-      type: value,
+      rt_id: value,
     })
   }
+
   // submit retailer request
   const handleRetailerSubmit = () => {
     setLoading(true)
@@ -415,13 +426,13 @@ const RetailerList = () => {
   ////////////////////SEND FUNDS TO RETAILER//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const handleFund = e => {
-    setFund({ ...fund, [e.currentTarget.name]: e.currentTarget.value })
+    setAssign({ ...assign, [e.currentTarget.name]: e.currentTarget.value })
   }
 
   const handleFundTransfer = () => {
     setLoading(true)
     const sendRequest = new Promise(res => {
-      res(Instance.post("", fund))
+      res(Instance.post("", assign))
     })
     sendRequest.then(({ data }) => {
       let fields = data.required_fields
@@ -457,7 +468,7 @@ const RetailerList = () => {
   const title = (
     <h4>
       <Dash_retail_icon style={{ marginRight: "10px" }} />
-      Retailer List
+      Sub Dealers
     </h4>
   )
   ///////////export to csv///////////////////////////////////////////////////
@@ -472,10 +483,10 @@ const RetailerList = () => {
   ]
 
   return (
-    <DealerLayout title={title} position={["2"]}>
+    <DealerLayout title={title} position={["9"]}>
       <div>
         <Tabs defaultActiveKey="1" onTabClick={handleRetailTab}>
-          <TabPane tab="Retailer List" key="1">
+          <TabPane tab="Sub Dealer List" key="1">
             <div
               className={openToken ? "hide" : "table_container"}
               style={
@@ -522,7 +533,7 @@ const RetailerList = () => {
               <div className="sendTokenGroup">
                 <div className="tokenTitle">
                   <h4>
-                    Send Funds to{" "}
+                    Assign Retailers to{" "}
                     <span
                       style={{
                         color: "Green",
@@ -550,31 +561,41 @@ const RetailerList = () => {
                     >
                       {message}
                     </div>
-                    <Form.Item label="AMOUNT">
+                    <Form.Item label="Sub Dealer">
                       <Input
-                        name="amount"
-                        type="number"
+                        name="subdealer"
                         placeholder="N 1000"
+                        value={name}
+                        disabled
                         onChange={handleFund}
                       />
                     </Form.Item>
-                    <Form.Item label="Dealer Pin">
-                      <Input
-                        name="pin"
-                        type="password"
-                        placeholder="****"
-                        onChange={handleFund}
-                      />
+                    <Form.Item label="Retailer">
+                      <Select
+                        style={{ width: "100%" }}
+                        defaultValue="Select Retailer"
+                        onChange={handleRetailer}
+                      >
+                        {SelectRetailer.map(data => {
+                          if (data.type === "REGULAR" && data.d_id === null) {
+                            return (
+                              <Option key={data.id} value={data.id}>
+                                {data.name}
+                              </Option>
+                            )
+                          }
+                        })}
+                      </Select>
                     </Form.Item>
                   </Form>
                 </div>
                 <div className="btnTokenGroup"></div>
                 <div className="tokenBtn">
                   <Button
-                    onClick={handleFundTransfer}
+                    onClick={handleRetailerSubmit}
                     loading={!loading ? false : true}
                   >
-                    Send Fund
+                    Assign
                   </Button>
                 </div>
               </div>
@@ -729,4 +750,4 @@ const RetailerList = () => {
   )
 }
 
-export default RetailerList
+export default SubDealer
