@@ -67,6 +67,9 @@ const RetailerHistory = () => {
 
     requestCredit.then(({ data }) => {
       if (data.status === "200") {
+        //   var datat = data.history;
+        //let cast = (array) datat
+        console.log(data.history)
         setHistoryDebit(data.history)
       }
     })
@@ -102,13 +105,8 @@ const RetailerHistory = () => {
     },
     {
       title: "Retailer Name",
-      dataIndex: "destination",
-      key: "destination",
-      render: (text, record) => (
-        <p style={{ marginBottom: "0px" }}>
-          {record.destination === id ? name : "ADMIN"}
-        </p>
-      ),
+      dataIndex: "name",
+      key: "name",
     },
     {
       title: "Type",

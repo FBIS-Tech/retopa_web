@@ -436,6 +436,7 @@ const SubDealer = () => {
     })
     sendRequest.then(({ data }) => {
       let fields = data.required_fields
+      console.log(fields)
       let m = data.message
       if (data.status === "301") {
         setLoading(false)

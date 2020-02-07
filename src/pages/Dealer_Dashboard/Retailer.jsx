@@ -40,7 +40,7 @@ const RetailerList = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState([])
   const [name, setName] = useState("")
-  const [activate, setActivate] = useState("Activate")
+  const [sorted, setSorted] = useState([])
   const [filterText, setFilterText] = useState("")
   const [activateRetailer, setActivateRetailer] = useState({
     serviceCode: "ACT",
@@ -114,7 +114,6 @@ const RetailerList = () => {
     //console.log(request)
     request.then(({ data }) => {
       if (data.status === "200") {
-        //console.log(data.retailer)
         setRetailer(data.retailer)
       }
     })
@@ -178,12 +177,12 @@ const RetailerList = () => {
           </p>
         ),
     },
-    {
-      title: "Dealer",
-      dataIndex: "d_id",
-      key: "d_id",
-      // align: "right",
-    },
+    // {
+    //   title: "Dealer",
+    //   dataIndex: "d_id",
+    //   key: "d_id",
+    //   // align: "right",
+    // },
     {
       title: "Created at",
       dataIndex: "created_at",

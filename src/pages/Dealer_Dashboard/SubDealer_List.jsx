@@ -54,10 +54,11 @@ const SubDealerList = () => {
     const requestVtu = new Promise(res => {
       res(Instance.post("", VTU))
     })
-    //console.log(requestVtu)
     requestVtu.then(({ data }) => {
+      console.log(data)
       if (data.status === "200") {
-        //console.log("yes")
+        let retailers = data.sub_dealers
+        setVtuHistory(retailers)
       }
     })
   }, [])
@@ -124,7 +125,9 @@ const SubDealerList = () => {
       title: "Dealer",
       dataIndex: "d_id",
       key: "d_id",
-      // align: "right",
+      render: (text, record) => (
+        <p style={{ marginBottom: "0px" }}>{retailer.name}</p>
+      ),
     },
     {
       title: "Created at",
@@ -136,7 +139,7 @@ const SubDealerList = () => {
   ]
 
   const filteredVTUItems = VtuHistory.filter(item =>
-    item.ref.includes(filteredCredit.toLocaleLowerCase())
+    item.name.includes(filteredCredit.toLocaleLowerCase())
   )
 
   const title = (
