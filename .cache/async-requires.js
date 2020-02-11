@@ -2,6 +2,7 @@
 const preferDefault = m => m && m.default || m
 
 exports.components = {
+  "component---node-modules-gatsby-plugin-offline-app-shell-js": () => import("../node_modules/gatsby-plugin-offline/app-shell.js" /* webpackChunkName: "component---node-modules-gatsby-plugin-offline-app-shell-js" */),
   "component---src-pages-404-js": () => import("../src/pages/404.js" /* webpackChunkName: "component---src-pages-404-js" */),
   "component---src-pages-airtime-jsx": () => import("../src/pages/Airtime.jsx" /* webpackChunkName: "component---src-pages-airtime-jsx" */),
   "component---src-pages-contact-us-jsx": () => import("../src/pages/ContactUs.jsx" /* webpackChunkName: "component---src-pages-contact-us-jsx" */),
