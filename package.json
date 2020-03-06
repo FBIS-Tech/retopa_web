@@ -6,12 +6,16 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@thundersquared/gatsby-plugin-htaccess-redirect": "^1.0.5",
     "animate.css": "^3.7.2",
     "aos": "^2.3.4",
+    "cors": "^2.8.5",
     "cryptr": "^6.0.1",
     "gatsby": "^2.18.12",
     "gatsby-image": "^2.2.37",
     "gatsby-plugin-antd": "^2.1.0",
+    "gatsby-plugin-express": "^1.1.6",
+    "gatsby-plugin-htaccess": "^1.4.0",
     "gatsby-plugin-manifest": "^2.2.41",
     "gatsby-plugin-netlify-cms": "^4.1.33",
     "gatsby-plugin-offline": "^3.0.27",
@@ -27,7 +31,7 @@
     "js-base64": "^2.5.1",
     "localforage": "^1.7.3",
     "netlify-cms-app": "^2.10.0",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-accessible-accordion": "^3.0.1",
@@ -47,6 +51,7 @@
   },
   "devDependencies": {
     "gatsby-plugin-root-import": "^2.0.5",
+    "nodemon": "^2.0.2",
     "prettier": "^1.19.1"
   },
   "keywords": [
@@ -57,7 +62,7 @@
     "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
-    "start": "npm run develop",
+    "start": "npm run develop ",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"

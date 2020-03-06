@@ -1,0 +1,190 @@
+.billings_container .billings_left {
+  width: 100%;
+  background: #fbfbfa;
+  border: 1px solid #dedede;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.billings_container .billings_left .billings_search {
+  padding: 20px 30px;
+  background: #e9eae7;
+}
+
+.billings_container .billings_left .billings_search .ant-input-affix-wrapper .ant-input-suffix {
+  display: none;
+}
+
+.billings_container .billings_left .billings_search .ant-input-affix-wrapper .ant-input-prefix {
+  left: 5px;
+}
+
+.billings_container .billings_left .billings_search .ant-input:placeholder-shown {
+  padding: 0px 25px;
+}
+
+.billings_container .billings_left .billings_search input.ant-input {
+  padding: 0px 25px;
+  outline-color: green;
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  -webkit-box-shadow: 0px 4px 12px rgba(140, 172, 120, 0.1);
+          box-shadow: 0px 4px 12px rgba(140, 172, 120, 0.1);
+  border-radius: 5px;
+  height: 33px;
+  z-index: 1;
+}
+
+.billings_container .billings_left .billings_search .ant-input-affix-wrapper:hover .ant-input:not(.ant-input-disabled) {
+  border-color: green;
+  border-right-width: 1px !important;
+}
+
+.bill_list_container {
+  background: #fbfbfa;
+  border: 1px solid #dedede;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 20px 30px;
+  height: 400px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.bill_list_container .billGroupContainer {
+  background: #fafafa;
+  border: 1px solid #dddddd;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  padding: 13px 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 20px;
+  height: 76px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+.bill_list_container .billGroupContainer img {
+  margin: 0px;
+}
+
+.bill_list_container .billGroupContainer .bill_text {
+  margin-left: 11px;
+}
+
+.bill_list_container .billGroupContainer .bill_text h4 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  color: #404040;
+  margin-bottom: 6px;
+}
+
+.bill_list_container .billGroupContainer .bill_text p {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: #5b5b5b;
+  margin-bottom: 0px;
+}
+
+.billings_right {
+  padding: 30px;
+}
+
+.billings_right h5 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 28px;
+  color: #444444;
+  mix-blend-mode: normal;
+  opacity: 0.8;
+  margin-bottom: 30px;
+}
+
+.billings_right p,
+.billings_right h4 {
+  margin-bottom: 0px;
+}
+
+.billings_right p :hover,
+.billings_right h4 :hover {
+  color: inherit !important;
+}
+
+.billings_right .bills_list_group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.billings_right .bills_list_group .billGroupContainer {
+  background: #fafafa;
+  border: 1px solid #dddddd;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  padding: 13px 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 30px;
+  height: auto;
+  width: 256px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.billings_right .bills_list_group .billGroupContainer img {
+  margin: 0px;
+  margin-right: 11px;
+}
+
+@media (min-width: 768px) {
+  .billings_container .billings_left {
+    width: 316px;
+  }
+  .billings_container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  .bill_list_container {
+    height: auto;
+  }
+}
+/*# sourceMappingURL=user_billins.css.map */

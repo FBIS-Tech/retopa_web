@@ -1,0 +1,80 @@
+.address {
+  width: 167px;
+  line-height: 17px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #3e5154;
+}
+
+.footer_title {
+  margin-bottom: 19px;
+}
+
+.company,
+.legal,
+.contact {
+  width: 156px;
+}
+
+.company h4,
+.legal h4,
+.contact h4 {
+  margin-bottom: 17px;
+  width: 156px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #3e5154;
+}
+
+.logos {
+  width: 142px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 19px;
+}
+
+.store1 {
+  margin-bottom: 20px;
+}
+
+.footer_container {
+  border-bottom-color: #227f00;
+  border-bottom-width: 10px;
+  border-bottom-style: solid;
+  padding-top: 48px;
+}
+
+.footer_group {
+  width: 90%;
+  margin: auto;
+}
+
+@media (min-width: 425px) {
+  .footer_group {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -ms-flex-line-pack: center;
+        align-content: center;
+    padding-bottom: 63px;
+    padding-top: 48px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .footer_group {
+    max-width: 66.1%;
+  }
+}
+/*# sourceMappingURL=Footer.css.map */

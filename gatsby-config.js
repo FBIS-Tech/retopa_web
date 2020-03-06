@@ -14,6 +14,8 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-transition-link`,
     `gatsby-plugin-netlify-cms`,
+    "gatsby-plugin-htaccess",
+
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -32,6 +34,12 @@ module.exports = {
         theme_color: `#663399`,
         display: `minimal-ui`,
         // icon: `src/images/favicon.ico`, // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: "gatsby-plugin-express",
+      options: {
+        output: "config/gatsby-express.json",
       },
     },
     {

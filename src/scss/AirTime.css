@@ -1,0 +1,79 @@
+.hero_airtime {
+  background: #f5fbf8;
+}
+
+.ladyTwo {
+  display: none;
+  margin: 0;
+}
+
+.airtime_group .airTime_title {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 37px;
+  text-align: center;
+  color: #03363c;
+  width: 100%;
+  max-width: 775px !important;
+  margin: auto;
+  padding-top: 80px;
+}
+
+.airtime_group .airTime_text {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #1c484e;
+  max-width: 648px !important;
+  margin: auto;
+  padding-top: 26px;
+  padding-bottom: 70px;
+}
+
+.airtime_group button.ant-btn {
+  background: #227f00;
+  -webkit-box-shadow: 0px 4px 10px rgba(34, 127, 0, 0.1);
+          box-shadow: 0px 4px 10px rgba(34, 127, 0, 0.1);
+  border-radius: 7px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  width: 226px;
+  height: 53px;
+  margin-top: 10px;
+}
+
+.airTime_illustration_title {
+  font-style: normal;
+  font-weight: bold !important;
+  font-size: 18px;
+  line-height: 22px;
+  color: #03363c;
+  margin-bottom: 15px;
+}
+
+.airTime_illustration_text {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px !important;
+  line-height: 20px !important;
+  max-width: 456px !important;
+  color: #636363;
+  margin-bottom: 40px !important;
+}
+
+@media (min-width: 1232px) {
+  .ladyOne {
+    display: none;
+  }
+  .ladyTwo {
+    display: block;
+    position: relative;
+    left: 19%;
+    overflow: hidden;
+  }
+}
+/*# sourceMappingURL=AirTime.css.map */

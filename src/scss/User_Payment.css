@@ -1,0 +1,318 @@
+.paymentcontainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.payment_left_container {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #dedede;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 700px;
+  padding: 20px;
+}
+
+.payment_left_container .payment_container_group {
+  width: 405px;
+}
+
+.payment_left_container .payment_container_group .cardInfo_payment {
+  text-align: center;
+  margin-top: 198px;
+  margin-bottom: 30px;
+}
+
+.payment_left_container .payment_container_group button.ant-btn {
+  background: #ffffff;
+  border: 1px solid #a6a6a6;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02);
+          box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02);
+  border-radius: 7px;
+  width: 100%;
+  max-width: 405px !important;
+  height: 60px;
+  text-align: left;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.payment_left_container .payment_container_group button.ant-btn p {
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  letter-spacing: -0.02em;
+  color: #161616;
+  padding-left: 62.4px;
+  margin-bottom: 0;
+}
+
+.payment_billing_container {
+  padding-top: 50px;
+  width: 100%;
+}
+
+.payment_billing_container .payment_billing_group,
+.payment_billing_container .payment_billing_group_on {
+  background: #fbfbfa;
+  border: 1px solid #bfcabf;
+  border-radius: 10px;
+  padding: 34px 23px;
+  width: 100%;
+  opacity: 0.1;
+  max-width: 457px;
+}
+
+.payment_billing_container .payment_billing_group input[type="text"],
+.payment_billing_container .payment_billing_group_on input[type="text"] {
+  width: 100%;
+  border: none;
+  outline-color: transparent;
+  padding: 8px 11px;
+  border-radius: 5px;
+}
+
+.payment_billing_container .payment_billing_group h4,
+.payment_billing_container .payment_billing_group_on h4 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 23px;
+  color: #227f00;
+  padding-bottom: 20px;
+  margin-bottom: 0;
+}
+
+.payment_billing_container .payment_billing_group p,
+.payment_billing_container .payment_billing_group_on p {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 16px;
+  color: #929292;
+  margin-bottom: 0;
+}
+
+.payment_billing_container h6 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 16px;
+  color: #929292;
+  margin-top: 34px;
+}
+
+.payment_billing_container h6 a {
+  color: green;
+}
+
+.payment_billing_container button.ant-btn {
+  background: #227f00;
+  border: 1px solid #979797;
+  border-radius: 5px;
+  color: #fff;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 23px;
+  width: 100%;
+  height: 50px;
+  margin-top: 40px;
+}
+
+fieldset {
+  background: #ffffff;
+  border: 1px solid #a6a6a6;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 5px;
+}
+
+fieldset legend {
+  width: auto;
+  margin-left: 13px;
+  background: #ffffff;
+  border: 1px solid #979797;
+  border-radius: 10px;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 13px;
+  color: #777d75;
+  padding: 2px 10px;
+}
+
+.fieldset_bottom {
+  margin-top: 24px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.fieldset_bottom .fieldset_one {
+  width: 124px;
+}
+
+.fieldset_bottom fieldset.fieldset_two {
+  -webkit-box-flex: 3;
+      -ms-flex-positive: 3;
+          flex-grow: 3;
+  margin-left: 24px;
+}
+
+.payment_billing_container .payment_billing_group_on {
+  background: #fbfbfa;
+  border: 1px solid #bfcabf;
+  border-radius: 10px;
+  padding: 34px 23px;
+  width: 100%;
+  opacity: 1;
+  max-width: 457px;
+}
+
+@media (min-width: 768px) {
+  .payment_left_container {
+    width: 50%;
+    background: #ffffff;
+    border: 1px solid #dedede;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .payment_billing_container {
+    width: 50%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
+  }
+}
+
+@media (min-width: 1232px) {
+  .payment_billing_container {
+    width: 50%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
+    padding-right: 100px;
+    padding-top: 50px;
+  }
+}
+
+.paymentcontainer > .payment_billing_container > .payment_billing_group_on {
+  -webkit-animation: bounceIn 600ms both;
+          animation: bounceIn 600ms both;
+}
+
+@-webkit-keyframes bounceIn {
+  from,
+  20%,
+  40%,
+  60%,
+  80%,
+  to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+            transform: scale3d(0.3, 0.3, 0.3);
+  }
+  20% {
+    -webkit-transform: scale3d(1.1, 1.1, 1.1);
+            transform: scale3d(1.1, 1.1, 1.1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.9, 0.9, 0.9);
+            transform: scale3d(0.9, 0.9, 0.9);
+  }
+  60% {
+    opacity: 1;
+    -webkit-transform: scale3d(1.03, 1.03, 1.03);
+            transform: scale3d(1.03, 1.03, 1.03);
+  }
+  80% {
+    -webkit-transform: scale3d(0.97, 0.97, 0.97);
+            transform: scale3d(0.97, 0.97, 0.97);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes bounceIn {
+  from,
+  20%,
+  40%,
+  60%,
+  80%,
+  to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+            transform: scale3d(0.3, 0.3, 0.3);
+  }
+  20% {
+    -webkit-transform: scale3d(1.1, 1.1, 1.1);
+            transform: scale3d(1.1, 1.1, 1.1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.9, 0.9, 0.9);
+            transform: scale3d(0.9, 0.9, 0.9);
+  }
+  60% {
+    opacity: 1;
+    -webkit-transform: scale3d(1.03, 1.03, 1.03);
+            transform: scale3d(1.03, 1.03, 1.03);
+  }
+  80% {
+    -webkit-transform: scale3d(0.97, 0.97, 0.97);
+            transform: scale3d(0.97, 0.97, 0.97);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+}
+/*# sourceMappingURL=User_Payment.css.map */

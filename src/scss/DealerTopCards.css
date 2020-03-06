@@ -1,0 +1,128 @@
+.dealer_card_container {
+  width: 100%;
+  max-width: 370px;
+  height: 140px;
+  margin-bottom: 30px;
+}
+
+.dealer_card_container .dealer_card_group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: #ffffff;
+  border: 1px solid #bcc4d5;
+  -webkit-box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 7px;
+  padding: 22px 20px;
+}
+
+.dealer_card_container .dealerCardImage {
+  -ms-flex-negative: 1;
+      flex-shrink: 1;
+}
+
+.dealer_card_container .dealerCardImage .imgee {
+  position: relative;
+}
+
+.dealer_card_container .dealerCardImage .imgee h4.circle_data {
+  position: absolute;
+  left: 37%;
+  top: 36%;
+  margin: 0px;
+}
+
+.dealer_card_container .dealerCardImage img {
+  margin: 0;
+  width: 74px;
+}
+
+.dealer_card_container .dealer_card_details {
+  text-align: center;
+  -webkit-box-flex: 2;
+      -ms-flex-positive: 2;
+          flex-grow: 2;
+}
+
+.dealer_card_container .dealer_card_details h4 {
+  margin-bottom: 0px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 35px;
+  padding-bottom: 10px;
+  color: #1e2d3b;
+}
+
+.dealer_card_container .dealer_card_details p {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 23px;
+  color: #898989;
+}
+
+.activities_dealer {
+  width: 100%;
+  max-width: 344px;
+  background: #ffffff;
+  border: 1px solid #e4e4e4;
+  border-radius: 7px;
+  margin-bottom: 30px;
+}
+
+.activities_dealer .activity_title {
+  background: #227f00;
+  border-radius: 7px 7px 0px 0px;
+  width: 100%;
+  padding: 13px 25px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  color: #ffffff;
+  margin: 0px;
+}
+
+.activities_dealer p {
+  margin: 0;
+}
+
+.activities_dealer .activity_price {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 30px;
+  padding: 25px;
+  color: #1e2d3b;
+  font-weight: bold;
+}
+
+.activities_dealer .view_activity {
+  background: #f7f6f6;
+  border: 1px solid #e4e4e4;
+  border-radius: 0px 0px 7px 7px;
+  width: 100%;
+  padding: 10px 25px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+}
+
+.activities_dealer .view_activity p {
+  margin-left: 8px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #676767;
+}
+/*# sourceMappingURL=DealerTopCards.css.map */

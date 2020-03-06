@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,UAAU,CAAC;EACT,KAAK,EAAE,GAAG;EACV,MAAM,EAAE,IAAI;EACZ,WAAW,EAAE,IAAI;EACjB,cAAc,EAAE,IAAI;CACrB;;AAED,MAAM,EAAE,SAAS,EAAE,KAAK;EACtB,AAAA,UAAU,CAAC;IACT,SAAS,EAAE,GAAG;GACf",
+    "sources": [
+        "RegHeader.scss"
+    ],
+    "names": [],
+    "file": "RegHeader.css"
+}

@@ -1,0 +1,260 @@
+.user_airtime_group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.user_airtime_group .user_airtime_left {
+  width: 100%;
+  max-width: 547px;
+  background: #ffffff;
+  border: 1px solid #dedede;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 50px 45px 50px 45px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.user_airtime_group .user_airtime_right {
+  width: 90%;
+  margin: 20px auto;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.Airtime_Top_up_container.right_topup_container {
+  width: 100%;
+  max-width: 457px;
+}
+
+.Airtime_Top_up_container {
+  width: 100%;
+  padding: 27px 30px;
+  background: #fbfbfa;
+  border: 1px solid #bfcabf;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.Airtime_Top_up_container .Airtime_Top_up_title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  cursor: pointer;
+}
+
+.Airtime_Top_up_container .Airtime_Top_up_title h4 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 23px;
+  color: #227f00;
+  margin-bottom: 0;
+}
+
+.airtime_drop_down {
+  padding-top: 33px;
+}
+
+.airtime_drop_down .bottom {
+  padding-top: 33px;
+}
+
+.airtime_drop_down .bottom p {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 16px;
+  color: #929292;
+  margin-bottom: 10px;
+}
+
+.airtime_drop_down .bottom input.ant-input {
+  height: 50px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #39434a;
+}
+
+.airtime_drop_down button.ant-btn {
+  background: #227f00;
+  border: 1px solid #979797;
+  border-radius: 5px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 23px;
+  height: 50px;
+  width: 100%;
+  color: #ffffff;
+  margin-top: 50px;
+}
+
+.ant-select-selection.ant-select-selection--single {
+  height: 50px;
+}
+
+.ant-select-selection__rendered {
+  position: relative;
+  display: block;
+  margin-right: 11px;
+  margin-left: 11px;
+  line-height: 46px;
+}
+
+li.ant-select-dropdown-menu-item.ant-select-dropdown-menu-item-selected {
+  background-color: transparent;
+}
+
+ul.ant-select-dropdown-menu.ant-select-dropdown-menu-root.ant-select-dropdown-menu-vertical {
+  margin: 10px;
+}
+
+.hide {
+  display: none;
+}
+
+.DataTopUp {
+  margin-top: 40px;
+}
+
+.paystack_billing h4 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 23px;
+  color: #227f00;
+  margin-top: 64px;
+  margin-bottom: 20px;
+}
+
+.paystack_billing p {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 16px;
+  color: #929292;
+  margin-bottom: 19px;
+}
+
+.paystack_billing .paystack-embed-body {
+  position: relative;
+  width: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  overflow-y: hidden !important;
+}
+
+.user_airtime_group > .Airtime_Top_up_container > .airtime_drop_down {
+  -webkit-animation: fadeIn 400ms ease-in-out 300ms both;
+          animation: fadeIn 400ms ease-in-out 300ms both;
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (min-width: 549px) {
+  .user_airtime_group .user_airtime_left {
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+  }
+  .Airtime_Top_up_container.right_topup_container {
+    margin: 53px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .user_airtime_group {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  .user_airtime_group .user_airtime_left {
+    -ms-flex-item-align: auto;
+        -ms-grid-row-align: auto;
+        align-self: auto;
+  }
+  .user_airtime_group .user_airtime_right {
+    width: 90%;
+    margin: 0px;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    -webkit-box-align: baseline;
+        -ms-flex-align: baseline;
+            align-items: baseline;
+  }
+  .Airtime_Top_up_container.right_topup_container {
+    margin: 0px;
+  }
+  header.ant-layout-header .header_right {
+    margin-right: 50px;
+  }
+}
+
+@media (min-width: 1232px) {
+  .Airtime_Top_up_container.right_topup_container {
+    margin: 50px 100px 50px 0px;
+  }
+}
+/*# sourceMappingURL=User_airtime.css.map */

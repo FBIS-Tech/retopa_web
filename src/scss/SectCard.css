@@ -1,0 +1,71 @@
+.sect_card_container {
+  max-width: 300px;
+  max-height: 357px;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.sect_card_container .sect_card_group {
+  background: #ffffff;
+  -webkit-box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 10px 20px 37px 20px;
+  height: 396px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.sect_card_container .sect_card_group .sect_card_image {
+  margin-bottom: 16px;
+}
+
+.sect_card_container .sect_card_group .sect_card_title {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  color: #353535;
+  max-width: 210px;
+  margin-bottom: 12px;
+}
+
+.sect_card_container .sect_card_group .sect_card_text {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  max-width: 227px;
+  color: #1c484e;
+  margin-bottom: 15px;
+}
+
+.sect_card_container .sect_card_group .sect_card_learn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.sect_card_container .sect_card_group .sect_card_learn h4 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #227f00;
+  padding-left: 10px;
+  margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .sect_card_container {
+    margin: 20px 0;
+  }
+}
+/*# sourceMappingURL=SectCard.css.map */

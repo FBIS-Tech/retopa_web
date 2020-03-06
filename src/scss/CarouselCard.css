@@ -1,0 +1,59 @@
+.carouselCard {
+  background: #ffffff;
+  border: 1px solid #c2c2c2;
+  -webkit-box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.03);
+          box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.03);
+  border-radius: 10px;
+  max-width: 300px;
+  margin: auto;
+}
+
+.carouselCard .carousel_card_group {
+  padding: 20px;
+}
+
+.carouselCard .carousel_card_group img {
+  margin-bottom: 36px;
+}
+
+.carouselCard .carousel_card_group h3 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 22px;
+  color: #252527;
+  margin-bottom: 14px;
+  text-align: justify;
+}
+
+.carouselCard .carousel_card_group p {
+  margin-bottom: 33px;
+  max-width: 260px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #808080;
+  margin-bottom: 48px;
+  text-align: left;
+}
+
+.carouselCard .carousel_card_group .carousel_date {
+  margin-bottom: 5px !important;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: #bdbdbd;
+}
+
+.testimony_container .testimony_group .IndexCarousel {
+  width: 100%;
+  text-align: center;
+}
+
+.slick-dots li.slick-active button:before {
+  opacity: 0.75;
+  color: #70c092;
+}
+/*# sourceMappingURL=CarouselCard.css.map */

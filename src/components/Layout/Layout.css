@@ -1,0 +1,320 @@
+@import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("../../../assets/font/ProximaNova-Regular.otf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #fbfbfb;
+}
+
+h3 {
+  font-family: "Proxima Nova", sans-serif;
+  color: #03363c;
+  font-family: Proxima Nova;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 22px;
+  margin: 0px;
+}
+
+.hide {
+  display: none;
+}
+
+h4,
+label,
+p,
+li,
+a,
+div {
+  font-family: "Muli", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0px;
+}
+
+.Layout_container {
+  margin: 0px auto;
+}
+
+.top_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: 21px auto;
+  width: 90%;
+}
+
+.top_container h4 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  margin: 0;
+  color: #5a6f72;
+}
+
+.nav_container {
+  padding: 34px 0;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f6f9f4), to(rgba(255, 255, 255, 0)));
+  background: linear-gradient(180deg, #f6f9f4 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.nav_container_fixed {
+  position: fixed;
+  width: 100%;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f6f9f4), to(white));
+  background: linear-gradient(180deg, #f6f9f4 0%, white 100%);
+  padding: 14px 0;
+  top: 0;
+  z-index: 1000;
+  -webkit-box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.tl-wrapper > .Layout_container > .nav_container_fixed {
+  animation: pfadeInUp 600ms both;
+  -webkit-animation: pfadeInUp 600ms both;
+}
+
+.drawer_top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 90%;
+  margin: auto;
+}
+
+.drawer_top .main_nav {
+  display: none;
+}
+
+.drawer_top .main_nav h3 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: #03363c;
+  margin-bottom: 0;
+}
+
+.drawer_top .main_nav .login_btn {
+  border-color: #227f00;
+  color: #227f00;
+  height: 50px;
+  -webkit-box-shadow: 0px 4px 10px rgba(34, 127, 0, 0.1);
+          box-shadow: 0px 4px 10px rgba(34, 127, 0, 0.1);
+  border-radius: 7px;
+}
+
+.drawer_top .main_nav .signup_btn {
+  background: #227f00;
+  -webkit-box-shadow: 0px 4px 10px rgba(34, 127, 0, 0.1);
+          box-shadow: 0px 4px 10px rgba(34, 127, 0, 0.1);
+  border-radius: 7px;
+  color: white;
+  height: 50px;
+  border-color: #227f00;
+}
+
+.application {
+  background: white;
+  padding: 60px 0px;
+}
+
+.application .app_group {
+  width: 90%;
+  margin: auto;
+  background: #2b7047;
+  -webkit-box-shadow: 0px 8px 18px rgba(43, 112, 71, 0.25);
+          box-shadow: 0px 8px 18px rgba(43, 112, 71, 0.25);
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 231px;
+}
+
+.application .app_group .get {
+  text-align: center;
+  font-size: 30px;
+  line-height: 37px;
+  color: #ffffff;
+  margin-bottom: 0;
+}
+
+.application .app_group .get_text {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: #ffffff;
+  margin-top: 16px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.get_store {
+  width: 308px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.drawer_links :nth-child(even) {
+  background: #f7f9f7;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.drawer_links a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 18px;
+}
+
+.drawer_links h6 {
+  font-size: 18px;
+  padding: 15px 10px;
+  color: #227f00;
+  margin: 0;
+}
+
+.drawer_links h6 svg {
+  margin-right: 40px;
+}
+
+@media (min-width: 768px) {
+  .menu {
+    display: none;
+  }
+  .drawer_top .main_nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 100%;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app_group,
+  .drawer_top {
+    max-width: 66.1%;
+  }
+}
+
+@media (min-width: 1100px) {
+  .top_container,
+  .app_group {
+    max-width: 66.1%;
+  }
+  .drawer_top {
+    max-width: 66.1%;
+  }
+  .drawer_top .main_nav {
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    max-width: 81%;
+  }
+}
+
+@media (min-width: 1232px) {
+  .drawer_top .main_nav {
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    max-width: 70%;
+  }
+  .drawer_top .main_nav .login_btn,
+  .drawer_top .main_nav .signup_btn {
+    width: 118px;
+  }
+}
+
+.tl-wrapper > .Layout_container > .nav_container {
+  animation: pfadeInDown 600ms both;
+  -webkit-animation: pfadeInDown 600ms both;
+}
+
+@-webkit-keyframes pfadeInUp {
+  from {
+    opacity: 0.3;
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+}
+
+@keyframes pfadeInUp {
+  from {
+    opacity: 0.3;
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+}
+
+@-webkit-keyframes pfadeInDown {
+  from {
+    opacity: 0.3;
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+}
+
+@keyframes pfadeInDown {
+  from {
+    opacity: 0.3;
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+}
+/*# sourceMappingURL=Layout.css.map */
