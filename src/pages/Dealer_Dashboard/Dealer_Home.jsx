@@ -60,6 +60,7 @@ const Dealer_Home = () => {
         <div className="dealer_home_group">
           <div className="dash_dealer_top">
             {topCardDetails.map(data => {
+              console.log(data)
               return (
                 <DealerTopCards
                   number={retailer.length}
