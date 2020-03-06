@@ -1,0 +1,105 @@
+.contactus_container {
+  background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#e9fcf3));
+  background: linear-gradient(180deg, #ffffff 0%, #e9fcf3 100%);
+}
+
+.contactus_container .contactus_group {
+  width: 90%;
+  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding-top: 100px;
+  padding-bottom: 20px;
+}
+
+.contact_image {
+  width: 100%;
+  max-width: 374px;
+}
+
+.contact_image svg {
+  width: 100%;
+}
+
+.contactUs_form {
+  width: 100%;
+  max-width: 450px;
+}
+
+.contact_information {
+  margin-top: 70px;
+  margin-top: 70px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: wrap;
+      flex-flow: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.contact_information .contact_infos {
+  margin-bottom: 50px;
+}
+
+.contact_information .contact_infos h4 {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  color: #03363c;
+  padding-bottom: 25px;
+  margin-bottom: 0px;
+}
+
+.contact_information .contact_infos p {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  max-width: 197px;
+  color: #373737;
+  margin-bottom: 0px;
+}
+
+@media (min-width: 768px) {
+  .contactus_container .contactus_group {
+    width: 90%;
+    margin: auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  .contactus_container .contactus_group .contact_us_details {
+    margin-left: 10px;
+    width: 100%;
+    max-width: 374px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .contactus_group {
+    max-width: 66.1%;
+    margin: auto;
+  }
+}
+/*# sourceMappingURL=ContactUs.css.map */

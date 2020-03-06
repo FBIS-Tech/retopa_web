@@ -1,0 +1,260 @@
+.user_group_left {
+  width: 100%;
+  max-width: 430px;
+}
+
+.user_group_left .user_account_balance {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.user_group_left label {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 23px;
+  color: #878e85;
+  padding-bottom: 10px;
+}
+
+.user_group_left h4 {
+  font-weight: bold;
+  font-size: 18px;
+  margin-left: 18.26px;
+}
+
+.user_group_left h4 span {
+  font-weight: 600;
+}
+
+.user_group_left .ant-divider.ant-divider-vertical {
+  height: 62px;
+  border: 0.5px solid #979797;
+}
+
+.user_home {
+  padding: 50px;
+  min-width: 320px;
+}
+
+.user_payment,
+.user_Airtime {
+  min-width: 320px;
+}
+
+.user_account_airtime {
+  margin-top: 82px;
+}
+
+.user_account_airtime .user_account_airtime_container {
+  padding: 24px 9.5% 40px 9.5%;
+  background: #ffffff;
+  border: 1px solid #b7deb7;
+  border-radius: 10px;
+}
+
+.user_account_airtime .user_account_airtime_container .user_account_airtime_group .airtime_title {
+  width: 100%;
+  border-bottom: 1px solid #cfcfcf;
+  margin: 0;
+  padding-bottom: 23.5px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #03363c;
+}
+
+.user_account_airtime .user_account_airtime_container .user_account_airtime_group .airtime_Brands {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: wrap;
+      flex-flow: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.user_account_airtime .user_account_airtime_container .user_account_airtime_group .airtime_Brands div {
+  margin-top: 40px;
+}
+
+.user_account_airtime .user_account_airtime_container .user_account_airtime_group .airtime_Brands div img {
+  margin: 0;
+}
+
+.account_referral_container {
+  background: #e2ffe2;
+  border: 1px solid #b7deb7;
+  border-radius: 10px;
+  padding: 24px 9.5% 33px 9.5%;
+  margin-top: 44px;
+}
+
+.account_referral_container .account_referral_group .referral_title {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #03363c;
+  width: 100%;
+  border-bottom: 1px solid #cfcfcf;
+  margin: 0;
+  padding-bottom: 23.5px;
+}
+
+.account_referral_container .account_referral_group .code {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 30px;
+  color: #03363c;
+  margin-top: 19.5px;
+  margin-bottom: 14px;
+}
+
+.account_referral_container .account_referral_group p {
+  color: #03363c;
+  background: #bae0ba;
+  border: 1px solid #e2ffe2;
+  border-radius: 5px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+.account_referral_container .account_referral_group p a {
+  color: inherit;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.user_dash_group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.user_group_right {
+  width: 100%;
+  max-width: 522px;
+  max-height: 779px;
+  overflow: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  background: #ffffff;
+  border: 1px solid #cfcfcf;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+#style-1::-webkit-scrollbar {
+  width: 2px;
+  height: 500px;
+  background-color: #d8f2db;
+}
+
+#style-1::-webkit-scrollbar-thumb {
+  background-color: #00aa00;
+}
+
+.user_group_right_head {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 24px 34px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-bottom: 1px solid #e4e4e4;
+}
+
+.user_group_right_head h4 {
+  margin-bottom: 0px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #03363c;
+}
+
+@media (min-width: 425px) {
+  .account_referral_container .account_referral_group p {
+    width: 269px;
+  }
+}
+
+@media (min-width: 768px) {
+  .user_account_airtime
+.user_account_airtime_container
+.user_account_airtime_group
+.airtime_Brands {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: wrap;
+        flex-flow: wrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+
+@media (min-width: 1024px) {
+  .user_home {
+    padding: 50px 105px 42px 44px;
+  }
+}
+
+@media (min-width: 1232px) {
+  .user_dash_group {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  .user_group_right {
+    margin-top: 0;
+  }
+}
+
+.hide {
+  display: none;
+}
+/*# sourceMappingURL=User_dashboard.css.map */

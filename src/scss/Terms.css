@@ -1,0 +1,246 @@
+.terms_header_container {
+  background: #f5f9f7;
+  height: 260px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.terms_header_container .terms_header_group {
+  width: 90%;
+  margin: auto;
+}
+
+.terms_header_container .terms_header_group h3 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 44px;
+  color: #03363c;
+  margin-bottom: 0px;
+}
+
+.terms_details_container {
+  background: #fff;
+}
+
+.terms_details_container .terms_details_group {
+  width: 90%;
+  margin: auto;
+}
+
+.terms_details_container .terms_logo {
+  padding: 72px 0;
+}
+
+.terms_details_container .terms_main_title h4 {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 32px;
+  color: #03363c;
+  width: 100%;
+  max-width: 826px;
+}
+
+.terms_details_container .terms_details {
+  margin-top: 65px;
+}
+
+.terms_details_container .terms_details .terms_detail_sects h3 {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  color: #556f72;
+  margin-bottom: 20px;
+}
+
+.terms_details_container .terms_details .terms_detail_sects .para {
+  margin-bottom: 33px !important;
+  padding: 0px;
+}
+
+.terms_details_container .terms_details .terms_detail_sects p {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: #8b9192;
+  text-align: justify;
+  text-justify: newspaper;
+  padding-bottom: 46px;
+}
+
+.terms_contact_container {
+  background: -webkit-gradient(linear, left top, left bottom, from(#fbfffd), to(#f3fcf7));
+  background: linear-gradient(180deg, #fbfffd 0%, #f3fcf7 100%);
+}
+
+.terms_contact_container .terms_contact_group {
+  width: 90%;
+  margin: auto;
+}
+
+.terms_contact_container .terms_form {
+  width: 100%;
+  max-width: 524px;
+}
+
+.terms_contact_form_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding-bottom: 60px;
+}
+
+.terms_contact_title {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 32px;
+  text-align: center;
+  color: #03363c;
+  padding: 65px 0 60px 0;
+}
+
+.terms_contact {
+  width: 100%;
+  max-width: 371px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.terms_contact .faqCard {
+  background: #29322d;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 8px;
+  margin-top: 20px;
+}
+
+.terms_contact .faqCard .faqCard_group {
+  padding: 11px;
+  border: 1px dashed #717975;
+  border-radius: 10px;
+}
+
+.terms_contact .faqCard .faqCard_group h4 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  color: #ffffff;
+  padding: 11px 0 13px 0;
+}
+
+.terms_contact .faqCard .faqCard_group p {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  padding-bottom: 14px;
+  color: #ffffff;
+}
+
+.terms_contact .faqCard .faqCard_group button.ant-btn {
+  height: 50px;
+  width: 100%;
+  text-align: left;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  color: #528568;
+  padding-left: 80px;
+}
+
+.contact_info {
+  background: #ffffff;
+  -webkit-box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 100%;
+  max-width: 371px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 30px 0 21px 0;
+  margin-top: 20px;
+}
+
+.contact_info .contact_name {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 27px;
+  text-align: center;
+  color: #5f5f5f;
+  padding: 24px 0 18px 0;
+}
+
+.contact_info .contact_number {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 27px;
+  text-align: center;
+  color: #558c6c;
+  padding-bottom: 18px;
+  padding-top: 18px;
+}
+
+@media (min-width: 768px) {
+  .terms_contact_form_container {
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+  }
+  .contact_info {
+    margin-top: 0px;
+  }
+  .terms_contact {
+    margin-left: 10px;
+  }
+  .terms_contact .faqCard {
+    margin-top: 0px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .terms_header_group,
+  .terms_details_group,
+  .terms_contact_group {
+    max-width: 66.1%;
+    margin: auto;
+  }
+}
+/*# sourceMappingURL=Terms.css.map */

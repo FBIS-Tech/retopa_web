@@ -1,0 +1,138 @@
+.formContainer .adminFormBtn {
+  padding: 20px 0px;
+  background: #ffffff;
+  border: 1px solid #e4e4e4;
+  border-radius: 0px 0px 10px 10px;
+}
+
+.formContainer .adminFormBtn .btngroup {
+  width: 90%;
+  max-width: 640px;
+  margin: auto;
+  text-align: end;
+}
+
+.formContainer .adminFormBtn button.ant-btn {
+  background: #227f00;
+  border-radius: 5px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #ffffff;
+  width: 180px;
+  height: 50px;
+}
+
+.formContainer button.ant-btn {
+  background: #227f00;
+  border-radius: 5px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #ffffff;
+  width: 180px;
+  height: 50px;
+}
+
+.formTitle {
+  background: #ffffff;
+  border: 1px solid #cad5d9;
+  padding: 20px 38px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.formTitle p {
+  margin-bottom: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 19px;
+  color: #262626;
+  font-weight: 500;
+}
+
+.formTitle .cancle {
+  font-weight: 600;
+  color: red;
+  cursor: pointer;
+}
+
+.adminForm .formInput {
+  width: 90%;
+  margin: auto;
+  margin-bottom: 24px;
+}
+
+.adminForm label {
+  text-align: right;
+  margin-right: 30px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: right;
+  color: #262626;
+  font-weight: 500;
+}
+
+.adminForm .ant-input {
+  width: 100%;
+  max-width: 553px !important;
+  height: 50px;
+}
+
+.formGroup {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 50px 0;
+  background: #ffffff;
+  border: 1px solid #f0f0f0;
+  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.100279);
+          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.100279);
+}
+
+.inputBack {
+  background: #f4f4fd;
+  border: 1px solid #dedede;
+}
+
+.changeToken label {
+  width: 114px !important;
+}
+
+.adminForm {
+  width: 100%;
+  max-width: 639px;
+}
+
+@media (min-width: 768px) {
+  .formInput {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .formInput label {
+    width: 250px;
+  }
+  .adminForm .formInput {
+    width: 100%;
+  }
+}
+/*# sourceMappingURL=Admin.css.map */

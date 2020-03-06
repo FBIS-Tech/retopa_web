@@ -20,12 +20,9 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export default ({ element }) => {
   const middleware = createSagaMiddleware()
-  const enhancer = windowGlobal.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+  // const enhancer = windowGlobal.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
   const middlewares = [middleware]
-  const store = createStore(
-    persistedReducer,
-    enhancer(applyMiddleware(...middlewares))
-  )
+  const store = createStore(persistedReducer, applyMiddleware(...middlewares))
   let persistor = persistStore(store)
   // const store = createStore(reducers, applyMiddleware(middleware))
 

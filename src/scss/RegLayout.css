@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("../../assets/font/ProximaNova-Regular.otf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #fbfbfb;
+}
+
+h3 {
+  font-family: "Proxima Nova", sans-serif;
+  color: #03363c;
+  font-family: Proxima Nova;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 22px;
+  margin: 0px;
+}
+
+h4,
+label,
+p,
+li {
+  font-family: "Muli", sans-serif;
+  font-size: 14px;
+  font-weight: "500";
+  margin: 0px;
+}
+/*# sourceMappingURL=RegLayout.css.map */

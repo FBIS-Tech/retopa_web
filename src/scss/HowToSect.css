@@ -1,0 +1,235 @@
+.HowTo_sect_top h4 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 37px;
+  color: #03363c;
+  max-width: 549px;
+  margin-bottom: 0;
+}
+
+.HowTo_sect_top p {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 23px;
+  color: #1c484e;
+  max-width: 648px;
+  padding-top: 23px;
+  padding-bottom: 71px;
+  margin-bottom: 0;
+}
+
+.how_to_position {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.how_to_position .HowTo_sect_left {
+  position: relative;
+  width: 100%;
+  margin: auto;
+}
+
+.how_to_position .HowTo_sect_right .steps_title {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 22px;
+  line-height: 27px;
+  color: #03363c;
+  max-width: 362px;
+  padding-bottom: 50px;
+  margin-bottom: 0;
+}
+
+.how_to_position .HowTo_sect_right .steps_title_nfc {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 22px;
+  line-height: 27px;
+  color: #03363c;
+  max-width: 470px;
+  padding-bottom: 50px;
+  margin-bottom: 0;
+}
+
+.how_to_position .HowTo_sect_right .steps .step {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.how_to_position .HowTo_sect_right .steps .step .number {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+  margin-bottom: 0;
+}
+
+.how_to_position .HowTo_sect_right .steps .step .title {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  color: #03363c;
+  margin-left: 14%;
+  margin-bottom: 0;
+}
+
+.how_to_position .HowTo_sect_right .steps .step .divider {
+  margin-bottom: 0;
+}
+
+.how_to_position .HowTo_sect_right button.ant-btn {
+  background: #227f00;
+  -webkit-box-shadow: 0px 4px 10px rgba(34, 127, 0, 0.1);
+          box-shadow: 0px 4px 10px rgba(34, 127, 0, 0.1);
+  border-radius: 7px;
+  border-color: #227f00;
+  color: white;
+  width: 226px;
+  height: 53px;
+  margin-top: 46px;
+}
+
+.step2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin-top: 14px;
+  margin-bottom: 14px;
+}
+
+.divider {
+  border-right: 1px solid #1c484e;
+  height: 100px;
+  padding-left: 2.6%;
+}
+
+.step_text {
+  margin-left: 16%;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-size: 16px !important;
+  line-height: 17px !important;
+  color: #1c484e;
+  max-width: 400px !important;
+  margin-bottom: 0px;
+}
+
+.step_text.third {
+  margin-left: 20%;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-size: 16px !important;
+  line-height: 17px !important;
+  color: #1c484e;
+  max-width: 400px !important;
+}
+
+.nfc_store {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin-top: 63px;
+  -ms-flex-flow: wrap;
+      flex-flow: wrap;
+}
+
+.scrollImage {
+  width: 29%;
+  height: 40%;
+  overflow: auto;
+  position: absolute;
+  top: 29%;
+  left: 34%;
+  overflow-y: hidden;
+  transform: translate(0%, -1.8983%) translate3d(0px, 0px, 0px);
+  -webkit-transform: translate(0%, -1.8983%) translate3d(0px, 0px, 0px);
+  -moz-transform: translate(0%, -1.8983%) translate3d(0px, 0px, 0px);
+  -ms-transform: translate(0%, -1.8983%) translate3d(0px, 0px, 0px);
+  -o-transform: translate(0%, -1.8983%) translate3d(0px, 0px, 0px);
+}
+
+.scrollImage img {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .how_to_position {
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+  }
+  .HowTo_sect_left {
+    width: 100%;
+    margin: auto;
+  }
+  .HowTo_sect_right {
+    padding-left: 20px;
+  }
+  .nfc_store {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-flow: nowrap;
+        flex-flow: nowrap;
+  }
+}
+
+@media (min-width: 1232px) {
+  .step_text.third {
+    margin-left: 20%;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-size: 16px !important;
+    line-height: 17px !important;
+    color: #1c484e;
+    width: 362px !important;
+  }
+  .HowTo_sect_right {
+    padding-left: 0px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .scrollImage {
+    width: 146px;
+    height: 263px;
+    overflow: auto;
+    position: absolute;
+    top: 183px;
+    left: 166px;
+    overflow-y: hidden;
+  }
+}
+/*# sourceMappingURL=HowToSect.css.map */

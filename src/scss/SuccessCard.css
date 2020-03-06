@@ -1,0 +1,54 @@
+.success_content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+}
+
+.success_content h4 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 34px;
+  line-height: 41px;
+  margin-top: 79px;
+  color: #2f3a45;
+  margin-bottom: 34px;
+}
+
+.success_content p {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #3e3e3e;
+  margin-bottom: 39px;
+}
+
+.success_content button.ant-btn {
+  background: #227f00;
+  -webkit-box-shadow: 0px 4px 10px rgba(34, 127, 0, 0.1);
+          box-shadow: 0px 4px 10px rgba(34, 127, 0, 0.1);
+  border-radius: 7px;
+  color: #fff;
+  width: 250px;
+  height: 53px;
+  font-family: Proxima Nova;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  margin: auto;
+  margin-bottom: 80px;
+}
+
+.success_card {
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+/*# sourceMappingURL=SuccessCard.css.map */

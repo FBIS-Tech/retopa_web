@@ -1,5 +1,6 @@
 import axios from "axios"
+const proxyurl = "https://cors-anywhere.herokuapp.com/"
 
 export default axios.create({
-  baseURL: "https://retopin.com/retopa/public/api/test/app",
+  baseURL: proxyurl + "https://retopin.com/retopa/public/api/test/app",
 })

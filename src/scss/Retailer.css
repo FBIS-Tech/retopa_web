@@ -1,0 +1,379 @@
+thead.ant-table-thead {
+  background: #f4f4fc;
+  border: 1px solid #e4e4e4;
+  border-radius: 10px;
+  height: 50px;
+}
+
+.ant-table-small > .ant-table-content > .ant-table-body {
+  margin: 0px;
+}
+
+.ant-table-thead > tr > th .ant-table-header-column {
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: top;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #9a9db4;
+}
+
+table {
+  margin-bottom: 0px;
+}
+
+tbody.ant-table-tbody tr {
+  background: #ffffff;
+  border: 1px solid #e4e4e4;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+tbody.ant-table-tbody tr:nth-child(even) {
+  background: #fafafc !important;
+  border: 1px solid #e4e4e4 !important;
+  border-radius: 10px !important;
+  -webkit-border-radius: 10px !important;
+  -moz-border-radius: 10px !important;
+  -ms-border-radius: 10px !important;
+  -o-border-radius: 10px !important;
+}
+
+table {
+  margin-bottom: 0px !important;
+}
+
+td {
+  font-size: 14px;
+  line-height: 18px;
+  color: #313131;
+  padding: 15px 8px !important;
+}
+
+th:first-child,
+td:first-child {
+  padding-left: 30px !important;
+}
+
+#components-table-demo-resizable-column .react-resizable {
+  position: relative;
+  background-clip: padding-box;
+}
+
+#components-table-demo-resizable-column .react-resizable-handle {
+  position: absolute;
+  width: 10px;
+  height: 100%;
+  bottom: 0;
+  right: -5px;
+  cursor: col-resize;
+  z-index: 1;
+}
+
+.table_header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 20px 30px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  background: #ffffff;
+  border: 1px solid #e4e4e4;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.table_header input.ant-input {
+  background: #ffffff;
+  border: 1px solid #dce1eb;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 302px;
+  height: 40px;
+}
+
+.rowShow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 20px;
+}
+
+.rowShow h4 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  margin-left: 20px;
+  color: #0c0e18;
+  font-weight: 600;
+  margin-bottom: 0px;
+}
+
+.rowShow button.ant-btn {
+  background: #227f00;
+  border-radius: 5px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  width: 180px;
+  height: 40px;
+  color: #ffffff;
+}
+
+.ant-table-wrapper {
+  width: 100%;
+  overflow: hidden;
+  overflow-x: auto;
+}
+
+.ant-tabs-tab {
+  height: 50px;
+  width: 150px;
+  border-radius: 15px 15px 0px 0px;
+  background-color: #f7f9f7;
+  position: relative;
+  top: 10px;
+  left: 1px;
+  border: 1px solid #cad5d9;
+  display: inline-block;
+  color: #a3a3a3;
+  padding: 16px 0 16px 35.73px !important;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 19px;
+  border-right: transparent;
+  border-top-right-radius: 11px;
+}
+
+.ant-tabs-tab:hover {
+  color: #227f00;
+}
+
+.ant-tabs-tab:after {
+  height: 50px;
+  width: 70px;
+  border-radius: 0px 10px 0px 0px;
+  background-color: transparent;
+  content: "";
+  position: absolute;
+  left: 96px;
+  top: 0px;
+  -webkit-transform: skewX(40deg);
+  transform: skewX(40deg);
+  border: 1px solid #cad5d9;
+  border-left: transparent;
+  border-top: transparent;
+}
+
+.ant-tabs-tab-active.ant-tabs-tab {
+  height: 50px;
+  width: 150px;
+  border-radius: 15px 15px 0px 0px;
+  background-color: #ffffff59;
+  position: relative;
+  top: 10px;
+  left: 1px;
+  border: 1px solid #cad5d9;
+  display: inline-block;
+  color: #227f00;
+  font-weight: 600;
+  padding: 16px 0 16px 35.73px !important;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 19px;
+  border-right: transparent;
+  border-top-right-radius: 11px;
+}
+
+.ant-tabs-tab-active.ant-tabs-tab:hover {
+  color: #227f00;
+}
+
+.ant-tabs-tab-active.ant-tabs-tab:after {
+  height: 50px;
+  width: 70px;
+  border-radius: 0px 10px 0px 0px;
+  background-color: transparent;
+  content: "";
+  position: absolute;
+  left: 96px;
+  top: 0px;
+  -webkit-transform: skewX(40deg);
+  transform: skewX(40deg);
+  border: 1px solid #cad5d9;
+  border-left: transparent;
+  border-top: transparent;
+}
+
+.ant-tabs-nav .ant-tabs-tab-active {
+  color: #227f00 !important;
+  font-weight: 500;
+}
+
+.ant-tabs-bar.ant-tabs-top-bar {
+  margin-bottom: 0px;
+}
+
+.ant-tabs-ink-bar.ant-tabs-ink-bar-animated {
+  width: 0px !important;
+}
+
+.sendTokenContainer {
+  background: #ffffff;
+  border: 1px solid #cad5d9;
+}
+
+.sendTokenContainer .sendTokenGroup .tokenTitle {
+  background: #ffffff;
+  border-bottom: 1px solid #cad5d9;
+  padding: 20px 38px;
+}
+
+.sendTokenContainer .sendTokenGroup .tokenTitle h4 {
+  margin-bottom: 0px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 19px;
+  color: #262626;
+}
+
+.sendTokenContainer .sendTokenGroup .btnTokenGroup {
+  border-top: 1px solid #cad5d9;
+}
+
+.sendTokenContainer .sendTokenGroup .tokenBtn {
+  width: 90%;
+  margin: auto;
+  padding: 20px 0;
+  text-align: end;
+}
+
+.sendTokenContainer .sendTokenGroup .tokenBtn button.ant-btn {
+  background: #227f00;
+  border-radius: 5px;
+  margin-left: auto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 13px 45px;
+  height: 50px;
+  color: #ffffff;
+}
+
+.sendTokenContainer .sendTokenGroup .tokenForm {
+  width: 90%;
+  margin: auto;
+  padding: 50px 0;
+}
+
+.sendTokenContainer .sendTokenGroup .tokenForm form.ant-form.ant-form-vertical {
+  max-width: 553px;
+  margin: auto;
+}
+
+.sendTokenContainer .sendTokenGroup .tokenForm .ant-form-item label {
+  position: relative;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #262626;
+}
+
+.sendTokenContainer .sendTokenGroup .tokenForm .ant-input {
+  width: 100%;
+  max-width: 553px;
+  height: 50px;
+  display: inline !important;
+}
+
+.sendTokenContainer .sendTokenGroup .tokenForm .ant-form-vertical .ant-form-item {
+  padding-bottom: 0px;
+}
+
+.ant-tabs-nav .ant-tabs-tab:hover {
+  color: #00aa00;
+}
+
+@media (min-width: 768px) {
+  .rowShow {
+    margin-bottom: 0px;
+  }
+  .tokenForm,
+  .tokenBtn {
+    width: 60% !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .tokenBtn button.ant-btn {
+    margin-right: 13%;
+  }
+}
+
+.hide {
+  display: none;
+}
+
+.popover {
+  color: #9a9db4;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.tableheight {
+  height: 100vh;
+}
+
+p.enabled {
+  color: #00aa00;
+  background-color: #d8f2db;
+  border-radius: 3px;
+  padding: 2px 13px;
+  display: inline;
+  width: 72px !important;
+}
+
+p.disabled {
+  color: #ff4848;
+  background-color: #ffd8d8;
+  border-radius: 3px;
+  padding: 2px 13px;
+  display: inline;
+  width: 72px !important;
+}
+
+.dotPosition {
+  margin-right: 5px;
+  position: relative;
+  top: -2px;
+}
+
+.cancle {
+  font-weight: 600;
+  color: red;
+}
+/*# sourceMappingURL=Retailer.css.map */
