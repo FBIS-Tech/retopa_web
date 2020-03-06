@@ -37,12 +37,6 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-express",
-      options: {
-        output: "config/gatsby-express.json",
-      },
-    },
-    {
       resolve: "gatsby-plugin-react-svg",
       options: {
         rule: {
