@@ -300,14 +300,14 @@ const RetailerSingleHistory = () => {
                 />
               </div>
             </TabPane>
-            {/* <TabPane tab="AWUF" key="4">
+            <TabPane tab="USSD" key="4">
               <div className="table_Group">
                 <div className="table_header">
                   <div className="rowShow">
                     <Button>
                       <CSVLink
-                        // data={history}
-                        filename={"Wallet Debits.csv"}
+                        data={DataHistory}
+                        filename={`${retailer.name}'s Data.csv`}
                         headers={headerDebit}
                         style={{ color: "white" }}
                       >
@@ -330,12 +330,12 @@ const RetailerSingleHistory = () => {
                 </div>
                 <Table
                   columns={HistoryColumn}
-                  dataSource={filteredAwufItems}
+                  dataSource={filteredDataItems}
                   bordered
                   size="small"
                 />
               </div>
-            </TabPane> */}
+            </TabPane>
           </Tabs>
         </div>
       </div>

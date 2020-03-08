@@ -89,11 +89,19 @@ const RetailerHistory = () => {
     },
   ]
 
-  const filteredDebitItems = history.filter(item =>
-    item.ref.includes(filteredDebit.toLocaleLowerCase())
+  const filteredDebitItems = history.filter(
+    item =>
+      item.ref.includes(filteredDebit.toLocaleLowerCase()) ||
+      item.destination
+        .toLocaleLowerCase()
+        .includes(filteredDebit.toLocaleLowerCase())
   )
-  const filteredCreditItems = historyCredit.filter(item =>
-    item.ref.includes(filteredCredit.toLocaleLowerCase())
+  const filteredCreditItems = historyCredit.filter(
+    item =>
+      item.ref.includes(filteredCredit.toLocaleLowerCase()) ||
+      item.destination
+        .toLocaleLowerCase()
+        .includes(filteredCredit.toLocaleLowerCase())
   )
 
   const title = (

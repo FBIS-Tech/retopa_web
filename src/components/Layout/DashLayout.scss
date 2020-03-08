@@ -167,6 +167,7 @@ main.ant-layout-content {
 .dash_children {
   // padding: 50px;
   margin-top: 152px;
+  min-width: 300px;
 }
 .headersss {
   position: fixed;
@@ -351,6 +352,10 @@ ul.ant-menu.ant-menu-light.ant-menu-inline-collapsed.ant-menu-root.ant-menu-inli
 }
 ul.ant-menu.ant-menu-light.ant-menu-root.ant-menu-inline {
   height: 100vh;
+}
+
+.ant-dropdown-link.ant-dropdown-trigger {
+    display: flex;
 }
 
 @media (min-width: 500px) {

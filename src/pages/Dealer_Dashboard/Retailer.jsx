@@ -114,6 +114,7 @@ const RetailerList = () => {
     //console.log(request)
     request.then(({ data }) => {
       if (data.status === "200") {
+        console.log(data.retailer)
         setRetailer(data.retailer)
       }
     })
@@ -615,7 +616,7 @@ const RetailerList = () => {
                       defaultValue="Select Type"
                       onChange={handleRetailer}
                     >
-                      <Option value="REGULAR">REGULAR</Option>
+                      <Option value="REGULAR">RETAILER</Option>
                       <Option value="SUB DEALER">SUB DEALER</Option>
                     </Select>
                   </div>
@@ -704,6 +705,7 @@ const RetailerList = () => {
                     <label htmlFor="pin">Dealer Pin</label>
                     <Input
                       placeholder="****"
+                      type="password"
                       name="pin"
                       onChange={handleChange}
                     />
