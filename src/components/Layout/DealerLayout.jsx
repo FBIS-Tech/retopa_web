@@ -87,7 +87,7 @@ const DealerLayout = ({
           navigateTo("/Dealer_Dashboard/Settings")
         }}
       >
-        <a>Reset Pin</a>
+        <a>Reset Token</a>
       </Menu.Item>
     </Menu>
   )
