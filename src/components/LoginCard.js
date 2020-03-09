@@ -48,19 +48,19 @@ const LoginCard = ({
             <h4>
               New user? <Link to="/SignUp">Create an account</Link>
             </h4>
-            <Button onClick={handleSubmit} loading={loading ? true : false}>
+            <Button onClick={handleSubmit} loading={loading}>
               Login
             </Button>
           </div>
-          <h4 className="socials">Log In through socials</h4>
-          <div className="social-logo">
+          {/* <h4 className="socials">Log In through socials</h4> */}
+          {/* <div className="social-logo">
             <div>
               <Google />
             </div>
             <div>
               <Face />
             </div>
-          </div>
+          </div> */}
         </form>
       </div>
     </div>
