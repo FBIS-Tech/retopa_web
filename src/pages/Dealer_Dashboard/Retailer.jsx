@@ -697,7 +697,7 @@ const RetailerList = () => {
                       defaultValue="Select Type"
                       onChange={handleType}
                     >
-                      <Option value="REGULAR">REGULAR</Option>
+                      <Option value="REGULAR">RETAILER</Option>
                       <Option value="SUB DEALER">SUB DEALER</Option>
                     </Select>
                   </div>
