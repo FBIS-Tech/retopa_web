@@ -146,30 +146,12 @@ const Transactions = () => {
     setDate(dateString)
   }
 
-  const QueryDate = () => {
-    setloading(true)
-    const search = {
-      serviceCode: "SEARCH",
-      from_date: date[0],
-      to_date: date[1],
-      username: dets[0],
-      password: dets[1],
-    }
-    const request = new Promise(res => {
-      res(AdminInstance.post("", search))
-    })
-    request.then(({ data }) => {
-      if (data.status === "200") {
-        setloading(false)
-        setHistory(data.transactions)
-      } else {
-        setloading(false)
-      }
-    })
-  }
-
   const handleSearch = e => {
     setSearch(e.currentTarget.value)
+  }
+
+  const Query = () => {
+    setloading(true)
     const QuerySearch = {
       serviceCode: "SEARCH",
       search,
@@ -203,32 +185,40 @@ const Transactions = () => {
               <div className="table_Group">
                 <div className="table_header">
                   <div className="rowShow">
-                    Date:{" "}
+                    {/* Date:{" "}
                     <RangePicker
                       showTime
                       style={{ marginLeft: "5px" }}
                       onChange={onChange}
-                    />
-                    <Button
-                      style={{
-                        marginLeft: "5px",
-                        height: "33px",
-                      }}
-                      onClick={QueryDate}
-                      loading={loading}
-                    >
-                      SEARCH
-                    </Button>
-                  </div>
-                  <div className="searchTable">
+                    /> */}
                     <Input
-                      placeholder="Search Transactions…"
+                      placeholder="Search By Retail code or  phone number"
                       value={search}
                       onChange={handleSearch}
                       prefix={
                         <Icon type="search" style={{ color: "#D8D8D8" }} />
                       }
                     />
+                    <Button
+                      style={{
+                        marginLeft: "5px",
+                        height: "40px",
+                      }}
+                      onClick={Query}
+                      loading={loading}
+                    >
+                      SEARCH
+                    </Button>
+                  </div>
+                  <div className="searchTable">
+                    {/* <Input
+                      placeholder="Search By Retail code or  phone number"
+                      value={search}
+                      onChange={handleSearch}
+                      prefix={
+                        <Icon type="search" style={{ color: "#D8D8D8" }} />
+                      }
+                    /> */}
                   </div>
                 </div>
                 <Table

@@ -85,7 +85,7 @@
         flex-wrap: wrap;
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
-            justify-content: space-around;
+            justify-content: space-around0-6;
   }
 }
 
