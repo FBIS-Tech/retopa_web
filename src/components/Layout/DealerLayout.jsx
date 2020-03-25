@@ -52,10 +52,20 @@ const DealerLayout = ({
   position,
 }) => {
   const [user, setUser] = useState({})
+  const [userA, setUserA] = useState({})
   useEffect(() => {
     let data = sessionStorage.getItem("topup")
       ? JSON.parse(sessionStorage.getItem("topup"))
       : []
+    let UserData = localStorage.getItem("userData")
+      ? JSON.parse(localStorage.getItem("userData"))
+      : []
+
+    if (UserData === undefined) {
+      return false
+    } else {
+      setUserA(UserData)
+    }
     const username = Base64.decode(data.TOKEN_ONE)
     const password = Base64.decode(data.TOKEN_TWO)
     const req = { serviceCode: "SHP", username, password, user_id: "1" }
@@ -64,7 +74,12 @@ const DealerLayout = ({
     })
     profile.then(({ data }) => {
       let user = data.user
-      setUser(user)
+      console.log(user)
+      if (user === undefined) {
+        return false
+      } else {
+        setUser(user)
+      }
     })
   }, [])
 
@@ -106,6 +121,7 @@ const DealerLayout = ({
   let yyyy = today.getFullYear()
 
   today = dd + "/" + mm + "/" + yyyy
+
   return (
     <Layout>
       <Helmet>
@@ -120,7 +136,8 @@ const DealerLayout = ({
           </div>
         </div>
         <div className="user_name">
-          <span>Hello</span> <span>{user.username}</span>
+          <span>Hello</span>{" "}
+          <span>{user.username === undefined ? "ADMIN" : user.username}</span>
         </div>
         <Menu mode="inline" defaultSelectedKeys={position}>
           <Menu.Item
@@ -138,9 +155,10 @@ const DealerLayout = ({
             onClick={() => {
               navigateTo("/Dealer_Dashboard/Admin")
             }}
+            className={userA.type === "Admin" ? "" : "hide"}
           >
             <Dash_admin_icon />
-            <span className="nav-text">Admin</span>
+            <span className="nav-text">Trade Partners</span>
           </Menu.Item>
           <Menu.Item
             key="2"
@@ -156,6 +174,7 @@ const DealerLayout = ({
             onClick={() => {
               navigateTo("/Dealer_Dashboard/SubDealers")
             }}
+            className={userA.type === "Admin" ? "hide" : ""}
           >
             <Dash_airtime_icon />
             <span className="nav-text">Sub Dealers</span>
@@ -165,6 +184,7 @@ const DealerLayout = ({
             onClick={() => {
               navigateTo("/Dealer_Dashboard/Wallet")
             }}
+            className={userA.type === "Admin" ? "hide" : ""}
           >
             <Dash_bill_icon />
             <span className="nav-text">Wallet</span>
@@ -174,6 +194,7 @@ const DealerLayout = ({
             onClick={() => {
               navigateTo("/Dealer_Dashboard/Voucher")
             }}
+            className={userA.type === "Admin" ? "hide" : ""}
           >
             <Dash_voucher_icon />
             <span className="nav-text">Voucher</span>
@@ -183,15 +204,27 @@ const DealerLayout = ({
             onClick={() => {
               navigateTo("/Dealer_Dashboard/History")
             }}
+            className={userA.type === "Admin" ? "hide" : ""}
           >
             <Dash_history_icon />
             <span className="nav-text">History</span>
+          </Menu.Item>
+          <Menu.Item
+            key="10"
+            onClick={() => {
+              navigateTo("/Dealer_Dashboard/Transactions")
+            }}
+            className={userA.type === "Admin" ? "" : "hide"}
+          >
+            <Dash_history_icon />
+            <span className="nav-text">Transactions</span>
           </Menu.Item>
           <Menu.Item
             key="6"
             onClick={() => {
               navigateTo("/Dealer_Dashboard/Payment")
             }}
+            className={userA.type === "Admin" ? "hide" : ""}
           >
             <Dash_payment_icon />
             <span className="nav-text">Payment</span>

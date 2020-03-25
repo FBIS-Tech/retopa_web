@@ -602,7 +602,7 @@ const SubDealer = () => {
               </div>
             </div>
           </TabPane>
-          <TabPane tab="Add Retailer" key="2">
+          {/* <TabPane tab="Add Retailer" key="2">
             <div className="formContainer">
               <div className="formTitle">
                 <p>Add Retailer</p>
@@ -735,7 +735,7 @@ const SubDealer = () => {
               </div>
               <div className="adminFormBtn">
                 <div className="btngroup">
-                  <Button
+                  <Button1
                     onClick={handleVTUSubmit}
                     loading={!loading ? false : true}
                   >
@@ -744,7 +744,7 @@ const SubDealer = () => {
                 </div>
               </div>
             </div>
-          </TabPane>
+          </TabPane> */}
         </Tabs>
       </div>
     </DealerLayout>

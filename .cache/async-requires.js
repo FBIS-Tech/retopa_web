@@ -4,9 +4,15 @@ const preferDefault = m => m && m.default || m
 exports.components = {
   "component---cache-dev-404-page-js": () => import("dev-404-page.js" /* webpackChunkName: "component---cache-dev-404-page-js" */),
   "component---src-pages-404-js": () => import("../src/pages/404.js" /* webpackChunkName: "component---src-pages-404-js" */),
+  "component---src-pages-admin-dashboard-dashboard-jsx": () => import("../src/pages/Admin_Dashboard/Dashboard.jsx" /* webpackChunkName: "component---src-pages-admin-dashboard-dashboard-jsx" */),
+  "component---src-pages-admin-dashboard-home-jsx": () => import("../src/pages/Admin_Dashboard/Home.jsx" /* webpackChunkName: "component---src-pages-admin-dashboard-home-jsx" */),
+  "component---src-pages-admin-dashboard-settings-jsx": () => import("../src/pages/Admin_Dashboard/Settings.jsx" /* webpackChunkName: "component---src-pages-admin-dashboard-settings-jsx" */),
+  "component---src-pages-admin-dashboard-transaction-details-jsx": () => import("../src/pages/Admin_Dashboard/Transaction_Details.jsx" /* webpackChunkName: "component---src-pages-admin-dashboard-transaction-details-jsx" */),
+  "component---src-pages-admin-dashboard-transactions-jsx": () => import("../src/pages/Admin_Dashboard/Transactions.jsx" /* webpackChunkName: "component---src-pages-admin-dashboard-transactions-jsx" */),
   "component---src-pages-airtime-jsx": () => import("../src/pages/Airtime.jsx" /* webpackChunkName: "component---src-pages-airtime-jsx" */),
   "component---src-pages-contact-us-jsx": () => import("../src/pages/ContactUs.jsx" /* webpackChunkName: "component---src-pages-contact-us-jsx" */),
   "component---src-pages-dealer-dashboard-admin-jsx": () => import("../src/pages/Dealer_Dashboard/Admin.jsx" /* webpackChunkName: "component---src-pages-dealer-dashboard-admin-jsx" */),
+  "component---src-pages-dealer-dashboard-change-password-jsx": () => import("../src/pages/Dealer_Dashboard/ChangePassword.jsx" /* webpackChunkName: "component---src-pages-dealer-dashboard-change-password-jsx" */),
   "component---src-pages-dealer-dashboard-dashboard-jsx": () => import("../src/pages/Dealer_Dashboard/Dashboard.jsx" /* webpackChunkName: "component---src-pages-dealer-dashboard-dashboard-jsx" */),
   "component---src-pages-dealer-dashboard-dealer-home-jsx": () => import("../src/pages/Dealer_Dashboard/Dealer_Home.jsx" /* webpackChunkName: "component---src-pages-dealer-dashboard-dealer-home-jsx" */),
   "component---src-pages-dealer-dashboard-export-jsx": () => import("../src/pages/Dealer_Dashboard/Export.jsx" /* webpackChunkName: "component---src-pages-dealer-dashboard-export-jsx" */),
@@ -15,8 +21,11 @@ exports.components = {
   "component---src-pages-dealer-dashboard-payment-jsx": () => import("../src/pages/Dealer_Dashboard/Payment.jsx" /* webpackChunkName: "component---src-pages-dealer-dashboard-payment-jsx" */),
   "component---src-pages-dealer-dashboard-retailer-jsx": () => import("../src/pages/Dealer_Dashboard/Retailer.jsx" /* webpackChunkName: "component---src-pages-dealer-dashboard-retailer-jsx" */),
   "component---src-pages-dealer-dashboard-retailer-history-jsx": () => import("../src/pages/Dealer_Dashboard/RetailerHistory.jsx" /* webpackChunkName: "component---src-pages-dealer-dashboard-retailer-history-jsx" */),
+  "component---src-pages-dealer-dashboard-settings-jsx": () => import("../src/pages/Dealer_Dashboard/Settings.jsx" /* webpackChunkName: "component---src-pages-dealer-dashboard-settings-jsx" */),
   "component---src-pages-dealer-dashboard-sub-dealer-list-jsx": () => import("../src/pages/Dealer_Dashboard/SubDealer_List.jsx" /* webpackChunkName: "component---src-pages-dealer-dashboard-sub-dealer-list-jsx" */),
   "component---src-pages-dealer-dashboard-sub-dealers-jsx": () => import("../src/pages/Dealer_Dashboard/SubDealers.jsx" /* webpackChunkName: "component---src-pages-dealer-dashboard-sub-dealers-jsx" */),
+  "component---src-pages-dealer-dashboard-transactions-jsx": () => import("../src/pages/Dealer_Dashboard/Transactions.jsx" /* webpackChunkName: "component---src-pages-dealer-dashboard-transactions-jsx" */),
+  "component---src-pages-dealer-dashboard-view-details-jsx": () => import("../src/pages/Dealer_Dashboard/ViewDetails.jsx" /* webpackChunkName: "component---src-pages-dealer-dashboard-view-details-jsx" */),
   "component---src-pages-dealer-dashboard-voucher-jsx": () => import("../src/pages/Dealer_Dashboard/Voucher.jsx" /* webpackChunkName: "component---src-pages-dealer-dashboard-voucher-jsx" */),
   "component---src-pages-dealer-dashboard-wallet-jsx": () => import("../src/pages/Dealer_Dashboard/Wallet.jsx" /* webpackChunkName: "component---src-pages-dealer-dashboard-wallet-jsx" */),
   "component---src-pages-faq-jsx": () => import("../src/pages/FAQ.jsx" /* webpackChunkName: "component---src-pages-faq-jsx" */),
@@ -44,7 +53,6 @@ exports.components = {
   "component---src-pages-user-dashboard-user-airtime-jsx": () => import("../src/pages/User_Dashboard/User_Airtime.jsx" /* webpackChunkName: "component---src-pages-user-dashboard-user-airtime-jsx" */),
   "component---src-pages-user-dashboard-user-billing-jsx": () => import("../src/pages/User_Dashboard/User_billing.jsx" /* webpackChunkName: "component---src-pages-user-dashboard-user-billing-jsx" */),
   "component---src-pages-user-dashboard-user-home-jsx": () => import("../src/pages/User_Dashboard/User_Home.jsx" /* webpackChunkName: "component---src-pages-user-dashboard-user-home-jsx" */),
-  "component---src-pages-user-dashboard-user-payment-jsx": () => import("../src/pages/User_Dashboard/User_Payment.jsx" /* webpackChunkName: "component---src-pages-user-dashboard-user-payment-jsx" */),
-  "component---src-pages-dealer-dashboard-settings-jsx": () => import("../src/pages/Dealer_Dashboard/Settings.jsx" /* webpackChunkName: "component---src-pages-dealer-dashboard-settings-jsx" */)
+  "component---src-pages-user-dashboard-user-payment-jsx": () => import("../src/pages/User_Dashboard/User_Payment.jsx" /* webpackChunkName: "component---src-pages-user-dashboard-user-payment-jsx" */)
 }
 

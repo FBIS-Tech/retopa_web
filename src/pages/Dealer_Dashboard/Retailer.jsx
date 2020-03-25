@@ -10,6 +10,7 @@ import {
   Tabs,
   Popover,
   Form,
+  Tooltip,
 } from "antd"
 import "../../scss/Table.scss"
 import { TableTwo } from "../../components/Constants/Tableone"
@@ -26,6 +27,7 @@ import { RetailIcon } from "../../components/CustomIcons"
 import { Link, navigateTo } from "gatsby"
 import { retailerDetails } from "../../Actions/Actions"
 import { array } from "prop-types"
+import AdminInstance from "../../Api/AdminInstance"
 const Dash_retail_icon = props => <Icon component={RetailIcon} {...props} />
 
 const { TabPane } = Tabs
@@ -42,6 +44,7 @@ const RetailerList = () => {
   const [name, setName] = useState("")
   const [sorted, setSorted] = useState([])
   const [filterText, setFilterText] = useState("")
+  const [type, setType] = useState("")
   const [activateRetailer, setActivateRetailer] = useState({
     serviceCode: "ACT",
   })
@@ -71,7 +74,25 @@ const RetailerList = () => {
       : []
     const username = Base64.decode(data.TOKEN_ONE)
     const password = Base64.decode(data.TOKEN_TWO)
+
+    let data2 = sessionStorage.getItem("topup2")
+      ? JSON.parse(sessionStorage.getItem("topup2"))
+      : []
+    const usernameA = Base64.decode(data2.TOKEN_ONE_ADMIN)
+    const passwordA = Base64.decode(data2.TOKEN_TWO_ADMIN)
     const req = { serviceCode: "RTL", username, password, user_id }
+    const req2 = {
+      serviceCode: "RTL",
+      username: usernameA,
+      password: passwordA,
+      user_id: 1,
+    }
+
+    let UserData = localStorage.getItem("userData")
+      ? JSON.parse(localStorage.getItem("userData"))
+      : []
+
+    console.log(UserData)
 
     // inputs for adding vtu line
     setInput({
@@ -107,19 +128,30 @@ const RetailerList = () => {
       user_id,
     })
 
-    // request for retailer list
-    const request = new Promise(res => {
-      res(Instance.post("", req))
-    })
-    //console.log(request)
-    request.then(({ data }) => {
-      if (data.status === "200") {
-        console.log(data.retailer)
-        setRetailer(data.retailer)
-      }
-    })
+    if (UserData.type === "Admin") {
+      setType("Admin")
+      // request for retailer list
+      const request = new Promise(res => {
+        res(AdminInstance.post("", req2))
+      })
+      console.log(request)
+      request.then(({ data }) => {
+        if (data.status === "200") {
+          setRetailer(data.retailer)
+        }
+      })
+    } else {
+      // request for retailer list
+      const request = new Promise(res => {
+        res(Instance.post("", req))
+      })
+      request.then(({ data }) => {
+        if (data.status === "200") {
+          setRetailer(data.retailer)
+        }
+      })
+    }
   }, [])
-
   const ColumnsTwo = [
     {
       title: "Username",
@@ -145,6 +177,14 @@ const RetailerList = () => {
       title: "Retailer number",
       dataIndex: "phone",
       key: "phone",
+    },
+    {
+      title: "Wallet ballance",
+      dataIndex: "balance",
+      key: "balance",
+      render: (text, record) => (
+        <div>{`₦ ${parseInt(record.balance).toLocaleString()}`}</div>
+      ),
     },
 
     {
@@ -175,6 +215,24 @@ const RetailerList = () => {
           <p className="disabled">
             <Red className="dotPosition" />
             Disabled
+          </p>
+        ),
+    },
+    {
+      title: "USSD Status",
+      dataIndex: "ussd_status",
+      key: "ussd_status",
+
+      render: text =>
+        text === 1 ? (
+          <p className="enabled">
+            <Green className="dotPosition" />
+            Active
+          </p>
+        ) : (
+          <p className="disabled">
+            <Red className="dotPosition" />
+            Inactive
           </p>
         ),
     },
@@ -213,6 +271,18 @@ const RetailerList = () => {
               {/* <p>Edit</p> */}
               <p id={record.id} title={record.type} onClick={ActivateRetailer}>
                 {record.status === 1 ? "Deactivate POS" : "Activate POS"}
+              </p>
+              <p
+                id={record.id}
+                title={record.tp_id}
+                onClick={ActivateUSSD}
+                style={
+                  record.code === null
+                    ? { display: "none" }
+                    : { display: "block" }
+                }
+              >
+                {record.ussd_status === 1 ? "Deactivate USSD" : "Activate USSD"}
               </p>
               <p
                 id={record.id}
@@ -265,10 +335,8 @@ const RetailerList = () => {
       res(Instance.post("", inputChange))
     })
     submitRequest.then(({ data }) => {
-      //console.log(submitRequest)
       let fields = data.required_fields
       let m = data.message
-      //console.log(submitRequest)
       if (data.status === "301") {
         setLoading(false)
         setError(fields)
@@ -323,6 +391,7 @@ const RetailerList = () => {
         setLoading(false)
         setMessage(m)
         setTimeout(() => {
+          window.location.reload(false)
           setMessage("")
         }, 3000)
       } else {
@@ -411,6 +480,91 @@ const RetailerList = () => {
     }
   }
   ////////////////////ACTIVTE RETAILER END////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  ////////////////////ACTIVTE USSD//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  const ActivateUSSD = async e => {
+    let tp_id = e.currentTarget.title
+    let rt_id = e.target.id
+    let status = e.target.innerHTML
+    let { username } = activateRetailer
+    let { password } = activateRetailer
+    const Data = {
+      serviceCode: "RTAD",
+      username,
+      password,
+      rt_id,
+      type: "ACTIVATE",
+    }
+    const DataTwo = {
+      serviceCode: "RTAD",
+      username,
+      password,
+      rt_id,
+      type: "DEACTIVATE",
+    }
+    if (status === "Activate USSD") {
+      e.target.innerHTML = "Activating..."
+      const submitRequest = new Promise(res => {
+        res(Instance.post("", Data))
+      })
+      submitRequest.then(({ data }) => {
+        let m = data.message
+        if (data.status === "301") {
+          setLoading(false)
+          e.target.innerHTML = "Activate"
+          setTimeout(() => {
+            setError([])
+          }, 3000)
+        } else if (data.status === "200") {
+          setLoading(false)
+          setMessage(m)
+          setTimeout(() => {
+            setMessage("")
+            window.location.reload(false)
+          }, 3000)
+        } else {
+          setLoading(false)
+          setMessage(m)
+          e.target.innerHTML = "Activate"
+          setTimeout(() => {
+            setMessage("")
+          }, 3000)
+        }
+      })
+    } else if (status === "Deactivate USSD") {
+      e.target.innerHTML = "Deactivating..."
+      const submitRequest = new Promise(res => {
+        res(Instance.post("", DataTwo))
+      })
+      submitRequest.then(({ data }) => {
+        let fields = data.required_fields
+        let m = data.message
+        if (data.status === "301") {
+          setLoading(false)
+          setError(fields)
+          e.target.innerHTML = "Deactivate"
+          setTimeout(() => {
+            setError([])
+          }, 3000)
+        } else if (data.status === "200") {
+          setLoading(false)
+          setMessage(m)
+          setTimeout(() => {
+            setMessage("")
+            window.location.reload(false)
+          }, 3000)
+        } else {
+          setLoading(false)
+          setMessage(m)
+          e.target.innerHTML = "Deactivate"
+          setTimeout(() => {
+            setMessage("")
+          }, 3000)
+        }
+      })
+    }
+  }
+  ////////////////////ACTIVTE USSD END////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   ////////////////////SEND FUNDS TO RETAILER//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -580,7 +734,11 @@ const RetailerList = () => {
               </div>
             </div>
           </TabPane>
-          <TabPane tab="Add Retailer" key="2">
+          <TabPane
+            tab="Add Retailer"
+            key="2"
+            disabled={type === "Admin" ? true : false}
+          >
             <div className="formContainer">
               <div className="formTitle">
                 <p>Add Retailer</p>
@@ -644,7 +802,11 @@ const RetailerList = () => {
               </div>
             </div>
           </TabPane>
-          <TabPane tab="Activate USSD" key="3">
+          <TabPane
+            tab="Activate USSD"
+            key="3"
+            disabled={type === "Admin" ? true : false}
+          >
             <div className="formContainer">
               <div className="formTitle">
                 <p>Activate USSD</p>
@@ -676,11 +838,16 @@ const RetailerList = () => {
 
                   <div className="formInput VTUInput">
                     <label htmlFor="name">Number</label>
-                    <Input
-                      placeholder="23480********"
-                      name="phone"
-                      onChange={handleChange}
-                    />
+                    <Tooltip placement="topLeft" title="please start with 234">
+                      <Input
+                        maxLength={13}
+                        minLength={13}
+                        placeholder="23480********"
+                        name="phone"
+                        onChange={handleChange}
+                        type="tel"
+                      />
+                    </Tooltip>
                   </div>
                   <div className="formInput VTUInput">
                     <label htmlFor="name">Name</label>

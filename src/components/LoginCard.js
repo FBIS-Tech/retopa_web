@@ -6,9 +6,12 @@ import Face from "../../assets/colorfb.svg"
 import Google from "../../assets/google.svg"
 
 const LoginCard = ({
-  active,
+  activea,
+  activeb,
+  activec,
   activate1,
   activate2,
+  activate3,
   getInput,
   handleSubmit,
   loading,
@@ -16,11 +19,14 @@ const LoginCard = ({
   return (
     <div className="Login_card">
       <div className="method">
-        <h4 className={active ? "active" : ""} onClick={activate1}>
+        <h4 className={activeb ? "active" : ""} onClick={activate2}>
           Log In as a Partner{" "}
         </h4>
-        <h4 className={active ? "" : "active"} onClick={activate2}>
+        <h4 className={activec ? "active" : ""} onClick={activate3}>
           Log In as a Sub Dealer
+        </h4>
+        <h4 className={activea ? "active" : ""} onClick={activate1}>
+          Log In as a Admin
         </h4>
       </div>
       <div className="content">

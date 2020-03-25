@@ -12,9 +12,12 @@ const {
   LOGIN_SUCCESS,
   AUTH_ERROR,
   LOGIN_USER,
+  LOGIN_ADMIN,
   CLEAR,
   RETAILER,
   LOGIN_SUCCESS_DEALER,
+  LOGIN_SUCCESS_ADMIN,
+  TRANSACTIONS,
 } = actionType
 
 const initialState = {
@@ -31,6 +34,7 @@ const initialState = {
   tripDetsTwo: {},
   retailer: {},
   type: "",
+  transactions: {},
 }
 
 export const rootReducer = (state = initialState, { type, payload }) => {
@@ -51,7 +55,22 @@ export const rootReducer = (state = initialState, { type, payload }) => {
       sessionStorage.setItem("topup", JSON.stringify(token))
       return {
         ...state,
-        loginDets: payload,
+        // loginDets: payload,
+        isError: false,
+        authError: "",
+        logError: [],
+      }
+    case LOGIN_ADMIN:
+      let tokenOneAdmin = payload.username
+      let tokenTwoAdmin = payload.password
+      const TOKEN_ONE_ADMIN = Base64.encode(tokenOneAdmin)
+      const TOKEN_TWO_ADMIN = Base64.encode(tokenTwoAdmin)
+      const tokenAdmin = { TOKEN_ONE_ADMIN, TOKEN_TWO_ADMIN }
+
+      sessionStorage.setItem("topup2", JSON.stringify(tokenAdmin))
+      return {
+        ...state,
+        // loginDets: payload,
         isError: false,
         authError: "",
         logError: [],
@@ -84,8 +103,23 @@ export const rootReducer = (state = initialState, { type, payload }) => {
         authError: "",
         isError: false,
       }
+    case LOGIN_SUCCESS_ADMIN:
+      let load = payload
+      const dataAdmin = { ...load, type: "Admin", username: "ADMIN" }
+      localStorage.setItem("userData", JSON.stringify(dataAdmin))
+      window.location = "/Admin_Dashboard/Dashboard/"
+      return {
+        ...state,
+        userData: payload,
+        isLogged: true,
+        logError: [],
+        authError: "",
+        isError: false,
+      }
     case RETAILER:
       return { ...state, retailer: payload }
+    case TRANSACTIONS:
+      return { ...state, transactions: payload }
 
     default:
       return state

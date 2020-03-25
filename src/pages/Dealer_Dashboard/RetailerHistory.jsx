@@ -53,6 +53,8 @@ const RetailerSingleHistory = () => {
     const request = new Promise(res => {
       res(Instance.post("", VOD))
     })
+
+    console.log(request)
     request.then(({ data }) => {
       if (data.status === "200") {
         setVODHistory(data.history)
@@ -88,6 +90,7 @@ const RetailerSingleHistory = () => {
       res(Instance.post("", AWUF))
     })
     requestAwuf.then(({ data }) => {
+      console.log(data)
       if (data.status === "200") {
         setAwufHistory(data.history)
       }
@@ -209,7 +212,7 @@ const RetailerSingleHistory = () => {
                   </div>
                   <div className="searchTable">
                     <Input
-                      placeholder="Search Credit Wallet…"
+                      placeholder="Search"
                       value={filteredCredit}
                       onChange={e => {
                         setFilteredCredit(e.target.value)

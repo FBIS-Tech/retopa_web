@@ -7,9 +7,15 @@ const preferDefault = m => m && m.default || m
 exports.components = {
   "component---cache-dev-404-page-js": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\.cache\\dev-404-page.js"))),
   "component---src-pages-404-js": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\404.js"))),
+  "component---src-pages-admin-dashboard-dashboard-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Admin_Dashboard\\Dashboard.jsx"))),
+  "component---src-pages-admin-dashboard-home-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Admin_Dashboard\\Home.jsx"))),
+  "component---src-pages-admin-dashboard-settings-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Admin_Dashboard\\Settings.jsx"))),
+  "component---src-pages-admin-dashboard-transaction-details-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Admin_Dashboard\\Transaction_Details.jsx"))),
+  "component---src-pages-admin-dashboard-transactions-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Admin_Dashboard\\Transactions.jsx"))),
   "component---src-pages-airtime-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Airtime.jsx"))),
   "component---src-pages-contact-us-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\ContactUs.jsx"))),
   "component---src-pages-dealer-dashboard-admin-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Dealer_Dashboard\\Admin.jsx"))),
+  "component---src-pages-dealer-dashboard-change-password-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Dealer_Dashboard\\ChangePassword.jsx"))),
   "component---src-pages-dealer-dashboard-dashboard-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Dealer_Dashboard\\Dashboard.jsx"))),
   "component---src-pages-dealer-dashboard-dealer-home-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Dealer_Dashboard\\Dealer_Home.jsx"))),
   "component---src-pages-dealer-dashboard-export-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Dealer_Dashboard\\Export.jsx"))),
@@ -18,8 +24,11 @@ exports.components = {
   "component---src-pages-dealer-dashboard-payment-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Dealer_Dashboard\\Payment.jsx"))),
   "component---src-pages-dealer-dashboard-retailer-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Dealer_Dashboard\\Retailer.jsx"))),
   "component---src-pages-dealer-dashboard-retailer-history-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Dealer_Dashboard\\RetailerHistory.jsx"))),
+  "component---src-pages-dealer-dashboard-settings-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Dealer_Dashboard\\Settings.jsx"))),
   "component---src-pages-dealer-dashboard-sub-dealer-list-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Dealer_Dashboard\\SubDealer_List.jsx"))),
   "component---src-pages-dealer-dashboard-sub-dealers-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Dealer_Dashboard\\SubDealers.jsx"))),
+  "component---src-pages-dealer-dashboard-transactions-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Dealer_Dashboard\\Transactions.jsx"))),
+  "component---src-pages-dealer-dashboard-view-details-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Dealer_Dashboard\\ViewDetails.jsx"))),
   "component---src-pages-dealer-dashboard-voucher-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Dealer_Dashboard\\Voucher.jsx"))),
   "component---src-pages-dealer-dashboard-wallet-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Dealer_Dashboard\\Wallet.jsx"))),
   "component---src-pages-faq-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\FAQ.jsx"))),
@@ -47,7 +56,6 @@ exports.components = {
   "component---src-pages-user-dashboard-user-airtime-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\User_Dashboard\\User_Airtime.jsx"))),
   "component---src-pages-user-dashboard-user-billing-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\User_Dashboard\\User_billing.jsx"))),
   "component---src-pages-user-dashboard-user-home-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\User_Dashboard\\User_Home.jsx"))),
-  "component---src-pages-user-dashboard-user-payment-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\User_Dashboard\\User_Payment.jsx"))),
-  "component---src-pages-dealer-dashboard-settings-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Dealer_Dashboard\\Settings.jsx")))
+  "component---src-pages-user-dashboard-user-payment-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\User_Dashboard\\User_Payment.jsx")))
 }
 

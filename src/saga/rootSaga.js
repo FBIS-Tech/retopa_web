@@ -8,6 +8,9 @@ import {
   eventChannel,
 } from "redux-saga/effects"
 import Instance from "../Api/Instance"
+import TradePatnerLogin from "../Api/TradePatnerLogin"
+import DealerLoginInstance from "../Api/DealerLoginInstance"
+import AdminLoginInstance from "../Api/AdminLoginInstance"
 // import { actionType } from "../actions/ActionType"
 import {
   registrationSuccess,
@@ -16,11 +19,12 @@ import {
   loginSuccess,
   AuthError,
   loginDealerSuccess,
+  adminDealerSuccess,
 } from "../Actions/Actions.js"
 import { actionType } from "../Actions/ActionsType"
 import { Base64 } from "js-base64"
 import axios from "axios"
-const { REGISTER_USER, LOGIN_USER, LOGIN_DEALER } = actionType
+const { REGISTER_USER, LOGIN_USER, LOGIN_DEALER, LOGIN_ADMIN } = actionType
 
 function* registerUsers({ payload }) {
   try {
@@ -46,7 +50,7 @@ function* registerUsers({ payload }) {
 
 function* userLogin({ payload }) {
   try {
-    const request = yield Instance.post("", payload)
+    const request = yield TradePatnerLogin.post("", payload)
     // //console.log(request)
     // return false
     let s = request.data.status
@@ -57,6 +61,11 @@ function* userLogin({ payload }) {
       yield put(loginSuccess(d))
     } else if (s === "301") {
       yield put(loginError(m))
+      yield put(
+        setTimeout(() => {
+          loginError(" ")
+        }, 3000)
+      )
     } else {
       yield put(AuthError(ae))
       yield put(
@@ -73,12 +82,7 @@ function* userLogin({ payload }) {
 }
 function* dealerLogin({ payload }) {
   try {
-    const request = yield axios.post(
-      "https://retopin.com/retopa/public/api/d_login",
-      payload
-    )
-    //console.log(request)
-    // return false
+    const request = yield DealerLoginInstance.post("", payload)
     let s = request.data.status
     let d = request.data
     let ae = request.data.message
@@ -87,6 +91,42 @@ function* dealerLogin({ payload }) {
       yield put(loginDealerSuccess(d))
     } else if (s === "301") {
       yield put(loginError(m))
+      yield put(
+        setTimeout(() => {
+          loginError(" ")
+        }, 3000)
+      )
+    } else {
+      yield put(AuthError(ae))
+      yield put(
+        setTimeout(() => {
+          AuthError(" ")
+        }, 3000)
+      )
+    }
+  } catch (err) {
+    //console.log(err)
+    yield put({ type: "ERROR" })
+    // alert("something went wrong, Please check that you are connected")
+  }
+}
+function* adminLogin({ payload }) {
+  try {
+    const request = yield AdminLoginInstance.post("", payload)
+    let s = request.data.status
+    let d = request.data
+    let ae = request.data.message
+    // console.log(m)
+    // console.log(ae, "ae")
+    if (s === "200") {
+      yield put(adminDealerSuccess(d))
+    } else if (s === "401") {
+      yield put(AuthError(ae))
+      yield put(
+        setTimeout(() => {
+          AuthError(" ")
+        }, 3000)
+      )
     } else {
       yield put(AuthError(ae))
       yield put(
@@ -106,5 +146,6 @@ export default function* saga() {
   yield takeEvery(REGISTER_USER, registerUsers)
   yield takeEvery(LOGIN_USER, userLogin)
   yield takeEvery(LOGIN_DEALER, dealerLogin)
+  yield takeEvery(LOGIN_ADMIN, adminLogin)
   // yield fork(startListener)
 }

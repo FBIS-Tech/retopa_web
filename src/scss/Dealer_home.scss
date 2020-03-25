@@ -5,6 +5,35 @@
   flex-wrap: wrap;
   padding-bottom: 30px;
 }
+.dealerTopLayer {
+  
+  padding-bottom: 0px !important;
+  
+}
+
+.ant-select.ant-select-enabled {
+    width: 100% !important;
+}
+
+span.ant-calendar-picker-input.ant-input {
+    padding: -1px 0px;
+    height: 50px;
+}
+.ant-calendar-range-picker-separator {
+    display: inline-block;
+    min-width: 10px;
+    height: 100%;
+    color: rgba(0, 0, 0, 0.45);
+    white-space: nowrap;
+    text-align: center;
+    vertical-align: top;
+    pointer-events: none;
+    line-height: 40px;
+}
+
+span.ant-calendar-picker {
+    width: 256px;
+}
 
 .activity_container {
   background: #ffffff;
@@ -45,6 +74,13 @@
     flex-wrap: wrap;
     justify-content: center;
   }
+}
+
+.topLayer{ 
+    border: 1px solid #00800099;
+    padding: 20px 30px;
+    border-radius: 5px;
+    margin-bottom: 30px;
 }
 
 @media (min-width: 791px) {
