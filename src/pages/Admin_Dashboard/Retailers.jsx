@@ -1,0 +1,234 @@
+import React, { useState, useEffect } from "react"
+import { Table, Icon, Input, Select, Pagination, Tabs, Button } from "antd"
+import { ColumnsTwo, TableTwo } from "../../components/Constants/Tableone"
+import "../../scss/Table.scss"
+import "../../scss/Retailer.scss"
+import { CSVLink, CSVDownload } from "react-csv"
+import Instance from "../../Api/Instance"
+import { Base64 } from "js-base64"
+import AdminLayout from "../../components/Layout/AdminLayout"
+import { HistoryIcon } from "../../components/CustomIcons"
+import axios from "axios"
+import { DatePicker } from "antd"
+import AdminInstance from "../../Api/AdminInstance"
+const { RangePicker } = DatePicker
+const { TabPane } = Tabs
+const { Option } = Select
+const Dash_history_icon = props => <Icon component={HistoryIcon} {...props} />
+
+const Retailers = () => {
+  const [history, setHistory] = useState([])
+  const [historyCredit, setHistoryDebit] = useState([])
+  const [usernameH, setUsernameH] = useState([])
+  const [filteredCredit, setFilteredCredit] = useState("")
+  const [date, setDate] = useState([])
+  const [dets, setDets] = useState([])
+  const [loading, setloading] = useState(false)
+  const [search, setSearch] = useState("")
+  const [balance, setBalance] = useState("")
+  const [msg, setMsg] = useState(false)
+
+  useEffect(() => {
+    let onLogged = sessionStorage.getItem("persist:root")
+      ? JSON.parse(sessionStorage.getItem("persist:root"))
+      : []
+    const { userData } = onLogged
+    let allData = JSON.parse(userData)
+    const { user_id } = allData
+    setUsernameH(allData.username)
+    let data = sessionStorage.getItem("topup2")
+      ? JSON.parse(sessionStorage.getItem("topup2"))
+      : []
+
+    const username = Base64.decode(data.TOKEN_ONE_ADMIN)
+    const password = Base64.decode(data.TOKEN_TWO_ADMIN)
+
+    setDets([...dets, username, password])
+  }, [])
+
+  //   id: 14
+  // user_id: 6
+  // batch_id: 2
+  // vtu_id: 3
+  // unit: 1
+  // amount: "50.00"
+  // total_amount: "50.00"
+  // network: "MTN"
+  // description: "Payment for Pins Generation"
+  // retailer_code: null
+  // retailer_name: null
+  // phone: null
+  // loaded: null
+  // type: "DEBIT"
+  // status: "0"
+  // created_at: "2019-06-14 23:44:33"
+  // updated_at: "2019-06-14 2
+  const HistoryColumn = [
+    // {
+    //   title: "Source",
+    //   dataIndex: "source",
+    //   key: "source",
+    //   render: (text, record) => (
+    //     <p style={{ marginBottom: "0px" }}>
+    //       {record.source === 1 ? usernameH : "ADMIN"}
+    //     </p>
+    //   ),
+    // },
+
+    // {
+    //   title: "Retailer Code",
+    //   dataIndex: "retailer_code",
+    //   key: "retailer_code",
+    // },
+
+    // "id": 5,
+    //         "amount": "2000.00",
+    //         "type": "CREDIT",
+    //         "ref": "15730008921622",
+    //         "source": 1,
+    //         "destination": 2,
+    //         "created_at": "2019-11-06 00:41:32",
+    //         "updated_at": "2019-11-06 00:41:32"
+
+    {
+      title: "Amount",
+      dataIndex: "amount",
+      key: "amount",
+    },
+    {
+      title: "Type",
+      dataIndex: "type",
+      key: "type",
+    },
+    {
+      title: "Reference Number",
+      dataIndex: "ref",
+      key: "ref",
+    },
+    {
+      title: "Created at",
+      dataIndex: "created_at",
+      key: "created_at",
+    },
+  ]
+
+  //   const filteredDebitItems = history.filter(
+  //     item =>
+  //       item.ref.includes(filteredDebit.toLocaleLowerCase()) ||
+  //       item.destination
+  //         .toLocaleLowerCase()
+  //         .includes(filteredDebit.toLocaleLowerCase())
+  //   )
+  //   const filteredItems = history.filter(
+  //     item =>
+  //       item.retailer_code.includes(filteredCredit.toLocaleLowerCase()) ||
+  //       item.phone_number
+  //         .toLocaleLowerCase()
+  //         .includes(filteredCredit.toLocaleLowerCase())
+  //   )
+
+  const title = (
+    <h4>
+      <Dash_history_icon style={{ marginRight: "10px" }} />
+      Transaction
+    </h4>
+  )
+  const headerCredit = [
+    { label: "Source", key: "source" },
+    { label: "Retailer Name", key: "destination" },
+    { label: "Amount", key: "amount" },
+    { label: "Transaction ref", key: "ref" },
+    { label: "Created at", key: "created_at" },
+  ]
+
+  // get date
+  function onChange(value, dateString) {
+    setDate(dateString)
+  }
+
+  const handleSearch = e => {
+    setSearch(e.currentTarget.value)
+  }
+
+  const QueryRetailer = () => {
+    setloading(true)
+    const QuerySearch = {
+      username: dets[0],
+      password: dets[1],
+      rt_code: search,
+    }
+
+    const request = new Promise(res => {
+      res(AdminInstance.post("", QuerySearch))
+    })
+    request.then(({ data }) => {
+      if (data.status === "200") {
+        setMsg(true)
+        setloading(false)
+        setBalance(`₦ ${data.balance.toLocaleString()}`)
+        setHistory(data.histories)
+      } else {
+        setloading(false)
+      }
+    })
+  }
+
+  //   const handleSearch = e => {
+  //     setSearch(e.currentTarget.value)
+  //   }
+
+  return (
+    <AdminLayout title={title} position={["10"]}>
+      <div>
+        <div
+          className="table_container"
+          style={
+            HistoryColumn.length <= 9 ? { height: "100vh" } : { height: "auto" }
+          }
+        >
+          <Tabs defaultActiveKey="1">
+            <TabPane tab="Retailers" key="1">
+              <div className="table_Group">
+                <div className="table_header">
+                  <div className="rowShow">
+                    <Input
+                      placeholder="Search by Retailer code"
+                      value={search}
+                      onChange={handleSearch}
+                      prefix={
+                        <Icon type="search" style={{ color: "#D8D8D8" }} />
+                      }
+                    />
+                    <Button onClick={QueryRetailer}>search</Button>
+                  </div>
+                  {/* <div className="searchTable">
+                    <Input
+                      placeholder="Search by Retailer code"
+                      value={search}
+                      onChange={handleSearch}
+                      prefix={
+                        <Icon type="search" style={{ color: "#D8D8D8" }} />
+                      }
+                    />
+                    <Button onClick={QueryRetailer}>search</Button>
+                  </div> */}
+                </div>
+                <div className={msg ? "balance" : "hide"}>
+                  Retailer balance is {balance}
+                </div>
+                <Table
+                  columns={HistoryColumn}
+                  dataSource={history}
+                  bordered
+                  size="small"
+                />
+              </div>
+            </TabPane>
+          </Tabs>
+        </div>
+      </div>
+    </AdminLayout>
+  )
+}
+
+export default Retailers

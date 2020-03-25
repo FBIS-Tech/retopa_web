@@ -23,6 +23,7 @@ const Dash_admin_icon = props => <Icon component={HomeIcon} {...props} />
 
 const Settings = () => {
   const [openForm, setOpenForm] = useState(false)
+  const [input, setInput] = useState({})
   const AdminColumn = [
     {
       title: "Name",
@@ -85,6 +86,20 @@ const Settings = () => {
     setOpenForm(false)
   }
 
+  const getInput = e => {
+    setInput({ ...input, [e.target.name]: e.target.value })
+  }
+  console.log(input)
+  const handlePassword = () => {
+    const QueryPassword = {
+      serviceCode: "PWD",
+      username: "Retopa",
+      password: "123456",
+      old_password: input.old_password,
+      new_password: input.new_password,
+    }
+  }
+
   const title = (
     <h4>
       <Dash_admin_icon style={{ marginRight: "10px" }} />
@@ -107,24 +122,28 @@ const Settings = () => {
                   <div className="formGroup">
                     <div className="adminForm">
                       <div className="formInput changeToken">
-                        <label htmlFor="name">New Password</label>
+                        <label htmlFor="old_password">Old Password</label>
                         <Input
+                          name="old_password"
                           placeholder="Enter new password here..."
                           className="inputBack"
+                          onChange={getInput}
                         />
                       </div>
                       <div className="formInput changeToken">
-                        <label htmlFor="name">Confirm Password</label>
+                        <label htmlFor="new_password">New Password</label>
                         <Input
                           placeholder="Confirm password "
                           className="inputBack"
+                          name="new_password"
+                          onChange={getInput}
                         />
                       </div>
                     </div>
                   </div>
                   <div className="adminFormBtn">
                     <div className="btngroup">
-                      <Button>Submit</Button>
+                      <Button onClick={handlePassword}>Submit</Button>
                     </div>
                   </div>
                 </div>

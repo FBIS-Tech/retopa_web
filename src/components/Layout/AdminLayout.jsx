@@ -164,6 +164,17 @@ const AdminLayout = ({
             </Menu.Item>
           )}
 
+          <Menu.Item
+            key="2"
+            onClick={() => {
+              navigateTo("/Admin_Dashboard/Retailers")
+            }}
+            className={type === "adminB" ? "" : "hide "}
+          >
+            <Dash_history_icon />
+            <span className="nav-text">Retailers</span>
+          </Menu.Item>
+
           <Menu.Item key="7" onClick={handleLogout}>
             <Dash_logout_icon />
             <span className="nav-text">Logout</span>
