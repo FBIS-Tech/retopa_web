@@ -74,7 +74,7 @@ const DealerLayout = ({
     })
     profile.then(({ data }) => {
       let user = data.user
-      console.log(user)
+      //console.log(user)
       if (user === undefined) {
         return false
       } else {

@@ -55,7 +55,7 @@ const SubDealerList = () => {
       res(Instance.post("", VTU))
     })
     requestVtu.then(({ data }) => {
-      console.log(data)
+      //console.log(data)
       if (data.status === "200") {
         let retailers = data.sub_dealers
         setVtuHistory(retailers)

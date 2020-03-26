@@ -268,10 +268,10 @@ const RetailerList = () => {
       res(Instance.post("", inputChange))
     })
     submitRequest.then(({ data }) => {
-      //console.log(submitRequest)
+      ////console.log(submitRequest)
       let fields = data.required_fields
       let m = data.message
-      //console.log(submitRequest)
+      ////console.log(submitRequest)
       if (data.status === "301") {
         setLoading(false)
         setError(fields)

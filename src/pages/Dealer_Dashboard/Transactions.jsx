@@ -53,7 +53,7 @@ const Transactions = () => {
       res(AdminInstance.post("", search))
     })
     request.then(({ data }) => {
-      console.log(data)
+      //console.log(data)
       if (data.status === "200") {
         setHistory(data.transactions)
       }
@@ -175,7 +175,7 @@ const Transactions = () => {
       res(AdminInstance.post("", search))
     })
     request.then(({ data }) => {
-      console.log(data)
+      //console.log(data)
       if (data.status === "200") {
         setloading(false)
         setHistory(data.transactions)

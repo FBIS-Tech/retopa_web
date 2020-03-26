@@ -74,7 +74,7 @@ const Dealer_Home = () => {
     })
     profile.then(({ data }) => {
       let user = data.user
-      console.log(user)
+      //console.log(user)
       if (user === undefined) {
         return false
       } else {
@@ -125,7 +125,7 @@ const Dealer_Home = () => {
         res(AdminInstance.post("", DataReqst))
       })
       Data.then(({ data }) => {
-        console.log(data)
+        //console.log(data)
         let DataAmount = data.totalamount
         setData(`₦ ${DataAmount.toLocaleString()}`)
       })
@@ -155,7 +155,7 @@ const Dealer_Home = () => {
       const USSD = new Promise(res => {
         res(Instance.post("", ussdReqst))
       })
-      console.log(ussdReqst)
+      //console.log(ussdReqst)
       USSD.then(({ data }) => {
         let UssdAmt = data.totalamount
         setUssd(`₦ ${UssdAmt.toLocaleString()}`)
@@ -201,7 +201,7 @@ const Dealer_Home = () => {
         res(Instance.post("", RetailerReqst))
       })
       rtail.then(({ data }) => {
-        console.log(data)
+        //console.log(data)
         return
         let VoucherArry = data.details
         let sum = VoucherArry.reduce(function(total, currentValue) {
@@ -240,34 +240,6 @@ const Dealer_Home = () => {
                 />
               )
             })}
-          </div>
-          <div className={type === "Admin" ? "topLayer" : "hide"}>
-            <div
-              className={
-                type === "Admin" ? "dash_dealer_top dealerTopLayer" : "hide"
-              }
-            >
-              <div className="select">
-                <label style={{ color: "#227f00", padding: "10px 0px" }}>
-                  Select Trade Partner:
-                </label>
-                <Select defaultValue="All Trade Partner">
-                  {tps.map(data => {
-                    return (
-                      <Option key={data.vendor_name} value={data.name}>
-                        {data.name}
-                      </Option>
-                    )
-                  })}
-                </Select>
-              </div>
-              <div className="select">
-                <label style={{ color: "#227f00", display: "block" }}>
-                  Query Transaction by Date:
-                </label>
-                <RangePicker showTime onChange={onChange} />
-              </div>
-            </div>
           </div>
           <div className="activity_container">
             <div className="top_activity_container">

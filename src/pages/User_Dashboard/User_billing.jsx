@@ -21,7 +21,7 @@ const User_billing = () => {
                 />
               }
               placeholder="Find a biller e.g DSTV"
-              //   onSearch={value => //console.log(value)}
+              //   onSearch={value => ////console.log(value)}
             />
           </div>
           <div className="bill_list_container">

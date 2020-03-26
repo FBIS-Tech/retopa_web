@@ -54,7 +54,7 @@ const RetailerSingleHistory = () => {
       res(Instance.post("", VOD))
     })
 
-    console.log(request)
+    //console.log(request)
     request.then(({ data }) => {
       if (data.status === "200") {
         setVODHistory(data.history)
@@ -72,7 +72,7 @@ const RetailerSingleHistory = () => {
     const requestData = new Promise(res => {
       res(Instance.post("", DATA))
     })
-    //console.log(requestData)
+    ////console.log(requestData)
     requestData.then(({ data }) => {
       if (data.status === "200") {
         setDataHistory(data.history)
@@ -90,7 +90,7 @@ const RetailerSingleHistory = () => {
       res(Instance.post("", AWUF))
     })
     requestAwuf.then(({ data }) => {
-      console.log(data)
+      //console.log(data)
       if (data.status === "200") {
         setAwufHistory(data.history)
       }

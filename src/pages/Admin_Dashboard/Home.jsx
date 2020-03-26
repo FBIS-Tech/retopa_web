@@ -155,7 +155,7 @@ const Home = () => {
       res(AdminInstance.post("", ussdReqst))
     })
     USSD.then(({ data }) => {
-      console.log(data)
+      //console.log(data)
       setUssdData(data.ussd_details)
       setUssd(`₦ ${data.totalussd.toLocaleString()}`)
       setDataData(data.data_details)

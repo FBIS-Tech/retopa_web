@@ -180,7 +180,7 @@ const Transactions = () => {
       res(AdminInstance.post("", QuerySearch))
     })
     request.then(({ data }) => {
-      console.log(data)
+      //console.log(data)
       if (data.status === "200") {
         setloading(false)
         setHistory(data.transactions)

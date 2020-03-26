@@ -92,7 +92,7 @@ const RetailerList = () => {
       ? JSON.parse(localStorage.getItem("userData"))
       : []
 
-    console.log(UserData)
+    //console.log(UserData)
 
     // inputs for adding vtu line
     setInput({
@@ -134,7 +134,7 @@ const RetailerList = () => {
       const request = new Promise(res => {
         res(AdminInstance.post("", req2))
       })
-      console.log(request)
+      //console.log(request)
       request.then(({ data }) => {
         if (data.status === "200") {
           setRetailer(data.retailer)

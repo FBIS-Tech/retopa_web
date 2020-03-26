@@ -42,7 +42,7 @@ function* registerUsers({ payload }) {
       }
     }
   } catch (err) {
-    //console.log(err)
+    ////console.log(err)
     yield put({ type: "ERROR" })
     alert("something went wrong, Please check that you are connected")
   }
@@ -51,7 +51,7 @@ function* registerUsers({ payload }) {
 function* userLogin({ payload }) {
   try {
     const request = yield TradePatnerLogin.post("", payload)
-    // //console.log(request)
+    // ////console.log(request)
     // return false
     let s = request.data.status
     let d = request.data
@@ -75,7 +75,7 @@ function* userLogin({ payload }) {
       )
     }
   } catch (err) {
-    //console.log(err)
+    ////console.log(err)
     yield put({ type: "ERROR" })
     // alert("something went wrong, Please check that you are connected")
   }
@@ -105,7 +105,7 @@ function* dealerLogin({ payload }) {
       )
     }
   } catch (err) {
-    //console.log(err)
+    ////console.log(err)
     yield put({ type: "ERROR" })
     // alert("something went wrong, Please check that you are connected")
   }
@@ -116,8 +116,8 @@ function* adminLogin({ payload }) {
     let s = request.data.status
     let d = request.data
     let ae = request.data.message
-    // console.log(m)
-    // console.log(ae, "ae")
+    // //console.log(m)
+    // //console.log(ae, "ae")
     if (s === "200") {
       yield put(adminDealerSuccess(d))
     } else if (s === "401") {
@@ -136,7 +136,7 @@ function* adminLogin({ payload }) {
       )
     }
   } catch (err) {
-    //console.log(err)
+    ////console.log(err)
     yield put({ type: "ERROR" })
     // alert("something went wrong, Please check that you are connected")
   }

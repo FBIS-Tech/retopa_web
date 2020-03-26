@@ -89,7 +89,7 @@ const Settings = () => {
   const getInput = e => {
     setInput({ ...input, [e.target.name]: e.target.value })
   }
-  console.log(input)
+  //console.log(input)
   const handlePassword = () => {
     const QueryPassword = {
       serviceCode: "PWD",

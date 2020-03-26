@@ -71,7 +71,7 @@ const RetailerSingleHistory = () => {
     const requestData = new Promise(res => {
       res(Instance.post("", DATA))
     })
-    //console.log(requestData)
+    ////console.log(requestData)
     requestData.then(({ data }) => {
       if (data.status === "200") {
         setDataHistory(data.history)

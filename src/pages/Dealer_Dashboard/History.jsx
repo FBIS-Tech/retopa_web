@@ -47,7 +47,7 @@ const RetailerHistory = () => {
     const requestCredit = new Promise(res => {
       res(Instance.post("", reqDebit))
     })
-    //console.log(requestCredit)
+    ////console.log(requestCredit)
     requestCredit.then(({ data }) => {
       if (data.status === "200") {
         setHistoryDebit(data.history)

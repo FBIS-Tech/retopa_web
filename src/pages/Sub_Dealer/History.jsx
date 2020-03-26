@@ -69,7 +69,7 @@ const RetailerHistory = () => {
       if (data.status === "200") {
         //   var datat = data.history;
         //let cast = (array) datat
-        console.log(data.history)
+        //console.log(data.history)
         setHistoryDebit(data.history)
       }
     })
@@ -87,7 +87,7 @@ const RetailerHistory = () => {
     const requestRtl = new Promise(res => {
       res(Instance.post("", reqRtl))
     })
-    console.log(requestRtl)
+    //console.log(requestRtl)
     requestRtl.then(({ data }) => {
       // if (data.status === "200") {
       //   setRetailer(data.sub_dealers)
