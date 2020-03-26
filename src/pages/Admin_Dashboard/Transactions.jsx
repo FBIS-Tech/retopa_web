@@ -66,11 +66,11 @@ const Transactions = () => {
     //   title: "Source",
     //   dataIndex: "source",
     //   key: "source",
-    //   render: (text, record) => (
-    //     <p style={{ marginBottom: "0px" }}>
-    //       {record.source === 1 ? usernameH : "ADMIN"}
-    //     </p>
-    //   ),
+    // render: (text, record) => (
+    //   <p style={{ marginBottom: "0px" }}>
+    //     {record.source === 1 ? usernameH : "ADMIN"}
+    //   </p>
+    // ),
     // },
 
     // {
@@ -81,13 +81,13 @@ const Transactions = () => {
 
     {
       title: "Retailer code",
-      dataIndex: "retailer_code",
-      key: "retailer_code",
+      dataIndex: "code",
+      key: "code",
     },
     {
       title: "Name",
-      dataIndex: "retailer_name",
-      key: "retailer_name",
+      dataIndex: "name",
+      key: "name",
     },
     {
       title: "Amount",
@@ -99,11 +99,29 @@ const Transactions = () => {
       title: "Status",
       dataIndex: "status",
       key: "status",
+      render: (text, record) => (
+        <p style={{ marginBottom: "0px" }}>
+          {record.status === 0 ? (
+            <div style={{ color: "amber" }}>Pending</div>
+          ) : record.status === 1 ? (
+            <div style={{ color: "green" }}>Loaded</div>
+          ) : record.status === 2 ? (
+            <div style={{ color: "red" }}>Failed</div>
+          ) : (
+            <div style={{ color: "red" }}>Not Loaded</div>
+          )}
+        </p>
+      ),
     },
     {
-      title: "Phone Number",
-      dataIndex: "phone",
-      key: "phone",
+      title: "From",
+      dataIndex: "requested",
+      key: "requested",
+    },
+    {
+      title: "To",
+      dataIndex: "loaded",
+      key: "loaded",
     },
     {
       title: "Created at",
@@ -153,7 +171,7 @@ const Transactions = () => {
   const Query = () => {
     setloading(true)
     const QuerySearch = {
-      serviceCode: "SEARCH",
+      serviceCode: "SEARCH_TRAN",
       search,
       username: dets[0],
       password: dets[1],
@@ -162,6 +180,7 @@ const Transactions = () => {
       res(AdminInstance.post("", QuerySearch))
     })
     request.then(({ data }) => {
+      console.log(data)
       if (data.status === "200") {
         setloading(false)
         setHistory(data.transactions)
