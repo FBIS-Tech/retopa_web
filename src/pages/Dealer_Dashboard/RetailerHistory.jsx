@@ -69,6 +69,7 @@ const RetailerSingleHistory = () => {
       password,
       user_id: retailer.user_id,
     }
+    console.log(DATA)
     const requestData = new Promise(res => {
       res(Instance.post("", DATA))
     })

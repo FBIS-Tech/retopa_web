@@ -13,7 +13,7 @@ if (window.location.protocol !== `https:` && window.location.hostname !== `local
       // https://w3c.github.io/ServiceWorker/#service-worker-registration-updatefound-event
 
       const installingWorker = reg.installing;
-      //console.log(`installingWorker`, installingWorker);
+      console.log(`installingWorker`, installingWorker);
       installingWorker.addEventListener(`statechange`, () => {
         switch (installingWorker.state) {
           case `installed`:
@@ -28,13 +28,13 @@ if (window.location.protocol !== `https:` && window.location.hostname !== `local
               }); // If resources failed for the current page, reload.
 
               if (window.___failedResources) {
-                //console.log(`resources failed, SW updated - reloading`);
+                console.log(`resources failed, SW updated - reloading`);
                 window.location.reload();
               }
             } else {
               // At this point, everything has been precached.
               // It's the perfect time to display a "Content is cached for offline use." message.
-              //console.log(`Content is now available offline!`); // Post to service worker that install is complete.
+              console.log(`Content is now available offline!`); // Post to service worker that install is complete.
               // Delay to allow time for the event listener to be added --
               // otherwise fetch is called too soon and resources aren't cached.
 

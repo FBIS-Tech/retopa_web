@@ -150,7 +150,7 @@ const DealerLayout = ({
             <span className="nav-text">Home</span>
           </Menu.Item>
 
-          <Menu.Item
+          {/* <Menu.Item
             key="8"
             onClick={() => {
               navigateTo("/Dealer_Dashboard/Admin")
@@ -159,7 +159,7 @@ const DealerLayout = ({
           >
             <Dash_admin_icon />
             <span className="nav-text">Trade Partners</span>
-          </Menu.Item>
+          </Menu.Item> */}
           <Menu.Item
             key="2"
             onClick={() => {
@@ -209,7 +209,7 @@ const DealerLayout = ({
             <Dash_history_icon />
             <span className="nav-text">History</span>
           </Menu.Item>
-          <Menu.Item
+          {/* <Menu.Item
             key="10"
             onClick={() => {
               navigateTo("/Dealer_Dashboard/Transactions")
@@ -218,7 +218,7 @@ const DealerLayout = ({
           >
             <Dash_history_icon />
             <span className="nav-text">Transactions</span>
-          </Menu.Item>
+          </Menu.Item> */}
           <Menu.Item
             key="6"
             onClick={() => {

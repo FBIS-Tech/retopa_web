@@ -129,8 +129,8 @@ const Retailers = () => {
 
   const title = (
     <h4>
-      <Dash_history_icon style={{ marginRight: "10px" }} />
-      Transaction
+      {/* <Dash_history_icon style={{ marginRight: "10px" }} /> */}
+      Retailers
     </h4>
   )
   const headerCredit = [
@@ -156,6 +156,7 @@ const Retailers = () => {
       username: dets[0],
       password: dets[1],
       rt_code: search,
+      serviceCode:"SEARCH_H"
     }
 
     const request = new Promise(res => {
@@ -187,7 +188,7 @@ const Retailers = () => {
           }
         >
           <Tabs defaultActiveKey="1">
-            <TabPane tab="Retailers" key="1">
+            <TabPane tab="wallet history" key="1">
               <div className="table_Group">
                 <div className="table_header">
                   <div className="rowShow">
@@ -199,7 +200,7 @@ const Retailers = () => {
                         <Icon type="search" style={{ color: "#D8D8D8" }} />
                       }
                     />
-                    <Button onClick={QueryRetailer}>search</Button>
+                    <Button onClick={QueryRetailer} loading={loading}>search</Button>
                   </div>
                   {/* <div className="searchTable">
                     <Input
@@ -213,7 +214,7 @@ const Retailers = () => {
                     <Button onClick={QueryRetailer}>search</Button>
                   </div> */}
                 </div>
-                <div className={msg ? "balance" : "hide"}>
+                <div style={{padding:"10px"}} className={msg ? "balance" : "hide"}>
                   Retailer balance is {balance}
                 </div>
                 <Table

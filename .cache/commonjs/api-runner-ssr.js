@@ -16,7 +16,7 @@ const apis = require(`./api-ssr-docs`); // Run the specified API in any plugins 
 
 module.exports = (api, args, defaultReturn, argTransform) => {
   if (!apis[api]) {
-    //console.log(`This API doesn't exist`, api);
+    console.log(`This API doesn't exist`, api);
   } // Run each plugin in series.
   // eslint-disable-next-line no-undef
 

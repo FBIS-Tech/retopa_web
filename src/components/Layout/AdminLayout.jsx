@@ -185,7 +185,7 @@ const AdminLayout = ({
         <div className="headersss dealer_header">
           <Header>
             <div className="header_left dealerHeader">
-              <h4>Administrative Dashboard</h4>
+              <h4>{type==="adminB"?"Support Dashboard":"Administrative Dashboard"}</h4>
             </div>
             <div className="header_right">
               {/* <Input

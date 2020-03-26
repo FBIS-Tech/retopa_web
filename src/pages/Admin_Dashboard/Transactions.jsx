@@ -62,22 +62,6 @@ const Transactions = () => {
   // created_at: "2019-06-14 23:44:33"
   // updated_at: "2019-06-14 2
   const HistoryColumn = [
-    // {
-    //   title: "Source",
-    //   dataIndex: "source",
-    //   key: "source",
-    // render: (text, record) => (
-    //   <p style={{ marginBottom: "0px" }}>
-    //     {record.source === 1 ? usernameH : "ADMIN"}
-    //   </p>
-    // ),
-    // },
-
-    // {
-    //   title: "Retailer Code",
-    //   dataIndex: "retailer_code",
-    //   key: "retailer_code",
-    // },
 
     {
       title: "Retailer code",
@@ -85,7 +69,7 @@ const Transactions = () => {
       key: "code",
     },
     {
-      title: "Name",
+      title: "Trade Partner",
       dataIndex: "name",
       key: "name",
     },
@@ -102,29 +86,29 @@ const Transactions = () => {
       render: (text, record) => (
         <p style={{ marginBottom: "0px" }}>
           {record.status === 0 ? (
-            <div style={{ color: "amber" }}>Pending</div>
+            <div style={{ color: "amber" }}>Pending Approval</div>
           ) : record.status === 1 ? (
             <div style={{ color: "green" }}>Loaded</div>
           ) : record.status === 2 ? (
             <div style={{ color: "red" }}>Failed</div>
           ) : (
-            <div style={{ color: "red" }}>Not Loaded</div>
+            <div style={{ color: "red" }}>Recharge Later</div>
           )}
         </p>
       ),
     },
     {
-      title: "From",
+      title: "Retailer's number",
       dataIndex: "requested",
       key: "requested",
     },
     {
-      title: "To",
+      title: "Customer",
       dataIndex: "loaded",
       key: "loaded",
     },
     {
-      title: "Created at",
+      title: "Date/Time",
       dataIndex: "created_at",
       key: "created_at",
     },
@@ -151,12 +135,13 @@ const Transactions = () => {
       Transaction
     </h4>
   )
-  const headerCredit = [
-    { label: "Source", key: "source" },
-    { label: "Retailer Name", key: "destination" },
+  const header = [
+    { label: "Retailer code", key: "code" },
+    { label: "Trade Partner", key: "name" },
     { label: "Amount", key: "amount" },
-    { label: "Transaction ref", key: "ref" },
-    { label: "Created at", key: "created_at" },
+    { label: "Retailer's number", key: "requested" },
+    { label: "Customer", key: "loaded" },
+    { label: "Date/Time", key: "created_at" },
   ]
 
   // get date
@@ -227,6 +212,16 @@ const Transactions = () => {
                       loading={loading}
                     >
                       SEARCH
+                    </Button>
+                    <Button style={{marginLeft:"10px"}} className={history.length<=0?"hide":""}>
+                      <CSVLink
+                        data={history}
+                        filename={"Retailers.csv"}
+                        headers={header}
+                        style={{ color: "white" }}
+                      >
+                        Export to CSV
+                      </CSVLink>
                     </Button>
                   </div>
                   <div className="searchTable">
