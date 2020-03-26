@@ -611,7 +611,7 @@ const RetailerList = () => {
   const title = (
     <h4>
       <Dash_retail_icon style={{ marginRight: "10px" }} />
-      Retailer List
+      Retailers
     </h4>
   )
   ///////////export to csv///////////////////////////////////////////////////
