@@ -134,13 +134,9 @@ const Home = () => {
   }, [])
 
   function onChange(value, dateString) {
+    setLoading(true)
     let selectedDate = dateString
-    const query = {
-      serviceCode: "DATA",
-      username: dets[0],
-      password: dets[1],
-      tp_id,
-    }
+
     // total USSD
     const ussdReqst = {
       serviceCode: "SEARCH_tp",
@@ -156,6 +152,7 @@ const Home = () => {
     })
     USSD.then(({ data }) => {
       //console.log(data)
+      setLoading(false)
       setUssdData(data.ussd_details)
       setUssd(`₦ ${data.totalussd.toLocaleString()}`)
       setDataData(data.data_details)
@@ -224,6 +221,12 @@ const Home = () => {
                   })}
                 </Select>
               </div>
+              <h4
+                style={{ margin: "0px", color: "#227f00" }}
+                className={loading ? "" : "hide"}
+              >
+                Loading...
+              </h4>
               <div className="select">
                 <label style={{ color: "#227f00", display: "block" }}>
                   Query Transaction by Date:

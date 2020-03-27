@@ -4,6 +4,7 @@
   justify-content: center;
   flex-wrap: wrap;
   padding-bottom: 30px;
+  align-items: center;
 }
 .dealerTopLayer {
   
@@ -89,7 +90,7 @@ span.ant-calendar-picker {
       padding: 30px;
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
+      justify-content: space-evenly;
     }
   }
 }
