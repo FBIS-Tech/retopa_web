@@ -23,20 +23,20 @@ const Login = () => {
   }
 
   const handleDispatch = () => {
+    setLoading(true)
     if (active2) {
       dispatch(UserLogin(inputChange))
-      setLoading(true)
     } else if (active3) {
       dispatch(DealerLogin(inputChange))
-      setLoading(true)
     } else if (active) {
       dispatch(AdminLogin(inputChange))
-      setLoading(true)
     }
   }
 
-  useMemo(() => setLoading(false), [logError])
-  useMemo(() => setLoading(false), [authError])
+  console.log(logError, authError, isError)
+
+  // useMemo(() => setLoading(false), [logError])
+  // useMemo(() => setLoading(false), [authError])
 
   const handleAdmin = () => {
     setActive(true)
@@ -53,6 +53,12 @@ const Login = () => {
     setActive2(false)
     setActive3(true)
   }
+
+  useEffect(() => {
+    if (logError.length > 0 || authError !== "") {
+      setLoading(false)
+    }
+  }, [logError, authError])
 
   return (
     <RegLayout>
