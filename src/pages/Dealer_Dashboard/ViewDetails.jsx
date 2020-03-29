@@ -29,7 +29,6 @@ const ViewDetails = () => {
   const [voucher, setVoucher] = useState([])
 
   const { retailer, transactions } = useSelector(state => state)
-  console.log(transactions)
 
   useEffect(() => {
     let onLogged = sessionStorage.getItem("persist:root")
