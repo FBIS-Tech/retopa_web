@@ -99,7 +99,7 @@ const Admin = () => {
     //     ),
     // },
     {
-      title: "Created at",
+      title: "Date/Time",
       dataIndex: "created_at",
       key: "date",
     },

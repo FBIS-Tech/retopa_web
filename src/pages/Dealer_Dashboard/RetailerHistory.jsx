@@ -69,7 +69,7 @@ const RetailerSingleHistory = () => {
       password,
       user_id: retailer.user_id,
     }
-    console.log(DATA)
+
     const requestData = new Promise(res => {
       res(Instance.post("", DATA))
     })
@@ -91,7 +91,6 @@ const RetailerSingleHistory = () => {
       res(Instance.post("", AWUF))
     })
     requestAwuf.then(({ data }) => {
-      //console.log(data)
       if (data.status === "200") {
         setAwufHistory(data.history)
       }
@@ -149,7 +148,7 @@ const RetailerSingleHistory = () => {
       key: "ref",
     },
     {
-      title: "Created at",
+      title: "Date/Time",
       dataIndex: "created_at",
       key: "created_at",
     },
@@ -177,15 +176,16 @@ const RetailerSingleHistory = () => {
     { label: "Retailer Name", key: "destination" },
     { label: "Amount", key: "amount" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Created at", key: "created_at" },
+    { label: "Date/Time", key: "created_at" },
   ]
   const headerDebit = [
     { label: "Source", key: "source" },
     { label: "Retailer Name", key: "destination" },
     { label: "Amount", key: "amount" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Created at", key: "time" },
+    { label: "Date/Time", key: "time" },
   ]
+  const Vtu = []
   return (
     <DealerLayout title={title} position={["5"]}>
       <div>
@@ -196,7 +196,7 @@ const RetailerSingleHistory = () => {
           }
         >
           <Tabs defaultActiveKey="1">
-            <TabPane tab="VTU" key="1">
+            <TabPane tab="USSD" key="1">
               <div className="table_Group">
                 <div className="table_header">
                   <div className="rowShow">
@@ -304,13 +304,13 @@ const RetailerSingleHistory = () => {
                 />
               </div>
             </TabPane>
-            <TabPane tab="USSD" key="4">
+            <TabPane tab="VTU" key="4">
               <div className="table_Group">
                 <div className="table_header">
                   <div className="rowShow">
                     <Button>
                       <CSVLink
-                        data={DataHistory}
+                        data={Vtu}
                         filename={`${retailer.name}'s Data.csv`}
                         headers={headerDebit}
                         style={{ color: "white" }}

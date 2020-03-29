@@ -187,7 +187,7 @@ const RetailerList = () => {
     },
 
     {
-      title: "Created at",
+      title: "Date/Time",
       dataIndex: "created_at",
       key: "created_at",
 
@@ -470,7 +470,7 @@ const RetailerList = () => {
     { label: "Retailer Number", key: "phone" },
     { label: "USSD Code", key: "code" },
     { label: "Status", key: "status" },
-    { label: "Created at", key: "created_at" },
+    { label: "Date/Time", key: "created_at" },
   ]
 
   return (

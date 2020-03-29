@@ -28,7 +28,8 @@ const ViewDetails = () => {
   const [dataArray, setData] = useState("0")
   const [voucher, setVoucher] = useState([])
 
-  const { retailer } = useSelector(state => state)
+  const { retailer, transactions } = useSelector(state => state)
+  console.log(transactions)
 
   useEffect(() => {
     let onLogged = sessionStorage.getItem("persist:root")
@@ -57,51 +58,6 @@ const ViewDetails = () => {
     let UserData = localStorage.getItem("userData")
       ? JSON.parse(localStorage.getItem("userData"))
       : []
-
-    if (UserData.type === "Admin") {
-      // total USSD
-      const ussdReqst = {
-        serviceCode: "RTRA",
-        username: usernameA,
-        type: "USSD",
-        password: passwordA,
-      }
-      const USSD = new Promise(res => {
-        res(AdminInstance.post("", ussdReqst))
-      })
-      USSD.then(({ data }) => {
-        let UssdArry = data.transactions
-        setUssdData(UssdArry)
-      })
-      // total data
-      const DataReqst = {
-        serviceCode: "RTRA",
-        username: usernameA,
-        type: "DATA",
-        password: passwordA,
-      }
-      const Data = new Promise(res => {
-        res(AdminInstance.post("", DataReqst))
-      })
-      Data.then(({ data }) => {
-        let DataArry = data.details
-        setData(DataArry)
-      })
-      // total voucher
-      const VoucherReqst = {
-        serviceCode: "RTRA",
-        username: usernameA,
-        type: "VOUCHER",
-        password: passwordA,
-      }
-      const VOUCHER = new Promise(res => {
-        res(AdminInstance.post("", VoucherReqst))
-      })
-      VOUCHER.then(({ data }) => {
-        let VoucherArry = data.details
-        setVoucher(VoucherArry)
-      })
-    }
   }, [])
 
   const HistoryColumn = [
@@ -120,6 +76,20 @@ const ViewDetails = () => {
       dataIndex: "quantity",
       key: "quantity",
     },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      render: (text, record) => (
+        <p style={{ marginBottom: "0px" }}>
+          {record.status === 1 ? (
+            <p style={{ color: "green" }}>Successful</p>
+          ) : (
+            <p style={{ color: "red" }}>Failed</p>
+          )}
+        </p>
+      ),
+    },
 
     {
       title: "Transaction ref",
@@ -127,7 +97,7 @@ const ViewDetails = () => {
       key: "ref",
     },
     {
-      title: "Created at",
+      title: "Date/Time",
       dataIndex: "created_at",
       key: "created_at",
     },
@@ -143,6 +113,20 @@ const ViewDetails = () => {
       dataIndex: "quantity",
       key: "quantity",
     },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      render: (text, record) => (
+        <p style={{ marginBottom: "0px" }}>
+          {record.status === 1 ? (
+            <p style={{ color: "green" }}>Successful</p>
+          ) : (
+            <p style={{ color: "red" }}>Failed</p>
+          )}
+        </p>
+      ),
+    },
 
     {
       title: "Transaction ref",
@@ -150,7 +134,7 @@ const ViewDetails = () => {
       key: "ref",
     },
     {
-      title: "Created at",
+      title: "Date/Time",
       dataIndex: "created_at",
       key: "created_at",
     },
@@ -163,7 +147,7 @@ const ViewDetails = () => {
       key: "id",
     },
     {
-      title: "Number",
+      title: "Customer Number",
       dataIndex: "msisdn",
       key: "msisdn",
     },
@@ -179,7 +163,21 @@ const ViewDetails = () => {
       key: "code",
     },
     {
-      title: "Created at",
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      render: (text, record) => (
+        <p style={{ marginBottom: "0px" }}>
+          {record.status === 1 ? (
+            <p style={{ color: "green" }}>Successful</p>
+          ) : (
+            <p style={{ color: "red" }}>Failed</p>
+          )}
+        </p>
+      ),
+    },
+    {
+      title: "Date/Time",
       dataIndex: "created_at",
       key: "created_at",
     },
@@ -207,14 +205,14 @@ const ViewDetails = () => {
     { label: "Retailer Name", key: "destination" },
     { label: "Amount", key: "amount" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Created at", key: "created_at" },
+    { label: "Date/Time", key: "created_at" },
   ]
   const headerDebit = [
     { label: "Source", key: "source" },
     { label: "Retailer Name", key: "destination" },
     { label: "Amount", key: "amount" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Created at", key: "time" },
+    { label: "Date/Time", key: "time" },
   ]
 
   return (
@@ -281,7 +279,7 @@ const ViewDetails = () => {
                 {/* </div> */}
                 <Table
                   columns={Column}
-                  dataSource={voucher}
+                  dataSource={transactions.voucherData}
                   bordered
                   size="small"
                 />
@@ -305,7 +303,7 @@ const ViewDetails = () => {
                 </div> */}
                 <Table
                   columns={HistoryColumn}
-                  dataSource={dataArray}
+                  dataSource={transactions.dataData}
                   bordered
                   size="small"
                 />
@@ -341,7 +339,7 @@ const ViewDetails = () => {
                 </div> */}
                 <Table
                   columns={USSDColumn}
-                  dataSource={ussdData}
+                  dataSource={transactions.ussdData}
                   bordered
                   size="small"
                 />

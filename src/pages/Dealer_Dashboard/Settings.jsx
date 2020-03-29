@@ -51,7 +51,7 @@ const Settings = () => {
         ),
     },
     {
-      title: "Created at",
+      title: "Date/Time",
       dataIndex: "date",
       key: "date",
     },

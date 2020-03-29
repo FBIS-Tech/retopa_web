@@ -106,7 +106,7 @@ const Retailers = () => {
       key: "ref",
     },
     {
-      title: "Created at",
+      title: "Date/Time",
       dataIndex: "created_at",
       key: "created_at",
     },
@@ -138,7 +138,7 @@ const Retailers = () => {
     { label: "Retailer Name", key: "destination" },
     { label: "Amount", key: "amount" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Created at", key: "created_at" },
+    { label: "Date/Time", key: "created_at" },
   ]
 
   // get date
@@ -156,7 +156,7 @@ const Retailers = () => {
       username: dets[0],
       password: dets[1],
       rt_code: search,
-      serviceCode:"SEARCH_H"
+      serviceCode: "SEARCH_H",
     }
 
     const request = new Promise(res => {
@@ -200,7 +200,9 @@ const Retailers = () => {
                         <Icon type="search" style={{ color: "#D8D8D8" }} />
                       }
                     />
-                    <Button onClick={QueryRetailer} loading={loading}>search</Button>
+                    <Button onClick={QueryRetailer} loading={loading}>
+                      search
+                    </Button>
                   </div>
                   {/* <div className="searchTable">
                     <Input
@@ -214,7 +216,10 @@ const Retailers = () => {
                     <Button onClick={QueryRetailer}>search</Button>
                   </div> */}
                 </div>
-                <div style={{padding:"10px"}} className={msg ? "balance" : "hide"}>
+                <div
+                  style={{ padding: "10px" }}
+                  className={msg ? "balance" : "hide"}
+                >
                   Retailer balance is {balance}
                 </div>
                 <Table

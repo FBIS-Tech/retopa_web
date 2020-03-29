@@ -129,7 +129,7 @@ const Transaction_Details = () => {
       key: "ref",
     },
     {
-      title: "Created at",
+      title: "Date/Time",
       dataIndex: "created_at",
       key: "created_at",
     },
@@ -152,7 +152,7 @@ const Transaction_Details = () => {
       key: "ref",
     },
     {
-      title: "Created at",
+      title: "Date/Time",
       dataIndex: "created_at",
       key: "created_at",
     },
@@ -181,7 +181,7 @@ const Transaction_Details = () => {
       key: "code",
     },
     {
-      title: "Created at",
+      title: "Date/Time",
       dataIndex: "created_at",
       key: "created_at",
     },
@@ -209,14 +209,14 @@ const Transaction_Details = () => {
     { label: "Retailer Name", key: "destination" },
     { label: "Amount", key: "amount" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Created at", key: "created_at" },
+    { label: "Date/Time", key: "created_at" },
   ]
   const headerDebit = [
     { label: "Source", key: "source" },
     { label: "Retailer Name", key: "destination" },
     { label: "Amount", key: "amount" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Created at", key: "time" },
+    { label: "Date/Time", key: "time" },
   ]
 
   return (

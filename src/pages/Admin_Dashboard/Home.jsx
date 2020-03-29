@@ -165,7 +165,7 @@ const Home = () => {
   }
 
   const Dealer_Activity = [
-    // { title: "Total VTU Transactions", price: "₦ 0" },
+    // { title: "Total Direct Top-Up Transactions", price: "₦ 0" },
     { title: "Total voucher transaction", price: voucher },
     { title: "Total USSD transaction", price: ussd },
     { title: "Total data transaction", price: data },

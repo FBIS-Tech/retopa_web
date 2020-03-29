@@ -130,7 +130,7 @@ const SubDealerList = () => {
       ),
     },
     {
-      title: "Created at",
+      title: "Date/Time",
       dataIndex: "created_at",
       key: "created_at",
 
@@ -153,14 +153,14 @@ const SubDealerList = () => {
     { label: "Retailer Name", key: "destination" },
     { label: "Amount", key: "amount" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Created at", key: "created_at" },
+    { label: "Date/Time", key: "created_at" },
   ]
   const headerDebit = [
     { label: "Source", key: "source" },
     { label: "Retailer Name", key: "destination" },
     { label: "Amount", key: "amount" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Created at", key: "time" },
+    { label: "Date/Time", key: "time" },
   ]
   return (
     <DealerLayout title={title} position={["5"]}>

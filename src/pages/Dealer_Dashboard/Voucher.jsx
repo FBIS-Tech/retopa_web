@@ -55,7 +55,7 @@ const Voucher = () => {
       key: "units",
     },
     {
-      title: "Created at",
+      title: "Date/Time",
       dataIndex: "date",
       key: "date",
     },

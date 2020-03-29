@@ -44,12 +44,13 @@ const RetailerHistory = () => {
         setHistory(data.history)
       }
     })
-    const requestCredit = new Promise(res => {
+    const requestDebit = new Promise(res => {
       res(Instance.post("", reqDebit))
     })
     ////console.log(requestCredit)
-    requestCredit.then(({ data }) => {
+    requestDebit.then(({ data }) => {
       if (data.status === "200") {
+        console.log(data)
         setHistoryDebit(data.history)
       }
     })
@@ -83,9 +84,48 @@ const RetailerHistory = () => {
       key: "ref",
     },
     {
-      title: "Created at",
+      title: "Date/Time",
       dataIndex: "time",
       key: "time",
+    },
+  ]
+  const HistoryColumn2 = [
+    {
+      title: "Source",
+      dataIndex: "source",
+      key: "source",
+      render: (text, record) => (
+        <p style={{ marginBottom: "0px" }}>
+          {record.source === 1 ? usernameH : "ADMIN"}
+        </p>
+      ),
+    },
+    {
+      title: "Retailer Name",
+      dataIndex: "destination",
+      key: "destination",
+      render: (text, record) => (
+        <p style={{ marginBottom: "0px" }}>
+          {record.destination === 1 ? usernameH : " "}
+        </p>
+      ),
+    },
+
+    {
+      title: "Amount",
+      dataIndex: "amount",
+      key: "amount",
+    },
+
+    {
+      title: "Transaction ref",
+      dataIndex: "ref",
+      key: "ref",
+    },
+    {
+      title: "Date/Time",
+      dataIndex: "created_at",
+      key: "created_at",
     },
   ]
 
@@ -115,14 +155,14 @@ const RetailerHistory = () => {
     { label: "Retailer Name", key: "destination" },
     { label: "Amount", key: "amount" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Created at", key: "created_at" },
+    { label: "Date/Time", key: "created_at" },
   ]
   const headerDebit = [
     { label: "Source", key: "source" },
     { label: "Retailer Name", key: "destination" },
     { label: "Amount", key: "amount" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Created at", key: "time" },
+    { label: "Date/Time", key: "time" },
   ]
   return (
     <DealerLayout title={title} position={["5"]}>
@@ -163,7 +203,7 @@ const RetailerHistory = () => {
                   </div>
                 </div>
                 <Table
-                  columns={HistoryColumn}
+                  columns={HistoryColumn2}
                   dataSource={filteredCreditItems}
                   bordered
                   size="small"

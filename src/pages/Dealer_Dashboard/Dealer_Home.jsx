@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { useDispatch } from "react-redux"
 import {
   topCardDetails,
   Dealer_Activities,
@@ -13,6 +14,7 @@ import DealerLayout from "../../components/Layout/DealerLayout"
 import { Link, navigateTo } from "gatsby"
 import axios from "axios"
 import AdminInstance from "../../Api/AdminInstance"
+import { dispatchTransactions } from "../../Actions/Actions"
 const { RangePicker } = DatePicker
 const { Option } = Select
 
@@ -22,11 +24,15 @@ const Dealer_Home = () => {
   const [counter, setCounter] = useState("0")
   const [ussd, setUssd] = useState("0")
   const [ussdData, setUssdData] = useState([])
+  const [voucherData, setVoucherData] = useState([])
+  const [dataData, setDataData] = useState([])
   const [data, setData] = useState("0")
   const [voucher, setVoucher] = useState("0")
   const [type, setType] = useState("")
   const [tps, setTps] = useState([])
   const [date, setDate] = useState([])
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     //gets user details
@@ -83,134 +89,53 @@ const Dealer_Home = () => {
       }
     })
 
-    if (UserData.type === "Admin") {
-      // trade Partners
-      const tpReqst = {
-        serviceCode: "TRAL",
-        username: usernameA,
-        password: passwordA,
-      }
-      const tp = new Promise(res => {
-        res(AdminInstance.post("", tpReqst))
-      })
-      tp.then(({ data }) => {
-        let Arry = data.tp_details
-        setTps(Arry)
-      })
-
-      setType("Admin")
-      // total USSD
-      const ussdReqst = {
-        serviceCode: "RTRA",
-        username: usernameA,
-        type: "USSD",
-        password: passwordA,
-      }
-
-      const USSD = new Promise(res => {
-        res(AdminInstance.post("", ussdReqst))
-      })
-      USSD.then(({ data }) => {
-        let UssdAmount = data.totalamount
-        setUssd(`₦ ${UssdAmount.toLocaleString()}`)
-      })
-      // total data
-      const DataReqst = {
-        serviceCode: "RTRA",
-        username: usernameA,
-        type: "DATA",
-        password: passwordA,
-      }
-      const Data = new Promise(res => {
-        res(AdminInstance.post("", DataReqst))
-      })
-      Data.then(({ data }) => {
-        //console.log(data)
-        let DataAmount = data.totalamount
-        setData(`₦ ${DataAmount.toLocaleString()}`)
-      })
-      // total voucher
-      const VoucherReqst = {
-        serviceCode: "RTRA",
-        username: usernameA,
-        type: "VOUCHER",
-        password: passwordA,
-      }
-      const VOUCHER = new Promise(res => {
-        res(AdminInstance.post("", VoucherReqst))
-      })
-      VOUCHER.then(({ data }) => {
-        let VoucherData = data.totalamount
-        setVoucher(`₦ ${VoucherData.toLocaleString()}`)
-        setCounter(data.details.length)
-      })
-    } else {
-      // total USSD
-      const ussdReqst = {
-        serviceCode: "RTRA",
-        username,
-        type: "USSD",
-        password,
-      }
-      const USSD = new Promise(res => {
-        res(Instance.post("", ussdReqst))
-      })
-      //console.log(ussdReqst)
-      USSD.then(({ data }) => {
-        let UssdAmt = data.totalamount
-        setUssd(`₦ ${UssdAmt.toLocaleString()}`)
-      })
-      // total data
-      const DataReqst = {
-        serviceCode: "RTRA",
-        username,
-        type: "DATA",
-        password,
-      }
-      const Data = new Promise(res => {
-        res(Instance.post("", DataReqst))
-      })
-      Data.then(({ data }) => {
-        let DataAmt = data.totalamount
-
-        setData(`₦ ${DataAmt.toLocaleString()}`)
-      })
-      // total voucher
-      const VoucherReqst = {
-        serviceCode: "RTRA",
-        username,
-        type: "VOUCHER",
-        password,
-      }
-      const VOUCHER = new Promise(res => {
-        res(Instance.post("", VoucherReqst))
-      })
-      VOUCHER.then(({ data }) => {
-        let VoucherAmt = data.totalamount
-        setCounter(data.details.length)
-        setVoucher(`₦ ${VoucherAmt.toLocaleString()}`)
-      })
-      // something....
-      const RetailerReqst = {
-        serviceCode: "TRAL",
-        username,
-        type: "VOUCHER",
-        password,
-      }
-      const rtail = new Promise(res => {
-        res(Instance.post("", RetailerReqst))
-      })
-      rtail.then(({ data }) => {
-        //console.log(data)
-        return
-        let VoucherArry = data.details
-        let sum = VoucherArry.reduce(function(total, currentValue) {
-          let newValue = parseInt(currentValue.amount)
-          return total + newValue
-        }, 0)
-        setVoucher(`₦ ${sum.toLocaleString()}`)
-      })
+    // total USSD
+    const ussdReqst = {
+      serviceCode: "RTRA",
+      username,
+      type: "USSD",
+      password,
     }
+    const USSD = new Promise(res => {
+      res(Instance.post("", ussdReqst))
+    })
+    //console.log(ussdReqst)
+    USSD.then(({ data }) => {
+      let UssdAmt = data.totalamount
+      setUssd(`₦ ${UssdAmt.toLocaleString()}`)
+      setUssdData(data.transactions)
+    })
+    // total data
+    const DataReqst = {
+      serviceCode: "RTRA",
+      username,
+      type: "DATA",
+      password,
+    }
+    const Data = new Promise(res => {
+      res(Instance.post("", DataReqst))
+    })
+    Data.then(({ data }) => {
+      let DataAmt = data.totalamount
+      setData(`₦ ${DataAmt.toLocaleString()}`)
+      setDataData(data.details)
+    })
+    // total voucher
+    const VoucherReqst = {
+      serviceCode: "RTRA",
+      username,
+      type: "VOUCHER",
+      password,
+    }
+    const VOUCHER = new Promise(res => {
+      res(Instance.post("", VoucherReqst))
+    })
+    VOUCHER.then(({ data }) => {
+      let VoucherAmt = data.totalamount
+      setCounter(data.details.length)
+      setVoucher(`₦ ${VoucherAmt.toLocaleString()}`)
+      setVoucherData(data.details)
+    })
   }, [])
 
   function onChange(value, dateString) {
@@ -218,13 +143,19 @@ const Dealer_Home = () => {
   }
 
   const Dealer_Activity = [
-    { title: "Total VTU Transactions", price: "₦ 0" },
+    { title: "Total Direct Top-Up Transactions", price: "₦ 0" },
     { title: "Total voucher transaction", price: voucher },
     { title: "Total USSD transaction", price: ussd },
     { title: "Total data transaction", price: data },
     { title: "Total bills payment transaction", price: " ₦ 0" },
     { title: "This month transaction", price: "₦ 0" },
   ]
+
+  let transactionViews = { ussdData, dataData, voucherData }
+  const viewClick = () => {
+    dispatch(dispatchTransactions(transactionViews))
+    navigateTo("/Dealer_Dashboard/ViewDetails")
+  }
 
   return (
     <>
@@ -253,9 +184,7 @@ const Dealer_Home = () => {
                     <DealerActivities
                       title={data.title}
                       price={data.price}
-                      viewClicked={() => {
-                        navigateTo("/Dealer_Dashboard/ViewDetails")
-                      }}
+                      viewClicked={viewClick}
                     />
                   )
                 })}
