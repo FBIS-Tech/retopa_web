@@ -46,50 +46,7 @@ const Retailers = () => {
     setDets([...dets, username, password])
   }, [])
 
-  //   id: 14
-  // user_id: 6
-  // batch_id: 2
-  // vtu_id: 3
-  // unit: 1
-  // amount: "50.00"
-  // total_amount: "50.00"
-  // network: "MTN"
-  // description: "Payment for Pins Generation"
-  // retailer_code: null
-  // retailer_name: null
-  // phone: null
-  // loaded: null
-  // type: "DEBIT"
-  // status: "0"
-  // created_at: "2019-06-14 23:44:33"
-  // updated_at: "2019-06-14 2
   const HistoryColumn = [
-    // {
-    //   title: "Source",
-    //   dataIndex: "source",
-    //   key: "source",
-    //   render: (text, record) => (
-    //     <p style={{ marginBottom: "0px" }}>
-    //       {record.source === 1 ? usernameH : "ADMIN"}
-    //     </p>
-    //   ),
-    // },
-
-    // {
-    //   title: "Retailer Code",
-    //   dataIndex: "retailer_code",
-    //   key: "retailer_code",
-    // },
-
-    // "id": 5,
-    //         "amount": "2000.00",
-    //         "type": "CREDIT",
-    //         "ref": "15730008921622",
-    //         "source": 1,
-    //         "destination": 2,
-    //         "created_at": "2019-11-06 00:41:32",
-    //         "updated_at": "2019-11-06 00:41:32"
-
     {
       title: "Amount",
       dataIndex: "amount",

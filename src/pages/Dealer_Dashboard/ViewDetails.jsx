@@ -24,9 +24,6 @@ const ViewDetails = () => {
   const [usernameH, setUsernameH] = useState([])
   const [filteredCredit, setFilteredCredit] = useState("")
   const [filteredDebit, setFilteredDebit] = useState("")
-  const [ussdData, setUssdData] = useState([])
-  const [dataArray, setData] = useState("0")
-  const [voucher, setVoucher] = useState([])
 
   const { retailer, transactions } = useSelector(state => state)
 

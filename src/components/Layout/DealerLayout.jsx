@@ -180,6 +180,16 @@ const DealerLayout = ({
             <span className="nav-text">Sub Dealers</span>
           </Menu.Item>
           <Menu.Item
+            key="4"
+            onClick={() => {
+              navigateTo("/Dealer_Dashboard/Voucher")
+            }}
+            className={userA.type === "Admin" ? "hide" : ""}
+          >
+            <Dash_voucher_icon />
+            <span className="nav-text">VTU</span>
+          </Menu.Item>
+          <Menu.Item
             key="3"
             onClick={() => {
               navigateTo("/Dealer_Dashboard/Wallet")
@@ -189,16 +199,7 @@ const DealerLayout = ({
             <Dash_bill_icon />
             <span className="nav-text">Wallet</span>
           </Menu.Item>
-          <Menu.Item
-            key="4"
-            onClick={() => {
-              navigateTo("/Dealer_Dashboard/Voucher")
-            }}
-            className={userA.type === "Admin" ? "hide" : ""}
-          >
-            <Dash_voucher_icon />
-            <span className="nav-text">Voucher</span>
-          </Menu.Item>
+
           <Menu.Item
             key="5"
             onClick={() => {
