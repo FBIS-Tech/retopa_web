@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import "../../scss/Retailer.scss"
 import "../../scss/Admin.scss"
 import "../../scss/Export.scss"
-import { Input, Button, Tabs, Popover, Icon, Table } from "antd"
+import { Input, Button, Tabs, Popover, Icon, Table, Form } from "antd"
 import DealerLayout from "../../components/Layout/DealerLayout"
 import { VoucherIcon } from "../../components/CustomIcons"
 import { Base64 } from "js-base64"
@@ -17,6 +17,12 @@ const Voucher = () => {
   const [vtu, setVtu] = useState([])
   const [loading, setLoading] = useState(false)
   const [filtered, setFiltered] = useState("")
+  const [message, setMessage] = useState("")
+  const [name, setName] = useState("")
+  const [openToken, setOpenToken] = useState(false)
+  const [fund, setFund] = useState({
+    serviceCode: "FDM",
+  })
 
   useEffect(() => {
     //gets user details
@@ -34,7 +40,13 @@ const Voucher = () => {
     const username = Base64.decode(data.TOKEN_ONE)
     const password = Base64.decode(data.TOKEN_TWO)
 
-    setInput({ ...input, username, password, serviceCode: "ADDVTU" })
+    setInput({
+      ...input,
+      username,
+      password,
+      serviceCode: "ADDVTU",
+    })
+    setFund({ ...fund, username, password, user_id }) //initial state for sending funds
     const req = {
       username,
       password,
@@ -79,17 +91,54 @@ const Voucher = () => {
     })
   }
 
-  //  id: 1
-  // user_id: 1
-  // vtu_line: "07025666498"
-  // status: "0"
-  // active: "0"
-  // counter: 1
-  // username: "phillip"
-  // password: "Azikolaye"
-  // created_at: "2020-03-30 14:08:29"
-  // updated_at: "
+  // handle retail tab click{}
+  const handleRetailTab = () => {
+    setOpenToken(false)
+  }
+
+  ////////////////////fund transfer////////////////////////////////
+  const handleFund = e => {
+    setFund({
+      ...fund,
+      [e.currentTarget.name]: e.currentTarget.value,
+    })
+  }
+  const handleFundTransfer = () => {
+    setLoading(true)
+    const sendRequest = new Promise(res => {
+      res(Instance.post("", fund))
+    })
+    sendRequest.then(({ data }) => {
+      let fields = data.required_fields
+      let m = data.message
+      if (data.status === "301") {
+        setLoading(false)
+        setError(fields)
+        setTimeout(() => {
+          setError([])
+        }, 3000)
+      } else if (data.status === "200") {
+        setLoading(false)
+        setMessage(m)
+        setTimeout(() => {
+          setMessage("")
+        }, 3000)
+      } else {
+        setLoading(false)
+        setMessage(m)
+        setTimeout(() => {
+          setMessage("")
+          window.location.reload()
+        }, 3000)
+      }
+    })
+  }
   const VoucherColumn = [
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+    },
     {
       title: "VTU Line",
       dataIndex: "vtu_line",
@@ -118,6 +167,15 @@ const Voucher = () => {
       ),
     },
     {
+      title: "VTU Balance",
+      dataIndex: "balance",
+      key: "balance",
+      render: (text, record) => (
+        <div>{`₦ ${parseInt(record.balance).toLocaleString()}`}</div>
+      ),
+    },
+
+    {
       title: "Active",
       dataIndex: "active",
       key: "active",
@@ -136,23 +194,34 @@ const Voucher = () => {
       dataIndex: "created_at",
       key: "created_at",
     },
-    // {
-    //   title: "Action",
-    //   key: "action",
-    //   render: (text, record) => (
-    //     <Popover
-    //       content={
-    //         <div className="pop_content">
-    //           <p>Download Encrypted</p>
-    //         </div>
-    //       }
-    //       placement="bottom"
-    //       trigger="click"
-    //     >
-    //       <span className="popover">...</span>
-    //     </Popover>
-    //   ),
-    // },
+    {
+      title: "Action",
+      key: "action",
+      render: (text, record) => (
+        <Popover
+          content={
+            <div className="pop_content">
+              <p
+                id={record.username}
+                title={record.name}
+                onClick={e => {
+                  let id = e.target.id
+                  setOpenToken(!openToken)
+                  setFund({ ...fund, vtu_id: record.id })
+                  setName(e.currentTarget.title)
+                }}
+              >
+                Fund VTU
+              </p>
+            </div>
+          }
+          placement="bottom"
+          trigger="click"
+        >
+          <span className="popover">...</span>
+        </Popover>
+      ),
+    },
   ]
 
   const filteredList = vtu.filter(item => item.vtu_line.includes(filtered))
@@ -169,8 +238,8 @@ const Voucher = () => {
         <div className="adminGroup">
           <div className="admin">
             <Tabs defaultActiveKey="1">
-              <TabPane tab="VTU list" key="1">
-                <div className="table_Group">
+              <TabPane tab="VTU list" key="1" onTabClick={handleRetailTab}>
+                <div className={openToken ? "hide" : "table_Group"}>
                   <div className="table_header">
                     <div className="rowShow">
                       <h4>VTU list</h4>
@@ -195,6 +264,74 @@ const Voucher = () => {
                     size="small"
                   />
                 </div>
+                <div className={openToken ? "sendTokenContainer" : "hide"}>
+                  <div className="sendTokenGroup">
+                    <div className="tokenTitle">
+                      <h4>
+                        Send Funds to{" "}
+                        <span
+                          style={{
+                            color: "Green",
+                            fontWeight: "bold",
+                            fontSize: "16px",
+                          }}
+                        >
+                          {name}
+                        </span>
+                      </h4>
+                    </div>
+                    <div className="tokenForm">
+                      <Form layout="vertical">
+                        {error.map(data => (
+                          <div key={data} className="errors">
+                            {data}
+                          </div>
+                        ))}
+                        <div
+                          className={
+                            message === "Invalid Secret Key...Try again later!"
+                              ? "errors"
+                              : "msg"
+                          }
+                        >
+                          {message}
+                        </div>
+                        <Form.Item label="AMOUNT">
+                          <Input
+                            name="amount"
+                            type="number"
+                            placeholder="N 1000"
+                            onChange={handleFund}
+                          />
+                        </Form.Item>
+                        <Form.Item label="TOKEN">
+                          <Input
+                            name="ref"
+                            placeholder="Enter Unique Token"
+                            onChange={handleFund}
+                          />
+                        </Form.Item>
+                        <Form.Item label="Dealer Pin">
+                          <Input
+                            name="pin"
+                            type="password"
+                            placeholder="****"
+                            onChange={handleFund}
+                          />
+                        </Form.Item>
+                      </Form>
+                    </div>
+                    <div className="btnTokenGroup"></div>
+                    <div className="tokenBtn">
+                      <Button
+                        onClick={handleFundTransfer}
+                        loading={!loading ? false : true}
+                      >
+                        Send Fund
+                      </Button>
+                    </div>
+                  </div>
+                </div>
               </TabPane>
               <TabPane tab="Add VTU" key="2">
                 <div className="formContainer">
@@ -205,14 +342,22 @@ const Voucher = () => {
                     <div className="adminForm">
                       {error.map(data => {
                         return (
-                          <h5 style={{ color: "red", textAlign: "center" }}>
+                          <h5
+                            style={{
+                              color: "red",
+                              textAlign: "center",
+                            }}
+                          >
                             {data}
                           </h5>
                         )
                       })}
                       <div
                         className="msg"
-                        style={{ color: "green", textAlign: "center" }}
+                        style={{
+                          color: "green",
+                          textAlign: "center",
+                        }}
                       >
                         {msg}
                       </div>

@@ -36,6 +36,7 @@ const { Option } = Select
 
 const RetailerList = () => {
   const [openToken, setOpenToken] = useState(false)
+  const [openToken2, setOpenToken2] = useState(false)
   const [retailer, setRetailer] = useState([])
   const [message, setMessage] = useState("")
   const [messageAct, setMessageAct] = useState("")
@@ -45,6 +46,7 @@ const RetailerList = () => {
   const [sorted, setSorted] = useState([])
   const [filterText, setFilterText] = useState("")
   const [type, setType] = useState("")
+  const [SelectSub, setSelectSub] = useState([])
   const [activateRetailer, setActivateRetailer] = useState({
     serviceCode: "ACT",
   })
@@ -56,6 +58,7 @@ const RetailerList = () => {
   })
   const [inputChange, setInput] = useState({ serviceCode: "ACR" })
   const [inputRetailChange, setInputRetail] = useState({ serviceCode: "ADR" })
+  const [Assign, setAssign] = useState({ serviceCode: "ARL" })
 
   const dispatch = useDispatch()
 
@@ -80,7 +83,12 @@ const RetailerList = () => {
       : []
     const usernameA = Base64.decode(data2.TOKEN_ONE_ADMIN)
     const passwordA = Base64.decode(data2.TOKEN_TWO_ADMIN)
-    const req = { serviceCode: "RTL", username, password, user_id }
+    const req = {
+      serviceCode: "RTL",
+      username,
+      password,
+      user_id,
+    }
     const req2 = {
       serviceCode: "RTL",
       username: usernameA,
@@ -92,8 +100,11 @@ const RetailerList = () => {
       ? JSON.parse(localStorage.getItem("userData"))
       : []
 
-    //console.log(UserData)
-
+    setAssign({
+      ...Assign,
+      username,
+      password,
+    })
     // inputs for adding vtu line
     setInput({
       ...inputChange,
@@ -134,7 +145,6 @@ const RetailerList = () => {
       const request = new Promise(res => {
         res(AdminInstance.post("", req2))
       })
-      //console.log(request)
       request.then(({ data }) => {
         if (data.status === "200") {
           setRetailer(data.retailer)
@@ -151,6 +161,20 @@ const RetailerList = () => {
         }
       })
     }
+
+    // sub dealers list
+    const reqSubDealer = { serviceCode: "SSDL", username, password, user_id }
+    // request for sub dealer list
+    const request = new Promise(res => {
+      res(Instance.post("", reqSubDealer))
+    })
+    request.then(({ data }) => {
+      if (data.status === "200") {
+        let allRetailers = data.sub_dealers
+        setSelectSub(allRetailers)
+        // to query sub dealers only
+      }
+    })
   }, [])
   const ColumnsTwo = [
     {
@@ -161,25 +185,29 @@ const RetailerList = () => {
       // render: text => <a>{text}</a>,
     },
     {
-      title: "Full name",
+      title: "Full Name",
       dataIndex: "name",
       key: "name",
     },
-    {
-      title: "Type",
-      dataIndex: "type",
-      key: "type",
-
-      // render: text => <a>{text}</a>,
-    },
 
     {
-      title: "Retailer number",
+      title: "Retailer Number",
       dataIndex: "phone",
       key: "phone",
     },
     {
-      title: "Wallet ballance",
+      title: "VTU Name",
+      dataIndex: "vtu_name",
+      key: "vtu_name",
+    },
+
+    {
+      title: "Sub Dealer",
+      dataIndex: "sub_dealer_name",
+      key: "sub_dealer_name",
+    },
+    {
+      title: "Wallet Balance",
       dataIndex: "balance",
       key: "balance",
       render: (text, record) => (
@@ -188,7 +216,7 @@ const RetailerList = () => {
     },
 
     {
-      title: "USSD Code",
+      title: "Retail Code",
       dataIndex: "code",
       key: "code",
       render: (text, record) => (
@@ -262,7 +290,7 @@ const RetailerList = () => {
                 onClick={e => {
                   let id = e.target.id
                   setOpenToken(!openToken)
-                  setFund({ ...fund, id })
+                  setFund({ ...fund, id: record.id, vtu_id: record.vtu_id })
                   setName(e.currentTarget.title)
                 }}
               >
@@ -297,6 +325,18 @@ const RetailerList = () => {
                 }}
               >
                 Retailer's history
+              </p>
+              <p
+                id={record.username}
+                title={record.name}
+                onClick={e => {
+                  let id = e.target.id
+                  setOpenToken2(!openToken2)
+                  setAssign({ ...Assign, rt_id: record.id })
+                  setName(e.currentTarget.title)
+                }}
+              >
+                Assign Sub-Dealer
               </p>
             </div>
           }
@@ -367,11 +407,12 @@ const RetailerList = () => {
   }
 
   function handleRetailer(value) {
-    setInputRetail({
+    setRetailer({
       ...inputRetailChange,
       type: value,
     })
   }
+
   // submit retailer request
   const handleRetailerSubmit = () => {
     setLoading(true)
@@ -573,9 +614,64 @@ const RetailerList = () => {
   }
 
   const handleFundTransfer = () => {
+    // console.log(fund)
+    // return
     setLoading(true)
     const sendRequest = new Promise(res => {
       res(Instance.post("", fund))
+    })
+    sendRequest.then(({ data }) => {
+      let fields = data.required_fields
+      let m = data.message
+      if (data.status === "301") {
+        setLoading(false)
+        setError(fields)
+        setTimeout(() => {
+          setError([])
+        }, 3000)
+      } else if (data.status === "200") {
+        setLoading(false)
+        setMessage(m)
+        setTimeout(() => {
+          setMessage("")
+          window.location.reload()
+        }, 3000)
+      } else {
+        setLoading(false)
+        setMessage(m)
+        setTimeout(() => {
+          setMessage("")
+        }, 3000)
+      }
+    })
+  }
+  ////////////////////retailer search////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  const filteredItems = retailer.filter(
+    item =>
+      item.name.toLocaleLowerCase().includes(filterText.toLocaleLowerCase()) ||
+      item.username.toLocaleLowerCase().includes(filterText.toLocaleLowerCase())
+  )
+
+  const title = (
+    <h4>
+      <Dash_retail_icon style={{ marginRight: "10px" }} />
+      Retailers
+    </h4>
+  )
+
+  /////////////////////aassign Retailer////////////////////////////////////////
+
+  function handleAssign(value) {
+    setAssign({
+      ...Assign,
+      d_id: value,
+    })
+  }
+
+  const SubmitAssign = () => {
+    setLoading(true)
+    const sendRequest = new Promise(res => {
+      res(Instance.post("", Assign))
     })
     sendRequest.then(({ data }) => {
       let fields = data.required_fields
@@ -601,19 +697,7 @@ const RetailerList = () => {
       }
     })
   }
-  ////////////////////retailer search////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  const filteredItems = retailer.filter(
-    item =>
-      item.name.toLocaleLowerCase().includes(filterText.toLocaleLowerCase()) ||
-      item.username.toLocaleLowerCase().includes(filterText.toLocaleLowerCase())
-  )
 
-  const title = (
-    <h4>
-      <Dash_retail_icon style={{ marginRight: "10px" }} />
-      Retailers
-    </h4>
-  )
   ///////////export to csv///////////////////////////////////////////////////
   const headers = [
     { label: "Username", key: "username" },
@@ -631,7 +715,7 @@ const RetailerList = () => {
         <Tabs defaultActiveKey="1" onTabClick={handleRetailTab}>
           <TabPane tab="Retailer List" key="1">
             <div
-              className={openToken ? "hide" : "table_container"}
+              className={openToken || openToken2 ? "hide" : "table_container"}
               style={
                 TableTwo.length <= 9 ? { height: "100vh" } : { height: "auto" }
               }
@@ -729,6 +813,68 @@ const RetailerList = () => {
                     loading={!loading ? false : true}
                   >
                     Send Fund
+                  </Button>
+                </div>
+              </div>
+            </div>
+            {/***************************************** * Assign Retailer to sub dealer******************************************** */}
+            <div className={openToken2 ? "sendTokenContainer" : "hide"}>
+              <div className="sendTokenGroup">
+                <div className="tokenTitle">
+                  <h4>
+                    Assign Sub-Dealer to{" "}
+                    <span
+                      style={{
+                        color: "Green",
+                        fontWeight: "bold",
+                        fontSize: "16px",
+                      }}
+                    >
+                      {name}
+                    </span>
+                  </h4>
+                </div>
+                <div className="tokenForm">
+                  <Form layout="vertical">
+                    {error.map(data => (
+                      <div key={data} className="errors">
+                        {data}
+                      </div>
+                    ))}
+                    <div
+                      className={
+                        message === "Invalid Secret Key...Try again later!"
+                          ? "errors"
+                          : "msg"
+                      }
+                    >
+                      {message}
+                    </div>
+
+                    <Form.Item label="Select Sub-Dealer">
+                      <Select
+                        style={{ width: "100%" }}
+                        defaultValue="Select Sub-Dealer"
+                        onChange={handleAssign}
+                      >
+                        {SelectSub.map(data => {
+                          return (
+                            <Option key={data.id} value={data.id}>
+                              {data.name}
+                            </Option>
+                          )
+                        })}
+                      </Select>
+                    </Form.Item>
+                  </Form>
+                </div>
+                <div className="btnTokenGroup"></div>
+                <div className="tokenBtn">
+                  <Button
+                    onClick={SubmitAssign}
+                    loading={!loading ? false : true}
+                  >
+                    Assign
                   </Button>
                 </div>
               </div>

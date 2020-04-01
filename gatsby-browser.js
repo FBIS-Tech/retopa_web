@@ -6,7 +6,8 @@ export const onClientEntry = () => {
     let UserData = localStorage.getItem("userData")
       ? JSON.parse(localStorage.getItem("userData"))
       : []
-    if (UserData.type === "Admin") {
+
+    if (UserData.type === "Admin" || UserData.type === "subDealer") {
       const TOKEN_ONE = Base64.encode("tokenOne")
       const TOKEN_TWO = Base64.encode("tokenTwo")
       const token = { TOKEN_ONE, TOKEN_TWO }
