@@ -96,7 +96,7 @@ const RetailerHistory = () => {
   //           "retailer_name": "Kayode"
   const HistoryColumni = [
     {
-      title: "Retailer Name",
+      title: "Dealer Name",
       dataIndex: "retailer_name",
       key: "retailer_name",
     },

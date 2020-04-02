@@ -645,11 +645,18 @@ const RetailerList = () => {
     })
   }
   ////////////////////retailer search////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  const filteredItems = retailer.filter(
-    item =>
-      item.name.toLocaleLowerCase().includes(filterText.toLocaleLowerCase()) ||
-      item.username.toLocaleLowerCase().includes(filterText.toLocaleLowerCase())
-  )
+  const filteredItems = retailer
+    .slice()
+    .reverse()
+    .filter(
+      item =>
+        item.name
+          .toLocaleLowerCase()
+          .includes(filterText.toLocaleLowerCase()) ||
+        item.username
+          .toLocaleLowerCase()
+          .includes(filterText.toLocaleLowerCase())
+    )
 
   const title = (
     <h4>
