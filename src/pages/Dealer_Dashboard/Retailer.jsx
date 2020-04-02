@@ -376,6 +376,7 @@ const RetailerList = () => {
       res(Instance.post("", inputChange))
     })
     submitRequest.then(({ data }) => {
+      console.log(data, inputChange)
       let fields = data.required_fields
       let m = data.message
       if (data.status === "301") {
@@ -387,10 +388,7 @@ const RetailerList = () => {
       } else if (data.status === "200") {
         setLoading(false)
         setMessageAct(m)
-        // setTimeout(() => {
-        //   setMessage("")
-        // }, 3000)
-      } else if (data.status === "300") {
+      } else if (data.statusCode === "300") {
         setLoading(false)
         setMessageAct(m)
         setTimeout(() => {
@@ -967,7 +965,8 @@ const RetailerList = () => {
                   ))}
                   <div
                     className={
-                      messageAct === "Invalid Secret Key...Try again later!"
+                      messageAct === "Invalid Secret Key...Try again later!" ||
+                      messageAct === "Unauthencitacted!"
                         ? "errors"
                         : "msg"
                     }
@@ -977,8 +976,8 @@ const RetailerList = () => {
                   <div className="formInput VTUInput">
                     <label htmlFor="name">Username</label>
                     <Input
-                      placeholder="Enter Username e.g. 123434"
                       name="username"
+                      placeholder="Enter Username e.g. 123434"
                       onChange={handleChange}
                     />
                   </div>
