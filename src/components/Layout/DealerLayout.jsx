@@ -220,7 +220,7 @@ const DealerLayout = ({
             <Dash_history_icon />
             <span className="nav-text">Transactions</span>
           </Menu.Item> */}
-          <Menu.Item
+          {/* <Menu.Item
             key="6"
             onClick={() => {
               navigateTo("/Dealer_Dashboard/Payment")
@@ -229,7 +229,7 @@ const DealerLayout = ({
           >
             <Dash_payment_icon />
             <span className="nav-text">Payment</span>
-          </Menu.Item>
+          </Menu.Item> */}
           {/* <Menu.Item
             key="9"
             onClick={() => {

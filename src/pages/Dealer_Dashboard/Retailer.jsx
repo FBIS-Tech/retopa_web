@@ -275,7 +275,7 @@ const RetailerList = () => {
       title: "Date Created/Time",
       dataIndex: "created_at",
       key: "created_at",
-
+      // sorter: (a, b) => a.created_at - b.created_at,
       // align: "right",
     },
     {
@@ -645,18 +645,11 @@ const RetailerList = () => {
     })
   }
   ////////////////////retailer search////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  const filteredItems = retailer
-    .slice()
-    .reverse()
-    .filter(
-      item =>
-        item.name
-          .toLocaleLowerCase()
-          .includes(filterText.toLocaleLowerCase()) ||
-        item.username
-          .toLocaleLowerCase()
-          .includes(filterText.toLocaleLowerCase())
-    )
+  const filteredItems = retailer.filter(
+    item =>
+      item.name.toLocaleLowerCase().includes(filterText.toLocaleLowerCase()) ||
+      item.username.toLocaleLowerCase().includes(filterText.toLocaleLowerCase())
+  )
 
   const title = (
     <h4>
