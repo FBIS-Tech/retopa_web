@@ -237,8 +237,8 @@ const Voucher = () => {
       <div className="adminContainer">
         <div className="adminGroup">
           <div className="admin">
-            <Tabs defaultActiveKey="1">
-              <TabPane tab="VTU list" key="1" onTabClick={handleRetailTab}>
+            <Tabs defaultActiveKey="1" onTabClick={handleRetailTab}>
+              <TabPane tab="VTU list" key="1">
                 <div className={openToken ? "hide" : "table_Group"}>
                   <div className="table_header">
                     <div className="rowShow">

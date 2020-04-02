@@ -912,17 +912,6 @@ const RetailerList = () => {
                       onChange={handleRetailChange}
                     />
                   </div>
-                  {/* <div className="formInput VTUInput">
-                    <label htmlFor="type">Type</label>
-                    <Select
-                      style={{ width: "100%" }}
-                      defaultValue="Select Type"
-                      onChange={handleRetailer}
-                    >
-                      <Option value="REGULAR">RETAILER</Option>
-                      <Option value="SUB DEALER">SUB DEALER</Option>
-                    </Select>
-                  </div> */}
 
                   <div className="formInput VTUInput">
                     <label htmlFor="name">Dealer Pin</label>
@@ -953,9 +942,7 @@ const RetailerList = () => {
             disabled={type === "Admin" ? true : false}
           >
             <div className="formContainer">
-              <div className="formTitle">
-                <p>Activate USSD</p>
-              </div>
+              <div className="formTitle">{/* <p>Activate USSD</p> */}</div>
               <div className="formGroup">
                 <div className="adminForm">
                   {error.map(data => (
@@ -974,9 +961,9 @@ const RetailerList = () => {
                     {messageAct}
                   </div>
                   <div className="formInput VTUInput">
-                    <label htmlFor="name">Username</label>
+                    <label htmlFor="name">Retailer Username</label>
                     <Input
-                      name="username"
+                      name="retailer"
                       placeholder="Enter Username e.g. 123434"
                       onChange={handleChange}
                     />
