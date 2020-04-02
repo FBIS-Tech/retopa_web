@@ -968,7 +968,7 @@ const RetailerList = () => {
                     {messageAct}
                   </div>
                   <div className="formInput VTUInput">
-                    <label htmlFor="name">Retailer Username</label>
+                    <label htmlFor="name">POS Username</label>
                     <Input
                       name="retailer"
                       placeholder="Enter Username e.g. 123434"
