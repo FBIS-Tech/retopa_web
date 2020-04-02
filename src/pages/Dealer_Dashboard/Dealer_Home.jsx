@@ -143,12 +143,13 @@ const Dealer_Home = () => {
   }
 
   const Dealer_Activity = [
-    { title: "Total Direct Top-Up Transactions", price: "₦ 0" },
-    { title: "Total voucher transaction", price: voucher },
-    { title: "Total USSD transaction", price: ussd },
+    { title: "Total Transactions This Month ", price: "₦ 0" },
+    { title: "Total Transactions Today", price: "₦ 0" },
     { title: "Total data transaction", price: data },
-    { title: "Total bills payment transaction", price: " ₦ 0" },
-    { title: "This month transaction", price: "₦ 0" },
+    // { title: "Total voucher transaction", price: voucher },
+    // { title: "Total USSD transaction", price: ussd },
+    // { title: "Total bills payment transaction", price: " ₦ 0" },
+    // { title: "This month transaction", price: "₦ 0" },
   ]
 
   let transactionViews = { ussdData, dataData, voucherData }

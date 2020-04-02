@@ -137,7 +137,7 @@ const RetailerHistory = () => {
       key: "ref",
     },
     {
-      title: "Date/Time",
+      title: "Date Created/Time",
       dataIndex: "created_at",
       key: "created_at",
     },
@@ -191,7 +191,7 @@ const RetailerHistory = () => {
       key: "ref",
     },
     {
-      title: "Date/Time",
+      title: "Date Created/Time",
       dataIndex: "created_at",
       key: "created_at",
     },
@@ -235,7 +235,7 @@ const RetailerHistory = () => {
       key: "ref",
     },
     {
-      title: "Date/Time",
+      title: "Date Created/Time",
       dataIndex: "created_at",
       key: "created_at",
     },
@@ -270,7 +270,7 @@ const RetailerHistory = () => {
     { label: "Retailer Name", key: "destination" },
     { label: "Amount", key: "amount" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Date/Time", key: "created_at" },
+    { label: "Date Created/Time", key: "created_at" },
   ]
   const headerSub = [
     { label: "Source", key: "source" },
@@ -281,7 +281,7 @@ const RetailerHistory = () => {
     { label: "Trade Partner Balance", key: "fro_balance" },
     { label: "VTU Name", key: "vtu_name" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Date/Time", key: "created_at" },
+    { label: "Date Created/Time", key: "created_at" },
   ]
 
   const headerCrd = [
@@ -292,7 +292,7 @@ const RetailerHistory = () => {
     { label: "Retailer Balance", key: "balance" },
     { label: "Trade Partner Balance", key: "fro_balance" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Date/Time", key: "created_at" },
+    { label: "Date Created/Time", key: "created_at" },
   ]
 
   return (

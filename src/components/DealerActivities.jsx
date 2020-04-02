@@ -9,8 +9,8 @@ const DealerActivities = ({ title, price, viewClicked }) => {
         <h4 className="activity_title">{title}</h4>
         <p className="activity_price">{price}</p>
         <div className="view_activity" onClick={viewClicked}>
-          <Pen />
-          <p>View details</p>
+          {/* <Pen />
+          <p>View details</p> */}
         </div>
       </div>
     </>

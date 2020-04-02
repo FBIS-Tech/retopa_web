@@ -148,7 +148,7 @@ const RetailerSingleHistory = () => {
       key: "ref",
     },
     {
-      title: "Date/Time",
+      title: "Date Created/Time",
       dataIndex: "created_at",
       key: "created_at",
     },
@@ -176,14 +176,14 @@ const RetailerSingleHistory = () => {
     { label: "Retailer Name", key: "destination" },
     { label: "Amount", key: "amount" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Date/Time", key: "created_at" },
+    { label: "Date Created/Time", key: "created_at" },
   ]
   const headerDebit = [
     { label: "Source", key: "source" },
     { label: "Retailer Name", key: "destination" },
     { label: "Amount", key: "amount" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Date/Time", key: "time" },
+    { label: "Date Created/Time", key: "time" },
   ]
   const Vtu = []
   return (

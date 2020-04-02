@@ -118,6 +118,7 @@ const RetailerList = () => {
       username,
       password,
       user_id,
+      type: "REGULAR",
     })
     // inputs for Activating retailers
     setActivateRetailer({
@@ -178,14 +179,14 @@ const RetailerList = () => {
   }, [])
   const ColumnsTwo = [
     {
-      title: "Username",
+      title: "POS Username",
       dataIndex: "username",
       key: "username",
 
       // render: text => <a>{text}</a>,
     },
     {
-      title: "Full Name",
+      title: "Retailer Name",
       dataIndex: "name",
       key: "name",
     },
@@ -196,13 +197,13 @@ const RetailerList = () => {
       key: "phone",
     },
     {
-      title: "VTU Name",
+      title: "Assigned Wallet",
       dataIndex: "vtu_name",
       key: "vtu_name",
     },
 
     {
-      title: "Sub Dealer",
+      title: "Assigned Sub Dealer",
       dataIndex: "sub_dealer_name",
       key: "sub_dealer_name",
     },
@@ -271,7 +272,7 @@ const RetailerList = () => {
     //   // align: "right",
     // },
     {
-      title: "Date/Time",
+      title: "Date Created/Time",
       dataIndex: "created_at",
       key: "created_at",
 
@@ -706,7 +707,7 @@ const RetailerList = () => {
     { label: "Retailer Number", key: "phone" },
     { label: "USSD Code", key: "code" },
     { label: "Status", key: "status" },
-    { label: "Date/Time", key: "created_at" },
+    { label: "Date Created/Time", key: "created_at" },
   ]
 
   return (
@@ -913,7 +914,7 @@ const RetailerList = () => {
                       onChange={handleRetailChange}
                     />
                   </div>
-                  <div className="formInput VTUInput">
+                  {/* <div className="formInput VTUInput">
                     <label htmlFor="type">Type</label>
                     <Select
                       style={{ width: "100%" }}
@@ -923,7 +924,7 @@ const RetailerList = () => {
                       <Option value="REGULAR">RETAILER</Option>
                       <Option value="SUB DEALER">SUB DEALER</Option>
                     </Select>
-                  </div>
+                  </div> */}
 
                   <div className="formInput VTUInput">
                     <label htmlFor="name">Dealer Pin</label>

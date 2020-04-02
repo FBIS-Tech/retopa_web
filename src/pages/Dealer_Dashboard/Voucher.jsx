@@ -190,7 +190,7 @@ const Voucher = () => {
       ),
     },
     {
-      title: "Date/Time",
+      title: "Date Created/Time",
       dataIndex: "created_at",
       key: "created_at",
     },

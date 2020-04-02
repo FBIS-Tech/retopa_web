@@ -102,7 +102,7 @@ export const History = [
 //     key: "ref",
 //   },
 //   {
-//     title: "Date/Time",
+//     title: "Date Created/Time",
 //     dataIndex: "time",
 //     key: "time",
 //   },

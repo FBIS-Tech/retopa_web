@@ -152,7 +152,7 @@ const SubDealer = () => {
   }, [])
   const ColumnsTwo = [
     {
-      title: "Username",
+      title: "POS Username",
       dataIndex: "username",
       key: "username",
 
@@ -165,29 +165,29 @@ const SubDealer = () => {
     },
 
     {
-      title: "Counter",
+      title: "Retailers",
       dataIndex: "counter",
       key: "counter",
     },
     {
-      title: "Retailer number",
+      title: "Sub-Dealer number",
       dataIndex: "phone",
       key: "phone",
     },
 
-    {
-      title: "USSD Code",
-      dataIndex: "code",
-      key: "code",
-      render: (text, record) => (
-        <div>
-          {record.tp_no}
-          {record.code}
-        </div>
-      ),
+    // {
+    //   title: "USSD Code",
+    //   dataIndex: "code",
+    //   key: "code",
+    //   render: (text, record) => (
+    //     <div>
+    //       {record.tp_no}
+    //       {record.code}
+    //     </div>
+    //   ),
 
-      // align: "right",
-    },
+    //   // align: "right",
+    // },
     // {
     //   title: "Status",
     //   dataIndex: "status",
@@ -207,7 +207,7 @@ const SubDealer = () => {
     //     ),
     // },
     {
-      title: "Date/Time",
+      title: "Date Created/Time",
       dataIndex: "created_at",
       key: "created_at",
 
@@ -553,7 +553,7 @@ const SubDealer = () => {
     { label: "Retailer Number", key: "phone" },
     { label: "USSD Code", key: "code" },
     { label: "Status", key: "status" },
-    { label: "Date/Time", key: "created_at" },
+    { label: "Date Created/Time", key: "created_at" },
   ]
 
   /////////////////////wallet column/////////////////////////

@@ -122,7 +122,7 @@ const Transactions = () => {
       key: "phone",
     },
     {
-      title: "Date/Time",
+      title: "Date Created/Time",
       dataIndex: "created_at",
       key: "created_at",
     },
@@ -154,7 +154,7 @@ const Transactions = () => {
     { label: "Retailer Name", key: "destination" },
     { label: "Amount", key: "amount" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Date/Time", key: "created_at" },
+    { label: "Date Created/Time", key: "created_at" },
   ]
 
   // get date

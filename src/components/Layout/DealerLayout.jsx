@@ -189,7 +189,7 @@ const DealerLayout = ({
             <Dash_voucher_icon />
             <span className="nav-text">VTU</span>
           </Menu.Item>
-          <Menu.Item
+          {/* <Menu.Item
             key="3"
             onClick={() => {
               navigateTo("/Dealer_Dashboard/Wallet")
@@ -198,7 +198,7 @@ const DealerLayout = ({
           >
             <Dash_bill_icon />
             <span className="nav-text">Wallet</span>
-          </Menu.Item>
+          </Menu.Item> */}
 
           <Menu.Item
             key="5"

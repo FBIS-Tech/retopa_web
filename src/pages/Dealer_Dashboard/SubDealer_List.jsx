@@ -51,6 +51,7 @@ const SubDealerList = () => {
       rt_id: retailer.user_id,
       d_id: retailer.user_id,
     }
+    console.log(VTU)
     const requestVtu = new Promise(res => {
       res(Instance.post("", VTU))
     })
@@ -63,35 +64,121 @@ const SubDealerList = () => {
     })
   }, [])
 
+  // key: "type",
+
+  //   const ColumnsTwo = [
+  //     {
+  //       title: "Username",
+  //       dataIndex: "username",
+  //       key: "username",
+
+  //       // render: text => <a>{text}</a>,
+  //     },
+  //     {
+  //       title: "Full name",
+  //       dataIndex: "name",
+  //       key: "name",
+  //     },
+  //     {
+  //       title: "Type",
+  //       dataIndex: "type",
+  //     // render: text => <a>{text}</a>,
+  //   },
+
+  //   {
+  //     title: "Retailer number",
+  //     dataIndex: "phone",
+  //     key: "phone",
+  //   },
+
+  //   {
+  //     title: "USSD Code",
+  //     dataIndex: "code",
+  //     key: "code",
+  //     render: (text, record) => (
+  //       <div>
+  //         {record.tp_no}
+  //         {record.code}
+  //       </div>
+  //     ),
+
+  //     // align: "right",
+  //   },
+  //   {
+  //     title: "POS Status",
+  //     dataIndex: "status",
+  //     key: "status",
+
+  //     render: text =>
+  //       text === 1 ? (
+  //         <p className="enabled">
+  //           <Green className="dotPosition" />
+  //           Enable
+  //         </p>
+  //       ) : (
+  //         <p className="disabled">
+  //           <Red className="dotPosition" />
+  //           Disabled
+  //         </p>
+  //       ),
+  //   },
+  //   {
+  //     title: "Dealer",
+  //     dataIndex: "d_id",
+  //     key: "d_id",
+  //     render: (text, record) => (
+  //       <p style={{ marginBottom: "0px" }}>{retailer.name}</p>
+  //     ),
+  //   },
+  //   {
+  //     title: "Date Created/Time",
+  //     dataIndex: "created_at",
+  //     key: "created_at",
+
+  //     // align: "right",
+  //   },
+  // ]
   const ColumnsTwo = [
     {
-      title: "Username",
+      title: "POS Username",
       dataIndex: "username",
       key: "username",
 
       // render: text => <a>{text}</a>,
     },
     {
-      title: "Full name",
+      title: "Retailer Name",
       dataIndex: "name",
       key: "name",
     },
-    {
-      title: "Type",
-      dataIndex: "type",
-      key: "type",
-
-      // render: text => <a>{text}</a>,
-    },
 
     {
-      title: "Retailer number",
+      title: "Retailer Number",
       dataIndex: "phone",
       key: "phone",
     },
+    {
+      title: "Assigned Wallet",
+      dataIndex: "vtu_name",
+      key: "vtu_name",
+    },
 
     {
-      title: "USSD Code",
+      title: "Assigned Sub Dealer",
+      dataIndex: "sub_dealer_name",
+      key: "sub_dealer_name",
+    },
+    {
+      title: "Wallet Balance",
+      dataIndex: "balance",
+      key: "balance",
+      render: (text, record) => (
+        <div>{`₦ ${parseInt(record.balance).toLocaleString()}`}</div>
+      ),
+    },
+
+    {
+      title: "Retail Code",
       dataIndex: "code",
       key: "code",
       render: (text, record) => (
@@ -102,6 +189,14 @@ const SubDealerList = () => {
       ),
 
       // align: "right",
+    },
+    {
+      title: "Dealer",
+      dataIndex: "d_id",
+      key: "d_id",
+      render: (text, record) => (
+        <p style={{ marginBottom: "0px" }}>{retailer.name}</p>
+      ),
     },
     {
       title: "POS Status",
@@ -122,15 +217,25 @@ const SubDealerList = () => {
         ),
     },
     {
-      title: "Dealer",
-      dataIndex: "d_id",
-      key: "d_id",
-      render: (text, record) => (
-        <p style={{ marginBottom: "0px" }}>{retailer.name}</p>
-      ),
+      title: "USSD Status",
+      dataIndex: "ussd_status",
+      key: "ussd_status",
+
+      render: text =>
+        text === 1 ? (
+          <p className="enabled">
+            <Green className="dotPosition" />
+            Active
+          </p>
+        ) : (
+          <p className="disabled">
+            <Red className="dotPosition" />
+            Inactive
+          </p>
+        ),
     },
     {
-      title: "Date/Time",
+      title: "Date Created/Time",
       dataIndex: "created_at",
       key: "created_at",
 
@@ -153,14 +258,14 @@ const SubDealerList = () => {
     { label: "Retailer Name", key: "destination" },
     { label: "Amount", key: "amount" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Date/Time", key: "created_at" },
+    { label: "Date Created/Time", key: "created_at" },
   ]
   const headerDebit = [
     { label: "Source", key: "source" },
     { label: "Retailer Name", key: "destination" },
     { label: "Amount", key: "amount" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Date/Time", key: "time" },
+    { label: "Date Created/Time", key: "time" },
   ]
   return (
     <DealerLayout title={title} position={["5"]}>

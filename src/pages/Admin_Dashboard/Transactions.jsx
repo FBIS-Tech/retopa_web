@@ -62,7 +62,6 @@ const Transactions = () => {
   // created_at: "2019-06-14 23:44:33"
   // updated_at: "2019-06-14 2
   const HistoryColumn = [
-
     {
       title: "Retailer code",
       dataIndex: "code",
@@ -108,7 +107,7 @@ const Transactions = () => {
       key: "loaded",
     },
     {
-      title: "Date/Time",
+      title: "Date Created/Time",
       dataIndex: "created_at",
       key: "created_at",
     },
@@ -141,7 +140,7 @@ const Transactions = () => {
     { label: "Amount", key: "amount" },
     { label: "Retailer's number", key: "requested" },
     { label: "Customer", key: "loaded" },
-    { label: "Date/Time", key: "created_at" },
+    { label: "Date Created/Time", key: "created_at" },
   ]
 
   // get date
@@ -213,7 +212,10 @@ const Transactions = () => {
                     >
                       SEARCH
                     </Button>
-                    <Button style={{marginLeft:"10px"}} className={history.length<=0?"hide":""}>
+                    <Button
+                      style={{ marginLeft: "10px" }}
+                      className={history.length <= 0 ? "hide" : ""}
+                    >
                       <CSVLink
                         data={history}
                         filename={"Retailers.csv"}

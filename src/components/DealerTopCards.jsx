@@ -12,7 +12,7 @@ const DealerTopCards = ({ number, description, voucher, direct }) => {
           <div className="dealerCardImage">
             {description === "Voucher Count" ? (
               <Voucher />
-            ) : description === "Direct top up count" ? (
+            ) : description === "Total Recharge Today" ? (
               <Direct />
             ) : (
               <div className="imgee">
@@ -25,7 +25,7 @@ const DealerTopCards = ({ number, description, voucher, direct }) => {
             <h4>
               {description === "Voucher Count"
                 ? voucher
-                : description === "Direct top up count"
+                : description === "Total Recharge Today"
                 ? direct
                 : number}
             </h4>

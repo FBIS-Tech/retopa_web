@@ -127,7 +127,7 @@ const RetailerHistory = () => {
       key: "ref",
     },
     {
-      title: "Date/Time",
+      title: "Date Created/Time",
       dataIndex: "created_at",
       key: "created_at",
     },
@@ -153,7 +153,7 @@ const RetailerHistory = () => {
     { label: "Amount", key: "amount" },
     { label: "Type", key: "type" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Date/Time", key: "time" },
+    { label: "Date Created/Time", key: "time" },
   ]
   return (
     <SubDealerLayout title={title} position={["5"]}>
