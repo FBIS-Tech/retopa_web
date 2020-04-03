@@ -11,6 +11,7 @@ import {
   Popover,
   Modal,
   Form,
+  Popconfirm,
 } from "antd"
 import "../../scss/Table.scss"
 import { TableTwo } from "../../components/Constants/Tableone"
@@ -34,7 +35,9 @@ const { Option } = Select
 
 const SubDealer = () => {
   const [openToken, setOpenToken] = useState(false)
+  const [openToken2, setOpenToken2] = useState(false)
   const [retailer, setRetailer] = useState([])
+  const [vtuDATA, setVtuDATA] = useState([])
   const [walletData, setWalletData] = useState([])
   const [SelectRetailer, setSelectRetailer] = useState([])
   const [message, setMessage] = useState("")
@@ -65,6 +68,9 @@ const SubDealer = () => {
   })
   const [fund, setFund] = useState({
     serviceCode: "FSDF",
+  })
+  const [vtu, setVtu] = useState({
+    serviceCode: "AVVD",
   })
 
   const dispatch = useDispatch()
@@ -123,7 +129,7 @@ const SubDealer = () => {
       username,
       password,
     })
-    // inputs for funding retailers
+    // inputs for Assigning retailers
     setAssign({
       ...assign,
       username,
@@ -133,6 +139,12 @@ const SubDealer = () => {
     // inputs for funding retailers
     setFund({
       ...fund,
+      username,
+      password,
+      user_id,
+    })
+    setVtu({
+      ...vtu,
       username,
       password,
       user_id,
@@ -147,6 +159,21 @@ const SubDealer = () => {
         let allRetailers = data.sub_dealers
         setRetailer(allRetailers)
         // to query sub dealers only
+      }
+    })
+
+    // request for Vtu list
+    const reqVTU = {
+      username,
+      password,
+      serviceCode: "VTULS",
+    }
+    const requestVtu = new Promise(res => {
+      res(Instance.post("", reqVTU))
+    })
+    requestVtu.then(({ data }) => {
+      if (data.status === "200") {
+        setVtuDATA(data.vtus)
       }
     })
   }, [])
@@ -174,38 +201,11 @@ const SubDealer = () => {
       dataIndex: "phone",
       key: "phone",
     },
-
-    // {
-    //   title: "USSD Code",
-    //   dataIndex: "code",
-    //   key: "code",
-    //   render: (text, record) => (
-    //     <div>
-    //       {record.tp_no}
-    //       {record.code}
-    //     </div>
-    //   ),
-
-    //   // align: "right",
-    // },
-    // {
-    //   title: "Status",
-    //   dataIndex: "status",
-    //   key: "status",
-
-    //   render: text =>
-    //     text === 1 ? (
-    //       <p className="enabled">
-    //         <Green className="dotPosition" />
-    //         Enable
-    //       </p>
-    //     ) : (
-    //       <p className="disabled">
-    //         <Red className="dotPosition" />
-    //         Disabled
-    //       </p>
-    //     ),
-    // },
+    {
+      title: "VTU Name",
+      dataIndex: "vtu_name",
+      key: "vtu_name",
+    },
     {
       title: "Date Created/Time",
       dataIndex: "created_at",
@@ -232,6 +232,18 @@ const SubDealer = () => {
                 }}
               >
                 Fund Sub-Dealer
+              </p>
+              <p
+                id={record.id}
+                title={record.name}
+                onClick={e => {
+                  let id = e.target.id
+                  setOpenToken2(!openToken2)
+                  setVtu({ ...vtu, d_id: record.id })
+                  setName(e.currentTarget.title)
+                }}
+              >
+                Assign VTU
               </p>
               <p
                 id={record.id}
@@ -567,8 +579,60 @@ const SubDealer = () => {
       title: "Balance",
       dataIndex: "balance",
       key: "balance",
+      render: (text, record) => (
+        <div>{`₦ ${parseInt(record.balance).toLocaleString()}`}</div>
+      ),
     },
   ]
+  /////////////////////vtu select/////////////////////////
+
+  function handleVTUSelect(value) {
+    setVtu({
+      ...vtu,
+      vtu_id: value,
+    })
+  }
+
+  const handleVTUAssign = () => {
+    setLoading(true)
+    const vtuAssign = new Promise(res => {
+      res(Instance.post("", vtu))
+    })
+    vtuAssign.then(({ data }) => {
+      let fields = data.required_fields
+      let m = data.message
+      if (data.status === "301") {
+        setLoading(false)
+        setError(fields)
+        setTimeout(() => {
+          setError([])
+        }, 3000)
+      } else if (data.status === "200") {
+        setLoading(false)
+        setMessage(m)
+        setTimeout(() => {
+          window.location.reload()
+          setMessage("")
+        }, 3000)
+      } else {
+        setLoading(false)
+        setMessage(m)
+        setTimeout(() => {
+          setMessage("")
+        }, 3000)
+      }
+    })
+  }
+
+  // ///////////////////////confirmations ///////////////////////////////
+  function confirm(e) {
+    handleFundTransfer()
+  }
+
+  function cancel(e) {
+    console.log(e)
+    // message.error("Click on No")
+  }
 
   return (
     <DealerLayout title={title} position={["9"]}>
@@ -576,7 +640,7 @@ const SubDealer = () => {
         <Tabs defaultActiveKey="1" onTabClick={handleRetailTab}>
           <TabPane tab="Sub Dealer List" key="1">
             <div
-              className={openToken ? "hide" : "table_container"}
+              className={openToken || openToken2 ? "hide" : "table_container"}
               style={
                 TableTwo.length <= 9 ? { height: "100vh" } : { height: "auto" }
               }
@@ -657,16 +721,16 @@ const SubDealer = () => {
                         onChange={handleFund}
                       />
                     </Form.Item>
-                    <Form.Item label="Select Sub-Dealer">
+                    <Form.Item label="Select VTU">
                       <Select
                         style={{ width: "100%" }}
-                        defaultValue="Select Sub-Dealer"
+                        defaultValue="Select VTU"
                         onChange={handleAssign}
                       >
-                        {walletData.map(data => {
+                        {vtuDATA.map(data => {
                           return (
-                            <Option key={data.id} value={data.vtu_id}>
-                              {data.vtu_name}
+                            <Option key={data.id} value={data.id}>
+                              {data.name}
                             </Option>
                           )
                         })}
@@ -684,11 +748,82 @@ const SubDealer = () => {
                 </div>
                 <div className="btnTokenGroup"></div>
                 <div className="tokenBtn">
+                  <Popconfirm
+                    title={`You are about to send the sum of ₦ ${parseInt(
+                      fund.amount
+                    ).toLocaleString()} to ${name}, please press "Yes" to confirm`}
+                    onConfirm={confirm}
+                    onCancel={cancel}
+                    okText="Yes"
+                    cancelText="No"
+                  >
+                    <Button
+                      // onClick={handleFundTransfer}
+                      loading={!loading ? false : true}
+                    >
+                      Send Fund
+                    </Button>
+                  </Popconfirm>
+                </div>
+              </div>
+            </div>
+            {/* **********************************assign vtu************************************************************** */}
+            <div className={openToken2 ? "sendTokenContainer" : "hide"}>
+              <div className="sendTokenGroup">
+                <div className="tokenTitle">
+                  <h4>
+                    Assign VTU to{" "}
+                    <span
+                      style={{
+                        color: "Green",
+                        fontWeight: "bold",
+                        fontSize: "16px",
+                      }}
+                    >
+                      {name}
+                    </span>
+                  </h4>
+                </div>
+                <div className="tokenForm">
+                  <Form layout="vertical">
+                    {error.map(data => (
+                      <div key={data} className="errors">
+                        {data}
+                      </div>
+                    ))}
+                    <div
+                      className={
+                        message === "Invalid Secret Key...Try again later!"
+                          ? "errors"
+                          : "msg"
+                      }
+                    >
+                      {message}
+                    </div>
+                    <Form.Item label="Select VTU ">
+                      <Select
+                        style={{ width: "100%" }}
+                        defaultValue="Select Wallet"
+                        onChange={handleVTUSelect}
+                      >
+                        {vtuDATA.map(data => {
+                          return (
+                            <Option key={data.id} value={data.id}>
+                              {data.name}
+                            </Option>
+                          )
+                        })}
+                      </Select>
+                    </Form.Item>
+                  </Form>
+                </div>
+                <div className="btnTokenGroup"></div>
+                <div className="tokenBtn">
                   <Button
-                    onClick={handleFundTransfer}
+                    onClick={handleVTUAssign}
                     loading={!loading ? false : true}
                   >
-                    Send Fund
+                    Assign
                   </Button>
                 </div>
               </div>

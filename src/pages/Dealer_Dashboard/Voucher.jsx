@@ -2,7 +2,16 @@ import React, { useState, useEffect } from "react"
 import "../../scss/Retailer.scss"
 import "../../scss/Admin.scss"
 import "../../scss/Export.scss"
-import { Input, Button, Tabs, Popover, Icon, Table, Form } from "antd"
+import {
+  Input,
+  Button,
+  Tabs,
+  Popover,
+  Icon,
+  Table,
+  Form,
+  Popconfirm,
+} from "antd"
 import DealerLayout from "../../components/Layout/DealerLayout"
 import { VoucherIcon } from "../../components/CustomIcons"
 import { Base64 } from "js-base64"
@@ -122,13 +131,13 @@ const Voucher = () => {
         setMessage(m)
         setTimeout(() => {
           setMessage("")
+          window.location.reload()
         }, 3000)
       } else {
         setLoading(false)
         setMessage(m)
         setTimeout(() => {
           setMessage("")
-          window.location.reload()
         }, 3000)
       }
     })
@@ -223,6 +232,16 @@ const Voucher = () => {
       ),
     },
   ]
+
+  // ///////////////////////confirmations ///////////////////////////////
+  function confirm(e) {
+    handleFundTransfer()
+  }
+
+  function cancel(e) {
+    console.log(e)
+    // message.error("Click on No")
+  }
 
   const filteredList = vtu.filter(item => item.vtu_line.includes(filtered))
 
@@ -323,12 +342,22 @@ const Voucher = () => {
                     </div>
                     <div className="btnTokenGroup"></div>
                     <div className="tokenBtn">
-                      <Button
-                        onClick={handleFundTransfer}
-                        loading={!loading ? false : true}
+                      <Popconfirm
+                        title={`You are about to send the sum of ₦ ${parseInt(
+                          fund.amount
+                        ).toLocaleString()} to ${name}, please press "Yes" to confirm`}
+                        onConfirm={confirm}
+                        onCancel={cancel}
+                        okText="Yes"
+                        cancelText="No"
                       >
-                        Send Fund
-                      </Button>
+                        <Button
+                          // onClick={handleFundTransfer}
+                          loading={!loading ? false : true}
+                        >
+                          Send Fund
+                        </Button>
+                      </Popconfirm>
                     </div>
                   </div>
                 </div>

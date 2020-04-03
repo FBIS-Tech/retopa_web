@@ -30,6 +30,16 @@ table {
   font-size: 18px;
 }
 
+.ant-popover-inner-content {
+    padding: 20px !important;
+}
+
+.ant-popover-message-title {
+    width: 100%;
+    max-width: 400px;
+    color: #227f00;
+    font-weight: 800;
+}
 
 tbody.ant-table-tbody {
   tr {

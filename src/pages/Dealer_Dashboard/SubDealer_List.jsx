@@ -51,7 +51,6 @@ const SubDealerList = () => {
       rt_id: retailer.user_id,
       d_id: retailer.user_id,
     }
-    console.log(VTU)
     const requestVtu = new Promise(res => {
       res(Instance.post("", VTU))
     })
@@ -59,6 +58,7 @@ const SubDealerList = () => {
       //console.log(data)
       if (data.status === "200") {
         let retailers = data.sub_dealers
+        console.log(retailers)
         setVtuHistory(retailers)
       }
     })
@@ -163,19 +163,19 @@ const SubDealerList = () => {
       key: "vtu_name",
     },
 
-    {
-      title: "Assigned Sub Dealer",
-      dataIndex: "sub_dealer_name",
-      key: "sub_dealer_name",
-    },
-    {
-      title: "Wallet Balance",
-      dataIndex: "balance",
-      key: "balance",
-      render: (text, record) => (
-        <div>{`₦ ${parseInt(record.balance).toLocaleString()}`}</div>
-      ),
-    },
+    // {
+    //   title: "Assigned Sub Dealer",
+    //   dataIndex: "sub_dealer_name",
+    //   key: "sub_dealer_name",
+    // },
+    // {
+    //   title: "Wallet Balance",
+    //   dataIndex: "balance",
+    //   key: "balance",
+    //   render: (text, record) => (
+    //     <div>{`₦ ${parseInt(record.balance).toLocaleString()}`}</div>
+    //   ),
+    // },
 
     {
       title: "Retail Code",

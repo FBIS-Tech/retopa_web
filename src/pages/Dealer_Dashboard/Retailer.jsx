@@ -11,6 +11,8 @@ import {
   Popover,
   Form,
   Tooltip,
+  Popconfirm,
+  message,
 } from "antd"
 import "../../scss/Table.scss"
 import { TableTwo } from "../../components/Constants/Tableone"
@@ -38,6 +40,7 @@ const RetailerList = () => {
   const [openToken, setOpenToken] = useState(false)
   const [openToken2, setOpenToken2] = useState(false)
   const [retailer, setRetailer] = useState([])
+  const [vtu, setVtu] = useState([])
   const [message, setMessage] = useState("")
   const [messageAct, setMessageAct] = useState("")
   const [loading, setLoading] = useState(false)
@@ -164,7 +167,12 @@ const RetailerList = () => {
     }
 
     // sub dealers list
-    const reqSubDealer = { serviceCode: "SSDL", username, password, user_id }
+    const reqSubDealer = {
+      serviceCode: "SSDL",
+      username,
+      password,
+      user_id,
+    }
     // request for sub dealer list
     const request = new Promise(res => {
       res(Instance.post("", reqSubDealer))
@@ -174,6 +182,20 @@ const RetailerList = () => {
         let allRetailers = data.sub_dealers
         setSelectSub(allRetailers)
         // to query sub dealers only
+      }
+    })
+    // request for Vtu list
+    const reqVTU = {
+      username,
+      password,
+      serviceCode: "VTULS",
+    }
+    const requestVtu = new Promise(res => {
+      res(Instance.post("", reqVTU))
+    })
+    requestVtu.then(({ data }) => {
+      if (data.status === "200") {
+        setVtu(data.vtus)
       }
     })
   }, [])
@@ -275,7 +297,7 @@ const RetailerList = () => {
       title: "Date Created/Time",
       dataIndex: "created_at",
       key: "created_at",
-      // sorter: (a, b) => a.created_at - b.created_at,
+      sorter: (a, b) => a.created_at - b.created_at,
       // align: "right",
     },
     {
@@ -360,6 +382,14 @@ const RetailerList = () => {
     setInput({
       ...inputChange,
       type: value,
+    })
+  }
+
+  // handle vtu select
+  function handleVTUSelect(value) {
+    setFund({
+      ...fund,
+      vtu_id: value,
     })
   }
   const handleChange = e => {
@@ -613,8 +643,7 @@ const RetailerList = () => {
   }
 
   const handleFundTransfer = () => {
-    // console.log(fund)
-    // return
+    console.log(fund)
     setLoading(true)
     const sendRequest = new Promise(res => {
       res(Instance.post("", fund))
@@ -708,6 +737,16 @@ const RetailerList = () => {
     { label: "Date Created/Time", key: "created_at" },
   ]
 
+  // ///////////////////////confirmations ///////////////////////////////
+  function confirm(e) {
+    handleFundTransfer()
+  }
+
+  function cancel(e) {
+    console.log(e)
+    // message.error("Click on No")
+  }
+
   return (
     <DealerLayout title={title} position={["2"]}>
       <div>
@@ -787,6 +826,21 @@ const RetailerList = () => {
                     >
                       {message}
                     </div>
+                    <Form.Item label="Select VTU">
+                      <Select
+                        style={{ width: "100%" }}
+                        defaultValue="Select VTU name"
+                        onChange={handleVTUSelect}
+                      >
+                        {vtu.map(data => {
+                          return (
+                            <Option key={data.id} value={data.id}>
+                              {data.name}
+                            </Option>
+                          )
+                        })}
+                      </Select>
+                    </Form.Item>
                     <Form.Item label="AMOUNT">
                       <Input
                         name="amount"
@@ -807,12 +861,22 @@ const RetailerList = () => {
                 </div>
                 <div className="btnTokenGroup"></div>
                 <div className="tokenBtn">
-                  <Button
-                    onClick={handleFundTransfer}
-                    loading={!loading ? false : true}
+                  <Popconfirm
+                    title={`You are about to send the sum of ₦ ${parseInt(
+                      fund.amount
+                    ).toLocaleString()} to ${name}, please press "Yes" to confirm`}
+                    onConfirm={confirm}
+                    onCancel={cancel}
+                    okText="Yes"
+                    cancelText="No"
                   >
-                    Send Fund
-                  </Button>
+                    <Button
+                      // onClick={handleFundTransfer}
+                      loading={!loading ? false : true}
+                    >
+                      Send Fund
+                    </Button>
+                  </Popconfirm>
                 </div>
               </div>
             </div>
