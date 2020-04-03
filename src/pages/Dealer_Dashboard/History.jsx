@@ -96,7 +96,7 @@ const RetailerHistory = () => {
   //           "retailer_name": "Kayode"
   const HistoryColumni = [
     {
-      title: "Dealer Name",
+      title: "Retailer Name",
       dataIndex: "retailer_name",
       key: "retailer_name",
     },
@@ -208,7 +208,7 @@ const RetailerHistory = () => {
       ),
     },
     {
-      title: "Retailer Name",
+      title: "Trade Partner Name",
       dataIndex: "destination",
       key: "destination",
       render: (text, record) => (
