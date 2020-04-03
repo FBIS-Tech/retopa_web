@@ -31,6 +31,7 @@ const Voucher = () => {
   const [openToken, setOpenToken] = useState(false)
   const [fund, setFund] = useState({
     serviceCode: "FDM",
+    ref: "65389201652216",
   })
 
   useEffect(() => {
@@ -323,13 +324,13 @@ const Voucher = () => {
                             onChange={handleFund}
                           />
                         </Form.Item>
-                        <Form.Item label="TOKEN">
+                        {/* <Form.Item label="TOKEN">
                           <Input
                             name="ref"
                             placeholder="Enter Unique Token"
                             onChange={handleFund}
                           />
-                        </Form.Item>
+                        </Form.Item> */}
                         <Form.Item label="Dealer Pin">
                           <Input
                             name="pin"
