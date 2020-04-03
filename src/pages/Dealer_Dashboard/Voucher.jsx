@@ -29,6 +29,8 @@ const Voucher = () => {
   const [message, setMessage] = useState("")
   const [name, setName] = useState("")
   const [openToken, setOpenToken] = useState(false)
+  const [openToken2, setOpenToken2] = useState(false)
+  const [update, setUpdate] = useState({})
   const [fund, setFund] = useState({
     serviceCode: "FDM",
     ref: "65389201652216",
@@ -50,6 +52,12 @@ const Voucher = () => {
     const username = Base64.decode(data.TOKEN_ONE)
     const password = Base64.decode(data.TOKEN_TWO)
 
+    setUpdate({
+      ...update,
+      username,
+      password,
+      serviceCode: "UPDVTU",
+    })
     setInput({
       ...input,
       username,
@@ -89,14 +97,28 @@ const Voucher = () => {
       res(Instance.post("", input))
     })
     request.then(({ data }) => {
+      let fields = data.required_fields
       let m = data.message
-      let e = data.required_fields
-      if (data.status === "200") {
+      if (data.status === "301") {
         setLoading(false)
-        setMsg(m)
+        setError(fields)
+        setTimeout(() => {
+          setError([])
+        }, 3000)
+      } else if (data.status === 200) {
+        setLoading(false)
+        setMessage(m)
+        setTimeout(() => {
+          setMessage("")
+          window.location.reload()
+        }, 3000)
       } else {
         setLoading(false)
-        setError(e)
+        setMessage(m)
+        setTimeout(() => {
+          setMessage("")
+          // window.location.reload()
+        }, 3000)
       }
     })
   }
@@ -104,6 +126,7 @@ const Voucher = () => {
   // handle retail tab click{}
   const handleRetailTab = () => {
     setOpenToken(false)
+    setOpenToken2(false)
   }
 
   ////////////////////fund transfer////////////////////////////////
@@ -127,7 +150,7 @@ const Voucher = () => {
         setTimeout(() => {
           setError([])
         }, 3000)
-      } else if (data.status === "200") {
+      } else if (data.status === 200 || data.status === "200") {
         setLoading(false)
         setMessage(m)
         setTimeout(() => {
@@ -138,6 +161,7 @@ const Voucher = () => {
         setLoading(false)
         setMessage(m)
         setTimeout(() => {
+          window.location.reload()
           setMessage("")
         }, 3000)
       }
@@ -223,6 +247,21 @@ const Voucher = () => {
               >
                 Fund VTU
               </p>
+              <p
+                className={
+                  record.status === "2" && record.active === "0" ? "" : "hide"
+                }
+                id={record.username}
+                title={record.name}
+                onClick={e => {
+                  let id = e.target.id
+                  setOpenToken2(!openToken2)
+                  setUpdate({ ...update, vtu_id: record.id })
+                  setName(e.currentTarget.title)
+                }}
+              >
+                Update VTU
+              </p>
             </div>
           }
           placement="bottom"
@@ -244,6 +283,43 @@ const Voucher = () => {
     // message.error("Click on No")
   }
 
+  // //////////////////////VTU UPDATE//////////////////////////////////
+  const handleUpdate = e => {
+    setUpdate({ ...update, [e.currentTarget.name]: e.currentTarget.value })
+  }
+
+  const handleVTUupdate = () => {
+    setLoading(true)
+    const sendUpdateRequest = new Promise(res => {
+      res(Instance.post("", update))
+    })
+    sendUpdateRequest.then(({ data }) => {
+      let fields = data.required_fields
+      let m = data.message
+      if (data.status === "301") {
+        setLoading(false)
+        setError(fields)
+        setTimeout(() => {
+          setError([])
+        }, 3000)
+      } else if (data.status === 200) {
+        setLoading(false)
+        setMessage(m)
+        setTimeout(() => {
+          setMessage("")
+          window.location.reload()
+        }, 3000)
+      } else {
+        setLoading(false)
+        setMessage(m)
+        setTimeout(() => {
+          setMessage("")
+          // window.location.reload()
+        }, 3000)
+      }
+    })
+  }
+
   const filteredList = vtu.filter(item => item.vtu_line.includes(filtered))
 
   const title = (
@@ -259,7 +335,9 @@ const Voucher = () => {
           <div className="admin">
             <Tabs defaultActiveKey="1" onTabClick={handleRetailTab}>
               <TabPane tab="VTU list" key="1">
-                <div className={openToken ? "hide" : "table_Group"}>
+                <div
+                  className={openToken || openToken2 ? "hide" : "table_Group"}
+                >
                   <div className="table_header">
                     <div className="rowShow">
                       <h4>VTU list</h4>
@@ -359,6 +437,76 @@ const Voucher = () => {
                           Send Fund
                         </Button>
                       </Popconfirm>
+                    </div>
+                  </div>
+                </div>
+                {/******************************** * update vtu ************************************/}
+
+                <div className={openToken2 ? "sendTokenContainer" : "hide"}>
+                  <div className="sendTokenGroup">
+                    <div className="tokenTitle">
+                      <h4>
+                        Update VTU for{" "}
+                        <span
+                          style={{
+                            color: "Green",
+                            fontWeight: "bold",
+                            fontSize: "16px",
+                          }}
+                        >
+                          {name}
+                        </span>
+                      </h4>
+                    </div>
+                    <div className="tokenForm">
+                      <Form layout="vertical">
+                        {error.map(data => (
+                          <div key={data} className="errors">
+                            {data}
+                          </div>
+                        ))}
+                        <div
+                          className={
+                            message === "Invalid Secret Key...Try again later!"
+                              ? "errors"
+                              : "msg"
+                          }
+                        >
+                          {message}
+                        </div>
+                        <Form.Item label="VTU Line">
+                          <Input
+                            name="vtu_line"
+                            type="number"
+                            placeholder="2348********"
+                            onChange={handleUpdate}
+                          />
+                        </Form.Item>
+                        <Form.Item label="VTU Username">
+                          <Input
+                            name="vtu_username"
+                            placeholder="Enter Unique Token"
+                            onChange={handleUpdate}
+                          />
+                        </Form.Item>
+                        <Form.Item label="VTU Password">
+                          <Input
+                            name="vtu_password"
+                            type="password"
+                            placeholder="****"
+                            onChange={handleUpdate}
+                          />
+                        </Form.Item>
+                      </Form>
+                    </div>
+                    <div className="btnTokenGroup"></div>
+                    <div className="tokenBtn">
+                      <Button
+                        onClick={handleVTUupdate}
+                        loading={!loading ? false : true}
+                      >
+                        Update VTU
+                      </Button>
                     </div>
                   </div>
                 </div>
