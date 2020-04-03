@@ -418,7 +418,13 @@ const RetailerList = () => {
       } else if (data.status === "200") {
         setLoading(false)
         setMessageAct(m)
-      } else if (data.statusCode === "300") {
+      } else if (data.statusCode === "300" || data.status === "300") {
+        setLoading(false)
+        setMessageAct(m)
+        setTimeout(() => {
+          setMessageAct("")
+        }, 3000)
+      } else {
         setLoading(false)
         setMessageAct(m)
         setTimeout(() => {
