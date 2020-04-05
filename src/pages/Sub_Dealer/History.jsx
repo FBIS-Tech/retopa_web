@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react"
 import { Table, Icon, Input, Select, Pagination, Tabs, Button } from "antd"
+import { ColumnsTwo, TableTwo } from "../../components/Constants/Tableone"
 import "../../scss/Table.scss"
 import "../../scss/Retailer.scss"
 import { CSVLink, CSVDownload } from "react-csv"
-import Instance from "../../Api/Instance"
+import DealerLoginInstance from "../../Api/DealerLoginInstance"
 import { Base64 } from "js-base64"
+import DealerLayout from "../../components/Layout/DealerLayout"
 import { HistoryIcon } from "../../components/CustomIcons"
 import SubDealerLayout from "../../components/Layout/SubDealerLayout"
 const { TabPane } = Tabs
@@ -12,13 +14,12 @@ const { Option } = Select
 const Dash_history_icon = props => <Icon component={HistoryIcon} {...props} />
 
 const RetailerHistory = () => {
-  const [history, setHistory] = useState([])
-  const [historyCredit, setHistoryDebit] = useState([])
+  const [subHistory, setSUBHistory] = useState([])
+  const [historyRetailer, setHistoryRetailer] = useState([])
+  const [creditHistory, setCreditHistory] = useState([])
   const [usernameH, setUsernameH] = useState([])
-  const [name, setName] = useState("")
-  const [id, setID] = useState("")
   const [filteredCredit, setFilteredCredit] = useState("")
-  const [filteredDebit, setFilteredDebit] = useState("")
+  const [filtered, setFiltered] = useState("")
 
   useEffect(() => {
     let onLogged = sessionStorage.getItem("persist:root")
@@ -27,97 +28,216 @@ const RetailerHistory = () => {
     const { userData } = onLogged
     let allData = JSON.parse(userData)
     const { user_id } = allData
-    setID(user_id)
     setUsernameH(allData.username)
-    setName(allData.name)
-    let data = sessionStorage.getItem("topup")
-      ? JSON.parse(sessionStorage.getItem("topup"))
+    // gets tokens
+    let data = sessionStorage.getItem("topup3")
+      ? JSON.parse(sessionStorage.getItem("topup3"))
       : []
-
-    const username = Base64.decode(data.TOKEN_ONE)
-    const password = Base64.decode(data.TOKEN_TWO)
-    // const req = { serviceCode: "SMM", username, password, user_id }
-    const req = {
-      serviceCode: "HSS",
+    console.log(data)
+    const username = Base64.decode(data.TOKEN_ONE_DEALER)
+    const password = Base64.decode(data.TOKEN_TWO_DEALER)
+    const Creditreq = {
+      serviceCode: "CWH",
       username,
-      type: "VTU",
-      id: user_id,
-      rt_id: user_id,
       password,
       user_id,
     }
-    const reqCredit = {
+    const Debitreq = {
+      serviceCode: "DWH",
+      username,
+      password,
+      user_id,
+    }
+    const SubDealereq = {
+      serviceCode: "SMM",
+      username,
+      password,
+      user_id,
+    }
+    const retailereq = {
       serviceCode: "SMH",
       username,
       password,
       user_id,
     }
-
-    const request = new Promise(res => {
-      res(Instance.post("", req))
+    // ////credit history list//////////////////////////////////////
+    const requestCRD = new Promise(res => {
+      res(DealerLoginInstance.post("", Creditreq))
     })
-    request.then(({ data }) => {
+    requestCRD.then(({ data }) => {
       if (data.status === "200") {
-        setHistory(data.sub_dealers)
+        setCreditHistory(data.history)
       }
     })
-    const requestCredit = new Promise(res => {
-      res(Instance.post("", reqCredit))
+    // ////debit history list//////////////////////////////////////
+    const requestDBT = new Promise(res => {
+      res(DealerLoginInstance.post("", Debitreq))
     })
-
-    requestCredit.then(({ data }) => {
+    requestDBT.then(({ data }) => {
+      console.log(data)
       if (data.status === "200") {
-        //   var datat = data.history;
-        //let cast = (array) datat
-        //console.log(data.history)
-        setHistoryDebit(data.history)
+        setSUBHistory(data.history)
       }
     })
-
-    // get retailers
-    const reqRtl = {
-      serviceCode: "DHL",
-      username,
-      password,
-      user_id,
-      rt_id: user_id,
-      d_id: user_id,
-    }
-    // request for retailer list
-    const requestRtl = new Promise(res => {
-      res(Instance.post("", reqRtl))
-    })
-    //console.log(requestRtl)
-    requestRtl.then(({ data }) => {
-      // if (data.status === "200") {
-      //   setRetailer(data.sub_dealers)
-      // }
-    })
+    // // ////sub dealer history list/////////////////////////////////////
+    // const request = new Promise(res => {
+    //   res(DealerLoginInstance.post("", SubDealereq))
+    // })
+    // request.then(({ data }) => {
+    //   if (data.status === "200") {
+    //     setSUBHistory(data.history)
+    //   }
+    // })
+    // // ////sub dealer history list/////////////////////////////////////
+    // const requestDebit = new Promise(res => {
+    //   res(DealerLoginInstance.post("", retailereq))
+    // })
+    // ////console.log(requestCredit)
+    // requestDebit.then(({ data }) => {
+    //   if (data.status === "200") {
+    //     console.log(data)
+    //     setHistoryRetailer(data.history)
+    //   }
+    // })
   }, [])
-  const HistoryColumn = [
-    {
-      title: "Source",
-      dataIndex: "source",
-      key: "source",
-      render: (text, record) => (
-        <p style={{ marginBottom: "0px" }}>{text === id ? name : "ADMIN"}</p>
-      ),
-    },
+  // "id": 22,
+  //           "amount": "10.00",
+  //           "type": "CREDIT",
+  //           "account_type": "TP",
+  //           "ref": "15857529838127",
+  //           "balance": "10.00",
+  //           "fro_balance": "38990.00",
+  //           "source": 1,
+  //           "destination": 9,
+  //           "created_at": "2020-04-01 14:56:23",
+  //           "updated_at": "2020-04-01 14:56:23",
+  //           "retailer_name": "Kayode"
+  const HistoryColumni = [
     {
       title: "Retailer Name",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Type",
-      dataIndex: "type",
-      key: "type",
-      render: text => <p style={{ marginBottom: "0px" }}>{text}</p>,
+      dataIndex: "retailer_name",
+      key: "retailer_name",
     },
 
     {
       title: "Amount",
       dataIndex: "amount",
+      key: "amount",
+      render: (text, record) => (
+        <div>{`₦ ${parseInt(record.amount).toLocaleString()}`}</div>
+      ),
+    },
+    {
+      title: "Transaction Type",
+      dataIndex: "type",
+      key: "type",
+    },
+    {
+      title: "Retailer Balance",
+      dataIndex: "balance",
+      key: "balance",
+      render: (text, record) => (
+        <div>{`₦ ${parseInt(record.balance).toLocaleString()}`}</div>
+      ),
+    },
+    {
+      title: "Trade Partner Balance",
+      dataIndex: "fro_balance",
+      key: "fro_balance",
+      render: (text, record) => (
+        <div>{`₦ ${parseInt(record.fro_balance).toLocaleString()}`}</div>
+      ),
+    },
+
+    {
+      title: "Transaction ref",
+      dataIndex: "ref",
+      key: "ref",
+    },
+    {
+      title: "Date Created/Time",
+      dataIndex: "created_at",
+      key: "created_at",
+    },
+  ]
+
+  // id: 41
+  // amount: "10.00"
+  // type: "CREDIT"
+  // account_type: "SD"
+  // ref: "1586117836995"
+  // balance: "60.00"
+  // fro_balance: "20.00"
+  // source: 2
+  // destination: 9
+  // created_at: "2020-04-05 20:17:16"
+  // updated_at: "2020-04-05 20:17:16"
+  // retailer_name: "Kayode"
+  // vtu_name: "94RT1"
+
+  const HistoryColumn = [
+    {
+      title: "Retailer Name",
+      dataIndex: "retailer_name",
+      key: "retailer_name",
+    },
+
+    {
+      title: "Amount",
+      dataIndex: "amount",
+      key: "amount",
+      render: (text, record) => (
+        <div>{`₦ ${parseInt(record.amount).toLocaleString()}`}</div>
+      ),
+    },
+    {
+      title: "Sub-Dealer Balance",
+      dataIndex: "fro_balance",
+      key: "fro_balance",
+    },
+    {
+      title: "Retailer Balance",
+      dataIndex: "balance",
+      key: "balance",
+    },
+
+    {
+      title: "VTU Name",
+      dataIndex: "vtu_name",
+      key: "vtu_name",
+    },
+
+    {
+      title: "Transaction ref",
+      dataIndex: "ref",
+      key: "ref",
+    },
+    {
+      title: "Date Created/Time",
+      dataIndex: "created_at",
+      key: "created_at",
+    },
+  ]
+  const HistoryColumn2 = [
+    {
+      title: "Source",
+      dataIndex: "vtu_name",
+      key: "vtu_name",
+    },
+    {
+      title: "Trade Partner Name",
+      dataIndex: "tp_name",
+      key: "tp_name",
+    },
+
+    {
+      title: "Amount",
+      dataIndex: "amount",
+      key: "amount",
+    },
+    {
+      title: "Balance",
+      dataIndex: "balance",
       key: "amount",
     },
 
@@ -133,11 +253,22 @@ const RetailerHistory = () => {
     },
   ]
 
-  const filteredDebitItems = history.filter(item =>
-    item.ref.includes(filteredDebit.toLocaleLowerCase())
+  const filteredSubHistory = subHistory.filter(
+    item =>
+      item.ref.includes(filtered) ||
+      item.sub_dealer_name
+        .toLocaleLowerCase()
+        .includes(filtered.toLocaleLowerCase())
   )
-  const filteredCreditItems = historyCredit.filter(item =>
-    item.ref.includes(filteredCredit.toLocaleLowerCase())
+  const filteredRetailer = historyRetailer.filter(
+    item =>
+      item.ref.includes(filtered.toLocaleLowerCase()) ||
+      item.retailer_name
+        .toLocaleLowerCase()
+        .includes(filtered.toLocaleLowerCase())
+  )
+  const filtercreditHistory = creditHistory.filter(item =>
+    item.ref.includes(filtered)
   )
 
   const title = (
@@ -146,15 +277,36 @@ const RetailerHistory = () => {
       History
     </h4>
   )
-
-  const headerDebit = [
+  const headerCredit = [
     { label: "Source", key: "source" },
     { label: "Retailer Name", key: "destination" },
     { label: "Amount", key: "amount" },
-    { label: "Type", key: "type" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Date Created/Time", key: "time" },
+    { label: "Date Created/Time", key: "created_at" },
   ]
+  const headerSub = [
+    { label: "Source", key: "source" },
+    { label: "Sub-Dealer Name", key: "sub_dealer_name" },
+    { label: "Amount", key: "amount" },
+    { label: "Transaction Type", key: "type" },
+    { label: "Sub-Dealer Balance", key: "balance" },
+    { label: "Trade Partner Balance", key: "fro_balance" },
+    { label: "VTU Name", key: "vtu_name" },
+    { label: "Transaction ref", key: "ref" },
+    { label: "Date Created/Time", key: "created_at" },
+  ]
+
+  const headerCrd = [
+    { label: "Source", key: "source" },
+    { label: "Retailer Name", key: "retailer_name" },
+    { label: "Amount", key: "amount" },
+    { label: "Transaction Type", key: "type" },
+    { label: "Retailer Balance", key: "balance" },
+    { label: "Trade Partner Balance", key: "fro_balance" },
+    { label: "Transaction ref", key: "ref" },
+    { label: "Date Created/Time", key: "created_at" },
+  ]
+
   return (
     <SubDealerLayout title={title} position={["5"]}>
       <div>
@@ -165,14 +317,14 @@ const RetailerHistory = () => {
           }
         >
           <Tabs defaultActiveKey="1">
-            {/* <TabPane tab="Credit History" key="1">
+            <TabPane tab="Credit History" key="1">
               <div className="table_Group">
                 <div className="table_header">
                   <div className="rowShow">
                     <Button>
                       <CSVLink
-                        data={historyCredit}
-                        filename={"Wallet credits.csv"}
+                        data={creditHistory}
+                        filename={"Trade Partner History.csv"}
                         headers={headerCredit}
                         style={{ color: "white" }}
                       >
@@ -182,10 +334,10 @@ const RetailerHistory = () => {
                   </div>
                   <div className="searchTable">
                     <Input
-                      placeholder="Search Credit Wallet…"
-                      value={filteredCredit}
+                      placeholder="Search Trade Partner History…"
+                      value={filtered}
                       onChange={e => {
-                        setFilteredCredit(e.target.value)
+                        setFiltered(e.target.value)
                       }}
                       prefix={
                         <Icon type="search" style={{ color: "#D8D8D8" }} />
@@ -194,22 +346,22 @@ const RetailerHistory = () => {
                   </div>
                 </div>
                 <Table
-                  columns={HistoryColumnTwo}
-                  dataSource={filteredCreditItems}
+                  columns={HistoryColumn2}
+                  dataSource={filtercreditHistory}
                   bordered
                   size="small"
                 />
               </div>
-            </TabPane> */}
-            <TabPane tab="History" key="1">
+            </TabPane>
+            <TabPane tab="Debit Historyr" key="2">
               <div className="table_Group">
                 <div className="table_header">
                   <div className="rowShow">
                     <Button>
                       <CSVLink
-                        data={history}
-                        filename={"Wallet Debits.csv"}
-                        headers={headerDebit}
+                        data={subHistory}
+                        filename={"Debit History.csv"}
+                        headers={headerSub}
                         style={{ color: "white" }}
                       >
                         Export to CSV
@@ -218,10 +370,10 @@ const RetailerHistory = () => {
                   </div>
                   <div className="searchTable">
                     <Input
-                      placeholder="Search Debit History…"
-                      value={filteredDebit}
+                      placeholder="Search Sub-Dealer History…"
+                      value={filtered}
                       onChange={e => {
-                        setFilteredDebit(e.target.value)
+                        setFiltered(e.target.value)
                       }}
                       prefix={
                         <Icon type="search" style={{ color: "#D8D8D8" }} />
@@ -231,20 +383,48 @@ const RetailerHistory = () => {
                 </div>
                 <Table
                   columns={HistoryColumn}
-                  dataSource={filteredDebitItems}
+                  dataSource={filteredSubHistory}
                   bordered
                   size="small"
                 />
-                {/* <Pagination
-            total={TableOne.length}
-            showTotal={(total, range) =>
-              `${range[0]}-${range[1]} of ${total} items`
-            }
-            pageSize={10}
-            defaultCurrent={1}
-          /> */}
               </div>
             </TabPane>
+            {/* <TabPane tab="Retailer" key="3">
+              <div className="table_Group">
+                <div className="table_header">
+                  <div className="rowShow">
+                    <Button>
+                      <CSVLink
+                        data={historyRetailer}
+                        filename={"retailer history.csv"}
+                        headers={headerCrd}
+                        style={{ color: "white" }}
+                      >
+                        Export to CSV
+                      </CSVLink>
+                    </Button>
+                  </div>
+                  <div className="searchTable">
+                    <Input
+                      placeholder="Search Retailer History…"
+                      value={filtered}
+                      onChange={e => {
+                        setFiltered(e.target.value)
+                      }}
+                      prefix={
+                        <Icon type="search" style={{ color: "#D8D8D8" }} />
+                      }
+                    />
+                  </div>
+                </div>
+                <Table
+                  columns={HistoryColumni}
+                  dataSource={filteredRetailer}
+                  bordered
+                  size="small"
+                />
+              </div>
+            </TabPane> */}
           </Tabs>
         </div>
       </div>

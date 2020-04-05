@@ -9,7 +9,7 @@ import {
 } from "redux-saga/effects"
 import Instance from "../Api/Instance"
 import TradePatnerLogin from "../Api/TradePatnerLogin"
-import DealerLoginInstance from "../Api/DealerLoginInstance"
+import SubdealerApi from "../Api/SubdealerApi"
 import AdminLoginInstance from "../Api/AdminLoginInstance"
 // import { actionType } from "../actions/ActionType"
 import {
@@ -82,7 +82,8 @@ function* userLogin({ payload }) {
 }
 function* dealerLogin({ payload }) {
   try {
-    const request = yield DealerLoginInstance.post("", payload)
+    const request = yield SubdealerApi.post("", payload)
+    console.log(request)
     let s = request.data.status
     let d = request.data
     let ae = request.data.message

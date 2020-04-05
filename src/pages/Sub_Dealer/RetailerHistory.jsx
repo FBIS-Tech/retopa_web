@@ -3,7 +3,6 @@ import { Table, Icon, Input, Select, Pagination, Tabs, Button } from "antd"
 import "../../scss/Table.scss"
 import "../../scss/Retailer.scss"
 import { CSVLink, CSVDownload } from "react-csv"
-import Instance from "../../Api/Instance"
 import { Base64 } from "js-base64"
 import DealerLayout from "../../components/Layout/DealerLayout"
 import { HistoryIcon } from "../../components/CustomIcons"
@@ -11,6 +10,7 @@ import { useSelector } from "react-redux"
 import Green from "../../../assets/green.svg"
 import Red from "../../../assets/red.svg"
 import SubDealerLayout from "../../components/Layout/SubDealerLayout"
+import DealerLoginInstance from "../../Api/DealerLoginInstance"
 const { TabPane } = Tabs
 const { Option } = Select
 const Dash_history_icon = props => <Icon component={HistoryIcon} {...props} />
@@ -35,26 +35,30 @@ const RetailerSingleHistory = () => {
     let allData = JSON.parse(userData)
     const { user_id } = allData
     setUsernameH(allData.username)
-    let data = sessionStorage.getItem("topup")
-      ? JSON.parse(sessionStorage.getItem("topup"))
+    // gets tokens
+    let data = sessionStorage.getItem("topup3")
+      ? JSON.parse(sessionStorage.getItem("topup3"))
       : []
-
-    const username = Base64.decode(data.TOKEN_ONE)
-    const password = Base64.decode(data.TOKEN_TWO)
+    console.log(data)
+    const username = Base64.decode(data.TOKEN_ONE_DEALER)
+    const password = Base64.decode(data.TOKEN_TWO_DEALER)
 
     const VOD = {
       serviceCode: "TTV",
       username,
       type: "VOD",
       password,
-      user_id: retailer.user_id,
+      // user_id: retailer.user_id,
+      user_id: 1,
     }
 
     //////////////VOD history//////////////////////
+    console.log(VOD)
     const request = new Promise(res => {
-      res(Instance.post("", VOD))
+      res(DealerLoginInstance.post("", VOD))
     })
     request.then(({ data }) => {
+      console.log(data)
       if (data.status === "200") {
         setVODHistory(data.history)
       }
@@ -69,7 +73,7 @@ const RetailerSingleHistory = () => {
       user_id: retailer.user_id,
     }
     const requestData = new Promise(res => {
-      res(Instance.post("", DATA))
+      res(DealerLoginInstance.post("", DATA))
     })
     ////console.log(requestData)
     requestData.then(({ data }) => {
@@ -86,7 +90,7 @@ const RetailerSingleHistory = () => {
       user_id: retailer.user_id,
     }
     const requestAwuf = new Promise(res => {
-      res(Instance.post("", AWUF))
+      res(DealerLoginInstance.post("", AWUF))
     })
     requestAwuf.then(({ data }) => {
       if (data.status === "200") {
@@ -102,7 +106,7 @@ const RetailerSingleHistory = () => {
       user_id: retailer.user_id,
     }
     const requestVtu = new Promise(res => {
-      res(Instance.post("", VTU))
+      res(DealerLoginInstance.post("", VTU))
     })
     requestVtu.then(({ data }) => {
       if (data.status === "200") {

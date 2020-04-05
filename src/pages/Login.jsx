@@ -33,8 +33,6 @@ const Login = () => {
     }
   }
 
-  console.log(logError, authError, isError)
-
   // useMemo(() => setLoading(false), [logError])
   // useMemo(() => setLoading(false), [authError])
 

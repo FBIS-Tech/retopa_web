@@ -18,6 +18,7 @@ const {
   LOGIN_SUCCESS_DEALER,
   LOGIN_SUCCESS_ADMIN,
   TRANSACTIONS,
+  LOGIN_DEALER,
 } = actionType
 
 const initialState = {
@@ -53,6 +54,21 @@ export const rootReducer = (state = initialState, { type, payload }) => {
       const token = { TOKEN_ONE, TOKEN_TWO }
 
       sessionStorage.setItem("topup", JSON.stringify(token))
+      return {
+        ...state,
+        // loginDets: payload,
+        isError: false,
+        authError: "",
+        logError: [],
+      }
+    case LOGIN_DEALER:
+      let tokenOne_dealer = payload.username
+      let tokenTwo_dealer = payload.password
+      const TOKEN_ONE_DEALER = Base64.encode(tokenOne_dealer)
+      const TOKEN_TWO_DEALER = Base64.encode(tokenTwo_dealer)
+      const token3 = { TOKEN_ONE_DEALER, TOKEN_TWO_DEALER }
+
+      sessionStorage.setItem("topup3", JSON.stringify(token3))
       return {
         ...state,
         // loginDets: payload,

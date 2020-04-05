@@ -65,7 +65,7 @@ const SubDealer_Home = () => {
     <>
       <div className="dealer_home_container">
         <div className="dealer_home_group">
-          <div className="dash_dealer_top">
+          {/* <div className="dash_dealer_top">
             {topCardDetails.map(data => {
               return (
                 <DealerTopCards
@@ -79,7 +79,7 @@ const SubDealer_Home = () => {
                 />
               )
             })}
-          </div>
+          </div> */}
           <div className="activity_container">
             <div className="top_activity_container">
               <h4>Activities</h4>

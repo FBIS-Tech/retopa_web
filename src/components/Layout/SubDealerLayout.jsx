@@ -105,7 +105,7 @@ const SubDealerLayout = ({ children, title, position }) => {
             <span className="nav-text">Retailer</span>
           </Menu.Item>
 
-          <Menu.Item
+          {/* <Menu.Item
             key="3"
             onClick={() => {
               navigateTo("/Sub_Dealer/Wallet")
@@ -113,7 +113,7 @@ const SubDealerLayout = ({ children, title, position }) => {
           >
             <Dash_bill_icon />
             <span className="nav-text">Wallet</span>
-          </Menu.Item>
+          </Menu.Item> */}
 
           <Menu.Item
             key="5"
