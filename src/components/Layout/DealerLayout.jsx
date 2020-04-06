@@ -95,15 +95,6 @@ const DealerLayout = ({
       >
         <a>Change Password</a>
       </Menu.Item>
-      <Menu.Divider />
-      <Menu.Item
-        key="1"
-        onClick={() => {
-          navigateTo("/Dealer_Dashboard/Settings")
-        }}
-      >
-        <a>Reset Token</a>
-      </Menu.Item>
     </Menu>
   )
 

@@ -95,15 +95,6 @@ const AdminLayout = ({
       >
         <a>Change Password</a>
       </Menu.Item>
-      <Menu.Divider />
-      <Menu.Item
-        key="1"
-        onClick={() => {
-          navigateTo("/Admin_Dashboard/Settings")
-        }}
-      >
-        <a>Reset Token</a>
-      </Menu.Item>
     </Menu>
   )
 
@@ -185,7 +176,11 @@ const AdminLayout = ({
         <div className="headersss dealer_header">
           <Header>
             <div className="header_left dealerHeader">
-              <h4>{type==="adminB"?"Support Dashboard":"Administrative Dashboard"}</h4>
+              <h4>
+                {type === "adminB"
+                  ? "Support Dashboard"
+                  : "Administrative Dashboard"}
+              </h4>
             </div>
             <div className="header_right">
               {/* <Input
