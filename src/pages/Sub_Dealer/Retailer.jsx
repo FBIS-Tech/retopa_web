@@ -65,6 +65,7 @@ const RetailerList = () => {
     const { userData } = onLogged
     let allData = JSON.parse(userData)
     const { user_id } = allData
+    console.log(allData)
 
     // gets tokens
     let data = sessionStorage.getItem("topup3")
@@ -651,7 +652,7 @@ const RetailerList = () => {
               </div>
             </div>
           </TabPane>
-          {/*  <TabPane tab="Activate USSD" key="3">
+          <TabPane tab="Activate USSD" key="3">
             <div className="formContainer">
               <div className="formTitle">
                 <p>Activate USSD</p>
@@ -729,7 +730,7 @@ const RetailerList = () => {
                 </div>
               </div>
             </div>
-          </TabPane> */}
+          </TabPane>
         </Tabs>
       </div>
     </SubDealerLayout>

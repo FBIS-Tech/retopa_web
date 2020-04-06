@@ -119,9 +119,9 @@ const RetailerSingleHistory = () => {
       key: "amount",
     },
     {
-      title: "Quantity",
-      dataIndex: "quantity",
-      key: "quantity",
+      title: "Phone Number",
+      dataIndex: "phone",
+      key: "phone",
     },
     {
       title: "Status",
