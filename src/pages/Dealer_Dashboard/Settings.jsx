@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import "../../scss/Retailer.scss"
 import "../../scss/Admin.scss"
 import {
@@ -12,76 +12,92 @@ import {
   Popover,
   Form,
 } from "antd"
+import { navigate } from "gatsby"
 import { HomeIcon } from "../../components/CustomIcons"
 import Green from "../../../assets/green.svg"
 import Red from "../../../assets/red.svg"
 import { AdminMember } from "../../components/Constants/AdminPage"
 import DealerLayout from "../../components/Layout/DealerLayout"
+import SubDealerLayout from "../../components/Layout/SubDealerLayout"
+
+import { Base64 } from "js-base64"
+import Instance from "../../Api/Instance"
 const { TabPane } = Tabs
 const Dash_admin_icon = props => <Icon component={HomeIcon} {...props} />
 
 const Settings = () => {
   const [openForm, setOpenForm] = useState(false)
-  const AdminColumn = [
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
-    },
-    {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
-      render: text =>
-        text === "enable" ? (
-          <p className="enabled">
-            <Green className="dotPosition" />
-            {text}
-          </p>
-        ) : (
-          <p className="disabled">
-            <Red className="dotPosition" />
-            {text}
-          </p>
-        ),
-    },
-    {
-      title: "Date Created/Time",
-      dataIndex: "date",
-      key: "date",
-    },
-    {
-      title: "Action",
-      key: "action",
-      render: (text, record) => (
-        <Popover
-          content={
-            <div className="pop_content">
-              <p>Send Token</p>
-              <p>Edit</p>
-            </div>
-          }
-          placement="bottom"
-          trigger="click"
-        >
-          <span className="popover">...</span>
-        </Popover>
-      ),
-    },
-  ]
+  const [messageAct, setMessageAct] = useState("")
+  const [message, setMessage] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState([])
+  const [inputChange, setInput] = useState({ serviceCode: "CPS" })
 
-  //   handle admin add form
-  const handleForm = () => {
-    setOpenForm(true)
+  useEffect(() => {
+    //gets user details
+    let onLogged = sessionStorage.getItem("persist:root")
+      ? JSON.parse(sessionStorage.getItem("persist:root"))
+      : []
+    const { userData } = onLogged
+    let allData = JSON.parse(userData)
+    const { user_id } = allData
+
+    // gets tokens
+    let data = sessionStorage.getItem("topup")
+      ? JSON.parse(sessionStorage.getItem("topup"))
+      : []
+    const username = Base64.decode(data.TOKEN_ONE)
+    const password = Base64.decode(data.TOKEN_TWO)
+
+    setInput({
+      ...inputChange,
+      username,
+      password,
+      user_id,
+    })
+  }, [])
+
+  const passwordInput = e => {
+    setInput({ ...inputChange, [e.target.name]: e.target.value })
   }
-  //   close admin add form on tabchange
-  const handleDefault = () => {
-    setOpenForm(false)
+
+  const submitPassword = () => {
+    setLoading(true)
+    const submitRequest = new Promise(res => {
+      res(Instance.post("", inputChange))
+    })
+    if (inputChange.confirmed === inputChange.new_password) {
+      submitRequest.then(({ data }) => {
+        let fields = data.required_fields
+        let m = data.message
+        ////console.log(submitRequest)
+        if (data.status === "301") {
+          setLoading(false)
+          setError(fields)
+          setTimeout(() => {
+            setError([])
+          }, 3000)
+        } else if (data.status === "200") {
+          setLoading(false)
+          setMessageAct(m)
+          setTimeout(() => {
+            setMessage("")
+            localStorage.clear()
+            sessionStorage.clear()
+            navigate("/Login")
+          }, 3000)
+        } else if (data.status === "300") {
+          setLoading(false)
+          setMessageAct(m)
+          setTimeout(() => {
+            setMessageAct("")
+          }, 3000)
+        }
+      })
+    } else {
+      setMessageAct("Please check that you typed in the correct password")
+      setLoading(false)
+    }
   }
 
   const title = (
@@ -97,7 +113,7 @@ const Settings = () => {
       >
         <div className="adminGroup">
           <div className="admin">
-            <Tabs defaultActiveKey="1" onChange={handleDefault}>
+            <Tabs defaultActiveKey="1">
               <TabPane tab="Password" key="1">
                 <div className="formContainer">
                   <div className="formTitle">
@@ -105,11 +121,37 @@ const Settings = () => {
                   </div>
                   <div className="formGroup">
                     <div className="adminForm">
+                      {error.map(data => (
+                        <div key={data} className="errors">
+                          {data}
+                        </div>
+                      ))}
+                      <div
+                        className={
+                          messageAct ===
+                          "Please check that you typed in the correct password"
+                            ? "errors"
+                            : "msg"
+                        }
+                      >
+                        {messageAct}
+                      </div>
+                      <div className="formInput changeToken">
+                        <label htmlFor="name">Old Password</label>
+                        <Input
+                          placeholder="Enter new password here..."
+                          className="inputBack"
+                          name="old_password"
+                          onChange={passwordInput}
+                        />
+                      </div>
                       <div className="formInput changeToken">
                         <label htmlFor="name">New Password</label>
                         <Input
                           placeholder="Enter new password here..."
                           className="inputBack"
+                          name="new_password"
+                          onChange={passwordInput}
                         />
                       </div>
                       <div className="formInput changeToken">
@@ -117,36 +159,17 @@ const Settings = () => {
                         <Input
                           placeholder="Confirm password "
                           className="inputBack"
+                          name="confirmed"
+                          onChange={passwordInput}
                         />
                       </div>
                     </div>
                   </div>
                   <div className="adminFormBtn">
                     <div className="btngroup">
-                      <Button>Submit</Button>
-                    </div>
-                  </div>
-                </div>
-              </TabPane>
-              <TabPane tab="Change Token" key="2">
-                <div className="formContainer">
-                  <div className="formTitle">
-                    <p>Change Pin</p>
-                  </div>
-                  <div className="formGroup">
-                    <div className="adminForm">
-                      <div className="formInput changeToken">
-                        <label htmlFor="name">New Token</label>
-                        <Input
-                          placeholder="Enter name here..."
-                          className="inputBack"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="adminFormBtn">
-                    <div className="btngroup">
-                      <Button>Submit</Button>
+                      <Button loading={loading} onClick={submitPassword}>
+                        Submit
+                      </Button>
                     </div>
                   </div>
                 </div>

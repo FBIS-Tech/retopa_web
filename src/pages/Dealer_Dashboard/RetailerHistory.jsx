@@ -304,7 +304,7 @@ const RetailerSingleHistory = () => {
                 />
               </div>
             </TabPane>
-            <TabPane tab="VTU" key="4">
+            {/* <TabPane tab="VTU" key="4">
               <div className="table_Group">
                 <div className="table_header">
                   <div className="rowShow">
@@ -339,7 +339,7 @@ const RetailerSingleHistory = () => {
                   size="small"
                 />
               </div>
-            </TabPane>
+            </TabPane> */}
           </Tabs>
         </div>
       </div>

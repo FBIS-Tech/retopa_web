@@ -10,6 +10,7 @@ import {
   Tabs,
   Popover,
   Form,
+  Tooltip,
 } from "antd"
 import "../../scss/Table.scss"
 import { TableTwo } from "../../components/Constants/Tableone"
@@ -52,7 +53,9 @@ const RetailerList = () => {
   const [fund, setFund] = useState({
     serviceCode: "FUR",
   })
-  const [inputChange, setInput] = useState({ serviceCode: "ACR" })
+  const [inputChange, setInput] = useState({
+    serviceCode: "ACR",
+  })
   const [inputRetailChange, setInputRetail] = useState({ serviceCode: "SDRC" })
 
   const dispatch = useDispatch()
@@ -65,13 +68,12 @@ const RetailerList = () => {
     const { userData } = onLogged
     let allData = JSON.parse(userData)
     const { user_id } = allData
-    console.log(allData)
+    const { tp_id } = allData
 
     // gets tokens
     let data = sessionStorage.getItem("topup3")
       ? JSON.parse(sessionStorage.getItem("topup3"))
       : []
-    console.log(data)
     const username = Base64.decode(data.TOKEN_ONE_DEALER)
     const password = Base64.decode(data.TOKEN_TWO_DEALER)
     // const req = { serviceCode: "RTL", username, password, user_id }
@@ -81,13 +83,14 @@ const RetailerList = () => {
       password,
       user_id,
     }
-    console.log(req)
+
     // inputs for adding vtu line
     setInput({
       ...inputChange,
       username,
       password,
-      user_id,
+      user_id: tp_id,
+      type: "REGULAR",
     })
     // inputs for adding retailers
     setInputRetail({
@@ -242,11 +245,30 @@ const RetailerList = () => {
                 onClick={e => {
                   // let id = e.target.id
                   setOpenToken(!openToken)
-                  setFund({ ...fund, rt_id: record.id, vtu_id: record.vtu_id })
+                  setFund({
+                    ...fund,
+                    rt_id: record.id,
+                    vtu_id: record.vtu_id,
+                  })
                   setName(e.currentTarget.title)
                 }}
               >
                 Send Fund
+              </p>
+              <p id={record.id} title={record.type} onClick={ActivateRetailer}>
+                {record.status === 1 ? "Deactivate POS" : "Activate POS"}
+              </p>
+              <p
+                id={record.id}
+                title={record.tp_id}
+                onClick={ActivateUSSD}
+                style={
+                  record.code === null
+                    ? { display: "none" }
+                    : { display: "block" }
+                }
+              >
+                {record.ussd_status === 1 ? "Deactivate USSD" : "Activate USSD"}
               </p>
               <p
                 id={record.id}
@@ -273,18 +295,103 @@ const RetailerList = () => {
     },
   ]
 
+  ////////////////////ACTIVTE USSD//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  const ActivateUSSD = async e => {
+    let tp_id = e.currentTarget.title
+    let rt_id = e.target.id
+    let status = e.target.innerHTML
+    let { username } = activateRetailer
+    let { password } = activateRetailer
+    const Data = {
+      serviceCode: "RTAD",
+      username,
+      password,
+      rt_id,
+      type: "ACTIVATE",
+    }
+    const DataTwo = {
+      serviceCode: "RTAD",
+      username,
+      password,
+      rt_id,
+      type: "DEACTIVATE",
+    }
+    if (status === "Activate USSD") {
+      e.target.innerHTML = "Activating..."
+      const submitRequest = new Promise(res => {
+        res(DealerLoginInstance.post("", Data))
+      })
+      submitRequest.then(({ data }) => {
+        let m = data.message
+        if (data.status === "301") {
+          setLoading(false)
+          e.target.innerHTML = "Activate"
+          setTimeout(() => {
+            setError([])
+          }, 3000)
+        } else if (data.status === "200") {
+          setLoading(false)
+          setMessage(m)
+          setTimeout(() => {
+            setMessage("")
+            window.location.reload(false)
+          }, 3000)
+        } else {
+          setLoading(false)
+          setMessage(m)
+          e.target.innerHTML = "Activate"
+          setTimeout(() => {
+            setMessage("")
+          }, 3000)
+        }
+      })
+    } else if (status === "Deactivate USSD") {
+      e.target.innerHTML = "Deactivating..."
+      const submitRequest = new Promise(res => {
+        res(DealerLoginInstance.post("", DataTwo))
+      })
+      submitRequest.then(({ data }) => {
+        let fields = data.required_fields
+        let m = data.message
+        if (data.status === "301") {
+          setLoading(false)
+          setError(fields)
+          e.target.innerHTML = "Deactivate"
+          setTimeout(() => {
+            setError([])
+          }, 3000)
+        } else if (data.status === "200") {
+          setLoading(false)
+          setMessage(m)
+          setTimeout(() => {
+            setMessage("")
+            window.location.reload(false)
+          }, 3000)
+        } else {
+          setLoading(false)
+          setMessage(m)
+          e.target.innerHTML = "Deactivate"
+          setTimeout(() => {
+            setMessage("")
+          }, 3000)
+        }
+      })
+    }
+  }
+  ////////////////////ACTIVTE USSD END////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   // handle retail tab click{}
   const handleRetailTab = () => {
     setOpenToken(false)
   }
 
   // select user type
-  function handleType(value) {
-    setInput({
-      ...inputChange,
-      type: value,
-    })
-  }
+  // function handleType(value) {
+  //   setInput({
+  //     ...inputChange,
+  //     type: value,
+  //   })
+  // }
   const handleChange = e => {
     setInput({
       ...inputChange,
@@ -373,8 +480,20 @@ const RetailerList = () => {
     let { serviceCode } = activateRetailer
     let { username } = activateRetailer
     let { password } = activateRetailer
-    const Data = { serviceCode, username, password, type, user_id }
-    const DataTwo = { serviceCode: "DEA", username, password, type, user_id }
+    const Data = {
+      serviceCode,
+      username,
+      password,
+      type,
+      user_id,
+    }
+    const DataTwo = {
+      serviceCode: "DEA",
+      username,
+      password,
+      type,
+      user_id,
+    }
     if (status === "Activate POS") {
       e.target.innerHTML = "Activating..."
       const submitRequest = new Promise(res => {
@@ -444,7 +563,10 @@ const RetailerList = () => {
   ////////////////////SEND FUNDS TO RETAILER//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const handleFund = e => {
-    setFund({ ...fund, [e.currentTarget.name]: e.currentTarget.value })
+    setFund({
+      ...fund,
+      [e.currentTarget.name]: e.currentTarget.value,
+    })
   }
   const handleFundTransfer = () => {
     setLoading(true)
@@ -497,7 +619,10 @@ const RetailerList = () => {
     { label: "Retailer Number", key: "phone" },
     { label: "USSD Code", key: "code" },
     { label: "Status", key: "status" },
-    { label: "Date Created/Time", key: "created_at" },
+    {
+      label: "Date Created/Time",
+      key: "created_at",
+    },
   ]
 
   return (
@@ -534,7 +659,12 @@ const RetailerList = () => {
                         setFilterText(e.target.value)
                       }}
                       prefix={
-                        <Icon type="search" style={{ color: "#D8D8D8" }} />
+                        <Icon
+                          type="search"
+                          style={{
+                            color: "#D8D8D8",
+                          }}
+                        />
                       }
                     />
                   </div>
@@ -652,11 +782,13 @@ const RetailerList = () => {
               </div>
             </div>
           </TabPane>
-          <TabPane tab="Activate USSD" key="3">
+          <TabPane
+            tab="Activate USSD"
+            key="3"
+            // disabled={type === "Admin" ? true : false}
+          >
             <div className="formContainer">
-              <div className="formTitle">
-                <p>Activate USSD</p>
-              </div>
+              <div className="formTitle">{/* <p>Activate USSD</p> */}</div>
               <div className="formGroup">
                 <div className="adminForm">
                   {error.map(data => (
@@ -666,7 +798,8 @@ const RetailerList = () => {
                   ))}
                   <div
                     className={
-                      messageAct === "Invalid Secret Key...Try again later!"
+                      messageAct === "Invalid Secret Key...Try again later!" ||
+                      messageAct === "Unauthencitacted!"
                         ? "errors"
                         : "msg"
                     }
@@ -674,46 +807,32 @@ const RetailerList = () => {
                     {messageAct}
                   </div>
                   <div className="formInput VTUInput">
-                    <label htmlFor="name">Username</label>
+                    <label htmlFor="name">POS Username</label>
                     <Input
+                      name="retailer"
                       placeholder="Enter Username e.g. 123434"
-                      name="username"
                       onChange={handleChange}
                     />
                   </div>
 
                   <div className="formInput VTUInput">
                     <label htmlFor="name">Number</label>
-                    <Input
-                      placeholder="23480********"
-                      name="phone"
-                      onChange={handleChange}
-                    />
+                    <Tooltip placement="topLeft" title="please start with 234">
+                      <Input
+                        maxLength={13}
+                        minLength={13}
+                        placeholder="23480********"
+                        name="phone"
+                        onChange={handleChange}
+                        type="tel"
+                      />
+                    </Tooltip>
                   </div>
                   <div className="formInput VTUInput">
                     <label htmlFor="name">Name</label>
                     <Input
                       placeholder="Enter User's Name"
                       name="name"
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="formInput VTUInput">
-                    <label htmlFor="name">Type</label>
-                    <Select
-                      style={{ width: "100%" }}
-                      defaultValue="Select Type"
-                      onChange={handleType}
-                    >
-                      <Option value="REGULAR">REGULAR</Option>
-                      <Option value="SUB DEALER">SUB DEALER</Option>
-                    </Select>
-                  </div>
-                  <div className="formInput VTUInput">
-                    <label htmlFor="pin">Dealer Pin</label>
-                    <Input
-                      placeholder="****"
-                      name="pin"
                       onChange={handleChange}
                     />
                   </div>

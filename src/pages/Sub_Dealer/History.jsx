@@ -33,7 +33,6 @@ const RetailerHistory = () => {
     let data = sessionStorage.getItem("topup3")
       ? JSON.parse(sessionStorage.getItem("topup3"))
       : []
-    console.log(data)
     const username = Base64.decode(data.TOKEN_ONE_DEALER)
     const password = Base64.decode(data.TOKEN_TWO_DEALER)
     const Creditreq = {
@@ -74,7 +73,6 @@ const RetailerHistory = () => {
       res(DealerLoginInstance.post("", Debitreq))
     })
     requestDBT.then(({ data }) => {
-      console.log(data)
       if (data.status === "200") {
         setSUBHistory(data.history)
       }

@@ -12,15 +12,15 @@ import {
   Popover,
   Form,
 } from "antd"
-import { navigate } from "gatsby"
 import { HomeIcon } from "../../components/CustomIcons"
 import Green from "../../../assets/green.svg"
 import Red from "../../../assets/red.svg"
 import { AdminMember } from "../../components/Constants/AdminPage"
 import DealerLayout from "../../components/Layout/DealerLayout"
-import AdminLayout from "../../components/Layout/AdminLayout"
-import AdminInstance from "../../Api/AdminInstance"
+import SubDealerLayout from "../../components/Layout/SubDealerLayout"
+import DealerLoginInstance from "../../Api/DealerLoginInstance"
 import { Base64 } from "js-base64"
+import { navigate } from "gatsby"
 const { TabPane } = Tabs
 const Dash_admin_icon = props => <Icon component={HomeIcon} {...props} />
 
@@ -30,7 +30,7 @@ const Settings = () => {
   const [message, setMessage] = useState("")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState([])
-  const [inputChange, setInput] = useState({ serviceCode: "PWD" })
+  const [inputChange, setInput] = useState({ serviceCode: "CPS" })
 
   useEffect(() => {
     let onLogged = sessionStorage.getItem("persist:root")
@@ -39,13 +39,12 @@ const Settings = () => {
     const { userData } = onLogged
     let allData = JSON.parse(userData)
     const { user_id } = allData
-    let data = sessionStorage.getItem("topup2")
-      ? JSON.parse(sessionStorage.getItem("topup2"))
+    // gets tokens
+    let data = sessionStorage.getItem("topup3")
+      ? JSON.parse(sessionStorage.getItem("topup3"))
       : []
-
-    const username = Base64.decode(data.TOKEN_ONE_ADMIN)
-    const password = Base64.decode(data.TOKEN_TWO_ADMIN)
-
+    const username = Base64.decode(data.TOKEN_ONE_DEALER)
+    const password = Base64.decode(data.TOKEN_TWO_DEALER)
     setInput({
       ...inputChange,
       username,
@@ -61,7 +60,7 @@ const Settings = () => {
   const submitPassword = () => {
     setLoading(true)
     const submitRequest = new Promise(res => {
-      res(AdminInstance.post("", inputChange))
+      res(DealerLoginInstance.post("", inputChange))
     })
     if (inputChange.confirmed === inputChange.new_password) {
       submitRequest.then(({ data }) => {
@@ -104,7 +103,7 @@ const Settings = () => {
     </h4>
   )
   return (
-    <AdminLayout title={title} position={["8"]}>
+    <SubDealerLayout title={title} position={["8"]}>
       <div
         className={AdminMember.length <= 9 ? "tableheight" : "adminContainer"}
       >
@@ -175,7 +174,7 @@ const Settings = () => {
           </div>
         </div>
       </div>
-    </AdminLayout>
+    </SubDealerLayout>
   )
 }
 

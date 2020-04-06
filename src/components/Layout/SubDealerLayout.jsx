@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
-import { Layout, Menu, Icon, Button, Input } from "antd"
+import { Layout, Menu, Icon, Button, Input, Dropdown } from "antd"
 import { Link, navigateTo } from "gatsby"
 import Logo from "../../../assets/logo.svg"
 import "./DashLayout.scss"
@@ -53,6 +53,19 @@ const SubDealerLayout = ({ children, title, position }) => {
       setUser(data.payload.name)
     }
   }, [])
+
+  const menu = (
+    <Menu>
+      <Menu.Item
+        key="0"
+        onClick={() => {
+          navigateTo("/Sub_Dealer/Settings")
+        }}
+      >
+        <a>Change Password</a>
+      </Menu.Item>
+    </Menu>
+  )
 
   // handle logout
   const handleLogout = () => {
@@ -142,12 +155,14 @@ const SubDealerLayout = ({ children, title, position }) => {
                 prefix={<Icon type="search" />}
               />
               <Avatar style={{ marginLeft: "50px" }} />
-              {/* <img
-                src={user.logo}
-                alt="user logo"
-                style={{ width: "36.49px", height: "55px", margin: 0 }}
-              /> */}
-              <Setting style={{ marginLeft: "30px" }} />
+              <Dropdown overlay={menu}>
+                <div
+                  className="ant-dropdown-link"
+                  onClick={e => e.preventDefault()}
+                >
+                  <Setting style={{ marginLeft: "30px" }} />
+                </div>
+              </Dropdown>
             </div>
           </Header>
           <Header className="sub_header">
