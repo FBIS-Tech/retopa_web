@@ -96,7 +96,7 @@ const RetailerList = () => {
       serviceCode: "RTL",
       username: usernameA,
       password: passwordA,
-      user_id: 1,
+      user_id,
     }
 
     let UserData = localStorage.getItem("userData")
