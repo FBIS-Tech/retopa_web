@@ -46,6 +46,7 @@ exports.components = {
   "component---src-pages-sub-dealer-history-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Sub_Dealer\\History.jsx"))),
   "component---src-pages-sub-dealer-retailer-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Sub_Dealer\\Retailer.jsx"))),
   "component---src-pages-sub-dealer-retailer-history-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Sub_Dealer\\RetailerHistory.jsx"))),
+  "component---src-pages-sub-dealer-settings-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Sub_Dealer\\Settings.jsx"))),
   "component---src-pages-sub-dealer-sub-dealer-home-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Sub_Dealer\\SubDealer_Home.jsx"))),
   "component---src-pages-sub-dealer-wallet-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Sub_Dealer\\Wallet.jsx"))),
   "component---src-pages-success-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Success.jsx"))),
@@ -57,7 +58,6 @@ exports.components = {
   "component---src-pages-user-dashboard-user-airtime-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\User_Dashboard\\User_Airtime.jsx"))),
   "component---src-pages-user-dashboard-user-billing-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\User_Dashboard\\User_billing.jsx"))),
   "component---src-pages-user-dashboard-user-home-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\User_Dashboard\\User_Home.jsx"))),
-  "component---src-pages-user-dashboard-user-payment-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\User_Dashboard\\User_Payment.jsx"))),
-  "component---src-pages-sub-dealer-settings-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\Sub_Dealer\\Settings.jsx")))
+  "component---src-pages-user-dashboard-user-payment-jsx": hot(preferDefault(require("D:\\YU\\Documents\\retopa\\src\\pages\\User_Dashboard\\User_Payment.jsx")))
 }
 

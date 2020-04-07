@@ -217,68 +217,74 @@ const SubDealer = () => {
       title: "Action",
       key: "action",
       render: (text, record) => (
-        <Popover
-          content={
-            <div className="pop_content">
-              <p
-                id={record.id}
-                title={record.name}
-                onClick={e => {
-                  let id = e.target.id
-                  setOpenToken(!openToken)
-                  setFund({ ...fund, id: record.id, vtu_id: record.vtu_id })
-                  setName(e.currentTarget.title)
-                  walletBalance2(id)
-                }}
-              >
-                Fund Sub-Dealer
-              </p>
-              <p
-                id={record.id}
-                title={record.name}
-                onClick={e => {
-                  let id = e.target.id
-                  setOpenToken2(!openToken2)
-                  setVtu({ ...vtu, d_id: record.id })
-                  setName(e.currentTarget.title)
-                }}
-              >
-                Assign VTU
-              </p>
-              <p
-                id={record.id}
-                title={record.name}
-                onClick={e => {
-                  let id = e.currentTarget.id
-
-                  setName(record.name)
-                  // setWallet({ ...wallet, id: e.currentTarget.id })
-                  walletBalance(id)
-                }}
-              >
-                {!loading ? "Check Balance" : "Checking..."}
-              </p>
-              <p
-                id={record.id}
-                title={record.name}
-                onClick={e => {
-                  let details = {
-                    user_id: e.currentTarget.id,
-                    name: e.currentTarget.title,
+        console.log(record),
+        (
+          <Popover
+            content={
+              <div className="pop_content">
+                <p
+                  id={record.id}
+                  title={record.name}
+                  onClick={e => {
+                    let id = e.target.id
+                    setOpenToken(!openToken)
+                    setFund({ ...fund, id: record.id, vtu_id: record.vtu_id })
+                    setName(e.currentTarget.title)
+                    walletBalance2(id)
+                  }}
+                >
+                  Fund Sub-Dealer
+                </p>
+                <p
+                  className={
+                    record.vtu_id === "" || record.vtu_id === null ? "" : "hide"
                   }
-                  dispatch(retailerDetails(details))
-                  navigateTo(`/Dealer_Dashboard/SubDealer_List`)
-                }}
-              >
-                Retailer List
-              </p>
-            </div>
-          }
-          placement="bottom"
-          trigger="click"
-        >
-          <span className="popover">...</span>
-        </Popover>
+                  id={record.id}
+                  title={record.name}
+                  onClick={e => {
+                    let id = e.target.id
+                    setOpenToken2(!openToken2)
+                    setVtu({ ...vtu, d_id: record.id })
+                    setName(e.currentTarget.title)
+                  }}
+                >
+                  Assign VTU
+                </p>
+                <p
+                  id={record.id}
+                  title={record.name}
+                  onClick={e => {
+                    let id = e.currentTarget.id
+
+                    setName(record.name)
+                    // setWallet({ ...wallet, id: e.currentTarget.id })
+                    walletBalance(id)
+                  }}
+                >
+                  {!loading ? "Check Balance" : "Checking..."}
+                </p>
+                <p
+                  id={record.id}
+                  title={record.name}
+                  onClick={e => {
+                    let details = {
+                      user_id: e.currentTarget.id,
+                      name: e.currentTarget.title,
+                    }
+                    dispatch(retailerDetails(details))
+                    navigateTo(`/Dealer_Dashboard/SubDealer_List`)
+                  }}
+                >
+                  Retailer List
+                </p>
+              </div>
+            }
+            placement="bottom"
+            trigger="click"
+          >
+            <span className="popover">...</span>
+          </Popover>
+        )
       ),
     },
   ]
@@ -486,6 +492,7 @@ const SubDealer = () => {
   }
 
   const handleFundTransfer = () => {
+    // console.log(fund)
     setLoading(true)
     const sendRequest = new Promise(res => {
       res(Instance.post("", fund))
@@ -721,7 +728,7 @@ const SubDealer = () => {
                         onChange={handleFund}
                       />
                     </Form.Item>
-                    <Form.Item label="Select VTU">
+                    {/* <Form.Item label="Select VTU">
                       <Select
                         style={{ width: "100%" }}
                         defaultValue="Select VTU"
@@ -735,7 +742,7 @@ const SubDealer = () => {
                           )
                         })}
                       </Select>
-                    </Form.Item>
+                    </Form.Item> */}
                     <Form.Item label="Dealer Pin">
                       <Input
                         name="pin"

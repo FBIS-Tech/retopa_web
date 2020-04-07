@@ -43,6 +43,7 @@ exports.components = {
   "component---src-pages-sub-dealer-history-jsx": () => import("../src/pages/Sub_Dealer/History.jsx" /* webpackChunkName: "component---src-pages-sub-dealer-history-jsx" */),
   "component---src-pages-sub-dealer-retailer-jsx": () => import("../src/pages/Sub_Dealer/Retailer.jsx" /* webpackChunkName: "component---src-pages-sub-dealer-retailer-jsx" */),
   "component---src-pages-sub-dealer-retailer-history-jsx": () => import("../src/pages/Sub_Dealer/RetailerHistory.jsx" /* webpackChunkName: "component---src-pages-sub-dealer-retailer-history-jsx" */),
+  "component---src-pages-sub-dealer-settings-jsx": () => import("../src/pages/Sub_Dealer/Settings.jsx" /* webpackChunkName: "component---src-pages-sub-dealer-settings-jsx" */),
   "component---src-pages-sub-dealer-sub-dealer-home-jsx": () => import("../src/pages/Sub_Dealer/SubDealer_Home.jsx" /* webpackChunkName: "component---src-pages-sub-dealer-sub-dealer-home-jsx" */),
   "component---src-pages-sub-dealer-wallet-jsx": () => import("../src/pages/Sub_Dealer/Wallet.jsx" /* webpackChunkName: "component---src-pages-sub-dealer-wallet-jsx" */),
   "component---src-pages-success-jsx": () => import("../src/pages/Success.jsx" /* webpackChunkName: "component---src-pages-success-jsx" */),
@@ -54,7 +55,6 @@ exports.components = {
   "component---src-pages-user-dashboard-user-airtime-jsx": () => import("../src/pages/User_Dashboard/User_Airtime.jsx" /* webpackChunkName: "component---src-pages-user-dashboard-user-airtime-jsx" */),
   "component---src-pages-user-dashboard-user-billing-jsx": () => import("../src/pages/User_Dashboard/User_billing.jsx" /* webpackChunkName: "component---src-pages-user-dashboard-user-billing-jsx" */),
   "component---src-pages-user-dashboard-user-home-jsx": () => import("../src/pages/User_Dashboard/User_Home.jsx" /* webpackChunkName: "component---src-pages-user-dashboard-user-home-jsx" */),
-  "component---src-pages-user-dashboard-user-payment-jsx": () => import("../src/pages/User_Dashboard/User_Payment.jsx" /* webpackChunkName: "component---src-pages-user-dashboard-user-payment-jsx" */),
-  "component---src-pages-sub-dealer-settings-jsx": () => import("../src/pages/Sub_Dealer/Settings.jsx" /* webpackChunkName: "component---src-pages-sub-dealer-settings-jsx" */)
+  "component---src-pages-user-dashboard-user-payment-jsx": () => import("../src/pages/User_Dashboard/User_Payment.jsx" /* webpackChunkName: "component---src-pages-user-dashboard-user-payment-jsx" */)
 }
 

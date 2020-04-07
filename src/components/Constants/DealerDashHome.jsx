@@ -6,7 +6,7 @@ export const topCardDetails = [
 
 export const Dealer_Activities = [
   // { title: "Total voucher transaction", price: "N37,360" },
-  { title: "Total Transactions Today", price: "N0" },
-  { title: "Total data transaction", price: "N0" },
-  { title: "This month total transaction ", price: "N0" },
+  { title: "Wallet Balance", price: "N0" },
+  { title: "Total Sales Today", price: "N0" },
+  { title: "This Sales This Month ", price: "N0" },
 ]

@@ -143,7 +143,7 @@ const Dealer_Home = () => {
   }
 
   const Dealer_Activity = [
-    { title: "Total Transactions This Month ", price: "₦ 0" },
+    { title: "Total Salse This Month ", price: "₦ 0" },
     { title: "Total Transactions Today", price: "₦ 0" },
     { title: "Total data transaction", price: data },
     // { title: "Total voucher transaction", price: voucher },
