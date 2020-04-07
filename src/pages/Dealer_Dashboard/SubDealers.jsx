@@ -12,6 +12,7 @@ import {
   Modal,
   Form,
   Popconfirm,
+  Tooltip,
 } from "antd"
 import "../../scss/Table.scss"
 import { TableTwo } from "../../components/Constants/Tableone"
@@ -236,9 +237,9 @@ const SubDealer = () => {
                   Fund Sub-Dealer
                 </p>
                 <p
-                  className={
-                    record.vtu_id === "" || record.vtu_id === null ? "" : "hide"
-                  }
+                  // className={
+                  //   record.vtu_id === "" || record.vtu_id === null ? "" : "hide"
+                  // }
                   id={record.id}
                   title={record.name}
                   onClick={e => {
@@ -373,6 +374,7 @@ const SubDealer = () => {
         setMessage(m)
         setTimeout(() => {
           setMessage("")
+          window.location.reload()
         }, 3000)
       } else {
         setLoading(false)
@@ -864,6 +866,19 @@ const SubDealer = () => {
                       name="name"
                       onChange={handleSubDealerAdd}
                     />
+                  </div>
+                  <div className="formInput VTUInput">
+                    <label htmlFor="name">Number</label>
+                    <Tooltip placement="topLeft" title="please start with 234">
+                      <Input
+                        maxLength={13}
+                        minLength={13}
+                        placeholder="23480********"
+                        name="phone"
+                        onChange={handleSubDealerAdd}
+                        type="tel"
+                      />
+                    </Tooltip>
                   </div>
 
                   <div className="formInput VTUInput">

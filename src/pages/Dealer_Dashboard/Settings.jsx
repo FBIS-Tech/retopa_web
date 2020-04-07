@@ -31,7 +31,7 @@ const Settings = () => {
   const [message, setMessage] = useState("")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState([])
-  const [inputChange, setInput] = useState({ serviceCode: "CPS" })
+  const [inputChange, setInput] = useState({ serviceCode: "CHP" })
 
   useEffect(() => {
     //gets user details
