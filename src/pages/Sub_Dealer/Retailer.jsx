@@ -25,7 +25,7 @@ import { openTokenForm } from "../../Actions/ActionsType"
 // import { useSelector, useDispatch } from "react-redux"
 import DealerLayout from "../../components/Layout/DealerLayout"
 import { RetailIcon } from "../../components/CustomIcons"
-import { Link, navigateTo } from "gatsby"
+import { Link, navigate } from "gatsby"
 import { retailerDetails } from "../../Actions/Actions"
 import SubDealerLayout from "../../components/Layout/SubDealerLayout"
 import axios from "axios"
@@ -281,7 +281,7 @@ const RetailerList = () => {
                     name: e.currentTarget.title,
                   }
                   dispatch(retailerDetails(details))
-                  navigateTo(`/Sub_Dealer/RetailerHistory`)
+                  navigate(`/Sub_Dealer/RetailerHistory`)
                 }}
               >
                 Retailer's history
