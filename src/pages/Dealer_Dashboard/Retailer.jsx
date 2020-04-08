@@ -115,6 +115,7 @@ const RetailerList = () => {
       username,
       password,
       user_id,
+      type: "REGULAR",
     })
     // inputs for adding retailers
     setInputRetail({
@@ -1068,7 +1069,7 @@ const RetailerList = () => {
                       onChange={handleChange}
                     />
                   </div>
-                  <div className="formInput VTUInput">
+                  {/* <div className="formInput VTUInput">
                     <label htmlFor="name">Type</label>
                     <Select
                       style={{ width: "100%" }}
@@ -1078,7 +1079,7 @@ const RetailerList = () => {
                       <Option value="REGULAR">RETAILER</Option>
                       <Option value="SUB DEALER">SUB DEALER</Option>
                     </Select>
-                  </div>
+                  </div> */}
                   <div className="formInput VTUInput">
                     <label htmlFor="pin">Dealer Pin</label>
                     <Input
