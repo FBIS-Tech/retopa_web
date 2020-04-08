@@ -13,6 +13,8 @@ import {
   Tooltip,
 } from "antd"
 import "../../scss/Table.scss"
+import "../../scss/Admin.scss"
+import "../../scss/Export.scss"
 import { TableTwo } from "../../components/Constants/Tableone"
 import "../../scss/Retailer.scss"
 import Green from "../../../assets/green.svg"
