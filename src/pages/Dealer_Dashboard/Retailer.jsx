@@ -15,6 +15,8 @@ import {
   message,
 } from "antd"
 import "../../scss/Table.scss"
+import "../../scss/Admin.scss"
+import "../../scss/Export.scss"
 import { TableTwo } from "../../components/Constants/Tableone"
 import "../../scss/Retailer.scss"
 import Green from "../../../assets/green.svg"
@@ -26,9 +28,8 @@ import Instance from "../../Api/Instance"
 // import { useSelector, useDispatch } from "react-redux"
 import DealerLayout from "../../components/Layout/DealerLayout"
 import { RetailIcon } from "../../components/CustomIcons"
-import { Link, navigateTo } from "gatsby"
+import { Link, navigate } from "gatsby"
 import { retailerDetails } from "../../Actions/Actions"
-import { array } from "prop-types"
 import AdminInstance from "../../Api/AdminInstance"
 const Dash_retail_icon = props => <Icon component={RetailIcon} {...props} />
 
@@ -344,7 +345,7 @@ const RetailerList = () => {
                     name: e.currentTarget.title,
                   }
                   dispatch(retailerDetails(details))
-                  navigateTo(`/Dealer_Dashboard/RetailerHistory`)
+                  navigate(`/Dealer_Dashboard/RetailerHistory`)
                 }}
               >
                 Retailer's history
