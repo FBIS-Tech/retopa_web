@@ -42,7 +42,7 @@ function* registerUsers({ payload }) {
       }
     }
   } catch (err) {
-    ////console.log(err)
+    alert(err)
     yield put({ type: "ERROR" })
     alert("something went wrong, Please check that you are connected")
   }
