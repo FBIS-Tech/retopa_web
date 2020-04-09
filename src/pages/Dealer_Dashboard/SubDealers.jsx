@@ -225,74 +225,71 @@ const SubDealer = () => {
       title: "Action",
       key: "action",
       render: (text, record) => (
-        console.log(record),
-        (
-          <Popover
-            content={
-              <div className="pop_content">
-                <p
-                  id={record.id}
-                  title={record.name}
-                  onClick={e => {
-                    let id = e.target.id
-                    setOpenToken(!openToken)
-                    setFund({ ...fund, id: record.id, vtu_id: record.vtu_id })
-                    setName(e.currentTarget.title)
-                    walletBalance2(id)
-                  }}
-                >
-                  Fund Sub-Dealer
-                </p>
-                <p
-                  // className={
-                  //   record.vtu_id === "" || record.vtu_id === null ? "" : "hide"
-                  // }
-                  id={record.id}
-                  title={record.name}
-                  onClick={e => {
-                    let id = e.target.id
-                    setOpenToken2(!openToken2)
-                    setVtu({ ...vtu, d_id: record.id })
-                    setName(e.currentTarget.title)
-                  }}
-                >
-                  Assign VTU
-                </p>
-                <p
-                  id={record.id}
-                  title={record.name}
-                  onClick={e => {
-                    let id = e.currentTarget.id
+        <Popover
+          content={
+            <div className="pop_content">
+              <p
+                id={record.id}
+                title={record.name}
+                onClick={e => {
+                  let id = e.target.id
+                  setOpenToken(!openToken)
+                  setFund({ ...fund, id: record.id, vtu_id: record.vtu_id })
+                  setName(e.currentTarget.title)
+                  walletBalance2(id)
+                }}
+              >
+                Fund Sub-Dealer
+              </p>
+              <p
+                // className={
+                //   record.vtu_id === "" || record.vtu_id === null ? "" : "hide"
+                // }
+                id={record.id}
+                title={record.name}
+                onClick={e => {
+                  let id = e.target.id
+                  setOpenToken2(!openToken2)
+                  setVtu({ ...vtu, d_id: record.id })
+                  setName(e.currentTarget.title)
+                }}
+              >
+                Assign VTU
+              </p>
+              <p
+                id={record.id}
+                title={record.name}
+                onClick={e => {
+                  let id = e.currentTarget.id
 
-                    setName(record.name)
-                    // setWallet({ ...wallet, id: e.currentTarget.id })
-                    walletBalance(id)
-                  }}
-                >
-                  {!loading ? "Check Balance" : "Checking..."}
-                </p>
-                <p
-                  id={record.id}
-                  title={record.name}
-                  onClick={e => {
-                    let details = {
-                      user_id: e.currentTarget.id,
-                      name: e.currentTarget.title,
-                    }
-                    dispatch(retailerDetails(details))
-                    navigate(`/Dealer_Dashboard/SubDealer_List`)
-                  }}
-                >
-                  Retailer List
-                </p>
-              </div>
-            }
-            placement="bottom"
-            trigger="click"
-          >
-            <span className="popover">...</span>
-          </Popover>
-        )
+                  setName(record.name)
+                  // setWallet({ ...wallet, id: e.currentTarget.id })
+                  walletBalance(id)
+                }}
+              >
+                {!loading ? "Check Balance" : "Checking..."}
+              </p>
+              <p
+                id={record.id}
+                title={record.name}
+                onClick={e => {
+                  let details = {
+                    user_id: e.currentTarget.id,
+                    name: e.currentTarget.title,
+                  }
+                  dispatch(retailerDetails(details))
+                  navigate(`/Dealer_Dashboard/SubDealer_List`)
+                }}
+              >
+                Retailer List
+              </p>
+            </div>
+          }
+          placement="bottom"
+          trigger="click"
+        >
+          <span className="popover">...</span>
+        </Popover>
       ),
     },
   ]

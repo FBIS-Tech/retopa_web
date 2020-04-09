@@ -49,7 +49,6 @@ const RetailerSingleHistory = () => {
     let data = sessionStorage.getItem("topup3")
       ? JSON.parse(sessionStorage.getItem("topup3"))
       : []
-    console.log(data)
     const username = Base64.decode(data.TOKEN_ONE_DEALER)
     const password = Base64.decode(data.TOKEN_TWO_DEALER)
 
@@ -67,12 +66,10 @@ const RetailerSingleHistory = () => {
     }
 
     //////////////VOD history//////////////////////
-    console.log(VOD)
     const request = new Promise(res => {
       res(DealerLoginInstance.post("", VOD))
     })
     request.then(({ data }) => {
-      console.log(data)
       if (data.status === "200") {
         setVODHistory(data.history)
       }
@@ -89,7 +86,6 @@ const RetailerSingleHistory = () => {
     const requestData = new Promise(res => {
       res(DealerLoginInstance.post("", DATA))
     })
-    ////console.log(requestData)
     requestData.then(({ data }) => {
       if (data.status === "200") {
         setDataHistory(data.history)

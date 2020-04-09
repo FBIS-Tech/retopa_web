@@ -93,7 +93,6 @@ const RetailerHistory = () => {
     ////console.log(requestCredit)
     requestDebit.then(({ data }) => {
       if (data.status === "200") {
-        console.log(data)
         setHistoryRetailer(data.history)
       }
     })
