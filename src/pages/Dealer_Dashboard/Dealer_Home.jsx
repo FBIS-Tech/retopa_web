@@ -11,7 +11,7 @@ import DealerActivities from "../../components/DealerActivities"
 import Instance from "../../Api/Instance"
 import { Base64 } from "js-base64"
 import DealerLayout from "../../components/Layout/DealerLayout"
-import { Link, navigateTo } from "gatsby"
+import { Link, navigate } from "gatsby"
 import axios from "axios"
 import AdminInstance from "../../Api/AdminInstance"
 import { dispatchTransactions } from "../../Actions/Actions"
@@ -155,7 +155,7 @@ const Dealer_Home = () => {
   let transactionViews = { ussdData, dataData, voucherData }
   const viewClick = () => {
     dispatch(dispatchTransactions(transactionViews))
-    navigateTo("/Dealer_Dashboard/ViewDetails")
+    navigate("/Dealer_Dashboard/ViewDetails")
   }
 
   return (

@@ -27,7 +27,7 @@ import Instance from "../../Api/Instance"
 // import { useSelector, useDispatch } from "react-redux"
 import DealerLayout from "../../components/Layout/DealerLayout"
 import { RetailIcon } from "../../components/CustomIcons"
-import { Link, navigateTo } from "gatsby"
+import { Link, navigate } from "gatsby"
 import { retailerDetails } from "../../Actions/Actions"
 const Dash_retail_icon = props => <Icon component={RetailIcon} {...props} />
 
@@ -280,7 +280,7 @@ const SubDealer = () => {
                       name: e.currentTarget.title,
                     }
                     dispatch(retailerDetails(details))
-                    navigateTo(`/Dealer_Dashboard/SubDealer_List`)
+                    navigate(`/Dealer_Dashboard/SubDealer_List`)
                   }}
                 >
                   Retailer List

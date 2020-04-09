@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { Layout, Menu, Icon, Button, Input, Dropdown } from "antd"
-import { Link, navigateTo } from "gatsby"
+import { Link, navigate } from "gatsby"
 import Logo from "../../../assets/logo.svg"
 import "./DashLayout.scss"
 import Dash from "../../../assets/dash.svg"
@@ -9,7 +9,6 @@ import Avatar from "../../../assets/avatartwo.svg"
 import Setting from "../../../assets/settings.svg"
 import Helmet from "react-helmet"
 import Favicon from "../../images/favicon.ico"
-import { navigate } from "gatsby"
 import { Base64 } from "js-base64"
 import {
   HomeIcon,
@@ -59,7 +58,7 @@ const SubDealerLayout = ({ children, title, position }) => {
       <Menu.Item
         key="0"
         onClick={() => {
-          navigateTo("/Sub_Dealer/Settings")
+          navigate("/Sub_Dealer/Settings")
         }}
       >
         <a>Change Password</a>
@@ -101,7 +100,7 @@ const SubDealerLayout = ({ children, title, position }) => {
           <Menu.Item
             key="1"
             onClick={() => {
-              navigateTo("/Sub_Dealer/Dashboard/")
+              navigate("/Sub_Dealer/Dashboard/")
             }}
           >
             <Dash_home_icon />
@@ -111,7 +110,7 @@ const SubDealerLayout = ({ children, title, position }) => {
           <Menu.Item
             key="2"
             onClick={() => {
-              navigateTo("/Sub_Dealer/Retailer")
+              navigate("/Sub_Dealer/Retailer")
             }}
           >
             <Dash_airtime_icon />
@@ -121,7 +120,7 @@ const SubDealerLayout = ({ children, title, position }) => {
           {/* <Menu.Item
             key="3"
             onClick={() => {
-              navigateTo("/Sub_Dealer/Wallet")
+              navigate("/Sub_Dealer/Wallet")
             }}
           >
             <Dash_bill_icon />
@@ -131,7 +130,7 @@ const SubDealerLayout = ({ children, title, position }) => {
           <Menu.Item
             key="5"
             onClick={() => {
-              navigateTo("/Sub_Dealer/History")
+              navigate("/Sub_Dealer/History")
             }}
           >
             <Dash_history_icon />

@@ -11,7 +11,7 @@ import DealerActivities from "../../components/DealerActivities"
 import Instance from "../../Api/Instance"
 import { Base64 } from "js-base64"
 import DealerLayout from "../../components/Layout/DealerLayout"
-import { Link, navigateTo } from "gatsby"
+import { Link, navigate } from "gatsby"
 import axios from "axios"
 import AdminInstance from "../../Api/AdminInstance"
 import { dispatchTransactions } from "../../Actions/Actions"
@@ -177,7 +177,7 @@ const Home = () => {
 
   const viewClick = () => {
     dispatch(dispatchTransactions(transactionViews))
-    navigateTo("/Admin_Dashboard/Transaction_Details")
+    navigate("/Admin_Dashboard/Transaction_Details")
   }
 
   return (

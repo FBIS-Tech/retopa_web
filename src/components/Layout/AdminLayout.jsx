@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { Layout, Menu, Icon, Button, Input, Dropdown } from "antd"
-import { Link, navigateTo } from "gatsby"
+import { Link, navigate } from "gatsby"
 import Logo from "../../../assets/logo.svg"
 import "./DashLayout.scss"
 import Avatar from "../../../assets/avatartwo.svg"
 import Setting from "../../../assets/settings.svg"
 import Helmet from "react-helmet"
 import Favicon from "../../images/favicon.ico"
-import { navigate } from "gatsby"
 import { Base64 } from "js-base64"
 import {
   HomeIcon,
@@ -90,7 +89,7 @@ const AdminLayout = ({
       <Menu.Item
         key="0"
         onClick={() => {
-          navigateTo("/Admin_Dashboard/Settings")
+          navigate("/Admin_Dashboard/Settings")
         }}
       >
         <a>Change Password</a>
@@ -135,7 +134,7 @@ const AdminLayout = ({
             <Menu.Item
               key="1"
               onClick={() => {
-                navigateTo("/Admin_Dashboard/Dashboard")
+                navigate("/Admin_Dashboard/Dashboard")
               }}
               className={type === "adminB" ? "hide" : ""}
             >
@@ -146,7 +145,7 @@ const AdminLayout = ({
             <Menu.Item
               key="1"
               onClick={() => {
-                navigateTo("/Admin_Dashboard/Dashboard")
+                navigate("/Admin_Dashboard/Dashboard")
               }}
               className={type === "adminB" ? "" : "hide "}
             >
@@ -158,7 +157,7 @@ const AdminLayout = ({
           <Menu.Item
             key="2"
             onClick={() => {
-              navigateTo("/Admin_Dashboard/Retailers")
+              navigate("/Admin_Dashboard/Retailers")
             }}
             className={type === "adminB" ? "" : "hide "}
           >

@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { Layout, Menu, Icon, Button, Input, Dropdown } from "antd"
-import { Link, navigateTo } from "gatsby"
+import { Link, navigate } from "gatsby"
 import Logo from "../../../assets/logo.svg"
 import "./DashLayout.scss"
 import Avatar from "../../../assets/avatartwo.svg"
 import Setting from "../../../assets/settings.svg"
 import Helmet from "react-helmet"
 import Favicon from "../../images/favicon.ico"
-import { navigate } from "gatsby"
 import { Base64 } from "js-base64"
 import {
   HomeIcon,
@@ -90,7 +89,7 @@ const DealerLayout = ({
       <Menu.Item
         key="0"
         onClick={() => {
-          navigateTo("/Dealer_Dashboard/Settings")
+          navigate("/Dealer_Dashboard/Settings")
         }}
       >
         <a>Change Password</a>
@@ -134,7 +133,7 @@ const DealerLayout = ({
           <Menu.Item
             key="1"
             onClick={() => {
-              navigateTo("/Dealer_Dashboard/Dashboard")
+              navigate("/Dealer_Dashboard/Dashboard")
             }}
           >
             <Dash_home_icon />
@@ -144,7 +143,7 @@ const DealerLayout = ({
           {/* <Menu.Item
             key="8"
             onClick={() => {
-              navigateTo("/Dealer_Dashboard/Admin")
+              navigate("/Dealer_Dashboard/Admin")
             }}
             className={userA.type === "Admin" ? "" : "hide"}
           >
@@ -154,7 +153,7 @@ const DealerLayout = ({
           <Menu.Item
             key="2"
             onClick={() => {
-              navigateTo("/Dealer_Dashboard/Retailer")
+              navigate("/Dealer_Dashboard/Retailer")
             }}
           >
             <Dash_airtime_icon />
@@ -163,7 +162,7 @@ const DealerLayout = ({
           <Menu.Item
             key="9"
             onClick={() => {
-              navigateTo("/Dealer_Dashboard/SubDealers")
+              navigate("/Dealer_Dashboard/SubDealers")
             }}
             className={userA.type === "Admin" ? "hide" : ""}
           >
@@ -173,7 +172,7 @@ const DealerLayout = ({
           <Menu.Item
             key="4"
             onClick={() => {
-              navigateTo("/Dealer_Dashboard/Voucher")
+              navigate("/Dealer_Dashboard/Voucher")
             }}
             className={userA.type === "Admin" ? "hide" : ""}
           >
@@ -183,7 +182,7 @@ const DealerLayout = ({
           {/* <Menu.Item
             key="3"
             onClick={() => {
-              navigateTo("/Dealer_Dashboard/Wallet")
+              navigate("/Dealer_Dashboard/Wallet")
             }}
             className={userA.type === "Admin" ? "hide" : ""}
           >
@@ -194,7 +193,7 @@ const DealerLayout = ({
           <Menu.Item
             key="5"
             onClick={() => {
-              navigateTo("/Dealer_Dashboard/History")
+              navigate("/Dealer_Dashboard/History")
             }}
             className={userA.type === "Admin" ? "hide" : ""}
           >
@@ -204,7 +203,7 @@ const DealerLayout = ({
           {/* <Menu.Item
             key="10"
             onClick={() => {
-              navigateTo("/Dealer_Dashboard/Transactions")
+              navigate("/Dealer_Dashboard/Transactions")
             }}
             className={userA.type === "Admin" ? "" : "hide"}
           >
@@ -214,7 +213,7 @@ const DealerLayout = ({
           {/* <Menu.Item
             key="6"
             onClick={() => {
-              navigateTo("/Dealer_Dashboard/Payment")
+              navigate("/Dealer_Dashboard/Payment")
             }}
             className={userA.type === "Admin" ? "hide" : ""}
           >
@@ -224,7 +223,7 @@ const DealerLayout = ({
           {/* <Menu.Item
             key="9"
             onClick={() => {
-              navigateTo("/Dealer_Dashboard/Export")
+              navigate("/Dealer_Dashboard/Export")
             }}
           >
             <Dash_export_icon />
