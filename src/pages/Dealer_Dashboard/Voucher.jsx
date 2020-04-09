@@ -11,6 +11,7 @@ import {
   Table,
   Form,
   Popconfirm,
+  Spin,
 } from "antd"
 import DealerLayout from "../../components/Layout/DealerLayout"
 import { VoucherIcon } from "../../components/CustomIcons"
@@ -25,6 +26,7 @@ const Voucher = () => {
   const [error, setError] = useState([])
   const [vtu, setVtu] = useState([])
   const [loading, setLoading] = useState(false)
+  const [spinning, setSpinning] = useState(true)
   const [filtered, setFiltered] = useState("")
   const [message, setMessage] = useState("")
   const [name, setName] = useState("")
@@ -52,6 +54,10 @@ const Voucher = () => {
     const username = Base64.decode(data.TOKEN_ONE)
     const password = Base64.decode(data.TOKEN_TWO)
 
+    setTimeout(() => {
+      setSpinning(false)
+    }, 60000)
+
     setUpdate({
       ...update,
       username,
@@ -77,6 +83,7 @@ const Voucher = () => {
     })
     request.then(({ data }) => {
       if (data.status === "200") {
+        setSpinning(false)
         setVtu(data.vtus)
       }
     })
@@ -320,7 +327,10 @@ const Voucher = () => {
     })
   }
 
-  const filteredList = vtu.filter(item => item.vtu_line.includes(filtered))
+  const filteredList = vtu
+    .slice()
+    .reverse()
+    .filter(item => item.vtu_line.includes(filtered))
 
   const title = (
     <h4>
@@ -355,12 +365,14 @@ const Voucher = () => {
                       />
                     </div>
                   </div>
-                  <Table
-                    columns={VoucherColumn}
-                    dataSource={filteredList}
-                    bordered
-                    size="small"
-                  />
+                  <Spin spinning={spinning} size="large" delay={0}>
+                    <Table
+                      columns={VoucherColumn}
+                      dataSource={filteredList}
+                      bordered
+                      size="small"
+                    />
+                  </Spin>
                 </div>
                 <div className={openToken ? "sendTokenContainer" : "hide"}>
                   <div className="sendTokenGroup">

@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react"
-import { Table, Icon, Input, Select, Pagination, Tabs, Button } from "antd"
+import {
+  Table,
+  Icon,
+  Input,
+  Select,
+  Pagination,
+  Tabs,
+  Button,
+  Spin,
+} from "antd"
 import { ColumnsTwo, TableTwo } from "../../components/Constants/Tableone"
 import "../../scss/Table.scss"
 import "../../scss/Retailer.scss"
@@ -19,6 +28,7 @@ const RetailerHistory = () => {
   const [usernameH, setUsernameH] = useState([])
   const [filteredCredit, setFilteredCredit] = useState("")
   const [filtered, setFiltered] = useState("")
+  const [spinning, setSpinning] = useState(true)
 
   useEffect(() => {
     let onLogged = sessionStorage.getItem("persist:root")
@@ -34,6 +44,11 @@ const RetailerHistory = () => {
 
     const username = Base64.decode(data.TOKEN_ONE)
     const password = Base64.decode(data.TOKEN_TWO)
+
+    setTimeout(() => {
+      setSpinning(false)
+    }, 6000)
+
     const Creditreq = {
       serviceCode: "SHR",
       username,
@@ -58,6 +73,7 @@ const RetailerHistory = () => {
     })
     requestCRD.then(({ data }) => {
       if (data.status === "200") {
+        setSpinning(false)
         setCreditHistory(data.history)
       }
     })
@@ -241,23 +257,30 @@ const RetailerHistory = () => {
     },
   ]
 
-  const filteredSubHistory = subHistory.filter(
-    item =>
-      item.ref.includes(filtered) ||
-      item.sub_dealer_name
-        .toLocaleLowerCase()
-        .includes(filtered.toLocaleLowerCase())
-  )
-  const filteredRetailer = historyRetailer.filter(
-    item =>
-      item.ref.includes(filtered.toLocaleLowerCase()) ||
-      item.retailer_name
-        .toLocaleLowerCase()
-        .includes(filtered.toLocaleLowerCase())
-  )
-  const filtercreditHistory = creditHistory.filter(item =>
-    item.ref.includes(filtered)
-  )
+  const filteredSubHistory = subHistory
+    .slice()
+    .reverse()
+    .filter(
+      item =>
+        item.ref.includes(filtered) ||
+        item.sub_dealer_name
+          .toLocaleLowerCase()
+          .includes(filtered.toLocaleLowerCase())
+    )
+  const filteredRetailer = historyRetailer
+    .slice()
+    .reverse()
+    .filter(
+      item =>
+        item.ref.includes(filtered.toLocaleLowerCase()) ||
+        item.retailer_name
+          .toLocaleLowerCase()
+          .includes(filtered.toLocaleLowerCase())
+    )
+  const filtercreditHistory = creditHistory
+    .slice()
+    .reverse()
+    .filter(item => item.ref.includes(filtered))
 
   const title = (
     <h4>
@@ -333,12 +356,14 @@ const RetailerHistory = () => {
                     />
                   </div>
                 </div>
-                <Table
-                  columns={HistoryColumn2}
-                  dataSource={filtercreditHistory}
-                  bordered
-                  size="small"
-                />
+                <Spin spinning={spinning} size="large" delay={0}>
+                  <Table
+                    columns={HistoryColumn2}
+                    dataSource={filtercreditHistory}
+                    bordered
+                    size="small"
+                  />
+                </Spin>
               </div>
             </TabPane>
             <TabPane tab="Sub-Dealer" key="2">

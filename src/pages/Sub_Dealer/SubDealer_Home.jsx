@@ -6,7 +6,7 @@ import {
 import { Table } from "antd"
 import DealerTopCards from "../../components/DealerTopCards"
 import "../../scss/Dealer_home.scss"
-import { Button } from "antd"
+import { Spin } from "antd"
 import DealerActivities from "../../components/DealerActivities"
 import Instance from "../../Api/Instance"
 import { Base64 } from "js-base64"
@@ -16,7 +16,7 @@ import DealerLoginInstance from "../../Api/DealerLoginInstance"
 const SubDealer_Home = () => {
   const [retailer, setRetailer] = useState([])
   const [walletData, setWalletData] = useState([])
-  const [user, setUser] = useState({})
+  const [spinning, setSpinning] = useState(true)
   const [counter, setCounter] = useState("0")
 
   useEffect(() => {
@@ -35,6 +35,11 @@ const SubDealer_Home = () => {
       : []
     const username = Base64.decode(data.TOKEN_ONE_DEALER)
     const password = Base64.decode(data.TOKEN_TWO_DEALER)
+
+    setTimeout(() => {
+      setSpinning(false)
+    }, 6000)
+
     const req = {
       serviceCode: "DHL",
       username,
@@ -64,6 +69,7 @@ const SubDealer_Home = () => {
       res(DealerLoginInstance.post("", reqs))
     })
     profile.then(({ data }) => {
+      setSpinning(false)
       setWalletData(data.wallets)
     })
   }, [])
@@ -110,23 +116,25 @@ const SubDealer_Home = () => {
               {/* <Button>Add Retailer</Button> */}
             </div>
             <div className="table" style={{ margin: "3%" }}>
-              <Table
-                title={() => (
-                  <div
-                    style={{
-                      color: "green",
-                      fontSize: "16px",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Wallet Balance
-                  </div>
-                )}
-                columns={WalletColums}
-                dataSource={walletData}
-                bordered
-                size="small"
-              />
+              <Spin spinning={spinning} size="large" delay={0}>
+                <Table
+                  title={() => (
+                    <div
+                      style={{
+                        color: "green",
+                        fontSize: "16px",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Wallet Balance
+                    </div>
+                  )}
+                  columns={WalletColums}
+                  dataSource={walletData}
+                  bordered
+                  size="small"
+                />
+              </Spin>
             </div>
             <div className="all_activities_container">
               <div className="allActivityGroup">

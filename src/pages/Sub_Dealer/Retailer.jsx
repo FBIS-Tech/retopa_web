@@ -11,6 +11,7 @@ import {
   Popover,
   Form,
   Tooltip,
+  Spin,
 } from "antd"
 import "../../scss/Table.scss"
 import "../../scss/Admin.scss"
@@ -28,7 +29,6 @@ import { RetailIcon } from "../../components/CustomIcons"
 import { Link, navigate } from "gatsby"
 import { retailerDetails } from "../../Actions/Actions"
 import SubDealerLayout from "../../components/Layout/SubDealerLayout"
-import axios from "axios"
 import DealerLoginInstance from "../../Api/DealerLoginInstance"
 const Dash_retail_icon = props => <Icon component={RetailIcon} {...props} />
 
@@ -42,6 +42,7 @@ const RetailerList = () => {
   const [message, setMessage] = useState("")
   const [messageAct, setMessageAct] = useState("")
   const [loading, setLoading] = useState(false)
+  const [spinning, setSpinning] = useState(true)
   const [error, setError] = useState([])
   const [name, setName] = useState("")
   const [activate, setActivate] = useState("Activate")
@@ -79,6 +80,11 @@ const RetailerList = () => {
     const username = Base64.decode(data.TOKEN_ONE_DEALER)
     const password = Base64.decode(data.TOKEN_TWO_DEALER)
     // const req = { serviceCode: "RTL", username, password, user_id }
+
+    setTimeout(() => {
+      setSpinning(false)
+    }, 60000)
+
     const req = {
       serviceCode: "RRL",
       username,
@@ -128,6 +134,7 @@ const RetailerList = () => {
     })
     request.then(({ data }) => {
       if (data.status === "200") {
+        setSpinning(false)
         setRetailer(data.retailers)
       }
     })
@@ -601,11 +608,18 @@ const RetailerList = () => {
     })
   }
   ////////////////////retailer search////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  const filteredItems = retailer.filter(
-    item =>
-      item.name.toLocaleLowerCase().includes(filterText.toLocaleLowerCase()) ||
-      item.username.toLocaleLowerCase().includes(filterText.toLocaleLowerCase())
-  )
+  const filteredItems = retailer
+    .slice()
+    .reverse()
+    .filter(
+      item =>
+        item.name
+          .toLocaleLowerCase()
+          .includes(filterText.toLocaleLowerCase()) ||
+        item.username
+          .toLocaleLowerCase()
+          .includes(filterText.toLocaleLowerCase())
+    )
 
   const title = (
     <h4>
@@ -671,12 +685,14 @@ const RetailerList = () => {
                     />
                   </div>
                 </div>
-                <Table
-                  columns={ColumnsTwo}
-                  dataSource={filteredItems}
-                  bordered
-                  size="small"
-                />
+                <Spin spinning={spinning} size="large" delay={0}>
+                  <Table
+                    columns={ColumnsTwo}
+                    dataSource={filteredItems}
+                    bordered
+                    size="small"
+                  />
+                </Spin>
               </div>
             </div>
             <div className={openToken ? "sendTokenContainer" : "hide"}>

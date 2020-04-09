@@ -13,6 +13,7 @@ import {
   Tooltip,
   Popconfirm,
   message,
+  Spin,
 } from "antd"
 import "../../scss/Table.scss"
 import "../../scss/Admin.scss"
@@ -40,6 +41,7 @@ const { Option } = Select
 const RetailerList = () => {
   const [openToken, setOpenToken] = useState(false)
   const [openToken2, setOpenToken2] = useState(false)
+  const [spinning, setSpinning] = useState(true)
   const [retailer, setRetailer] = useState([])
   const [vtu, setVtu] = useState([])
   const [message, setMessage] = useState("")
@@ -145,6 +147,10 @@ const RetailerList = () => {
       user_id,
     })
 
+    setTimeout(() => {
+      setSpinning(false)
+    }, 60000)
+
     if (UserData.type === "Admin") {
       setType("Admin")
       // request for retailer list
@@ -163,6 +169,7 @@ const RetailerList = () => {
       })
       request.then(({ data }) => {
         if (data.status === "200") {
+          setSpinning(false)
           setRetailer(data.retailer)
         }
       })
@@ -801,12 +808,14 @@ const RetailerList = () => {
                     />
                   </div>
                 </div>
-                <Table
-                  columns={ColumnsTwo}
-                  dataSource={filteredItems}
-                  bordered
-                  size="small"
-                />
+                <Spin spinning={spinning} size="large" delay={0}>
+                  <Table
+                    columns={ColumnsTwo}
+                    dataSource={filteredItems}
+                    bordered
+                    size="small"
+                  />
+                </Spin>
               </div>
             </div>
             <div className={openToken ? "sendTokenContainer" : "hide"}>

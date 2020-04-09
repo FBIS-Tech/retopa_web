@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react"
-import { Table, Icon, Input, Select, Pagination, Tabs, Button } from "antd"
+import {
+  Table,
+  Icon,
+  Input,
+  Select,
+  Pagination,
+  Tabs,
+  Button,
+  Spin,
+} from "antd"
 import { ColumnsTwo, TableTwo } from "../../components/Constants/Tableone"
 import "../../scss/Table.scss"
 import "../../scss/Retailer.scss"
@@ -18,7 +27,7 @@ const RetailerHistory = () => {
   const [historyRetailer, setHistoryRetailer] = useState([])
   const [creditHistory, setCreditHistory] = useState([])
   const [usernameH, setUsernameH] = useState([])
-  const [filteredCredit, setFilteredCredit] = useState("")
+  const [spinning, setSpinning] = useState(true)
   const [filtered, setFiltered] = useState("")
 
   useEffect(() => {
@@ -35,6 +44,11 @@ const RetailerHistory = () => {
       : []
     const username = Base64.decode(data.TOKEN_ONE_DEALER)
     const password = Base64.decode(data.TOKEN_TWO_DEALER)
+
+    setTimeout(() => {
+      setSpinning(false)
+    }, 60000)
+
     const Creditreq = {
       serviceCode: "CWH",
       username,
@@ -65,6 +79,7 @@ const RetailerHistory = () => {
     })
     requestCRD.then(({ data }) => {
       if (data.status === "200") {
+        setSpinning(false)
         setCreditHistory(data.history)
       }
     })
@@ -77,39 +92,8 @@ const RetailerHistory = () => {
         setSUBHistory(data.history)
       }
     })
-    // // ////sub dealer history list/////////////////////////////////////
-    // const request = new Promise(res => {
-    //   res(DealerLoginInstance.post("", SubDealereq))
-    // })
-    // request.then(({ data }) => {
-    //   if (data.status === "200") {
-    //     setSUBHistory(data.history)
-    //   }
-    // })
-    // // ////sub dealer history list/////////////////////////////////////
-    // const requestDebit = new Promise(res => {
-    //   res(DealerLoginInstance.post("", retailereq))
-    // })
-    // ////console.log(requestCredit)
-    // requestDebit.then(({ data }) => {
-    //   if (data.status === "200") {
-    //     console.log(data)
-    //     setHistoryRetailer(data.history)
-    //   }
-    // })
   }, [])
-  // "id": 22,
-  //           "amount": "10.00",
-  //           "type": "CREDIT",
-  //           "account_type": "TP",
-  //           "ref": "15857529838127",
-  //           "balance": "10.00",
-  //           "fro_balance": "38990.00",
-  //           "source": 1,
-  //           "destination": 9,
-  //           "created_at": "2020-04-01 14:56:23",
-  //           "updated_at": "2020-04-01 14:56:23",
-  //           "retailer_name": "Kayode"
+
   const HistoryColumni = [
     {
       title: "Retailer Name",
@@ -251,13 +235,16 @@ const RetailerHistory = () => {
     },
   ]
 
-  const filteredSubHistory = subHistory.filter(
-    item =>
-      item.ref.includes(filtered) ||
-      item.sub_dealer_name
-        .toLocaleLowerCase()
-        .includes(filtered.toLocaleLowerCase())
-  )
+  const filteredSubHistory = subHistory
+    .slice()
+    .reverse()
+    .filter(
+      item =>
+        item.ref.includes(filtered) ||
+        item.sub_dealer_name
+          .toLocaleLowerCase()
+          .includes(filtered.toLocaleLowerCase())
+    )
   const filteredRetailer = historyRetailer.filter(
     item =>
       item.ref.includes(filtered.toLocaleLowerCase()) ||
@@ -265,9 +252,10 @@ const RetailerHistory = () => {
         .toLocaleLowerCase()
         .includes(filtered.toLocaleLowerCase())
   )
-  const filtercreditHistory = creditHistory.filter(item =>
-    item.ref.includes(filtered)
-  )
+  const filtercreditHistory = creditHistory
+    .slice()
+    .reverse()
+    .filter(item => item.ref.includes(filtered))
 
   const title = (
     <h4>
@@ -343,15 +331,17 @@ const RetailerHistory = () => {
                     />
                   </div>
                 </div>
-                <Table
-                  columns={HistoryColumn2}
-                  dataSource={filtercreditHistory}
-                  bordered
-                  size="small"
-                />
+                <Spin spinning={spinning} size="large" delay={0}>
+                  <Table
+                    columns={HistoryColumn2}
+                    dataSource={filtercreditHistory}
+                    bordered
+                    size="small"
+                  />
+                </Spin>
               </div>
             </TabPane>
-            <TabPane tab="Debit Historyr" key="2">
+            <TabPane tab="Debit History" key="2">
               <div className="table_Group">
                 <div className="table_header">
                   <div className="rowShow">

@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react"
-import { Table, Icon, Input, Select, Pagination, Tabs, Button } from "antd"
+import {
+  Table,
+  Icon,
+  Input,
+  Select,
+  Pagination,
+  Tabs,
+  Button,
+  Spin,
+} from "antd"
 import "../../scss/Table.scss"
 import "../../scss/Retailer.scss"
 import { CSVLink, CSVDownload } from "react-csv"
@@ -22,7 +31,7 @@ const SubDealerList = () => {
   const [historyCredit, setHistoryDebit] = useState([])
   const [usernameH, setUsernameH] = useState([])
   const [filteredCredit, setFilteredCredit] = useState("")
-  const [filteredDebit, setFilteredDebit] = useState("")
+  const [spinning, setSpinning] = useState(true)
 
   const { retailer } = useSelector(state => state)
 
@@ -41,6 +50,10 @@ const SubDealerList = () => {
     const username = Base64.decode(data.TOKEN_ONE)
     const password = Base64.decode(data.TOKEN_TWO)
 
+    setTimeout(() => {
+      setSpinning(false)
+    }, 60000)
+
     ////////////AWUF history/////////////////
     const VTU = {
       serviceCode: "DHL",
@@ -57,8 +70,8 @@ const SubDealerList = () => {
     requestVtu.then(({ data }) => {
       //console.log(data)
       if (data.status === "200") {
+        setSpinning(false)
         let retailers = data.sub_dealers
-        console.log(retailers)
         setVtuHistory(retailers)
       }
     })
@@ -305,12 +318,14 @@ const SubDealerList = () => {
                     />
                   </div>
                 </div>
-                <Table
-                  columns={ColumnsTwo}
-                  dataSource={filteredVTUItems}
-                  bordered
-                  size="small"
-                />
+                <Spin spinning={spinning} size="large" delay={0}>
+                  <Table
+                    columns={ColumnsTwo}
+                    dataSource={filteredVTUItems}
+                    bordered
+                    size="small"
+                  />
+                </Spin>
               </div>
             </TabPane>
           </Tabs>

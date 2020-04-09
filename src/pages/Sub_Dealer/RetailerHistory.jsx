@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from "react"
-import { Table, Icon, Input, Select, Pagination, Tabs, Button } from "antd"
+import {
+  Table,
+  Icon,
+  Input,
+  Select,
+  Pagination,
+  Tabs,
+  Button,
+  Spin,
+} from "antd"
 import "../../scss/Table.scss"
 import "../../scss/Retailer.scss"
+import "../../scss/Admin.scss"
 import { CSVLink, CSVDownload } from "react-csv"
 import { Base64 } from "js-base64"
 import DealerLayout from "../../components/Layout/DealerLayout"
@@ -20,7 +30,7 @@ const RetailerSingleHistory = () => {
   const [DataHistory, setDataHistory] = useState([])
   const [AwufHistory, setAwufHistory] = useState([])
   const [VtuHistory, setVtuHistory] = useState([])
-  const [historyCredit, setHistoryDebit] = useState([])
+  const [spinning, setSpinning] = useState(true)
   const [usernameH, setUsernameH] = useState([])
   const [filteredCredit, setFilteredCredit] = useState("")
   const [filteredDebit, setFilteredDebit] = useState("")
@@ -42,6 +52,10 @@ const RetailerSingleHistory = () => {
     console.log(data)
     const username = Base64.decode(data.TOKEN_ONE_DEALER)
     const password = Base64.decode(data.TOKEN_TWO_DEALER)
+
+    setTimeout(() => {
+      setSpinning(false)
+    }, 60000)
 
     const VOD = {
       serviceCode: "TTV",
@@ -110,6 +124,7 @@ const RetailerSingleHistory = () => {
     })
     requestVtu.then(({ data }) => {
       if (data.status === "200") {
+        setSpinning(false)
         setVtuHistory(data.history)
       }
     })
@@ -121,9 +136,9 @@ const RetailerSingleHistory = () => {
       key: "amount",
     },
     {
-      title: "Quantity",
-      dataIndex: "quantity",
-      key: "quantity",
+      title: "Number",
+      dataIndex: "phone",
+      key: "phone",
     },
     {
       title: "Status",
@@ -225,12 +240,14 @@ const RetailerSingleHistory = () => {
                     />
                   </div>
                 </div>
-                <Table
-                  columns={HistoryColumn}
-                  dataSource={filteredVTUItems}
-                  bordered
-                  size="small"
-                />
+                <Spin spinning={spinning} size="large" delay={0}>
+                  <Table
+                    columns={HistoryColumn}
+                    dataSource={filteredVTUItems}
+                    bordered
+                    size="small"
+                  />
+                </Spin>
               </div>
             </TabPane>
             <TabPane tab="VOD" key="2">

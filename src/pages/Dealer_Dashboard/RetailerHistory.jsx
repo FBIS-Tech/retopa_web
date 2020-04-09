@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react"
-import { Table, Icon, Input, Select, Pagination, Tabs, Button } from "antd"
+import {
+  Table,
+  Icon,
+  Input,
+  Select,
+  Pagination,
+  Tabs,
+  Button,
+  Spin,
+} from "antd"
 import "../../scss/Table.scss"
 import "../../scss/Retailer.scss"
 import { CSVLink, CSVDownload } from "react-csv"
@@ -23,6 +32,7 @@ const RetailerSingleHistory = () => {
   const [usernameH, setUsernameH] = useState([])
   const [filteredCredit, setFilteredCredit] = useState("")
   const [filteredDebit, setFilteredDebit] = useState("")
+  const [spinning, setSpinning] = useState(true)
 
   const { retailer } = useSelector(state => state)
 
@@ -40,6 +50,10 @@ const RetailerSingleHistory = () => {
 
     const username = Base64.decode(data.TOKEN_ONE)
     const password = Base64.decode(data.TOKEN_TWO)
+
+    setTimeout(() => {
+      setSpinning(false)
+    }, 60000)
 
     const VOD = {
       serviceCode: "TTV",
@@ -108,6 +122,7 @@ const RetailerSingleHistory = () => {
     })
     requestVtu.then(({ data }) => {
       if (data.status === "200") {
+        setSpinning(false)
         setVtuHistory(data.history)
       }
     })
@@ -154,16 +169,16 @@ const RetailerSingleHistory = () => {
     },
   ]
 
-  const filteredDebitItems = VODHistory.filter(item =>
-    item.ref.includes(filteredDebit.toLocaleLowerCase())
-  )
-  const filteredDataItems = DataHistory.filter(item =>
-    item.ref.includes(filteredCredit.toLocaleLowerCase())
-  )
+  const filteredDebitItems = VODHistory.slice()
+    .reverse()
+    .filter(item => item.ref.includes(filteredDebit.toLocaleLowerCase()))
+  const filteredDataItems = DataHistory.slice()
+    .reverse()
+    .filter(item => item.ref.includes(filteredCredit.toLocaleLowerCase()))
 
-  const filteredVTUItems = VtuHistory.filter(item =>
-    item.ref.includes(filteredCredit.toLocaleLowerCase())
-  )
+  const filteredVTUItems = VtuHistory.slice()
+    .reverse()
+    .filter(item => item.ref.includes(filteredCredit.toLocaleLowerCase()))
 
   const title = (
     <h4>
@@ -224,12 +239,14 @@ const RetailerSingleHistory = () => {
                     />
                   </div>
                 </div>
-                <Table
-                  columns={HistoryColumn}
-                  dataSource={filteredVTUItems}
-                  bordered
-                  size="small"
-                />
+                <Spin spinning={spinning} size="large" delay={0}>
+                  <Table
+                    columns={HistoryColumn}
+                    dataSource={filteredVTUItems}
+                    bordered
+                    size="small"
+                  />
+                </Spin>
               </div>
             </TabPane>
             <TabPane tab="VOD" key="2">
@@ -296,6 +313,7 @@ const RetailerSingleHistory = () => {
                     />
                   </div>
                 </div>
+
                 <Table
                   columns={HistoryColumn}
                   dataSource={filteredDataItems}

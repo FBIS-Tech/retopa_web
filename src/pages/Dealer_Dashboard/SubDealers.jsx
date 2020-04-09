@@ -13,6 +13,7 @@ import {
   Form,
   Popconfirm,
   Tooltip,
+  Spin,
 } from "antd"
 import "../../scss/Table.scss"
 import { TableTwo } from "../../components/Constants/Tableone"
@@ -37,6 +38,7 @@ const { Option } = Select
 const SubDealer = () => {
   const [openToken, setOpenToken] = useState(false)
   const [openToken2, setOpenToken2] = useState(false)
+  const [spinning, setSpinning] = useState(true)
   const [retailer, setRetailer] = useState([])
   const [vtuDATA, setVtuDATA] = useState([])
   const [walletData, setWalletData] = useState([])
@@ -151,6 +153,10 @@ const SubDealer = () => {
       user_id,
     })
 
+    setTimeout(() => {
+      setSpinning(false)
+    }, 60000)
+
     // request for sub dealer list
     const request = new Promise(res => {
       res(Instance.post("", req))
@@ -158,6 +164,7 @@ const SubDealer = () => {
     request.then(({ data }) => {
       if (data.status === "200") {
         let allRetailers = data.sub_dealers
+        setSpinning(false)
         setRetailer(allRetailers)
         // to query sub dealers only
       }
@@ -554,11 +561,18 @@ const SubDealer = () => {
     })
   }
   ////////////////////retailer search////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  const filteredItems = retailer.filter(
-    item =>
-      item.name.toLocaleLowerCase().includes(filterText.toLocaleLowerCase()) ||
-      item.username.toLocaleLowerCase().includes(filterText.toLocaleLowerCase())
-  )
+  const filteredItems = retailer
+    .slice()
+    .reverse()
+    .filter(
+      item =>
+        item.name
+          .toLocaleLowerCase()
+          .includes(filterText.toLocaleLowerCase()) ||
+        item.username
+          .toLocaleLowerCase()
+          .includes(filterText.toLocaleLowerCase())
+    )
 
   const title = (
     <h4>
@@ -682,12 +696,14 @@ const SubDealer = () => {
                     />
                   </div>
                 </div>
-                <Table
-                  columns={ColumnsTwo}
-                  dataSource={filteredItems}
-                  bordered
-                  size="small"
-                />
+                <Spin spinning={spinning} size="large" delay={0}>
+                  <Table
+                    columns={ColumnsTwo}
+                    dataSource={filteredItems}
+                    bordered
+                    size="small"
+                  />
+                </Spin>
               </div>
             </div>
             <div className={openToken ? "sendTokenContainer" : "hide"}>
