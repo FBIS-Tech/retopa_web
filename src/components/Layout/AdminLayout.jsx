@@ -60,6 +60,8 @@ const AdminLayout = ({
     let UserData = localStorage.getItem("userData")
       ? JSON.parse(localStorage.getItem("userData"))
       : []
+
+    const { user_id } = UserData
     setType(UserData.admintype)
     if (UserData === undefined) {
       return false
@@ -68,7 +70,7 @@ const AdminLayout = ({
     }
     const username = Base64.decode(data.TOKEN_ONE)
     const password = Base64.decode(data.TOKEN_TWO)
-    const req = { serviceCode: "SHP", username, password, user_id: "1" }
+    const req = { serviceCode: "SHP", username, password, user_id }
     const profile = new Promise(res => {
       res(Instance.post("", req))
     })

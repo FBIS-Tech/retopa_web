@@ -74,7 +74,6 @@ const DealerLayout = ({
       res(Instance.post("", req))
     })
     profile.then(({ data }) => {
-      console.log(data)
       let user = data.user
       //console.log(user)
       if (user === undefined) {
