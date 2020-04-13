@@ -56,9 +56,11 @@ const DealerLayout = ({
     let data = sessionStorage.getItem("topup")
       ? JSON.parse(sessionStorage.getItem("topup"))
       : []
+
     let UserData = localStorage.getItem("userData")
       ? JSON.parse(localStorage.getItem("userData"))
       : []
+    const { user_id } = UserData
 
     if (UserData === undefined) {
       return false
@@ -67,11 +69,12 @@ const DealerLayout = ({
     }
     const username = Base64.decode(data.TOKEN_ONE)
     const password = Base64.decode(data.TOKEN_TWO)
-    const req = { serviceCode: "SHP", username, password, user_id: "1" }
+    const req = { serviceCode: "SHP", username, password, user_id }
     const profile = new Promise(res => {
       res(Instance.post("", req))
     })
     profile.then(({ data }) => {
+      console.log(data)
       let user = data.user
       //console.log(user)
       if (user === undefined) {
@@ -126,8 +129,7 @@ const DealerLayout = ({
           </div>
         </div>
         <div className="user_name">
-          <span>Hello</span>{" "}
-          <span>{user.username === undefined ? "ADMIN" : user.username}</span>
+          <span>Hello</span> <span>{user.username}</span>
         </div>
         <Menu mode="inline" defaultSelectedKeys={position}>
           <Menu.Item
