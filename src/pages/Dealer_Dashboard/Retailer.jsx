@@ -658,7 +658,6 @@ const RetailerList = () => {
   }
 
   const handleFundTransfer = () => {
-    console.log(fund)
     setLoading(true)
     const sendRequest = new Promise(res => {
       res(Instance.post("", fund))

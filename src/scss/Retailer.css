@@ -24,6 +24,23 @@ table {
   margin-bottom: 0px;
 }
 
+.balance {
+  text-align: center;
+  color: green;
+  font-size: 18px;
+}
+
+.ant-popover-inner-content {
+  padding: 20px !important;
+}
+
+.ant-popover-message-title {
+  width: 100%;
+  max-width: 400px;
+  color: #227f00;
+  font-weight: 800;
+}
+
 tbody.ant-table-tbody tr {
   background: #ffffff;
   border: 1px solid #e4e4e4;
