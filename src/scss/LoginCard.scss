@@ -45,6 +45,15 @@
   }
 }
 
+.sideded {
+  display: flex;
+  flex-direction: row !important;
+  justify-content: space-evenly;
+  a {
+    display: block;
+  }
+}
+
 .content {
   padding: 4% 8% 8% 8%;
   form {
@@ -169,11 +178,12 @@
 }
 
 .active {
-  border-bottom: 2px solid #227f00 !important;
+  border-bottom: 4px solid #227f00 !important;
   color: #227f00 !important;
   font-size: 16px;
   text-align: center;
   cursor: pointer;
+  border-right: 0.2px solid #00000014;
 }
 
 .socials {

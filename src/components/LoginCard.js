@@ -19,20 +19,23 @@ const LoginCard = ({
   return (
     <div className="Login_card">
       <div className={!activea ? "method" : "method2"}>
-        <a
-          href="https://retopin.com/backend/public/login"
-          className={activeb ? "active" : ""}
-          onClick={activate2}
-        >
-          Log In as a Partner{" "}
-        </a>
-        <a
-          href="https://retopin.com/backend/public/sub-dealer/login"
-          className={activec ? "active" : ""}
-          onClick={activate3}
-        >
-          Log In as a Sub Dealer
-        </a>
+        <div className={!activea ? "sideded" : "hide"}>
+          <a
+            href="https://retopin.com/backend/public/login"
+            className={activeb ? "active" : ""}
+            onClick={activate2}
+          >
+            Log In as a Partner{" "}
+          </a>
+          <a
+            href="https://retopin.com/backend/public/sub-dealer/login"
+            className={activec ? "active" : ""}
+            onClick={activate3}
+          >
+            Log In as a Sub Dealer
+          </a>
+        </div>
+
         <h4 className={activea ? "active" : ""} onClick={activate1}>
           Log In as a Admin
         </h4>

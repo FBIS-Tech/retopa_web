@@ -429,9 +429,6 @@
   .Trusted_cards .card_group {
     max-width: 30%;
   }
-  .sect_card_container {
-    max-width: 32%;
-  }
 }
 
 @media (min-width: 1024px) {
