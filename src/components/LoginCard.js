@@ -18,18 +18,26 @@ const LoginCard = ({
 }) => {
   return (
     <div className="Login_card">
-      <div className="method">
-        <h4 className={activeb ? "active" : ""} onClick={activate2}>
+      <div className={!activea ? "method" : "method2"}>
+        <a
+          href="https://retopin.com/backend/public/login"
+          className={activeb ? "active" : ""}
+          onClick={activate2}
+        >
           Log In as a Partner{" "}
-        </h4>
-        <h4 className={activec ? "active" : ""} onClick={activate3}>
+        </a>
+        <a
+          href="https://retopin.com/backend/public/sub-dealer/login"
+          className={activec ? "active" : ""}
+          onClick={activate3}
+        >
           Log In as a Sub Dealer
-        </h4>
+        </a>
         <h4 className={activea ? "active" : ""} onClick={activate1}>
           Log In as a Admin
         </h4>
       </div>
-      <div className="content">
+      <div className={activea ? "content" : "hide"}>
         <form>
           <div className="input">
             <label>Email/Phone number</label>
@@ -58,15 +66,6 @@ const LoginCard = ({
               Login
             </Button>
           </div>
-          {/* <h4 className="socials">Log In through socials</h4> */}
-          {/* <div className="social-logo">
-            <div>
-              <Google />
-            </div>
-            <div>
-              <Face />
-            </div>
-          </div> */}
         </form>
       </div>
     </div>

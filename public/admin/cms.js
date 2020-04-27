@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "904caa7037d70351e9cd";
+/******/ 	var hotCurrentHash = "81b85d67cee5bdad3e7f";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -261,7 +261,6 @@
 /******/ 			var chunkId = "cms";
 /******/ 			// eslint-disable-next-line no-lone-blocks
 /******/ 			{
-/******/ 				/*globals chunkId */
 /******/ 				hotEnsureUpdateChunk(chunkId);
 /******/ 			}
 /******/ 			if (
@@ -850,8 +849,8 @@ _netlifyIdentityWidget["default"].init();
     return;
   }
 
-  reactHotLoader.register(_netlifyIdentityWidget, "_netlifyIdentityWidget", "D:\\YU\\Documents\\retopa\\node_modules\\gatsby-plugin-netlify-cms\\cms-identity.js");
-  reactHotLoader.register(addLoginListener, "addLoginListener", "D:\\YU\\Documents\\retopa\\node_modules\\gatsby-plugin-netlify-cms\\cms-identity.js");
+  reactHotLoader.register(_netlifyIdentityWidget, "_netlifyIdentityWidget", "/home/olukayode/Documents/NewRetopa/retopa/node_modules/gatsby-plugin-netlify-cms/cms-identity.js");
+  reactHotLoader.register(addLoginListener, "addLoginListener", "/home/olukayode/Documents/NewRetopa/retopa/node_modules/gatsby-plugin-netlify-cms/cms-identity.js");
 })();
 
 ;
@@ -920,7 +919,7 @@ if (false) {} else {
     return;
   }
 
-  reactHotLoader.register(_netlifyCmsApp, "_netlifyCmsApp", "D:\\YU\\Documents\\retopa\\node_modules\\gatsby-plugin-netlify-cms\\cms.js");
+  reactHotLoader.register(_netlifyCmsApp, "_netlifyCmsApp", "/home/olukayode/Documents/NewRetopa/retopa/node_modules/gatsby-plugin-netlify-cms/cms.js");
 })();
 
 ;
@@ -990,8 +989,8 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\YU\Documents\retopa\node_modules\gatsby-plugin-netlify-cms\cms.js */"./node_modules/gatsby-plugin-netlify-cms/cms.js");
-module.exports = __webpack_require__(/*! D:\YU\Documents\retopa\node_modules\gatsby-plugin-netlify-cms\cms-identity.js */"./node_modules/gatsby-plugin-netlify-cms/cms-identity.js");
+__webpack_require__(/*! /home/olukayode/Documents/NewRetopa/retopa/node_modules/gatsby-plugin-netlify-cms/cms.js */"./node_modules/gatsby-plugin-netlify-cms/cms.js");
+module.exports = __webpack_require__(/*! /home/olukayode/Documents/NewRetopa/retopa/node_modules/gatsby-plugin-netlify-cms/cms-identity.js */"./node_modules/gatsby-plugin-netlify-cms/cms-identity.js");
 
 
 /***/ }),

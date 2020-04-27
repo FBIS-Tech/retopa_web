@@ -1,14 +1,14 @@
 var plugins = [{
-      plugin: require('D:/YU/Documents/retopa/node_modules/gatsby-plugin-react-helmet/gatsby-ssr'),
+      plugin: require('/home/olukayode/Documents/NewRetopa/retopa/node_modules/gatsby-plugin-react-helmet/gatsby-ssr'),
       options: {"plugins":[]},
     },{
-      plugin: require('D:/YU/Documents/retopa/node_modules/gatsby-plugin-transition-link/gatsby-ssr'),
+      plugin: require('/home/olukayode/Documents/NewRetopa/retopa/node_modules/gatsby-plugin-transition-link/gatsby-ssr'),
       options: {"plugins":[]},
     },{
-      plugin: require('D:/YU/Documents/retopa/node_modules/gatsby-plugin-manifest/gatsby-ssr'),
+      plugin: require('/home/olukayode/Documents/NewRetopa/retopa/node_modules/gatsby-plugin-manifest/gatsby-ssr'),
       options: {"plugins":[],"name":"Retopa","short_name":"starter","start_url":"/","background_color":"#663399","theme_color":"#663399","display":"minimal-ui"},
     },{
-      plugin: require('D:/YU/Documents/retopa/gatsby-ssr'),
+      plugin: require('/home/olukayode/Documents/NewRetopa/retopa/gatsby-ssr'),
       options: {"plugins":[]},
     }]
 // During bootstrap, we write requires at top of this file which looks like:
