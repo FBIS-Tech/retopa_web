@@ -97,12 +97,12 @@ const Transactions = () => {
       ),
     },
     {
-      title: "Retailer's number",
+      title: "Initiator",
       dataIndex: "requested",
       key: "requested",
     },
     {
-      title: "Customer",
+      title: "Receiver",
       dataIndex: "loaded",
       key: "loaded",
     },
@@ -195,7 +195,7 @@ const Transactions = () => {
                       onChange={onChange}
                     /> */}
                     <Input
-                      placeholder="Search By Retail code or  phone number"
+                      placeholder="234***********"
                       value={search}
                       onChange={handleSearch}
                       prefix={

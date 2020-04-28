@@ -150,7 +150,7 @@ const Retailers = () => {
                 <div className="table_header">
                   <div className="rowShow">
                     <Input
-                      placeholder="Search by Retailer code"
+                      placeholder="last 4 digits of retailer code"
                       value={search}
                       onChange={handleSearch}
                       prefix={

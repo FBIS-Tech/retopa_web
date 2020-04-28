@@ -15,6 +15,7 @@ import { Link, navigate } from "gatsby"
 import axios from "axios"
 import AdminInstance from "../../Api/AdminInstance"
 import { dispatchTransactions } from "../../Actions/Actions"
+import moment from "moment"
 const { RangePicker } = DatePicker
 const { Option } = Select
 
@@ -36,6 +37,8 @@ const Home = () => {
   const [tp_id, setTp_id] = useState("")
   const [loading, setLoading] = useState(false)
   const [adminType, setAdminType] = useState("")
+  const [month, setMonth] = useState([])
+  const [todayy, setToday] = useState([])
 
   const dispatch = useDispatch()
 
@@ -131,6 +134,71 @@ const Home = () => {
       })
       let DataAmt = data.totalamount
     }
+
+    var date = new Date(),
+      y = date.getFullYear(),
+      m = date.getMonth()
+    var firstDay = new Date(y, m, 1)
+    var lastDay = new Date(y, m + 1, 0)
+    const montReq = {
+      serviceCode: "SEARCH_tp",
+      username: usernameA,
+      password: passwordA,
+      tp_id,
+      from_date: moment(firstDay).format(),
+      to_date: moment(lastDay).format(),
+    }
+
+    const thisMonth = new Promise(res => {
+      res(AdminInstance.post("", montReq))
+    })
+    thisMonth.then(({ data }) => {
+      setMonth([
+        ...month,
+        {
+          title: "Airtime Sales",
+          price: `₦ ${data.totalussd.toLocaleString()}`,
+        },
+        {
+          title: "Data Sales",
+          price: `₦ ${data.total_data.toLocaleString()}`,
+        },
+      ])
+    })
+    // /////////////transactions today//////////////////////
+    // date query
+
+    let today = new Date()
+    let dd = String(today.getDate()).padStart(2, "0")
+    let mm = String(today.getMonth() + 1).padStart(2, "0") //January is 0!
+    let yyyy = today.getFullYear()
+
+    today = new Date(y, m, dd)
+    const todayReq = {
+      serviceCode: "SEARCH_tp",
+      username: usernameA,
+      password: passwordA,
+      tp_id,
+      from_date: moment(today).format(),
+      to_date: moment(today).format(),
+    }
+
+    const now = new Promise(res => {
+      res(AdminInstance.post("", todayReq))
+    })
+    now.then(({ data }) => {
+      setToday([
+        ...todayy,
+        {
+          title: "Airtime Sales",
+          price: `₦ ${data.totalussd.toLocaleString()}`,
+        },
+        {
+          title: "Data Sales",
+          price: `₦ ${data.total_data.toLocaleString()}`,
+        },
+      ])
+    })
   }, [])
 
   function onChange(value, dateString) {
@@ -151,7 +219,6 @@ const Home = () => {
       res(AdminInstance.post("", ussdReqst))
     })
     USSD.then(({ data }) => {
-      //console.log(data)
       setLoading(false)
       setUssdData(data.ussd_details)
       setUssd(`₦ ${data.totalussd.toLocaleString()}`)
@@ -166,11 +233,10 @@ const Home = () => {
 
   const Dealer_Activity = [
     // { title: "Total Direct Top-Up Transactions", price: "₦ 0" },
-    { title: "Total voucher transaction", price: voucher },
-    { title: "Total USSD transaction", price: ussd },
-    { title: "Total data transaction", price: data },
+    // { title: "Total voucher transaction", price: voucher },
+    { title: "Airtime Sales", price: ussd },
+    { title: "Data Sales", price: data },
     // { title: "Total bills payment transaction", price: " ₦ 0" },
-    { title: "This month transaction", price: "₦ 0" },
   ]
 
   let transactionViews = { ussdData, dataData, voucherData }
@@ -227,7 +293,7 @@ const Home = () => {
               >
                 Loading...
               </h4>
-              <div className="select">
+              <div className="selected">
                 <label style={{ color: "#227f00", display: "block" }}>
                   Query Transaction by Date:
                 </label>
@@ -241,8 +307,46 @@ const Home = () => {
               {/* <Button>Add Retailer</Button> */}
             </div>
             <div className="all_activities_container">
+              <h3
+                style={{
+                  color: "green",
+                  textAlign: "center",
+                  padding: "20px",
+                  margin: 0,
+                }}
+              >
+                Overall
+              </h3>
               <div className="allActivityGroup">
                 {Dealer_Activity.map(data => {
+                  return (
+                    <DealerActivities
+                      title={data.title}
+                      price={data.price}
+                      viewClicked={viewClick}
+                    />
+                  )
+                })}
+              </div>
+              <h3 style={{ color: "green", textAlign: "center", margin: 0 }}>
+                This Month
+              </h3>
+              <div className="allActivityGroup">
+                {month.map(data => {
+                  return (
+                    <DealerActivities
+                      title={data.title}
+                      price={data.price}
+                      viewClicked={viewClick}
+                    />
+                  )
+                })}
+              </div>
+              <h3 style={{ color: "green", textAlign: "center", margin: 0 }}>
+                Today
+              </h3>
+              <div className="allActivityGroup">
+                {todayy.map(data => {
                   return (
                     <DealerActivities
                       title={data.title}
