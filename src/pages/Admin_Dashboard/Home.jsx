@@ -246,6 +246,79 @@ const Home = () => {
     navigate("/Admin_Dashboard/Transaction_Details")
   }
 
+  const handletp = value => {
+    setMonth([])
+    setTp_id(value)
+    setLoading(true)
+
+    var date = new Date(),
+      y = date.getFullYear(),
+      m = date.getMonth()
+    var firstDay = new Date(y, m, 1)
+    var lastDay = new Date(y, m + 1, 0)
+    // total USSD
+    const ussdReqst = {
+      serviceCode: "SEARCH_tp",
+      username: dets[0],
+      password: dets[1],
+      tp_id,
+      from_date: moment(firstDay).format(),
+      to_date: moment(lastDay).format(),
+    }
+
+    const USSD = new Promise(res => {
+      res(AdminInstance.post("", ussdReqst))
+    })
+    USSD.then(({ data }) => {
+      setLoading(false)
+      setMonth([
+        {
+          title: "Airtime Sales",
+          price: `₦ ${data.totalussd.toLocaleString()}`,
+        },
+        {
+          title: "Data Sales",
+          price: `₦ ${data.total_data.toLocaleString()}`,
+        },
+      ])
+    })
+
+    // /////////////transactions today//////////////////////
+    // date query
+
+    let today = new Date()
+    let dd = String(today.getDate()).padStart(2, "0")
+    let mm = String(today.getMonth() + 1).padStart(2, "0") //January is 0!
+    let yyyy = today.getFullYear()
+
+    today = new Date(y, m, dd)
+    const todayReq = {
+      serviceCode: "SEARCH_tp",
+      username: dets[0],
+      password: dets[1],
+      tp_id,
+      from_date: moment(today).format(),
+      to_date: moment(today).format(),
+    }
+
+    const now = new Promise(res => {
+      res(AdminInstance.post("", todayReq))
+    })
+    now.then(({ data }) => {
+      setToday([
+        ...todayy,
+        {
+          title: "Airtime Sales",
+          price: `₦ ${data.totalussd.toLocaleString()}`,
+        },
+        {
+          title: "Data Sales",
+          price: `₦ ${data.total_data.toLocaleString()}`,
+        },
+      ])
+    })
+  }
+
   return (
     <>
       <div className="dealer_home_container">
@@ -274,7 +347,7 @@ const Home = () => {
                 <Select
                   defaultValue="All Trade Partner"
                   onChange={value => {
-                    setTp_id(value)
+                    handletp(value)
                   }}
                   loading={loading}
                 >
@@ -307,55 +380,79 @@ const Home = () => {
               {/* <Button>Add Retailer</Button> */}
             </div>
             <div className="all_activities_container">
-              <h3
-                style={{
-                  color: "green",
-                  textAlign: "center",
-                  padding: "20px",
-                  margin: 0,
-                }}
-              >
-                Overall
-              </h3>
-              <div className="allActivityGroup">
-                {Dealer_Activity.map(data => {
-                  return (
-                    <DealerActivities
-                      title={data.title}
-                      price={data.price}
-                      viewClicked={viewClick}
-                    />
-                  )
-                })}
-              </div>
-              <h3 style={{ color: "green", textAlign: "center", margin: 0 }}>
-                This Month
-              </h3>
-              <div className="allActivityGroup">
-                {month.map(data => {
-                  return (
-                    <DealerActivities
-                      title={data.title}
-                      price={data.price}
-                      viewClicked={viewClick}
-                    />
-                  )
-                })}
-              </div>
-              <h3 style={{ color: "green", textAlign: "center", margin: 0 }}>
-                Today
-              </h3>
-              <div className="allActivityGroup">
-                {todayy.map(data => {
-                  return (
-                    <DealerActivities
-                      title={data.title}
-                      price={data.price}
-                      viewClicked={viewClick}
-                    />
-                  )
-                })}
-              </div>
+              {loading && (
+                <h3
+                  style={{
+                    color: "green",
+                    textAlign: "center",
+                    padding: "20px",
+                    margin: 0,
+                  }}
+                >
+                  Please Wait ...
+                </h3>
+              )}
+              {!loading && (
+                <h3
+                  style={{
+                    color: "green",
+                    textAlign: "center",
+                    padding: "20px",
+                    margin: 0,
+                  }}
+                >
+                  Overall
+                </h3>
+              )}
+              {!loading && (
+                <div className="allActivityGroup">
+                  {Dealer_Activity.map(data => {
+                    return (
+                      <DealerActivities
+                        title={data.title}
+                        price={data.price}
+                        viewClicked={viewClick}
+                      />
+                    )
+                  })}
+                </div>
+              )}
+              {!loading && (
+                <h3 style={{ color: "green", textAlign: "center", margin: 0 }}>
+                  This Month
+                </h3>
+              )}
+              {!loading && (
+                <div className="allActivityGroup">
+                  {month.map(data => {
+                    return (
+                      <DealerActivities
+                        title={data.title}
+                        price={data.price}
+                        viewClicked={viewClick}
+                      />
+                    )
+                  })}
+                </div>
+              )}
+              {!loading && (
+                <h3 style={{ color: "green", textAlign: "center", margin: 0 }}>
+                  Today
+                </h3>
+              )}
+              {!loading && (
+                <div className="allActivityGroup">
+                  {todayy.map(data => {
+                    return (
+                      <DealerActivities
+                        title={data.title}
+                        price={data.price}
+                        viewClicked={viewClick}
+                      />
+                    )
+                  })}
+                </div>
+              )}
             </div>
           </div>
         </div>
