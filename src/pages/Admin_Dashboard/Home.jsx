@@ -306,7 +306,6 @@ const Home = () => {
     })
     now.then(({ data }) => {
       setToday([
-        ...todayy,
         {
           title: "Airtime Sales",
           price: `₦ ${data.totalussd.toLocaleString()}`,
