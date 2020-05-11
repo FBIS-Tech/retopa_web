@@ -316,7 +316,7 @@ const Home = () => {
       setToday([
         {
           title: "Airtime Sales",
-          price: `₦ ${data.totalussd.toLocaleString()}`,
+          price: `₦ ${data.total_vtu.toLocaleString()}`,
         },
         {
           title: "Data Sales",
