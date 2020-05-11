@@ -154,7 +154,6 @@ const Home = () => {
     })
     thisMonth.then(({ data }) => {
       setMonth([
-        ...month,
         {
           title: "Airtime Sales",
           price: `₦ ${data.totalussd.toLocaleString()}`,
@@ -188,7 +187,6 @@ const Home = () => {
     })
     now.then(({ data }) => {
       setToday([
-        ...todayy,
         {
           title: "Airtime Sales",
           price: `₦ ${data.totalussd.toLocaleString()}`,
@@ -248,7 +246,7 @@ const Home = () => {
 
   const handletp = value => {
     setMonth([])
-    setTp_id(value)
+    // setTp_id(value)
     setLoading(true)
 
     var date = new Date(),
@@ -261,20 +259,18 @@ const Home = () => {
       serviceCode: "SEARCH_tp",
       username: dets[0],
       password: dets[1],
-      tp_id,
+      tp_id: value,
       from_date: moment(firstDay).format(),
       to_date: moment(lastDay).format(),
     }
-
     const USSD = new Promise(res => {
       res(AdminInstance.post("", ussdReqst))
     })
     USSD.then(({ data }) => {
-      setLoading(false)
       setMonth([
         {
           title: "Airtime Sales",
-          price: `₦ ${data.totalussd.toLocaleString()}`,
+          price: `₦ ${data.total_vtu.toLocaleString()}`,
         },
         {
           title: "Data Sales",
@@ -296,9 +292,21 @@ const Home = () => {
       serviceCode: "SEARCH_tp",
       username: dets[0],
       password: dets[1],
-      tp_id,
+      tp_id: value,
       from_date: moment(today).format(),
       to_date: moment(today).format(),
+    }
+    const overallReq = {
+      serviceCode: "SEARCH_tp",
+      username: dets[0],
+      password: dets[1],
+      tp_id: value,
+      from_date: moment(
+        new Date(new Date().getFullYear(), 0, 1, 0, 0, 0)
+      ).format(),
+      to_date: moment(
+        new Date(new Date().getFullYear(), 11, 31, 0, 0, 0)
+      ).format(),
     }
 
     const now = new Promise(res => {
@@ -315,6 +323,14 @@ const Home = () => {
           price: `₦ ${data.total_data.toLocaleString()}`,
         },
       ])
+    })
+    const overall = new Promise(res => {
+      res(AdminInstance.post("", overallReq))
+    })
+    overall.then(({ data }) => {
+      setLoading(false)
+      setUssd(`₦ ${data.total_vtu.toLocaleString()}`)
+      setData(`₦ ${data.total_data.toLocaleString()}`)
     })
   }
 
