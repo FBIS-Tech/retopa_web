@@ -33,7 +33,7 @@ const RetailerSingleHistory = () => {
   const [usernameH, setUsernameH] = useState([])
   const [filteredCredit, setFilteredCredit] = useState("")
   const [filteredDebit, setFilteredDebit] = useState("")
-  const [spinning, setSpinning] = useState(false)
+  const [spinning, setSpinning] = useState(true)
   const [dets, setDets] = useState([])
 
   const [adminType, setAdminType] = useState("")
@@ -62,13 +62,9 @@ const RetailerSingleHistory = () => {
     let passwordA = Base64.decode(dataA.TOKEN_TWO_ADMIN)
     setDets([...dets, usernameA, passwordA])
 
-    const VOD = {
-      serviceCode: "TTV",
-      username: usernameA,
-      password: passwordA,
-      type: "VOD",
-      user_id: retailer.user_id,
-    }
+    setTimeout(() => {
+      setSpinning(false)
+    }, 10000)
     ////////////log history/////////////////
     const VTU = {
       serviceCode: "RTLT",
