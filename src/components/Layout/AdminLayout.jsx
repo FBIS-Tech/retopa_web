@@ -155,6 +155,18 @@ const AdminLayout = ({
               <span className="nav-text">Transactions</span>
             </Menu.Item>
           )}
+          {type === "adminA" && (
+            <Menu.Item
+              key="3"
+              onClick={() => {
+                navigate("/Admin_Dashboard/RetailerList")
+              }}
+              className={type === "adminB" ? "hide" : ""}
+            >
+              <Dash_history_icon />
+              <span className="nav-text">Retailers</span>
+            </Menu.Item>
+          )}
 
           <Menu.Item
             key="2"
