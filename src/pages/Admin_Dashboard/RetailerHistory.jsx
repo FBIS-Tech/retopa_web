@@ -38,7 +38,6 @@ const RetailerSingleHistory = () => {
 
   const [adminType, setAdminType] = useState("")
   const { retailer } = useSelector(state => state)
-  console.log(retailer)
   useEffect(() => {
     let onLogged = sessionStorage.getItem("persist:root")
       ? JSON.parse(sessionStorage.getItem("persist:root"))
@@ -78,14 +77,11 @@ const RetailerSingleHistory = () => {
       password: passwordA,
       r_id: retailer.user_id,
     }
-    console.log(VTU)
     const requestVtu = new Promise(res => {
       res(AdminInstance.post("", VTU))
     })
     requestVtu.then(({ data }) => {
-      console.log(data, "vtu")
       if (data.status === "200") {
-        console.log(data)
         setSpinning(false)
         setVtuHistory(data.transaction)
       }

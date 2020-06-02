@@ -112,7 +112,6 @@ const Home = () => {
       res(AdminInstance.post("", RetailerReqst))
     })
     list.then(({ data }) => {
-      console.log(data)
       if (data.status === "200") {
         setRetailer(data.retailer)
         setLoading(false)
