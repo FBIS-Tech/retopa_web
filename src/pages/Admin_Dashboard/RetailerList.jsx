@@ -14,7 +14,7 @@ import DealerLayout from "../../components/Layout/DealerLayout"
 import { Link, navigate } from "gatsby"
 import axios from "axios"
 import AdminInstance from "../../Api/AdminInstance"
-import { dispatchTransactions } from "../../Actions/Actions"
+import { dispatchTransactions, retailerDetails } from "../../Actions/Actions"
 import moment from "moment"
 import AdminLayout from "../../components/Layout/AdminLayout"
 import Green from "../../../assets/green.svg"
@@ -93,7 +93,7 @@ const Home = () => {
 
   const handletp = value => {
     setRetailer([])
-    // setTp_id(value)
+    setTp_id(value)
     setLoading(true)
 
     var date = new Date(),
@@ -185,6 +185,30 @@ const Home = () => {
       key: "created_at",
       sorter: (a, b) => a.created_at - b.created_at,
       // align: "right",
+    },
+    {
+      title: "Action",
+      dataIndex: "ussd_status",
+      key: "ussd_status",
+
+      render: (text, record) => (
+        <a
+          id={record.id}
+          title={record.name}
+          className="enabledLog"
+          onClick={e => {
+            let details = {
+              user_id: e.currentTarget.id,
+              name: e.currentTarget.title,
+              tp_id,
+            }
+            dispatch(retailerDetails(details))
+            navigate(`/Admin_Dashboard/RetailerHistory`)
+          }}
+        >
+          View Log
+        </a>
+      ),
     },
   ]
 
