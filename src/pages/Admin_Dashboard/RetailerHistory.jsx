@@ -11,6 +11,7 @@ import {
 } from "antd"
 import "../../scss/Table.scss"
 import "../../scss/Retailer.scss"
+import "../../scss/Dealer_home.scss"
 import { CSVLink, CSVDownload } from "react-csv"
 import AdminInstance from "../../Api/AdminInstance"
 import { Base64 } from "js-base64"
@@ -126,20 +127,13 @@ const RetailerSingleHistory = () => {
       {retailer.name}'s Log
     </h4>
   )
-  const headerCredit = [
-    { label: "Source", key: "source" },
-    { label: "Retailer Name", key: "destination" },
+  const headers = [
     { label: "Amount", key: "amount" },
-    { label: "Transaction ref", key: "ref" },
+    { label: "Phone Number", key: "phone" },
+    { label: "Status", key: "status" },
     { label: "Date Created/Time", key: "created_at" },
   ]
-  const headerDebit = [
-    { label: "Source", key: "source" },
-    { label: "Retailer Name", key: "destination" },
-    { label: "Amount", key: "amount" },
-    { label: "Transaction ref", key: "ref" },
-    { label: "Date Created/Time", key: "time" },
-  ]
+
   const Vtu = []
   return (
     <AdminLayout title={title} position={["5"]}>
@@ -150,6 +144,18 @@ const RetailerSingleHistory = () => {
             HistoryColumn.length <= 9 ? { height: "100vh" } : { height: "auto" }
           }
         >
+          <Button style={{ backgroundColor: "green", marginTop: "20px" }}>
+            <CSVLink
+              data={VtuHistory}
+              filename={"Retailer's log.csv"}
+              headers={headers}
+              className="btn btn-success"
+              style={{ color: "white" }}
+            >
+              Export to CSV
+            </CSVLink>
+          </Button>
+
           <Tabs defaultActiveKey="1">
             <TabPane tab="Logs" key="1">
               <div className="table_Group">
