@@ -12,6 +12,7 @@ import Instance from "../../Api/Instance"
 import { Base64 } from "js-base64"
 import DealerLayout from "../../components/Layout/DealerLayout"
 import { Link, navigate } from "gatsby"
+import { CSVLink, CSVDownload } from "react-csv"
 import axios from "axios"
 import AdminInstance from "../../Api/AdminInstance"
 import { dispatchTransactions, retailerDetails } from "../../Actions/Actions"
@@ -182,8 +183,6 @@ const Home = () => {
       title: "Date Created/Time",
       dataIndex: "created_at",
       key: "created_at",
-      sorter: (a, b) => a.created_at - b.created_at,
-      // align: "right",
     },
     {
       title: "Action",
@@ -211,7 +210,15 @@ const Home = () => {
     },
   ]
 
-  const dataTable = []
+  ///////////export to csv///////////////////////////////////////////////////
+  const headers = [
+    { label: "Pos Username", key: "username" },
+    { label: "Retailer Name", key: "name" },
+    { label: "Retailer Number", key: "type" },
+    { label: "Retailer Number", key: "phone" },
+    { label: "Retailer Code", key: "code" },
+    { label: "Date Created/Time", key: "created_at" },
+  ]
 
   return (
     <AdminLayout>
@@ -235,7 +242,12 @@ const Home = () => {
               }
             >
               <div className="select">
-                <label style={{ color: "#227f00", padding: "10px 0px" }}>
+                <label
+                  style={{
+                    color: "#227f00",
+                    padding: "10px 0px",
+                  }}
+                >
                   Select Trade Partner:
                 </label>
                 <Select
@@ -265,7 +277,18 @@ const Home = () => {
           <div className="activity_container">
             <div className="top_activity_container">
               <h4>Activities</h4>
-              {/* <Button>Add Retailer</Button> */}
+              {retailer.length > 0 && (
+                <Button>
+                  <CSVLink
+                    data={retailer}
+                    filename={"Retailers.csv"}
+                    headers={headers}
+                    style={{ color: "white" }}
+                  >
+                    Export to CSV
+                  </CSVLink>
+                </Button>
+              )}
             </div>
 
             <div className="all_activities_container">
@@ -287,6 +310,7 @@ const Home = () => {
                   <TabPane tab="Retailer List" key="1">
                     <div>
                       <div className="table_Group">
+                        <div className="rowShow"></div>
                         <Spin spinning={loading} size="large" delay={0}>
                           <Table
                             columns={ColumnsTwo}

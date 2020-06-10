@@ -131,10 +131,6 @@ const Retailers = () => {
     })
   }
 
-  //   const handleSearch = e => {
-  //     setSearch(e.currentTarget.value)
-  //   }
-
   return (
     <AdminLayout title={title} position={["10"]}>
       <div>

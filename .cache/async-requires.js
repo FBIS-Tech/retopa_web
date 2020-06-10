@@ -6,6 +6,7 @@ exports.components = {
   "component---src-pages-404-js": () => import("../src/pages/404.js" /* webpackChunkName: "component---src-pages-404-js" */),
   "component---src-pages-admin-dashboard-dashboard-jsx": () => import("../src/pages/Admin_Dashboard/Dashboard.jsx" /* webpackChunkName: "component---src-pages-admin-dashboard-dashboard-jsx" */),
   "component---src-pages-admin-dashboard-home-jsx": () => import("../src/pages/Admin_Dashboard/Home.jsx" /* webpackChunkName: "component---src-pages-admin-dashboard-home-jsx" */),
+  "component---src-pages-admin-dashboard-retailer-history-jsx": () => import("../src/pages/Admin_Dashboard/RetailerHistory.jsx" /* webpackChunkName: "component---src-pages-admin-dashboard-retailer-history-jsx" */),
   "component---src-pages-admin-dashboard-retailer-list-jsx": () => import("../src/pages/Admin_Dashboard/RetailerList.jsx" /* webpackChunkName: "component---src-pages-admin-dashboard-retailer-list-jsx" */),
   "component---src-pages-admin-dashboard-retailers-jsx": () => import("../src/pages/Admin_Dashboard/Retailers.jsx" /* webpackChunkName: "component---src-pages-admin-dashboard-retailers-jsx" */),
   "component---src-pages-admin-dashboard-settings-jsx": () => import("../src/pages/Admin_Dashboard/Settings.jsx" /* webpackChunkName: "component---src-pages-admin-dashboard-settings-jsx" */),
@@ -56,7 +57,6 @@ exports.components = {
   "component---src-pages-user-dashboard-user-airtime-jsx": () => import("../src/pages/User_Dashboard/User_Airtime.jsx" /* webpackChunkName: "component---src-pages-user-dashboard-user-airtime-jsx" */),
   "component---src-pages-user-dashboard-user-billing-jsx": () => import("../src/pages/User_Dashboard/User_billing.jsx" /* webpackChunkName: "component---src-pages-user-dashboard-user-billing-jsx" */),
   "component---src-pages-user-dashboard-user-home-jsx": () => import("../src/pages/User_Dashboard/User_Home.jsx" /* webpackChunkName: "component---src-pages-user-dashboard-user-home-jsx" */),
-  "component---src-pages-user-dashboard-user-payment-jsx": () => import("../src/pages/User_Dashboard/User_Payment.jsx" /* webpackChunkName: "component---src-pages-user-dashboard-user-payment-jsx" */),
-  "component---src-pages-admin-dashboard-retailer-history-jsx": () => import("../src/pages/Admin_Dashboard/RetailerHistory.jsx" /* webpackChunkName: "component---src-pages-admin-dashboard-retailer-history-jsx" */)
+  "component---src-pages-user-dashboard-user-payment-jsx": () => import("../src/pages/User_Dashboard/User_Payment.jsx" /* webpackChunkName: "component---src-pages-user-dashboard-user-payment-jsx" */)
 }
 
