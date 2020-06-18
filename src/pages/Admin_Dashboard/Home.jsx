@@ -219,7 +219,7 @@ const Home = () => {
     USSD.then(({ data }) => {
       setLoading(false)
       setUssdData(data.ussd_details)
-      setUssd(`₦ ${data.totalussd.toLocaleString()}`)
+      setUssd(`₦ ${data.total_vtu.toLocaleString()}`)
       setDataData(data.data_details)
       setData(`₦ ${data.total_data.toLocaleString()}`)
       setVoucher(`₦ ${data.totalVoucher.toLocaleString()}`)
@@ -246,7 +246,7 @@ const Home = () => {
 
   const handletp = value => {
     setMonth([])
-    // setTp_id(value)
+    setTp_id(value)
     setLoading(true)
 
     var date = new Date(),
