@@ -43,7 +43,7 @@ const LoginCard = ({
       <div className={activea ? "content" : "hide"}>
         <form>
           <div className="input">
-            <label>Email/Phone number</label>
+            <label>Username</label>
             <Input
               placeholder="Enter email or Phone number"
               onChange={getInput}

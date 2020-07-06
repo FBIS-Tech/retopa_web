@@ -111,7 +111,7 @@ export default function Navbar() {
             </Button>
             <Button className={!logged ? "signup_btn" : "hide"}>
               <AniLink swipe top="exit" duration={0.45} to="Retailcode_Login">
-                RetailCode
+                RetailCode Login
               </AniLink>
             </Button>
 
