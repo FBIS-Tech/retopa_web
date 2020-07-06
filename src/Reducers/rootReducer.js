@@ -121,6 +121,7 @@ export const rootReducer = (state = initialState, { type, payload }) => {
       }
     case LOGIN_SUCCESS_ADMIN:
       let load = payload
+
       const dataAdmin = { ...load, type: "Admin", username: "ADMIN" }
       localStorage.setItem("userData", JSON.stringify(dataAdmin))
       window.location = "/Admin_Dashboard/Dashboard/"

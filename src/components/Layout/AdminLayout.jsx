@@ -143,6 +143,17 @@ const AdminLayout = ({
               <Dash_home_icon />
               <span className="nav-text">Home</span>
             </Menu.Item>
+          ) : type === "finance" ? (
+            <Menu.Item
+              key="1"
+              onClick={() => {
+                navigate("/Admin_Dashboard/RetailerList")
+              }}
+              className={type === "adminB" ? "hide" : ""}
+            >
+              <Dash_history_icon />
+              <span className="nav-text">Retailers</span>
+            </Menu.Item>
           ) : (
             <Menu.Item
               key="1"

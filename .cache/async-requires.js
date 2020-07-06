@@ -40,6 +40,7 @@ exports.components = {
   "component---src-pages-page-2-js": () => import("../src/pages/page-2.js" /* webpackChunkName: "component---src-pages-page-2-js" */),
   "component---src-pages-password-reset-jsx": () => import("../src/pages/PasswordReset.jsx" /* webpackChunkName: "component---src-pages-password-reset-jsx" */),
   "component---src-pages-privacy-jsx": () => import("../src/pages/Privacy.jsx" /* webpackChunkName: "component---src-pages-privacy-jsx" */),
+  "component---src-pages-retail-code-jsx": () => import("../src/pages/RetailCode.jsx" /* webpackChunkName: "component---src-pages-retail-code-jsx" */),
   "component---src-pages-sign-up-jsx": () => import("../src/pages/SignUp.jsx" /* webpackChunkName: "component---src-pages-sign-up-jsx" */),
   "component---src-pages-sub-dealer-dashboard-jsx": () => import("../src/pages/Sub_Dealer/Dashboard.jsx" /* webpackChunkName: "component---src-pages-sub-dealer-dashboard-jsx" */),
   "component---src-pages-sub-dealer-history-jsx": () => import("../src/pages/Sub_Dealer/History.jsx" /* webpackChunkName: "component---src-pages-sub-dealer-history-jsx" */),
@@ -57,6 +58,7 @@ exports.components = {
   "component---src-pages-user-dashboard-user-airtime-jsx": () => import("../src/pages/User_Dashboard/User_Airtime.jsx" /* webpackChunkName: "component---src-pages-user-dashboard-user-airtime-jsx" */),
   "component---src-pages-user-dashboard-user-billing-jsx": () => import("../src/pages/User_Dashboard/User_billing.jsx" /* webpackChunkName: "component---src-pages-user-dashboard-user-billing-jsx" */),
   "component---src-pages-user-dashboard-user-home-jsx": () => import("../src/pages/User_Dashboard/User_Home.jsx" /* webpackChunkName: "component---src-pages-user-dashboard-user-home-jsx" */),
-  "component---src-pages-user-dashboard-user-payment-jsx": () => import("../src/pages/User_Dashboard/User_Payment.jsx" /* webpackChunkName: "component---src-pages-user-dashboard-user-payment-jsx" */)
+  "component---src-pages-user-dashboard-user-payment-jsx": () => import("../src/pages/User_Dashboard/User_Payment.jsx" /* webpackChunkName: "component---src-pages-user-dashboard-user-payment-jsx" */),
+  "component---src-pages-admin-dashboard-retail-code-jsx": () => import("../src/pages/Admin_Dashboard/RetailCode.jsx" /* webpackChunkName: "component---src-pages-admin-dashboard-retail-code-jsx" */)
 }
 

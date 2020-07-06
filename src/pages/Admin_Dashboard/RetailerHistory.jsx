@@ -135,6 +135,12 @@ const RetailerSingleHistory = () => {
   ]
 
   const Vtu = []
+
+  const Total = VtuHistory.reduce(
+    (prev, cur) => prev + Number(`${cur.amount}`),
+    0
+  )
+
   return (
     <AdminLayout title={title} position={["5"]}>
       <div>
@@ -144,17 +150,28 @@ const RetailerSingleHistory = () => {
             HistoryColumn.length <= 9 ? { height: "100vh" } : { height: "auto" }
           }
         >
-          <Button style={{ backgroundColor: "green", marginTop: "20px" }}>
-            <CSVLink
-              data={VtuHistory}
-              filename={"Retailer's log.csv"}
-              headers={headers}
-              className="btn btn-success"
-              style={{ color: "white" }}
-            >
-              Export to CSV
-            </CSVLink>
-          </Button>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <div style={{ color: "green", fontSize: "24px" }}>
+              Total Transaction: ₦ {parseInt(`${Total}`).toLocaleString()}
+            </div>
+            <Button style={{ backgroundColor: "green" }}>
+              <CSVLink
+                data={VtuHistory}
+                filename={"Retailer's log.csv"}
+                headers={headers}
+                className="btn btn-success"
+                style={{ color: "white" }}
+              >
+                Export to CSV
+              </CSVLink>
+            </Button>
+          </div>
 
           <Tabs defaultActiveKey="1">
             <TabPane tab="Logs" key="1">

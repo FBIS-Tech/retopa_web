@@ -75,13 +75,17 @@ const Home = () => {
         username: usernameA,
         password: passwordA,
       }
+      console.log(tpReqst)
       const tp = new Promise(res => {
         res(AdminInstance.post("", tpReqst))
       })
       tp.then(({ data }) => {
+        console.log(data)
         setLoading(false)
         let Arry = data.tp_details
         setTps(Arry)
+      }).catch(err => {
+        setLoading(false)
       })
 
       setType("Admin")
@@ -100,6 +104,8 @@ const Home = () => {
         let UssdAmount = data.totalamount
         setUssdData(data.transactions)
         setUssd(`₦ ${UssdAmount.toLocaleString()}`)
+      }).catch(err => {
+        alert("Something went wrong")
       })
       // total data
       const DataReqst = {
@@ -115,6 +121,8 @@ const Home = () => {
         let DataAmount = data.totalamount
         setDataData(data.details)
         setData(`₦ ${DataAmount.toLocaleString()}`)
+      }).catch(err => {
+        alert("Something went wrong")
       })
       // total voucher
       const VoucherReqst = {
@@ -131,8 +139,9 @@ const Home = () => {
         setVoucher(`₦ ${VoucherData.toLocaleString()}`)
         setCounter(data.details.length)
         setVoucherData(data.details)
+      }).catch(err => {
+        alert("Something went wrong")
       })
-      let DataAmt = data.totalamount
     }
 
     var date = new Date(),
@@ -152,18 +161,22 @@ const Home = () => {
     const thisMonth = new Promise(res => {
       res(AdminInstance.post("", montReq))
     })
-    thisMonth.then(({ data }) => {
-      setMonth([
-        {
-          title: "Airtime Sales",
-          price: `₦ ${data.totalussd.toLocaleString()}`,
-        },
-        {
-          title: "Data Sales",
-          price: `₦ ${data.total_data.toLocaleString()}`,
-        },
-      ])
-    })
+    thisMonth
+      .then(({ data }) => {
+        setMonth([
+          {
+            title: "Airtime Sales",
+            price: `₦ ${data.totalussd.toLocaleString()}`,
+          },
+          {
+            title: "Data Sales",
+            price: `₦ ${data.total_data.toLocaleString()}`,
+          },
+        ])
+      })
+      .catch(err => {
+        alert("Something went wrong")
+      })
     // /////////////transactions today//////////////////////
     // date query
 
@@ -185,18 +198,22 @@ const Home = () => {
     const now = new Promise(res => {
       res(AdminInstance.post("", todayReq))
     })
-    now.then(({ data }) => {
-      setToday([
-        {
-          title: "Airtime Sales",
-          price: `₦ ${data.totalussd.toLocaleString()}`,
-        },
-        {
-          title: "Data Sales",
-          price: `₦ ${data.total_data.toLocaleString()}`,
-        },
-      ])
-    })
+    now
+      .then(({ data }) => {
+        setToday([
+          {
+            title: "Airtime Sales",
+            price: `₦ ${data.totalussd.toLocaleString()}`,
+          },
+          {
+            title: "Data Sales",
+            price: `₦ ${data.total_data.toLocaleString()}`,
+          },
+        ])
+      })
+      .catch(err => {
+        alert("Something went wrong")
+      })
   }, [])
 
   function onChange(value, dateString) {

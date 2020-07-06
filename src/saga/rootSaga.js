@@ -117,6 +117,7 @@ function* adminLogin({ payload }) {
     let s = request.data.status
     let d = request.data
     let ae = request.data.message
+
     // //console.log(m)
     // //console.log(ae, "ae")
     if (s === "200") {

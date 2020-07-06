@@ -42,8 +42,17 @@ span.ant-calendar-picker-input.ant-input {
   line-height: 40px;
 }
 
+.selected {
+  width: 50%;
+}
+
 span.ant-calendar-picker {
-  width: 256px;
+  width: 100% !important;
+}
+
+.ant-calendar-range {
+  width: 100% !important;
+  overflow: hidden;
 }
 
 .activity_container {

@@ -43,6 +43,7 @@ exports.components = {
   "component---src-pages-page-2-js": hot(preferDefault(require("C:\\Users\\osisami olukayode\\Documents\\retopa\\src\\pages\\page-2.js"))),
   "component---src-pages-password-reset-jsx": hot(preferDefault(require("C:\\Users\\osisami olukayode\\Documents\\retopa\\src\\pages\\PasswordReset.jsx"))),
   "component---src-pages-privacy-jsx": hot(preferDefault(require("C:\\Users\\osisami olukayode\\Documents\\retopa\\src\\pages\\Privacy.jsx"))),
+  "component---src-pages-retail-code-jsx": hot(preferDefault(require("C:\\Users\\osisami olukayode\\Documents\\retopa\\src\\pages\\RetailCode.jsx"))),
   "component---src-pages-sign-up-jsx": hot(preferDefault(require("C:\\Users\\osisami olukayode\\Documents\\retopa\\src\\pages\\SignUp.jsx"))),
   "component---src-pages-sub-dealer-dashboard-jsx": hot(preferDefault(require("C:\\Users\\osisami olukayode\\Documents\\retopa\\src\\pages\\Sub_Dealer\\Dashboard.jsx"))),
   "component---src-pages-sub-dealer-history-jsx": hot(preferDefault(require("C:\\Users\\osisami olukayode\\Documents\\retopa\\src\\pages\\Sub_Dealer\\History.jsx"))),
@@ -60,6 +61,7 @@ exports.components = {
   "component---src-pages-user-dashboard-user-airtime-jsx": hot(preferDefault(require("C:\\Users\\osisami olukayode\\Documents\\retopa\\src\\pages\\User_Dashboard\\User_Airtime.jsx"))),
   "component---src-pages-user-dashboard-user-billing-jsx": hot(preferDefault(require("C:\\Users\\osisami olukayode\\Documents\\retopa\\src\\pages\\User_Dashboard\\User_billing.jsx"))),
   "component---src-pages-user-dashboard-user-home-jsx": hot(preferDefault(require("C:\\Users\\osisami olukayode\\Documents\\retopa\\src\\pages\\User_Dashboard\\User_Home.jsx"))),
-  "component---src-pages-user-dashboard-user-payment-jsx": hot(preferDefault(require("C:\\Users\\osisami olukayode\\Documents\\retopa\\src\\pages\\User_Dashboard\\User_Payment.jsx")))
+  "component---src-pages-user-dashboard-user-payment-jsx": hot(preferDefault(require("C:\\Users\\osisami olukayode\\Documents\\retopa\\src\\pages\\User_Dashboard\\User_Payment.jsx"))),
+  "component---src-pages-admin-dashboard-retail-code-jsx": hot(preferDefault(require("C:\\Users\\osisami olukayode\\Documents\\retopa\\src\\pages\\Admin_Dashboard\\RetailCode.jsx")))
 }
 
