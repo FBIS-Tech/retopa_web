@@ -105,7 +105,7 @@ const AdminLayout = ({
   const handleLogout = () => {
     localStorage.clear()
     sessionStorage.clear()
-    navigate("/Login")
+    navigate("/")
   }
 
   // setting date
