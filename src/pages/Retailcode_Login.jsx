@@ -5,6 +5,7 @@ import "../scss/Login.scss"
 import LoginCard from "../components/LoginCard"
 import { UserLogin, DealerLogin, AdminLogin } from "../Actions/Actions"
 import RegLayoutTwo from "../components/RegistrationLayout/RegLayoutTwo"
+import LoginCardTwo from "../components/LoginCardTwo"
 
 const Login = () => {
   const [active, setActive] = useState(true)
@@ -74,14 +75,14 @@ const Login = () => {
         })}
         <div className={!isError ? "hide" : "error"}>{authError}</div>
         <div>
-          <LoginCard
+          <LoginCardTwo
             loading={loading}
             activea={active}
-            activeb={active2}
-            activec={active3}
+            // activeb={active2}
+            // activec={active3}
             activate1={handleAdmin}
-            activate2={handleDealer}
-            activate3={handleSubDealer}
+            // activate2={handleDealer}
+            // activate3={handleSubDealer}
             getInput={handleInputChange}
             handleSubmit={handleDispatch}
           />
