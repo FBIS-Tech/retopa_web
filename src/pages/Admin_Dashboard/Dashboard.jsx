@@ -44,7 +44,7 @@ const Dashboard = () => {
           {admintype === "adminB" ? (
             <Transactions />
           ) : admintype === "finance" ? (
-            <Retail />
+            <Home />
           ) : (
             <Home />
           )}

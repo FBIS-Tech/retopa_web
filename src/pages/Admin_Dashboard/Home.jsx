@@ -75,12 +75,10 @@ const Home = () => {
         username: usernameA,
         password: passwordA,
       }
-      console.log(tpReqst)
       const tp = new Promise(res => {
         res(AdminInstance.post("", tpReqst))
       })
       tp.then(({ data }) => {
-        console.log(data)
         setLoading(false)
         let Arry = data.tp_details
         setTps(Arry)
@@ -432,12 +430,17 @@ const Home = () => {
                     padding: "20px",
                     margin: 0,
                   }}
+                  className={adminType === "finance" ? "hide" : ""}
                 >
                   Overall
                 </h3>
               )}
               {!loading && (
-                <div className="allActivityGroup">
+                <div
+                  className={
+                    adminType === "finance" ? "hide" : "allActivityGroup"
+                  }
+                >
                   {Dealer_Activity.map(data => {
                     return (
                       <DealerActivities

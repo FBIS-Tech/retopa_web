@@ -3,6 +3,8 @@ import PropTypes from "prop-types"
 import { Layout, Menu, Icon, Button, Input, Dropdown } from "antd"
 import { Link, navigate } from "gatsby"
 import Logo from "../../../assets/logo.svg"
+import Logo2 from "../../../assets/RetailerCode.svg"
+import Img from "../../images/retailcode.png"
 import "./DashLayout.scss"
 import Avatar from "../../../assets/avatartwo.svg"
 import Setting from "../../../assets/settings.svg"
@@ -122,9 +124,7 @@ const AdminLayout = ({
       <Sider breakpoint="lg" collapsedWidth="0" className="dealer_layout_side">
         <div className="logo">
           <div className="logo_content">
-            <Link to="/">
-              <Logo />
-            </Link>
+            <Link to="/">{type === "finance" ? <Logo2 /> : <Logo />}</Link>
           </div>
         </div>
         <div className="user_name">
@@ -132,7 +132,7 @@ const AdminLayout = ({
           <span>{user.username === undefined ? "ADMIN" : user.username}</span>
         </div>
         <Menu mode="inline" defaultSelectedKeys={position}>
-          {type === "adminA" ? (
+          {type === "adminA" || type === "finance" ? (
             <Menu.Item
               key="1"
               onClick={() => {
@@ -142,17 +142,6 @@ const AdminLayout = ({
             >
               <Dash_home_icon />
               <span className="nav-text">Home</span>
-            </Menu.Item>
-          ) : type === "finance" ? (
-            <Menu.Item
-              key="1"
-              onClick={() => {
-                navigate("/Admin_Dashboard/RetailerList")
-              }}
-              className={type === "adminB" ? "hide" : ""}
-            >
-              <Dash_history_icon />
-              <span className="nav-text">Retailers</span>
             </Menu.Item>
           ) : (
             <Menu.Item
@@ -166,7 +155,7 @@ const AdminLayout = ({
               <span className="nav-text">Transactions</span>
             </Menu.Item>
           )}
-          {type === "adminA" && (
+          {type === "adminA" || type === "finance" ? (
             <Menu.Item
               key="3"
               onClick={() => {
@@ -177,6 +166,8 @@ const AdminLayout = ({
               <Dash_history_icon />
               <span className="nav-text">Retailers</span>
             </Menu.Item>
+          ) : (
+            ""
           )}
 
           <Menu.Item
