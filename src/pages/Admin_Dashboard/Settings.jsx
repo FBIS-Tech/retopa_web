@@ -64,33 +64,45 @@ const Settings = () => {
       res(AdminInstance.post("", inputChange))
     })
     if (inputChange.confirmed === inputChange.new_password) {
-      submitRequest.then(({ data }) => {
-        let fields = data.required_fields
-        let m = data.message
-        ////console.log(submitRequest)
-        if (data.status === "301") {
+      submitRequest
+        .then(({ data }) => {
+          let fields = data.required_fields
+          let m = data.message
+          console.log(submitRequest)
+          if (data.status === "301") {
+            setLoading(false)
+            setError(fields)
+            setTimeout(() => {
+              setError([])
+            }, 3000)
+          } else if (data.status === "401") {
+            setLoading(false)
+            // setError(fields)
+            alert("Not Authorized")
+            setTimeout(() => {
+              setError([])
+            }, 3000)
+          } else if (data.status === "200") {
+            setLoading(false)
+            setMessageAct(m)
+            setTimeout(() => {
+              setMessage("")
+              localStorage.clear()
+              sessionStorage.clear()
+              navigate("/")
+            }, 3000)
+          } else if (data.status === "300") {
+            setLoading(false)
+            setMessageAct(m)
+            setTimeout(() => {
+              setMessageAct("")
+            }, 3000)
+          }
+        })
+        .catch(err => {
           setLoading(false)
-          setError(fields)
-          setTimeout(() => {
-            setError([])
-          }, 3000)
-        } else if (data.status === "200") {
-          setLoading(false)
-          setMessageAct(m)
-          setTimeout(() => {
-            setMessage("")
-            localStorage.clear()
-            sessionStorage.clear()
-            navigate("/Login")
-          }, 3000)
-        } else if (data.status === "300") {
-          setLoading(false)
-          setMessageAct(m)
-          setTimeout(() => {
-            setMessageAct("")
-          }, 3000)
-        }
-      })
+          console.log(err)
+        })
     } else {
       setMessageAct("Please check that you typed in the correct password")
       setLoading(false)
