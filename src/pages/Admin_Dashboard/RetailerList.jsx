@@ -220,6 +220,37 @@ const Home = () => {
     { label: "Date Created/Time", key: "created_at" },
   ]
 
+  //**query by date */
+  function onChange(value, dateString) {
+    setLoading(true)
+    let selectedDate = dateString
+
+    // total USSD
+    const ussdReqst = {
+      serviceCode: "SEARCH_tp",
+      username: dets[0],
+      password: dets[1],
+      tp_id,
+      from_date: selectedDate[0],
+      to_date: selectedDate[1],
+    }
+
+    const USSD = new Promise(res => {
+      res(AdminInstance.post("", ussdReqst))
+    })
+    USSD.then(({ data }) => {
+      setLoading(false)
+      setUssdData(data.ussd_details)
+      setUssd(`₦ ${data.total_vtu.toLocaleString()}`)
+      setDataData(data.data_details)
+      setData(`₦ ${data.total_data.toLocaleString()}`)
+      setVoucher(`₦ ${data.totalVoucher.toLocaleString()}`)
+      setVoucherData(data.voucher_details)
+      setVtu(`₦ ${data.total_vtu.toLocaleString()}`)
+      setVtuData(data.vtu_details)
+    })
+  }
+
   return (
     <AdminLayout>
       <div className="dealer_home_container">
@@ -260,7 +291,7 @@ const Home = () => {
                   {tps.map(data => {
                     return (
                       <Option key={data.vendor_name} value={data.id}>
-                        {data.name}
+                        {data.name}-{data.mtn_tp_code}
                       </Option>
                     )
                   })}
@@ -272,6 +303,12 @@ const Home = () => {
               >
                 Loading...
               </h4> */}
+              {/* <div className="selected">
+                <label style={{ color: "#227f00", display: "block" }}>
+                  Query Transaction by Date:
+                </label>
+                <RangePicker showTime onChange={onChange} />
+              </div> */}
             </div>
           </div>
           <div className="activity_container">

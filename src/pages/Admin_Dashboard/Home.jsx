@@ -384,7 +384,7 @@ const Home = () => {
                   {tps.map(data => {
                     return (
                       <Option key={data.vendor_name} value={data.id}>
-                        {data.name}
+                        {data.name}-{data.mtn_tp_code}
                       </Option>
                     )
                   })}
