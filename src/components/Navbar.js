@@ -110,10 +110,11 @@ export default function Navbar() {
               </AniLink>
             </Button>
             <Button className={!logged ? "signup_btn" : "hide"}>
-              <AniLink swipe top="exit" duration={0.45} to="SignUp">
-                Sign Up
+              <AniLink swipe top="exit" duration={0.45} to="Retailcode_Login">
+                RetailCode Login
               </AniLink>
             </Button>
+
             <Button
               onClick={navigateDashboard}
               className={logged ? "login_btn" : "hide"}
@@ -175,6 +176,9 @@ export default function Navbar() {
               <h6>Log In</h6>
             </Link>
 
+            <Link to="Retailcode_Login">
+              <h6>RetailCode Login</h6>
+            </Link>
             <Link to="SignUp">
               <h6>Sign Up</h6>
             </Link>

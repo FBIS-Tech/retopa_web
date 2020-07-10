@@ -6,27 +6,44 @@ import Face from "../../assets/colorfb.svg"
 import Google from "../../assets/google.svg"
 
 const LoginCard = ({
-  active,
+  activea,
+  activeb,
+  activec,
   activate1,
   activate2,
+  activate3,
   getInput,
   handleSubmit,
   loading,
 }) => {
   return (
     <div className="Login_card">
-      <div className="method">
-        <h4 className={active ? "active" : ""} onClick={activate1}>
-          Log In as a Partner{" "}
-        </h4>
-        <h4 className={active ? "" : "active"} onClick={activate2}>
-          Log In as a Sub Dealer
+      <div className={!activea ? "method" : "method2"}>
+        <div className={!activea ? "sideded" : "hide"}>
+          <a
+            href="https://retopin.com/backend/public/login"
+            className={activeb ? "active" : ""}
+            onClick={activate2}
+          >
+            Log In as a Partner{" "}
+          </a>
+          <a
+            href="https://retopin.com/backend/public/sub-dealer/login"
+            className={activec ? "active" : ""}
+            onClick={activate3}
+          >
+            Log In as a Sub Dealer
+          </a>
+        </div>
+
+        <h4 className={activea ? "active" : ""} onClick={activate1}>
+          Log In as a Admin
         </h4>
       </div>
-      <div className="content">
+      <div className={activea ? "content" : "hide"}>
         <form>
           <div className="input">
-            <label>Email/Phone number</label>
+            <label>Username</label>
             <Input
               placeholder="Enter email or Phone number"
               onChange={getInput}
@@ -48,18 +65,9 @@ const LoginCard = ({
             <h4>
               New user? <Link to="/SignUp">Create an account</Link>
             </h4>
-            <Button onClick={handleSubmit} loading={loading ? true : false}>
+            <Button onClick={handleSubmit} loading={loading}>
               Login
             </Button>
-          </div>
-          <h4 className="socials">Log In through socials</h4>
-          <div className="social-logo">
-            <div>
-              <Google />
-            </div>
-            <div>
-              <Face />
-            </div>
           </div>
         </form>
       </div>

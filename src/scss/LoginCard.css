@@ -12,6 +12,33 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.method h4,
+.method a {
+  border-bottom: 2px solid #d7e2e4;
+  padding: 30px 15px;
+  width: 100%;
+  text-align: center;
+  color: #9f9fa1 !important;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 0px;
+}
+
+.method2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
@@ -21,9 +48,10 @@
           justify-content: space-evenly;
 }
 
-.method h4 {
+.method2 h4,
+.method2 a {
   border-bottom: 2px solid #d7e2e4;
-  padding: 14px 15px;
+  padding: 30px 15px;
   width: 100%;
   text-align: center;
   color: #9f9fa1;
@@ -31,6 +59,24 @@
   font-weight: 600;
   font-size: 16px;
   cursor: pointer;
+  margin: 0px;
+}
+
+.sideded {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal !important;
+  -webkit-box-direction: normal !important;
+      -ms-flex-direction: row !important;
+          flex-direction: row !important;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.sideded a {
+  display: block;
 }
 
 .content {
@@ -70,7 +116,6 @@
 }
 
 .content form .ant-input:placeholder-shown {
-  font-family: Montserrat;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -190,11 +235,12 @@
 }
 
 .active {
-  border-bottom: 2px solid #227f00 !important;
+  border-bottom: 4px solid #227f00 !important;
   color: #227f00 !important;
   font-size: 16px;
   text-align: center;
   cursor: pointer;
+  border-right: 0.2px solid #00000014;
 }
 
 .socials {

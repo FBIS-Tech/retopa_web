@@ -22,11 +22,11 @@ const User_Airtime = () => {
   const email = "foobar@example.com" // customer email
   const amount = 10000 //equals NGN100,
   const callback = response => {
-    //console.log(response) // card charged successfully, get reference here
+    ////console.log(response) // card charged successfully, get reference here
   }
 
   const close = () => {
-    //console.log("Payment closed")
+    ////console.log("Payment closed")
   }
 
   const getReference = () => {

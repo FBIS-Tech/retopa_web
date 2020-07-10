@@ -258,7 +258,7 @@ export const Columns = [
     key: "network",
   },
   {
-    title: "Created at",
+    title: "Date Created/Time",
     dataIndex: "date",
     key: "date",
   },
@@ -338,7 +338,7 @@ export const ColumnsTwo = [
       ),
   },
   {
-    title: "Created at",
+    title: "Date Created/Time",
     dataIndex: "date",
     key: "date",
 

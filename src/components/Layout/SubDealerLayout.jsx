@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
-import { Layout, Menu, Icon, Button, Input } from "antd"
-import { Link, navigateTo } from "gatsby"
+import { Layout, Menu, Icon, Button, Input, Dropdown } from "antd"
+import { Link, navigate } from "gatsby"
 import Logo from "../../../assets/logo.svg"
 import "./DashLayout.scss"
 import Dash from "../../../assets/dash.svg"
@@ -9,7 +9,6 @@ import Avatar from "../../../assets/avatartwo.svg"
 import Setting from "../../../assets/settings.svg"
 import Helmet from "react-helmet"
 import Favicon from "../../images/favicon.ico"
-import { navigate } from "gatsby"
 import { Base64 } from "js-base64"
 import {
   HomeIcon,
@@ -54,6 +53,19 @@ const SubDealerLayout = ({ children, title, position }) => {
     }
   }, [])
 
+  const menu = (
+    <Menu>
+      <Menu.Item
+        key="0"
+        onClick={() => {
+          navigate("/Sub_Dealer/Settings")
+        }}
+      >
+        <a>Change Password</a>
+      </Menu.Item>
+    </Menu>
+  )
+
   // handle logout
   const handleLogout = () => {
     localStorage.clear()
@@ -88,7 +100,7 @@ const SubDealerLayout = ({ children, title, position }) => {
           <Menu.Item
             key="1"
             onClick={() => {
-              navigateTo("/Sub_Dealer/Dashboard/")
+              navigate("/Sub_Dealer/Dashboard/")
             }}
           >
             <Dash_home_icon />
@@ -98,27 +110,27 @@ const SubDealerLayout = ({ children, title, position }) => {
           <Menu.Item
             key="2"
             onClick={() => {
-              navigateTo("/Sub_Dealer/Retailer")
+              navigate("/Sub_Dealer/Retailer")
             }}
           >
             <Dash_airtime_icon />
             <span className="nav-text">Retailer</span>
           </Menu.Item>
 
-          <Menu.Item
+          {/* <Menu.Item
             key="3"
             onClick={() => {
-              navigateTo("/Sub_Dealer/Wallet")
+              navigate("/Sub_Dealer/Wallet")
             }}
           >
             <Dash_bill_icon />
             <span className="nav-text">Wallet</span>
-          </Menu.Item>
+          </Menu.Item> */}
 
           <Menu.Item
             key="5"
             onClick={() => {
-              navigateTo("/Sub_Dealer/History")
+              navigate("/Sub_Dealer/History")
             }}
           >
             <Dash_history_icon />
@@ -142,12 +154,14 @@ const SubDealerLayout = ({ children, title, position }) => {
                 prefix={<Icon type="search" />}
               />
               <Avatar style={{ marginLeft: "50px" }} />
-              {/* <img
-                src={user.logo}
-                alt="user logo"
-                style={{ width: "36.49px", height: "55px", margin: 0 }}
-              /> */}
-              <Setting style={{ marginLeft: "30px" }} />
+              <Dropdown overlay={menu}>
+                <div
+                  className="ant-dropdown-link"
+                  onClick={e => e.preventDefault()}
+                >
+                  <Setting style={{ marginLeft: "30px" }} />
+                </div>
+              </Dropdown>
             </div>
           </Header>
           <Header className="sub_header">

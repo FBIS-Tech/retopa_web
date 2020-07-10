@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
-import { Layout, Menu, Icon, Button, Input } from "antd"
-import { Link, navigateTo } from "gatsby"
+import { Layout, Menu, Icon, Button, Input, Dropdown } from "antd"
+import { Link, navigate } from "gatsby"
 import Logo from "../../../assets/logo.svg"
 import "./DashLayout.scss"
-import Dash from "../../../assets/dash.svg"
 import Avatar from "../../../assets/avatartwo.svg"
 import Setting from "../../../assets/settings.svg"
 import Helmet from "react-helmet"
 import Favicon from "../../images/favicon.ico"
-import { navigate } from "gatsby"
 import { Base64 } from "js-base64"
 import {
   HomeIcon,
@@ -25,6 +23,8 @@ import {
   ExportIcon,
 } from "../CustomIcons"
 import Instance from "../../Api/Instance"
+import { DownOutlined } from "@ant-design/icons"
+
 const { Header, Content, Sider } = Layout
 
 const Dash_home_icon = props => <Icon component={HomeIcon} {...props} />
@@ -51,21 +51,53 @@ const DealerLayout = ({
   position,
 }) => {
   const [user, setUser] = useState({})
+  const [userA, setUserA] = useState({})
   useEffect(() => {
     let data = sessionStorage.getItem("topup")
       ? JSON.parse(sessionStorage.getItem("topup"))
       : []
+
+    let UserData = localStorage.getItem("userData")
+      ? JSON.parse(localStorage.getItem("userData"))
+      : []
+    const { user_id } = UserData
+
+    if (UserData === undefined) {
+      return false
+    } else {
+      setUserA(UserData)
+    }
     const username = Base64.decode(data.TOKEN_ONE)
     const password = Base64.decode(data.TOKEN_TWO)
-    const req = { serviceCode: "SHP", username, password, user_id: "1" }
+    const req = { serviceCode: "SHP", username, password, user_id }
     const profile = new Promise(res => {
       res(Instance.post("", req))
     })
     profile.then(({ data }) => {
       let user = data.user
-      setUser(user)
+      //console.log(user)
+      if (user === undefined) {
+        return false
+      } else {
+        setUser(user)
+      }
     })
   }, [])
+
+  //menu list
+
+  const menu = (
+    <Menu>
+      <Menu.Item
+        key="0"
+        onClick={() => {
+          navigate("/Dealer_Dashboard/Settings")
+        }}
+      >
+        <a>Change Password</a>
+      </Menu.Item>
+    </Menu>
+  )
 
   // handle logout
   const handleLogout = () => {
@@ -81,6 +113,7 @@ const DealerLayout = ({
   let yyyy = today.getFullYear()
 
   today = dd + "/" + mm + "/" + yyyy
+
   return (
     <Layout>
       <Helmet>
@@ -101,26 +134,27 @@ const DealerLayout = ({
           <Menu.Item
             key="1"
             onClick={() => {
-              navigateTo("/Dealer_Dashboard/Dashboard")
+              navigate("/Dealer_Dashboard/Dashboard")
             }}
           >
             <Dash_home_icon />
             <span className="nav-text">Home</span>
           </Menu.Item>
 
-          <Menu.Item
+          {/* <Menu.Item
             key="8"
             onClick={() => {
-              navigateTo("/Dealer_Dashboard/Admin")
+              navigate("/Dealer_Dashboard/Admin")
             }}
+            className={userA.type === "Admin" ? "" : "hide"}
           >
             <Dash_admin_icon />
-            <span className="nav-text">Admin</span>
-          </Menu.Item>
+            <span className="nav-text">Trade Partners</span>
+          </Menu.Item> */}
           <Menu.Item
             key="2"
             onClick={() => {
-              navigateTo("/Dealer_Dashboard/Retailer")
+              navigate("/Dealer_Dashboard/Retailer")
             }}
           >
             <Dash_airtime_icon />
@@ -129,52 +163,68 @@ const DealerLayout = ({
           <Menu.Item
             key="9"
             onClick={() => {
-              navigateTo("/Dealer_Dashboard/SubDealers")
+              navigate("/Dealer_Dashboard/SubDealers")
             }}
+            className={userA.type === "Admin" ? "hide" : ""}
           >
             <Dash_airtime_icon />
             <span className="nav-text">Sub Dealers</span>
           </Menu.Item>
           <Menu.Item
+            key="4"
+            onClick={() => {
+              navigate("/Dealer_Dashboard/Voucher")
+            }}
+            className={userA.type === "Admin" ? "hide" : ""}
+          >
+            <Dash_voucher_icon />
+            <span className="nav-text">VTU</span>
+          </Menu.Item>
+          {/* <Menu.Item
             key="3"
             onClick={() => {
-              navigateTo("/Dealer_Dashboard/Wallet")
+              navigate("/Dealer_Dashboard/Wallet")
             }}
+            className={userA.type === "Admin" ? "hide" : ""}
           >
             <Dash_bill_icon />
             <span className="nav-text">Wallet</span>
-          </Menu.Item>
-          <Menu.Item
-            key="4"
-            onClick={() => {
-              navigateTo("/Dealer_Dashboard/Voucher")
-            }}
-          >
-            <Dash_voucher_icon />
-            <span className="nav-text">Voucher</span>
-          </Menu.Item>
+          </Menu.Item> */}
+
           <Menu.Item
             key="5"
             onClick={() => {
-              navigateTo("/Dealer_Dashboard/History")
+              navigate("/Dealer_Dashboard/History")
             }}
+            className={userA.type === "Admin" ? "hide" : ""}
           >
             <Dash_history_icon />
             <span className="nav-text">History</span>
           </Menu.Item>
-          <Menu.Item
+          {/* <Menu.Item
+            key="10"
+            onClick={() => {
+              navigate("/Dealer_Dashboard/Transactions")
+            }}
+            className={userA.type === "Admin" ? "" : "hide"}
+          >
+            <Dash_history_icon />
+            <span className="nav-text">Transactions</span>
+          </Menu.Item> */}
+          {/* <Menu.Item
             key="6"
             onClick={() => {
-              navigateTo("/Dealer_Dashboard/Payment")
+              navigate("/Dealer_Dashboard/Payment")
             }}
+            className={userA.type === "Admin" ? "hide" : ""}
           >
             <Dash_payment_icon />
             <span className="nav-text">Payment</span>
-          </Menu.Item>
+          </Menu.Item> */}
           {/* <Menu.Item
             key="9"
             onClick={() => {
-              navigateTo("/Dealer_Dashboard/Export")
+              navigate("/Dealer_Dashboard/Export")
             }}
           >
             <Dash_export_icon />
@@ -193,17 +243,19 @@ const DealerLayout = ({
               <h4>Administrative Dashboard</h4>
             </div>
             <div className="header_right">
-              <Input
+              {/* <Input
                 placeholder="Search Here"
                 prefix={<Icon type="search" />}
-              />
-              <Avatar style={{ marginLeft: "50px" }} />
-              {/* <img
-                src={user.logo}
-                alt="user logo"
-                style={{ width: "36.49px", height: "55px", margin: 0 }}
               /> */}
-              <Setting style={{ marginLeft: "30px" }} />
+              <Avatar style={{ marginLeft: "50px" }} />
+              <Dropdown overlay={menu}>
+                <div
+                  className="ant-dropdown-link"
+                  onClick={e => e.preventDefault()}
+                >
+                  <Setting style={{ marginLeft: "30px" }} />
+                </div>
+              </Dropdown>
             </div>
           </Header>
           <Header className="sub_header">

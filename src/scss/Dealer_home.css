@@ -12,6 +12,47 @@
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   padding-bottom: 30px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.dealerTopLayer {
+  padding-bottom: 0px !important;
+}
+
+.ant-select.ant-select-enabled {
+  width: 100% !important;
+}
+
+span.ant-calendar-picker-input.ant-input {
+  padding: -1px 0px;
+  height: 50px;
+}
+
+.ant-calendar-range-picker-separator {
+  display: inline-block;
+  min-width: 10px;
+  height: 100%;
+  color: rgba(0, 0, 0, 0.45);
+  white-space: nowrap;
+  text-align: center;
+  vertical-align: top;
+  pointer-events: none;
+  line-height: 40px;
+}
+
+.selected {
+  width: 50%;
+}
+
+span.ant-calendar-picker {
+  width: 100% !important;
+}
+
+.ant-calendar-range {
+  width: 100% !important;
+  overflow: hidden;
 }
 
 .activity_container {
@@ -75,6 +116,13 @@
           justify-content: center;
 }
 
+.topLayer {
+  border: 1px solid #00800099;
+  padding: 20px 30px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+
 @media (min-width: 791px) {
   .all_activities_container .allActivityGroup {
     padding: 30px;
@@ -83,9 +131,9 @@
     display: flex;
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
   }
 }
 
@@ -98,8 +146,9 @@
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row;
-    -ms-flex-pack: distribute;
-        justify-content: space-around;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
   }
 }
 

@@ -1,8 +1,9 @@
 .dealer_card_container {
-  width: 100%;
-  max-width: 370px;
+  width: 90%;
+  max-width: 243px;
   height: 140px;
   margin-bottom: 30px;
+  margin-top: 30px;
 }
 
 .dealer_card_container .dealer_card_group {
@@ -67,8 +68,7 @@
 }
 
 .activities_dealer {
-  width: 100%;
-  max-width: 344px;
+  width: 90%;
   background: #ffffff;
   border: 1px solid #e4e4e4;
   border-radius: 7px;
@@ -97,7 +97,7 @@
   font-weight: normal;
   font-size: 24px;
   line-height: 30px;
-  padding: 25px;
+  padding: 40px 25px;
   color: #1e2d3b;
   font-weight: bold;
 }
@@ -108,9 +108,7 @@
   border-radius: 0px 0px 7px 7px;
   width: 100%;
   padding: 10px 25px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -124,5 +122,35 @@
   font-size: 16px;
   line-height: 20px;
   color: #676767;
+}
+
+@media (min-width: 768px) {
+  .activities_dealer {
+    width: 48%;
+  }
+  .dealer_card_container {
+    width: 44%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .dealer_card_container {
+    max-width: 288px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .dealer_card_container {
+    max-width: 325px;
+  }
+  .activities_dealer {
+    width: 32%;
+  }
+}
+
+@media (min-width: 1400px) {
+  .dealer_card_container {
+    max-width: 360px;
+  }
 }
 /*# sourceMappingURL=DealerTopCards.css.map */

@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react"
-import { Table, Icon, Input, Select, Pagination, Tabs, Button } from "antd"
+import {
+  Table,
+  Icon,
+  Input,
+  Select,
+  Pagination,
+  Tabs,
+  Button,
+  Spin,
+} from "antd"
 import "../../scss/Table.scss"
 import "../../scss/Retailer.scss"
 import { CSVLink, CSVDownload } from "react-csv"
@@ -22,7 +31,7 @@ const SubDealerList = () => {
   const [historyCredit, setHistoryDebit] = useState([])
   const [usernameH, setUsernameH] = useState([])
   const [filteredCredit, setFilteredCredit] = useState("")
-  const [filteredDebit, setFilteredDebit] = useState("")
+  const [spinning, setSpinning] = useState(true)
 
   const { retailer } = useSelector(state => state)
 
@@ -41,6 +50,10 @@ const SubDealerList = () => {
     const username = Base64.decode(data.TOKEN_ONE)
     const password = Base64.decode(data.TOKEN_TWO)
 
+    setTimeout(() => {
+      setSpinning(false)
+    }, 60000)
+
     ////////////AWUF history/////////////////
     const VTU = {
       serviceCode: "DHL",
@@ -55,43 +68,130 @@ const SubDealerList = () => {
       res(Instance.post("", VTU))
     })
     requestVtu.then(({ data }) => {
-      console.log(data)
+      //console.log(data)
       if (data.status === "200") {
+        setSpinning(false)
         let retailers = data.sub_dealers
         setVtuHistory(retailers)
       }
     })
   }, [])
 
+  // key: "type",
+
+  //   const ColumnsTwo = [
+  //     {
+  //       title: "Username",
+  //       dataIndex: "username",
+  //       key: "username",
+
+  //       // render: text => <a>{text}</a>,
+  //     },
+  //     {
+  //       title: "Full name",
+  //       dataIndex: "name",
+  //       key: "name",
+  //     },
+  //     {
+  //       title: "Type",
+  //       dataIndex: "type",
+  //     // render: text => <a>{text}</a>,
+  //   },
+
+  //   {
+  //     title: "Retailer number",
+  //     dataIndex: "phone",
+  //     key: "phone",
+  //   },
+
+  //   {
+  //     title: "USSD Code",
+  //     dataIndex: "code",
+  //     key: "code",
+  //     render: (text, record) => (
+  //       <div>
+  //         {record.tp_no}
+  //         {record.code}
+  //       </div>
+  //     ),
+
+  //     // align: "right",
+  //   },
+  //   {
+  //     title: "POS Status",
+  //     dataIndex: "status",
+  //     key: "status",
+
+  //     render: text =>
+  //       text === 1 ? (
+  //         <p className="enabled">
+  //           <Green className="dotPosition" />
+  //           Enable
+  //         </p>
+  //       ) : (
+  //         <p className="disabled">
+  //           <Red className="dotPosition" />
+  //           Disabled
+  //         </p>
+  //       ),
+  //   },
+  //   {
+  //     title: "Dealer",
+  //     dataIndex: "d_id",
+  //     key: "d_id",
+  //     render: (text, record) => (
+  //       <p style={{ marginBottom: "0px" }}>{retailer.name}</p>
+  //     ),
+  //   },
+  //   {
+  //     title: "Date Created/Time",
+  //     dataIndex: "created_at",
+  //     key: "created_at",
+
+  //     // align: "right",
+  //   },
+  // ]
   const ColumnsTwo = [
     {
-      title: "Username",
+      title: "POS Username",
       dataIndex: "username",
       key: "username",
 
       // render: text => <a>{text}</a>,
     },
     {
-      title: "Full name",
+      title: "Retailer Name",
       dataIndex: "name",
       key: "name",
     },
-    {
-      title: "Type",
-      dataIndex: "type",
-      key: "type",
-
-      // render: text => <a>{text}</a>,
-    },
 
     {
-      title: "Retailer number",
+      title: "Retailer Number",
       dataIndex: "phone",
       key: "phone",
     },
+    {
+      title: "Assigned Wallet",
+      dataIndex: "vtu_name",
+      key: "vtu_name",
+    },
+
+    // {
+    //   title: "Assigned Sub Dealer",
+    //   dataIndex: "sub_dealer_name",
+    //   key: "sub_dealer_name",
+    // },
+    // {
+    //   title: "Wallet Balance",
+    //   dataIndex: "balance",
+    //   key: "balance",
+    //   render: (text, record) => (
+    //     <div>{`₦ ${parseInt(record.balance).toLocaleString()}`}</div>
+    //   ),
+    // },
 
     {
-      title: "USSD Code",
+      title: "Retail Code",
       dataIndex: "code",
       key: "code",
       render: (text, record) => (
@@ -102,6 +202,14 @@ const SubDealerList = () => {
       ),
 
       // align: "right",
+    },
+    {
+      title: "Dealer",
+      dataIndex: "d_id",
+      key: "d_id",
+      render: (text, record) => (
+        <p style={{ marginBottom: "0px" }}>{retailer.name}</p>
+      ),
     },
     {
       title: "POS Status",
@@ -122,15 +230,25 @@ const SubDealerList = () => {
         ),
     },
     {
-      title: "Dealer",
-      dataIndex: "d_id",
-      key: "d_id",
-      render: (text, record) => (
-        <p style={{ marginBottom: "0px" }}>{retailer.name}</p>
-      ),
+      title: "USSD Status",
+      dataIndex: "ussd_status",
+      key: "ussd_status",
+
+      render: text =>
+        text === 1 ? (
+          <p className="enabled">
+            <Green className="dotPosition" />
+            Active
+          </p>
+        ) : (
+          <p className="disabled">
+            <Red className="dotPosition" />
+            Inactive
+          </p>
+        ),
     },
     {
-      title: "Created at",
+      title: "Date Created/Time",
       dataIndex: "created_at",
       key: "created_at",
 
@@ -153,14 +271,14 @@ const SubDealerList = () => {
     { label: "Retailer Name", key: "destination" },
     { label: "Amount", key: "amount" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Created at", key: "created_at" },
+    { label: "Date Created/Time", key: "created_at" },
   ]
   const headerDebit = [
     { label: "Source", key: "source" },
     { label: "Retailer Name", key: "destination" },
     { label: "Amount", key: "amount" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Created at", key: "time" },
+    { label: "Date Created/Time", key: "time" },
   ]
   return (
     <DealerLayout title={title} position={["5"]}>
@@ -200,12 +318,14 @@ const SubDealerList = () => {
                     />
                   </div>
                 </div>
-                <Table
-                  columns={ColumnsTwo}
-                  dataSource={filteredVTUItems}
-                  bordered
-                  size="small"
-                />
+                <Spin spinning={spinning} size="large" delay={0}>
+                  <Table
+                    columns={ColumnsTwo}
+                    dataSource={filteredVTUItems}
+                    bordered
+                    size="small"
+                  />
+                </Spin>
               </div>
             </TabPane>
           </Tabs>

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import "../../scss/Retailer.scss"
 import "../../scss/Admin.scss"
 import {
@@ -13,15 +13,53 @@ import {
   Form,
 } from "antd"
 import { AdminIcon } from "../../components/CustomIcons"
+import Instance from "../../Api/Instance"
+import { Base64 } from "js-base64"
 import Green from "../../../assets/green.svg"
 import Red from "../../../assets/red.svg"
 import { AdminMember } from "../../components/Constants/AdminPage"
 import DealerLayout from "../../components/Layout/DealerLayout"
+import axios from "axios"
+import AdminInstance from "../../Api/AdminInstance"
 const { TabPane } = Tabs
 const Dash_admin_icon = props => <Icon component={AdminIcon} {...props} />
 
 const Admin = () => {
   const [openForm, setOpenForm] = useState(false)
+  const [filterText, setFilterText] = useState("")
+  const [tps, setTps] = useState([])
+  useEffect(() => {
+    //gets user details
+    let onLogged = sessionStorage.getItem("persist:root")
+      ? JSON.parse(sessionStorage.getItem("persist:root"))
+      : []
+    const { userData } = onLogged
+    let allData = JSON.parse(userData)
+    const { user_id } = allData
+
+    // gets tokens
+    let data = sessionStorage.getItem("topup2")
+      ? JSON.parse(sessionStorage.getItem("topup2"))
+      : []
+    const username = Base64.decode(data.TOKEN_ONE_ADMIN)
+    const password = Base64.decode(data.TOKEN_TWO_ADMIN)
+    const req = { serviceCode: "RTL", username, password, user_id }
+
+    // trade partners....
+    const tpReqst = {
+      serviceCode: "TRAL",
+      username,
+      password,
+    }
+    const tp = new Promise(res => {
+      res(AdminInstance.post("", tpReqst))
+    })
+    tp.then(({ data }) => {
+      let Arry = data.tp_details
+      setTps(Arry)
+    })
+  }, [])
+
   const AdminColumn = [
     {
       title: "Name",
@@ -29,30 +67,40 @@ const Admin = () => {
       key: "name",
     },
     {
+      title: "Vendor Name",
+      dataIndex: "vendor_name",
+      key: "vendor_name",
+    },
+    {
+      title: "Phone Number",
+      dataIndex: "phone_number",
+      key: "phone_number",
+    },
+    {
       title: "Email",
       dataIndex: "email",
       key: "email",
     },
+    // {
+    //   title: "Status",
+    //   dataIndex: "status",
+    //   key: "status",
+    //   render: text =>
+    //     text === "enable" ? (
+    //       <p className="enabled">
+    //         <Green className="dotPosition" />
+    //         {text}
+    //       </p>
+    //     ) : (
+    //       <p className="disabled">
+    //         <Red className="dotPosition" />
+    //         {text}
+    //       </p>
+    //     ),
+    // },
     {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
-      render: text =>
-        text === "enable" ? (
-          <p className="enabled">
-            <Green className="dotPosition" />
-            {text}
-          </p>
-        ) : (
-          <p className="disabled">
-            <Red className="dotPosition" />
-            {text}
-          </p>
-        ),
-    },
-    {
-      title: "Created at",
-      dataIndex: "date",
+      title: "Date Created/Time",
+      dataIndex: "created_at",
       key: "date",
     },
     {
@@ -87,9 +135,19 @@ const Admin = () => {
   const title = (
     <h4>
       <Dash_admin_icon style={{ marginRight: "10px" }} />
-      Admin
+      Trade Partners
     </h4>
   )
+
+  const filteredItems = tps.filter(
+    item =>
+      item.name.toLocaleLowerCase().includes(filterText.toLocaleLowerCase()) ||
+      item.email.toLocaleLowerCase().includes(filterText.toLocaleLowerCase()) ||
+      item.phone_number
+        .toLocaleLowerCase()
+        .includes(filterText.toLocaleLowerCase())
+  )
+
   return (
     <DealerLayout title={title} position={["8"]}>
       <div
@@ -98,24 +156,25 @@ const Admin = () => {
         <div className="adminGroup">
           <div className="admin">
             <Tabs defaultActiveKey="1" onChange={handleDefault}>
-              <TabPane tab="View Admin" key="1">
+              <TabPane tab="Partners" key="1">
                 <div className={openForm ? "hide" : "table_Group"}>
                   <div className="table_header">
                     <div className="rowShow">
-                      <Button onClick={handleForm}>Add Admin</Button>
+                      {/* <Button onClick={handleForm}>Add Admin</Button> */}
                     </div>
                     <div className="searchTable">
                       <Input
-                        placeholder="Search Admin…"
-                        prefix={
-                          <Icon type="search" style={{ color: "#D8D8D8" }} />
-                        }
+                        placeholder="Search Retailer…"
+                        value={filterText}
+                        onChange={e => {
+                          setFilterText(e.target.value)
+                        }}
                       />
                     </div>
                   </div>
                   <Table
                     columns={AdminColumn}
-                    dataSource={AdminMember}
+                    dataSource={filteredItems}
                     bordered
                     size="small"
                   />
@@ -171,7 +230,7 @@ const Admin = () => {
                   </div>
                 </div>
               </TabPane>
-              <TabPane tab="Change Token" key="2">
+              {/* <TabPane tab="Change Token" key="2">
                 <div className="formContainer">
                   <div className="formTitle">
                     <p>Change Token</p>
@@ -193,7 +252,7 @@ const Admin = () => {
                     </div>
                   </div>
                 </div>
-              </TabPane>
+              </TabPane> */}
             </Tabs>
           </div>
         </div>

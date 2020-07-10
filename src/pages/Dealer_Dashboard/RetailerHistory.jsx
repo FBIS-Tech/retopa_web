@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react"
-import { Table, Icon, Input, Select, Pagination, Tabs, Button } from "antd"
+import {
+  Table,
+  Icon,
+  Input,
+  Select,
+  Pagination,
+  Tabs,
+  Button,
+  Spin,
+} from "antd"
 import "../../scss/Table.scss"
 import "../../scss/Retailer.scss"
 import { CSVLink, CSVDownload } from "react-csv"
@@ -23,6 +32,7 @@ const RetailerSingleHistory = () => {
   const [usernameH, setUsernameH] = useState([])
   const [filteredCredit, setFilteredCredit] = useState("")
   const [filteredDebit, setFilteredDebit] = useState("")
+  const [spinning, setSpinning] = useState(true)
 
   const { retailer } = useSelector(state => state)
 
@@ -41,6 +51,10 @@ const RetailerSingleHistory = () => {
     const username = Base64.decode(data.TOKEN_ONE)
     const password = Base64.decode(data.TOKEN_TWO)
 
+    setTimeout(() => {
+      setSpinning(false)
+    }, 60000)
+
     const VOD = {
       serviceCode: "TTV",
       username,
@@ -53,6 +67,8 @@ const RetailerSingleHistory = () => {
     const request = new Promise(res => {
       res(Instance.post("", VOD))
     })
+
+    //console.log(request)
     request.then(({ data }) => {
       if (data.status === "200") {
         setVODHistory(data.history)
@@ -67,10 +83,11 @@ const RetailerSingleHistory = () => {
       password,
       user_id: retailer.user_id,
     }
+
     const requestData = new Promise(res => {
       res(Instance.post("", DATA))
     })
-    //console.log(requestData)
+    ////console.log(requestData)
     requestData.then(({ data }) => {
       if (data.status === "200") {
         setDataHistory(data.history)
@@ -105,6 +122,7 @@ const RetailerSingleHistory = () => {
     })
     requestVtu.then(({ data }) => {
       if (data.status === "200") {
+        setSpinning(false)
         setVtuHistory(data.history)
       }
     })
@@ -116,9 +134,9 @@ const RetailerSingleHistory = () => {
       key: "amount",
     },
     {
-      title: "Quantity",
-      dataIndex: "quantity",
-      key: "quantity",
+      title: "Phone Number",
+      dataIndex: "phone",
+      key: "phone",
     },
     {
       title: "Status",
@@ -145,22 +163,22 @@ const RetailerSingleHistory = () => {
       key: "ref",
     },
     {
-      title: "Created at",
+      title: "Date Created/Time",
       dataIndex: "created_at",
       key: "created_at",
     },
   ]
 
-  const filteredDebitItems = VODHistory.filter(item =>
-    item.ref.includes(filteredDebit.toLocaleLowerCase())
-  )
-  const filteredDataItems = DataHistory.filter(item =>
-    item.ref.includes(filteredCredit.toLocaleLowerCase())
-  )
+  const filteredDebitItems = VODHistory.slice()
+    .reverse()
+    .filter(item => item.ref.includes(filteredDebit.toLocaleLowerCase()))
+  const filteredDataItems = DataHistory.slice()
+    .reverse()
+    .filter(item => item.ref.includes(filteredCredit.toLocaleLowerCase()))
 
-  const filteredVTUItems = VtuHistory.filter(item =>
-    item.ref.includes(filteredCredit.toLocaleLowerCase())
-  )
+  const filteredVTUItems = VtuHistory.slice()
+    .reverse()
+    .filter(item => item.ref.includes(filteredCredit.toLocaleLowerCase()))
 
   const title = (
     <h4>
@@ -173,15 +191,16 @@ const RetailerSingleHistory = () => {
     { label: "Retailer Name", key: "destination" },
     { label: "Amount", key: "amount" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Created at", key: "created_at" },
+    { label: "Date Created/Time", key: "created_at" },
   ]
   const headerDebit = [
     { label: "Source", key: "source" },
     { label: "Retailer Name", key: "destination" },
     { label: "Amount", key: "amount" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Created at", key: "time" },
+    { label: "Date Created/Time", key: "time" },
   ]
+  const Vtu = []
   return (
     <DealerLayout title={title} position={["5"]}>
       <div>
@@ -192,7 +211,7 @@ const RetailerSingleHistory = () => {
           }
         >
           <Tabs defaultActiveKey="1">
-            <TabPane tab="VTU" key="1">
+            <TabPane tab="USSD" key="1">
               <div className="table_Group">
                 <div className="table_header">
                   <div className="rowShow">
@@ -209,7 +228,7 @@ const RetailerSingleHistory = () => {
                   </div>
                   <div className="searchTable">
                     <Input
-                      placeholder="Search Credit Wallet…"
+                      placeholder="Search"
                       value={filteredCredit}
                       onChange={e => {
                         setFilteredCredit(e.target.value)
@@ -220,12 +239,14 @@ const RetailerSingleHistory = () => {
                     />
                   </div>
                 </div>
-                <Table
-                  columns={HistoryColumn}
-                  dataSource={filteredVTUItems}
-                  bordered
-                  size="small"
-                />
+                <Spin spinning={spinning} size="large" delay={0}>
+                  <Table
+                    columns={HistoryColumn}
+                    dataSource={filteredVTUItems}
+                    bordered
+                    size="small"
+                  />
+                </Spin>
               </div>
             </TabPane>
             <TabPane tab="VOD" key="2">
@@ -292,6 +313,7 @@ const RetailerSingleHistory = () => {
                     />
                   </div>
                 </div>
+
                 <Table
                   columns={HistoryColumn}
                   dataSource={filteredDataItems}
@@ -300,14 +322,14 @@ const RetailerSingleHistory = () => {
                 />
               </div>
             </TabPane>
-            {/* <TabPane tab="AWUF" key="4">
+            {/* <TabPane tab="VTU" key="4">
               <div className="table_Group">
                 <div className="table_header">
                   <div className="rowShow">
                     <Button>
                       <CSVLink
-                        // data={history}
-                        filename={"Wallet Debits.csv"}
+                        data={Vtu}
+                        filename={`${retailer.name}'s Data.csv`}
                         headers={headerDebit}
                         style={{ color: "white" }}
                       >
@@ -330,7 +352,7 @@ const RetailerSingleHistory = () => {
                 </div>
                 <Table
                   columns={HistoryColumn}
-                  dataSource={filteredAwufItems}
+                  dataSource={filteredDataItems}
                   bordered
                   size="small"
                 />

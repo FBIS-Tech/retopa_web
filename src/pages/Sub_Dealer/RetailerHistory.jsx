@@ -1,9 +1,18 @@
 import React, { useState, useEffect } from "react"
-import { Table, Icon, Input, Select, Pagination, Tabs, Button } from "antd"
+import {
+  Table,
+  Icon,
+  Input,
+  Select,
+  Pagination,
+  Tabs,
+  Button,
+  Spin,
+} from "antd"
 import "../../scss/Table.scss"
 import "../../scss/Retailer.scss"
+import "../../scss/Admin.scss"
 import { CSVLink, CSVDownload } from "react-csv"
-import Instance from "../../Api/Instance"
 import { Base64 } from "js-base64"
 import DealerLayout from "../../components/Layout/DealerLayout"
 import { HistoryIcon } from "../../components/CustomIcons"
@@ -11,6 +20,7 @@ import { useSelector } from "react-redux"
 import Green from "../../../assets/green.svg"
 import Red from "../../../assets/red.svg"
 import SubDealerLayout from "../../components/Layout/SubDealerLayout"
+import DealerLoginInstance from "../../Api/DealerLoginInstance"
 const { TabPane } = Tabs
 const { Option } = Select
 const Dash_history_icon = props => <Icon component={HistoryIcon} {...props} />
@@ -20,7 +30,7 @@ const RetailerSingleHistory = () => {
   const [DataHistory, setDataHistory] = useState([])
   const [AwufHistory, setAwufHistory] = useState([])
   const [VtuHistory, setVtuHistory] = useState([])
-  const [historyCredit, setHistoryDebit] = useState([])
+  const [spinning, setSpinning] = useState(true)
   const [usernameH, setUsernameH] = useState([])
   const [filteredCredit, setFilteredCredit] = useState("")
   const [filteredDebit, setFilteredDebit] = useState("")
@@ -35,24 +45,29 @@ const RetailerSingleHistory = () => {
     let allData = JSON.parse(userData)
     const { user_id } = allData
     setUsernameH(allData.username)
-    let data = sessionStorage.getItem("topup")
-      ? JSON.parse(sessionStorage.getItem("topup"))
+    // gets tokens
+    let data = sessionStorage.getItem("topup3")
+      ? JSON.parse(sessionStorage.getItem("topup3"))
       : []
+    const username = Base64.decode(data.TOKEN_ONE_DEALER)
+    const password = Base64.decode(data.TOKEN_TWO_DEALER)
 
-    const username = Base64.decode(data.TOKEN_ONE)
-    const password = Base64.decode(data.TOKEN_TWO)
+    setTimeout(() => {
+      setSpinning(false)
+    }, 60000)
 
     const VOD = {
       serviceCode: "TTV",
       username,
       type: "VOD",
       password,
-      user_id: retailer.user_id,
+      // user_id: retailer.user_id,
+      user_id: 1,
     }
 
     //////////////VOD history//////////////////////
     const request = new Promise(res => {
-      res(Instance.post("", VOD))
+      res(DealerLoginInstance.post("", VOD))
     })
     request.then(({ data }) => {
       if (data.status === "200") {
@@ -69,9 +84,8 @@ const RetailerSingleHistory = () => {
       user_id: retailer.user_id,
     }
     const requestData = new Promise(res => {
-      res(Instance.post("", DATA))
+      res(DealerLoginInstance.post("", DATA))
     })
-    //console.log(requestData)
     requestData.then(({ data }) => {
       if (data.status === "200") {
         setDataHistory(data.history)
@@ -86,7 +100,7 @@ const RetailerSingleHistory = () => {
       user_id: retailer.user_id,
     }
     const requestAwuf = new Promise(res => {
-      res(Instance.post("", AWUF))
+      res(DealerLoginInstance.post("", AWUF))
     })
     requestAwuf.then(({ data }) => {
       if (data.status === "200") {
@@ -102,10 +116,11 @@ const RetailerSingleHistory = () => {
       user_id: retailer.user_id,
     }
     const requestVtu = new Promise(res => {
-      res(Instance.post("", VTU))
+      res(DealerLoginInstance.post("", VTU))
     })
     requestVtu.then(({ data }) => {
       if (data.status === "200") {
+        setSpinning(false)
         setVtuHistory(data.history)
       }
     })
@@ -117,9 +132,9 @@ const RetailerSingleHistory = () => {
       key: "amount",
     },
     {
-      title: "Quantity",
-      dataIndex: "quantity",
-      key: "quantity",
+      title: "Number",
+      dataIndex: "phone",
+      key: "phone",
     },
     {
       title: "Status",
@@ -146,7 +161,7 @@ const RetailerSingleHistory = () => {
       key: "ref",
     },
     {
-      title: "Created at",
+      title: "Date Created/Time",
       dataIndex: "created_at",
       key: "created_at",
     },
@@ -174,14 +189,14 @@ const RetailerSingleHistory = () => {
     { label: "Retailer Name", key: "destination" },
     { label: "Amount", key: "amount" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Created at", key: "created_at" },
+    { label: "Date Created/Time", key: "created_at" },
   ]
   const headerDebit = [
     { label: "Source", key: "source" },
     { label: "Retailer Name", key: "destination" },
     { label: "Amount", key: "amount" },
     { label: "Transaction ref", key: "ref" },
-    { label: "Created at", key: "time" },
+    { label: "Date Created/Time", key: "time" },
   ]
   return (
     <SubDealerLayout title={title} position={["5"]}>
@@ -221,12 +236,14 @@ const RetailerSingleHistory = () => {
                     />
                   </div>
                 </div>
-                <Table
-                  columns={HistoryColumn}
-                  dataSource={filteredVTUItems}
-                  bordered
-                  size="small"
-                />
+                <Spin spinning={spinning} size="large" delay={0}>
+                  <Table
+                    columns={HistoryColumn}
+                    dataSource={filteredVTUItems}
+                    bordered
+                    size="small"
+                  />
+                </Spin>
               </div>
             </TabPane>
             <TabPane tab="VOD" key="2">

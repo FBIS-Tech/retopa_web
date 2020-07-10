@@ -3,10 +3,12 @@ import { useSelector, useDispatch } from "react-redux"
 import RegLayout from "../components/RegistrationLayout/RegLayout"
 import "../scss/Login.scss"
 import LoginCard from "../components/LoginCard"
-import { UserLogin, DealerLogin } from "../Actions/Actions"
+import { UserLogin, DealerLogin, AdminLogin } from "../Actions/Actions"
 
 const Login = () => {
-  const [active, setActive] = useState(true)
+  const [active, setActive] = useState(false)
+  const [active2, setActive2] = useState(true)
+  const [active3, setActive3] = useState(false)
   const [loading, setLoading] = useState(false)
   const [inputChange, setInput] = useState({ serviceCode: "LGN" })
 
@@ -21,17 +23,40 @@ const Login = () => {
   }
 
   const handleDispatch = () => {
-    if (active) {
+    setLoading(true)
+    if (active2) {
       dispatch(UserLogin(inputChange))
-      setLoading(true)
-    } else {
+    } else if (active3) {
       dispatch(DealerLogin(inputChange))
-      setLoading(true)
+    } else if (active) {
+      dispatch(AdminLogin(inputChange))
     }
   }
 
-  useMemo(() => setLoading(false), [logError])
-  useMemo(() => setLoading(false), [authError])
+  // useMemo(() => setLoading(false), [logError])
+  // useMemo(() => setLoading(false), [authError])
+
+  const handleAdmin = () => {
+    setActive(true)
+    setActive2(false)
+    setActive3(false)
+  }
+  const handleDealer = () => {
+    setActive(false)
+    setActive2(true)
+    setActive3(false)
+  }
+  const handleSubDealer = () => {
+    setActive(false)
+    setActive2(false)
+    setActive3(true)
+  }
+
+  useEffect(() => {
+    if (logError.length > 0 || authError !== "") {
+      setLoading(false)
+    }
+  }, [logError, authError])
 
   return (
     <RegLayout>
@@ -50,13 +75,12 @@ const Login = () => {
         <div>
           <LoginCard
             loading={loading}
-            active={active}
-            activate1={() => {
-              setActive(true)
-            }}
-            activate2={() => {
-              setActive(false)
-            }}
+            activea={active}
+            activeb={active2}
+            activec={active3}
+            activate1={handleAdmin}
+            activate2={handleDealer}
+            activate3={handleSubDealer}
             getInput={handleInputChange}
             handleSubmit={handleDispatch}
           />

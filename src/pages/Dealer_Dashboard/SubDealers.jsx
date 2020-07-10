@@ -9,7 +9,11 @@ import {
   Button,
   Tabs,
   Popover,
+  Modal,
   Form,
+  Popconfirm,
+  Tooltip,
+  Spin,
 } from "antd"
 import "../../scss/Table.scss"
 import { TableTwo } from "../../components/Constants/Tableone"
@@ -23,7 +27,7 @@ import Instance from "../../Api/Instance"
 // import { useSelector, useDispatch } from "react-redux"
 import DealerLayout from "../../components/Layout/DealerLayout"
 import { RetailIcon } from "../../components/CustomIcons"
-import { Link, navigateTo } from "gatsby"
+import { Link, navigate } from "gatsby"
 import { retailerDetails } from "../../Actions/Actions"
 const Dash_retail_icon = props => <Icon component={RetailIcon} {...props} />
 
@@ -33,11 +37,16 @@ const { Option } = Select
 
 const SubDealer = () => {
   const [openToken, setOpenToken] = useState(false)
+  const [openToken2, setOpenToken2] = useState(false)
+  const [spinning, setSpinning] = useState(true)
   const [retailer, setRetailer] = useState([])
+  const [vtuDATA, setVtuDATA] = useState([])
+  const [walletData, setWalletData] = useState([])
   const [SelectRetailer, setSelectRetailer] = useState([])
   const [message, setMessage] = useState("")
   const [messageAct, setMessageAct] = useState("")
   const [loading, setLoading] = useState(false)
+  const [visible, setVisible] = useState(false)
   const [error, setError] = useState([])
   const [name, setName] = useState("")
   const [activate, setActivate] = useState("Activate")
@@ -51,8 +60,21 @@ const SubDealer = () => {
   const [assign, setAssign] = useState({
     serviceCode: "FUD",
   })
-  const [inputChange, setInput] = useState({ serviceCode: "ACR" })
-  const [inputRetailChange, setInputRetail] = useState({ serviceCode: "ARL" })
+  const [inputChange, setInput] = useState({
+    serviceCode: "ACR",
+  })
+  const [inputRetailChange, setInputRetail] = useState({
+    serviceCode: "AMSD",
+  })
+  const [wallet, setWallet] = useState({
+    serviceCode: "DDB",
+  })
+  const [fund, setFund] = useState({
+    serviceCode: "FSDF",
+  })
+  const [vtu, setVtu] = useState({
+    serviceCode: "AVVD",
+  })
 
   const dispatch = useDispatch()
 
@@ -71,8 +93,19 @@ const SubDealer = () => {
       : []
     const username = Base64.decode(data.TOKEN_ONE)
     const password = Base64.decode(data.TOKEN_TWO)
-    const req = { serviceCode: "RTL", username, password, user_id }
+    const req = {
+      serviceCode: "SSDL",
+      username,
+      password,
+      user_id,
+    }
 
+    // inputs for adding vtu line
+    setWallet({
+      ...wallet,
+      username,
+      password,
+    })
     // inputs for adding vtu line
     setInput({
       ...inputChange,
@@ -99,105 +132,90 @@ const SubDealer = () => {
       username,
       password,
     })
-    // inputs for funding retailers
+    // inputs for Assigning retailers
     setAssign({
       ...assign,
       username,
       password,
       user_id,
     })
+    // inputs for funding retailers
+    setFund({
+      ...fund,
+      username,
+      password,
+      user_id,
+    })
+    setVtu({
+      ...vtu,
+      username,
+      password,
+      user_id,
+    })
 
-    // request for retailer list
+    setTimeout(() => {
+      setSpinning(false)
+    }, 60000)
+
+    // request for sub dealer list
     const request = new Promise(res => {
       res(Instance.post("", req))
     })
     request.then(({ data }) => {
       if (data.status === "200") {
-        let allRetailers = data.retailer
-        setSelectRetailer(allRetailers)
+        let allRetailers = data.sub_dealers
+        setSpinning(false)
+        setRetailer(allRetailers)
         // to query sub dealers only
-        allRetailers.forEach(data => {
-          if (data.type === "SUB DEALER") {
-            setRetailer([
-              ...retailer,
-              {
-                username: data.username,
-                name: data.name,
-                type: data.type,
-                phone: data.phone,
-                code: data.code,
-                tp_no: data.tp_no,
-                status: data.status,
-                created_at: data.created_at,
-                id: data.id,
-              },
-            ])
-          }
-        })
+      }
+    })
+
+    // request for Vtu list
+    const reqVTU = {
+      username,
+      password,
+      serviceCode: "VTULS",
+    }
+    const requestVtu = new Promise(res => {
+      res(Instance.post("", reqVTU))
+    })
+    requestVtu.then(({ data }) => {
+      if (data.status === "200") {
+        setVtuDATA(data.vtus)
       }
     })
   }, [])
-
   const ColumnsTwo = [
     {
-      title: "Username",
+      title: "POS Username",
       dataIndex: "username",
       key: "username",
 
       // render: text => <a>{text}</a>,
     },
     {
-      title: "Full name",
+      title: "Sub-Dealer Name",
       dataIndex: "name",
       key: "name",
     },
-    {
-      title: "Type",
-      dataIndex: "type",
-      key: "type",
 
-      // render: text => <a>{text}</a>,
+    {
+      title: "Retailers",
+      dataIndex: "counter",
+      key: "counter",
     },
-
     {
-      title: "Retailer number",
+      title: "Sub-Dealer number",
       dataIndex: "phone",
       key: "phone",
     },
-
     {
-      title: "USSD Code",
-      dataIndex: "code",
-      key: "code",
-      render: (text, record) => (
-        <div>
-          {record.tp_no}
-          {record.code}
-        </div>
-      ),
-
-      // align: "right",
+      title: "VTU Name",
+      dataIndex: "vtu_name",
+      key: "vtu_name",
     },
     {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
-
-      render: text =>
-        text === 1 ? (
-          <p className="enabled">
-            <Green className="dotPosition" />
-            Enable
-          </p>
-        ) : (
-          <p className="disabled">
-            <Red className="dotPosition" />
-            Disabled
-          </p>
-        ),
-    },
-    {
-      title: "Created at",
+      title: "Date Created/Time",
       dataIndex: "created_at",
       key: "created_at",
 
@@ -214,17 +232,42 @@ const SubDealer = () => {
                 id={record.id}
                 title={record.name}
                 onClick={e => {
-                  let d_id = e.currentTarget.id
+                  let id = e.target.id
                   setOpenToken(!openToken)
-                  setInputRetail({ ...inputRetailChange, d_id })
+                  setFund({ ...fund, id: record.id, vtu_id: record.vtu_id })
+                  setName(e.currentTarget.title)
+                  walletBalance2(id)
+                }}
+              >
+                Fund Sub-Dealer
+              </p>
+              <p
+                // className={
+                //   record.vtu_id === "" || record.vtu_id === null ? "" : "hide"
+                // }
+                id={record.id}
+                title={record.name}
+                onClick={e => {
+                  let id = e.target.id
+                  setOpenToken2(!openToken2)
+                  setVtu({ ...vtu, d_id: record.id })
                   setName(e.currentTarget.title)
                 }}
               >
-                Assign Retailer
+                Assign VTU
               </p>
-              {/* <p>Edit</p> */}
-              <p id={record.id} title={record.type} onClick={ActivateRetailer}>
-                {record.status === 1 ? "Deactivate POS" : "Activate POS"}
+              <p
+                id={record.id}
+                title={record.name}
+                onClick={e => {
+                  let id = e.currentTarget.id
+
+                  setName(record.name)
+                  // setWallet({ ...wallet, id: e.currentTarget.id })
+                  walletBalance(id)
+                }}
+              >
+                {!loading ? "Check Balance" : "Checking..."}
               </p>
               <p
                 id={record.id}
@@ -235,7 +278,7 @@ const SubDealer = () => {
                     name: e.currentTarget.title,
                   }
                   dispatch(retailerDetails(details))
-                  navigateTo(`/Dealer_Dashboard/SubDealer_List`)
+                  navigate(`/Dealer_Dashboard/SubDealer_List`)
                 }}
               >
                 Retailer List
@@ -300,8 +343,8 @@ const SubDealer = () => {
       }
     })
   }
-  //////////////////////////////////////////////add retailer//////////////////////////////////////////////////////////////////////////////////////////
-  const handleRetailChange = e => {
+  //////////////////////////////////////////////add Subdealer//////////////////////////////////////////////////////////////////////////////////////////
+  const handleSubDealerAdd = e => {
     setInputRetail({
       ...inputRetailChange,
       [e.currentTarget.name]: e.currentTarget.value,
@@ -335,6 +378,7 @@ const SubDealer = () => {
         setMessage(m)
         setTimeout(() => {
           setMessage("")
+          window.location.reload()
         }, 3000)
       } else {
         setLoading(false)
@@ -355,8 +399,20 @@ const SubDealer = () => {
     let { serviceCode } = activateRetailer
     let { username } = activateRetailer
     let { password } = activateRetailer
-    const Data = { serviceCode, username, password, type, user_id }
-    const DataTwo = { serviceCode: "DEA", username, password, type, user_id }
+    const Data = {
+      serviceCode,
+      username,
+      password,
+      type,
+      user_id,
+    }
+    const DataTwo = {
+      serviceCode: "DEA",
+      username,
+      password,
+      type,
+      user_id,
+    }
     if (status === "Activate POS") {
       e.target.innerHTML = "Activating..."
       const submitRequest = new Promise(res => {
@@ -425,18 +481,30 @@ const SubDealer = () => {
 
   ////////////////////SEND FUNDS TO RETAILER//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  ////////////////////SEND FUNDS TO RETAILER//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  function handleAssign(value) {
+    setFund({
+      ...fund,
+      vtu_id: value,
+    })
+  }
+
   const handleFund = e => {
-    setAssign({ ...assign, [e.currentTarget.name]: e.currentTarget.value })
+    setFund({
+      ...fund,
+      [e.currentTarget.name]: e.currentTarget.value,
+    })
   }
 
   const handleFundTransfer = () => {
+    // console.log(fund)
     setLoading(true)
     const sendRequest = new Promise(res => {
-      res(Instance.post("", assign))
+      res(Instance.post("", fund))
     })
     sendRequest.then(({ data }) => {
       let fields = data.required_fields
-      console.log(fields)
       let m = data.message
       if (data.status === "301") {
         setLoading(false)
@@ -449,6 +517,7 @@ const SubDealer = () => {
         setMessage(m)
         setTimeout(() => {
           setMessage("")
+          window.location.reload()
         }, 3000)
       } else {
         setLoading(false)
@@ -459,12 +528,48 @@ const SubDealer = () => {
       }
     })
   }
+
+  const walletBalance = e => {
+    setLoading(true)
+    let data = { ...wallet, id: e }
+    const sendRequest = new Promise(res => {
+      res(Instance.post("", data))
+    })
+    sendRequest.then(({ data }) => {
+      let fields = data.wallets
+      if (data.status === "200") {
+        setVisible(true)
+        setWalletData(fields)
+        setLoading(false)
+      }
+    })
+  }
+  const walletBalance2 = e => {
+    let data = { ...wallet, id: e }
+    const sendRequest = new Promise(res => {
+      res(Instance.post("", data))
+    })
+    sendRequest.then(({ data }) => {
+      let fields = data.wallets
+      if (data.status === "200") {
+        setWalletData(fields)
+        setLoading(false)
+      }
+    })
+  }
   ////////////////////retailer search////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  const filteredItems = retailer.filter(
-    item =>
-      item.name.toLocaleLowerCase().includes(filterText.toLocaleLowerCase()) ||
-      item.username.toLocaleLowerCase().includes(filterText.toLocaleLowerCase())
-  )
+  const filteredItems = retailer
+    .slice()
+    .reverse()
+    .filter(
+      item =>
+        item.name
+          .toLocaleLowerCase()
+          .includes(filterText.toLocaleLowerCase()) ||
+        item.username
+          .toLocaleLowerCase()
+          .includes(filterText.toLocaleLowerCase())
+    )
 
   const title = (
     <h4>
@@ -480,8 +585,74 @@ const SubDealer = () => {
     { label: "Retailer Number", key: "phone" },
     { label: "USSD Code", key: "code" },
     { label: "Status", key: "status" },
-    { label: "Created at", key: "created_at" },
+    { label: "Date Created/Time", key: "created_at" },
   ]
+
+  /////////////////////wallet column/////////////////////////
+  const WalletColums = [
+    {
+      title: "VTU Name",
+      dataIndex: "vtu_name",
+      key: "vtu_name",
+    },
+    {
+      title: "Balance",
+      dataIndex: "balance",
+      key: "balance",
+      render: (text, record) => (
+        <div>{`₦ ${parseInt(record.balance).toLocaleString()}`}</div>
+      ),
+    },
+  ]
+  /////////////////////vtu select/////////////////////////
+
+  function handleVTUSelect(value) {
+    setVtu({
+      ...vtu,
+      vtu_id: value,
+    })
+  }
+
+  const handleVTUAssign = () => {
+    setLoading(true)
+    const vtuAssign = new Promise(res => {
+      res(Instance.post("", vtu))
+    })
+    vtuAssign.then(({ data }) => {
+      let fields = data.required_fields
+      let m = data.message
+      if (data.status === "301") {
+        setLoading(false)
+        setError(fields)
+        setTimeout(() => {
+          setError([])
+        }, 3000)
+      } else if (data.status === "200") {
+        setLoading(false)
+        setMessage(m)
+        setTimeout(() => {
+          window.location.reload()
+          setMessage("")
+        }, 3000)
+      } else {
+        setLoading(false)
+        setMessage(m)
+        setTimeout(() => {
+          setMessage("")
+        }, 3000)
+      }
+    })
+  }
+
+  // ///////////////////////confirmations ///////////////////////////////
+  function confirm(e) {
+    handleFundTransfer()
+  }
+
+  function cancel(e) {
+    console.log(e)
+    // message.error("Click on No")
+  }
 
   return (
     <DealerLayout title={title} position={["9"]}>
@@ -489,7 +660,7 @@ const SubDealer = () => {
         <Tabs defaultActiveKey="1" onTabClick={handleRetailTab}>
           <TabPane tab="Sub Dealer List" key="1">
             <div
-              className={openToken ? "hide" : "table_container"}
+              className={openToken || openToken2 ? "hide" : "table_container"}
               style={
                 TableTwo.length <= 9 ? { height: "100vh" } : { height: "auto" }
               }
@@ -522,19 +693,21 @@ const SubDealer = () => {
                     />
                   </div>
                 </div>
-                <Table
-                  columns={ColumnsTwo}
-                  dataSource={filteredItems}
-                  bordered
-                  size="small"
-                />
+                <Spin spinning={spinning} size="large" delay={0}>
+                  <Table
+                    columns={ColumnsTwo}
+                    dataSource={filteredItems}
+                    bordered
+                    size="small"
+                  />
+                </Spin>
               </div>
             </div>
             <div className={openToken ? "sendTokenContainer" : "hide"}>
               <div className="sendTokenGroup">
                 <div className="tokenTitle">
                   <h4>
-                    Assign Retailers to{" "}
+                    Send Funds to{" "}
                     <span
                       style={{
                         color: "Green",
@@ -562,29 +735,105 @@ const SubDealer = () => {
                     >
                       {message}
                     </div>
-                    <Form.Item label="Sub Dealer">
+                    <Form.Item label="AMOUNT">
                       <Input
-                        name="subdealer"
+                        name="amount"
+                        type="number"
                         placeholder="N 1000"
-                        value={name}
-                        disabled
                         onChange={handleFund}
                       />
                     </Form.Item>
-                    <Form.Item label="Retailer">
+                    {/* <Form.Item label="Select VTU">
                       <Select
                         style={{ width: "100%" }}
-                        defaultValue="Select Retailer"
-                        onChange={handleRetailer}
+                        defaultValue="Select VTU"
+                        onChange={handleAssign}
                       >
-                        {SelectRetailer.map(data => {
-                          if (data.type === "REGULAR" && data.d_id === null) {
-                            return (
-                              <Option key={data.id} value={data.id}>
-                                {data.name}
-                              </Option>
-                            )
-                          }
+                        {vtuDATA.map(data => {
+                          return (
+                            <Option key={data.id} value={data.id}>
+                              {data.name}
+                            </Option>
+                          )
+                        })}
+                      </Select>
+                    </Form.Item> */}
+                    <Form.Item label="Dealer Pin">
+                      <Input
+                        name="pin"
+                        type="password"
+                        placeholder="****"
+                        onChange={handleFund}
+                      />
+                    </Form.Item>
+                  </Form>
+                </div>
+                <div className="btnTokenGroup"></div>
+                <div className="tokenBtn">
+                  <Popconfirm
+                    title={`You are about to send the sum of ₦ ${parseInt(
+                      fund.amount
+                    ).toLocaleString()} to ${name}, please press "Yes" to confirm`}
+                    onConfirm={confirm}
+                    onCancel={cancel}
+                    okText="Yes"
+                    cancelText="No"
+                  >
+                    <Button
+                      // onClick={handleFundTransfer}
+                      loading={!loading ? false : true}
+                    >
+                      Send Fund
+                    </Button>
+                  </Popconfirm>
+                </div>
+              </div>
+            </div>
+            {/* **********************************assign vtu************************************************************** */}
+            <div className={openToken2 ? "sendTokenContainer" : "hide"}>
+              <div className="sendTokenGroup">
+                <div className="tokenTitle">
+                  <h4>
+                    Assign VTU to{" "}
+                    <span
+                      style={{
+                        color: "Green",
+                        fontWeight: "bold",
+                        fontSize: "16px",
+                      }}
+                    >
+                      {name}
+                    </span>
+                  </h4>
+                </div>
+                <div className="tokenForm">
+                  <Form layout="vertical">
+                    {error.map(data => (
+                      <div key={data} className="errors">
+                        {data}
+                      </div>
+                    ))}
+                    <div
+                      className={
+                        message === "Invalid Secret Key...Try again later!"
+                          ? "errors"
+                          : "msg"
+                      }
+                    >
+                      {message}
+                    </div>
+                    <Form.Item label="Select VTU ">
+                      <Select
+                        style={{ width: "100%" }}
+                        defaultValue="Select Wallet"
+                        onChange={handleVTUSelect}
+                      >
+                        {vtuDATA.map(data => {
+                          return (
+                            <Option key={data.id} value={data.id}>
+                              {data.name}
+                            </Option>
+                          )
                         })}
                       </Select>
                     </Form.Item>
@@ -593,7 +842,7 @@ const SubDealer = () => {
                 <div className="btnTokenGroup"></div>
                 <div className="tokenBtn">
                   <Button
-                    onClick={handleRetailerSubmit}
+                    onClick={handleVTUAssign}
                     loading={!loading ? false : true}
                   >
                     Assign
@@ -602,10 +851,10 @@ const SubDealer = () => {
               </div>
             </div>
           </TabPane>
-          <TabPane tab="Add Retailer" key="2">
+          <TabPane tab="Add Sub-Dealer" key="2">
             <div className="formContainer">
               <div className="formTitle">
-                <p>Add Retailer</p>
+                <p>Add Sub-Dealer</p>
               </div>
               <div className="formGroup">
                 <div className="adminForm">
@@ -626,21 +875,23 @@ const SubDealer = () => {
                   <div className="formInput VTUInput">
                     <label htmlFor="name">Name</label>
                     <Input
-                      placeholder="Enter Full Name"
+                      placeholder="Enter Name"
                       name="name"
-                      onChange={handleRetailChange}
+                      onChange={handleSubDealerAdd}
                     />
                   </div>
                   <div className="formInput VTUInput">
-                    <label htmlFor="type">Type</label>
-                    <Select
-                      style={{ width: "100%" }}
-                      defaultValue="Select Type"
-                      onChange={handleRetailer}
-                    >
-                      <Option value="REGULAR">REGULAR</Option>
-                      <Option value="SUB DEALER">SUB DEALER</Option>
-                    </Select>
+                    <label htmlFor="name">Number</label>
+                    <Tooltip placement="topLeft" title="please start with 234">
+                      <Input
+                        maxLength={13}
+                        minLength={13}
+                        placeholder="23480********"
+                        name="phone"
+                        onChange={handleSubDealerAdd}
+                        type="tel"
+                      />
+                    </Tooltip>
                   </div>
 
                   <div className="formInput VTUInput">
@@ -649,7 +900,7 @@ const SubDealer = () => {
                       type="password"
                       placeholder="****"
                       name="pin"
-                      onChange={handleRetailChange}
+                      onChange={handleSubDealerAdd}
                     />
                   </div>
                 </div>
@@ -666,87 +917,26 @@ const SubDealer = () => {
               </div>
             </div>
           </TabPane>
-          <TabPane tab="Activate USSD" key="3">
-            <div className="formContainer">
-              <div className="formTitle">
-                <p>Activate USSD</p>
-              </div>
-              <div className="formGroup">
-                <div className="adminForm">
-                  {error.map(data => (
-                    <div key={data} className="errors">
-                      {data}
-                    </div>
-                  ))}
-                  <div
-                    className={
-                      messageAct === "Invalid Secret Key...Try again later!"
-                        ? "errors"
-                        : "msg"
-                    }
-                  >
-                    {messageAct}
-                  </div>
-                  <div className="formInput VTUInput">
-                    <label htmlFor="name">Username</label>
-                    <Input
-                      placeholder="Enter Username e.g. 123434"
-                      name="username"
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className="formInput VTUInput">
-                    <label htmlFor="name">Number</label>
-                    <Input
-                      placeholder="23480********"
-                      name="phone"
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="formInput VTUInput">
-                    <label htmlFor="name">Name</label>
-                    <Input
-                      placeholder="Enter User's Name"
-                      name="name"
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="formInput VTUInput">
-                    <label htmlFor="name">Type</label>
-                    <Select
-                      style={{ width: "100%" }}
-                      defaultValue="Select Type"
-                      onChange={handleType}
-                    >
-                      <Option value="REGULAR">REGULAR</Option>
-                      <Option value="SUB DEALER">SUB DEALER</Option>
-                    </Select>
-                  </div>
-                  <div className="formInput VTUInput">
-                    <label htmlFor="pin">Dealer Pin</label>
-                    <Input
-                      placeholder="****"
-                      name="pin"
-                      onChange={handleChange}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="adminFormBtn">
-                <div className="btngroup">
-                  <Button
-                    onClick={handleVTUSubmit}
-                    loading={!loading ? false : true}
-                  >
-                    Submit
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </TabPane>
         </Tabs>
       </div>
+      <Modal
+        title={`${name}'s Wallet`}
+        visible={visible}
+        onOk={() => {
+          setVisible(false)
+        }}
+        onCancel={() => {
+          setVisible(false)
+          setWalletData([])
+        }}
+      >
+        <Table
+          columns={WalletColums}
+          dataSource={walletData}
+          bordered
+          size="small"
+        />
+      </Modal>
     </DealerLayout>
   )
 }

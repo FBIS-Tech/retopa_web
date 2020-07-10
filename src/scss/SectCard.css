@@ -1,6 +1,5 @@
 .sect_card_container {
-  max-width: 300px;
-  max-height: 357px;
+  max-width: 100%;
   margin: auto;
   margin-bottom: 20px;
 }
@@ -66,6 +65,7 @@
 @media (min-width: 768px) {
   .sect_card_container {
     margin: 20px 0;
+    max-width: 32%;
   }
 }
 /*# sourceMappingURL=SectCard.css.map */
