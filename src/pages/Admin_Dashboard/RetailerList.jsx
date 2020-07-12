@@ -108,6 +108,7 @@ const Home = () => {
       username: dets[0],
       password: dets[1],
       user_id: value,
+      filter: "filter",
     }
     const list = new Promise(res => {
       res(AdminInstance.post("", RetailerReqst))
@@ -222,17 +223,18 @@ const Home = () => {
 
   //**query by date */
   function onChange(value, dateString) {
-    setLoading(true)
+    // setLoading(true)
     let selectedDate = dateString
 
     // total USSD
     const ussdReqst = {
-      serviceCode: "SEARCH_tp",
+      serviceCode: "RTL",
       username: dets[0],
       password: dets[1],
-      tp_id,
-      from_date: selectedDate[0],
-      to_date: selectedDate[1],
+      user_id: tp_id,
+      filter: "filter",
+      start: selectedDate[0],
+      end: selectedDate[1],
     }
 
     const USSD = new Promise(res => {
@@ -240,6 +242,8 @@ const Home = () => {
     })
     USSD.then(({ data }) => {
       setLoading(false)
+      console.log(data)
+      return
       setUssdData(data.ussd_details)
       setUssd(`₦ ${data.total_vtu.toLocaleString()}`)
       setDataData(data.data_details)
@@ -297,18 +301,18 @@ const Home = () => {
                   })}
                 </Select>
               </div>
-              {/* <h4
+              <h4
                 style={{ margin: "0px", color: "#227f00" }}
                 className={loading ? "" : "hide"}
               >
                 Loading...
-              </h4> */}
-              {/* <div className="selected">
+              </h4>
+              <div className="selected">
                 <label style={{ color: "#227f00", display: "block" }}>
                   Query Transaction by Date:
                 </label>
                 <RangePicker showTime onChange={onChange} />
-              </div> */}
+              </div>
             </div>
           </div>
           <div className="activity_container">
