@@ -83,7 +83,6 @@ const RetailerSingleHistory = () => {
       res(AdminInstance.post("", VTU))
     })
     requestVtu.then(({ data }) => {
-      console.log(data)
       if (data.status === "200") {
         setSpinning(false)
         setVtuHistory(data.transaction)
@@ -91,23 +90,21 @@ const RetailerSingleHistory = () => {
     })
   }, [])
 
-  const openModal = (tp_id, r_id) => {
+  const openModal = () => {
     setSpinning(true)
     const query = {
       serviceCode: "RTLT",
-      tp_id,
-      r_id,
+      tp_id: retailer.tp_id,
+      r_id: retailer.r_id,
       username: dets[0],
       password: dets[1],
       start: retailer.start,
       end: retailer.end,
     }
-    console.log(query)
     const log = new Promise(res => {
       res(AdminInstance.post("", query))
     })
     log.then(({ data }) => {
-      console.log(data)
       if (data.status === "200") {
         setSpinning(false)
         setVisible(true)
@@ -127,24 +124,24 @@ const RetailerSingleHistory = () => {
       dataIndex: "date(created_at)",
       key: "date(created_at)",
     },
-    {
-      title: "Action",
-      dataIndex: "ussd_status",
-      key: "ussd_status",
+    // {
+    //   title: "Action",
+    //   dataIndex: "ussd_status",
+    //   key: "ussd_status",
 
-      render: (text, record) => (
-        <a
-          id={record.r_id}
-          title={record.phone}
-          className="enabledLog"
-          onClick={() => {
-            openModal(record.tp_id, record.r_id)
-          }}
-        >
-          View More
-        </a>
-      ),
-    },
+    //   render: (text, record) => (
+    //     <a
+    //       id={record.r_id}
+    //       title={record.phone}
+    //       className="enabledLog"
+    //       onClick={() => {
+    //         openModal(record.tp_id, record.r_id)
+    //       }}
+    //     >
+    //       View More
+    //     </a>
+    //   ),
+    // },
   ]
   const HistoryColumn2 = [
     {
@@ -225,17 +222,27 @@ const RetailerSingleHistory = () => {
             <div style={{ color: "green", fontSize: "24px" }}>
               Total Transaction: ₦ {parseInt(`${Total}`).toLocaleString()}
             </div>
-            <Button style={{ backgroundColor: "green" }}>
-              <CSVLink
-                data={VtuHistory}
-                filename={"Retailer's log.csv"}
-                headers={headers}
-                className="btn btn-success"
-                style={{ color: "white" }}
+            <div>
+              <Button style={{ backgroundColor: "green", marginRight: "10px" }}>
+                <CSVLink
+                  data={VtuHistory}
+                  filename={"Retailer's log.csv"}
+                  headers={headers}
+                  className="btn btn-success"
+                  style={{ color: "white" }}
+                >
+                  Export to CSV
+                </CSVLink>
+              </Button>
+              <Button
+                style={{ backgroundColor: "green", color: "#fff" }}
+                onClick={() => {
+                  openModal()
+                }}
               >
-                Export to CSV
-              </CSVLink>
-            </Button>
+                View Detail Log
+              </Button>
+            </div>
           </div>
 
           <Tabs defaultActiveKey="1">

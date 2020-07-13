@@ -126,7 +126,7 @@ const Home = () => {
 
   const handletp = value => {
     setRetailer([])
-    setTp_id(value)
+    // setTp_id(value)
     setDealer(value)
     setLoading(true)
 
@@ -297,7 +297,13 @@ const Home = () => {
                 >
                   {tps.map(data => {
                     return (
-                      <Option key={data.vendor_name} value={data.mtn_tp_code}>
+                      <Option
+                        key={data.vendor_name}
+                        value={data.mtn_tp_code}
+                        onClick={() => {
+                          setTp_id(data.id)
+                        }}
+                      >
                         {data.name}-{data.mtn_tp_code}
                       </Option>
                     )
