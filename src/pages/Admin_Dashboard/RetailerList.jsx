@@ -36,12 +36,19 @@ const Home = () => {
   const [voucherData, setVoucherData] = useState([])
   const [type, setType] = useState("")
   const [tps, setTps] = useState([])
-  const [date, setDate] = useState([])
+  const [start, setStart] = useState("")
+  const [end, setEnd] = useState("")
   const [dets, setDets] = useState([])
   const [tp_id, setTp_id] = useState("")
+  const [dealer, setDealer] = useState("")
   const [loading, setLoading] = useState(false)
   const [adminType, setAdminType] = useState("")
   const [month, setMonth] = useState([])
+  const [filteredInfo, setFilteredInfo] = useState(null)
+  const [sortedInfo, setSortedInfo] = useState({
+    order: "descend",
+    columnKey: "ussd_status",
+  })
   const [todayy, setToday] = useState([])
 
   const dispatch = useDispatch()
@@ -89,12 +96,38 @@ const Home = () => {
       })
 
       setType("Admin")
+
+      var date = new Date(),
+        y = date.getFullYear(),
+        m = date.getMonth()
+      var firstDay = new Date(y, m, 1)
+      var lastDay = new Date(y, m + 1, 0)
+
+      setStart(moment(firstDay).format())
+      setEnd(moment(lastDay).format())
+
+      const retailers = {
+        serviceCode: "AADD",
+        username: usernameA,
+        password: passwordA,
+        start: moment(firstDay).format(),
+        end: moment(lastDay).format(),
+      }
+      const retail = new Promise(res => {
+        res(AdminInstance.post("", retailers))
+      })
+      retail.then(({ data }) => {
+        setRetailer(data.transaction)
+
+        setLoading(false)
+      })
     }
   }, [])
 
   const handletp = value => {
     setRetailer([])
     setTp_id(value)
+    setDealer(value)
     setLoading(true)
 
     var date = new Date(),
@@ -104,18 +137,20 @@ const Home = () => {
     var lastDay = new Date(y, m + 1, 0)
     // total USSD
     const RetailerReqst = {
-      serviceCode: "RTL",
+      serviceCode: "AADD",
       username: dets[0],
       password: dets[1],
-      user_id: value,
-      filter: "filter",
+      dealer: value,
+      start: start,
+      end: end,
     }
+
     const list = new Promise(res => {
       res(AdminInstance.post("", RetailerReqst))
     })
     list.then(({ data }) => {
       if (data.status === "200") {
-        setRetailer(data.retailer)
+        setRetailer(data.transaction)
         setLoading(false)
       } else {
         setLoading(false)
@@ -130,61 +165,35 @@ const Home = () => {
   //**retailer table column */
   const ColumnsTwo = [
     {
-      title: "POS Username",
-      dataIndex: "username",
-      key: "username",
+      title: "TRANSACTION_DATE",
+      dataIndex: "created_at",
+      key: "created_at",
+    },
+    {
+      title: "RETAILER_MSISDN",
+      dataIndex: "phone",
+      key: "phone",
+    },
+    {
+      title: "DEALER_CODE",
+      dataIndex: "mtn_tp_code",
+      key: "mtn_tp_code",
 
       // render: text => <a>{text}</a>,
     },
     {
-      title: "Retailer Name",
-      dataIndex: "name",
-      key: "name",
-    },
-
-    {
-      title: "Retailer Number",
-      dataIndex: "phone",
-      key: "phone",
-    },
-
-    {
-      title: "Retail Code",
-      dataIndex: "code",
-      key: "code",
-      render: (text, record) => (
-        <div>
-          {record.tp_no}
-          {record.code}
-        </div>
-      ),
-
-      // align: "right",
-    },
-
-    {
-      title: "USSD Status",
-      dataIndex: "ussd_status",
-      key: "ussd_status",
-
-      render: text =>
-        text === 1 ? (
-          <p className="enabled">
-            <Green className="dotPosition" />
-            Active
-          </p>
-        ) : (
-          <p className="disabled">
-            <Red className="dotPosition" />
-            Inactive
-          </p>
-        ),
+      title: "TRANSACTION_AMOUNT",
+      dataIndex: "total_sales",
+      key: "total_sales",
+      // render: text => <a>{text}</a>,
     },
     {
-      title: "Date Created/Time",
-      dataIndex: "created_at",
-      key: "created_at",
+      title: "TRANSACTION_TYPE",
+      dataIndex: "total_sales",
+      key: "total_sales",
+      render: text => <p style={{ margin: 0, padding: 0 }}>Retopa Airtime</p>,
     },
+
     {
       title: "Action",
       dataIndex: "ussd_status",
@@ -213,26 +222,25 @@ const Home = () => {
 
   ///////////export to csv///////////////////////////////////////////////////
   const headers = [
-    { label: "Pos Username", key: "username" },
-    { label: "Retailer Name", key: "name" },
-    { label: "Retailer Number", key: "type" },
-    { label: "Retailer Number", key: "phone" },
-    { label: "Retailer Code", key: "code" },
-    { label: "Date Created/Time", key: "created_at" },
+    { label: "TRANSACTION_DATE", key: "created_at" },
+    { label: "RETAILER_MSISDN", key: "PHONE" },
+    { label: "DEALER_CODE", key: "mtn_tp_code" },
+    { label: "TRANSACTION_AMOUNT", key: "total_sales" },
   ]
 
   //**query by date */
-  function onChange(value, dateString) {
-    // setLoading(true)
-    let selectedDate = dateString
+  const onChange = async (value, dateString) => {
+    setLoading(true)
 
+    let selectedDate = dateString
+    await setStart(selectedDate[0])
+    await setEnd(selectedDate[1])
     // total USSD
     const ussdReqst = {
-      serviceCode: "RTL",
+      serviceCode: "AADD",
       username: dets[0],
       password: dets[1],
-      user_id: tp_id,
-      filter: "filter",
+      dealer: dealer,
       start: selectedDate[0],
       end: selectedDate[1],
     }
@@ -242,16 +250,7 @@ const Home = () => {
     })
     USSD.then(({ data }) => {
       setLoading(false)
-      console.log(data)
-      return
-      setUssdData(data.ussd_details)
-      setUssd(`₦ ${data.total_vtu.toLocaleString()}`)
-      setDataData(data.data_details)
-      setData(`₦ ${data.total_data.toLocaleString()}`)
-      setVoucher(`₦ ${data.totalVoucher.toLocaleString()}`)
-      setVoucherData(data.voucher_details)
-      setVtu(`₦ ${data.total_vtu.toLocaleString()}`)
-      setVtuData(data.vtu_details)
+      setRetailer(data.transaction)
     })
   }
 
@@ -294,7 +293,7 @@ const Home = () => {
                 >
                   {tps.map(data => {
                     return (
-                      <Option key={data.vendor_name} value={data.id}>
+                      <Option key={data.vendor_name} value={data.mtn_tp_code}>
                         {data.name}-{data.mtn_tp_code}
                       </Option>
                     )
