@@ -68,12 +68,14 @@ const RetailerSingleHistory = () => {
     }, 10000)
     ////////////log history/////////////////
     const VTU = {
-      serviceCode: "RTLT",
-      tp_id: retailer.tp_id,
+      serviceCode: "AABB",
+      retailer: retailer.r_id,
       username: usernameA,
       password: passwordA,
-      r_id: retailer.user_id,
+      start: retailer.start,
+      end: retailer.end,
     }
+    console.log(VTU)
     const requestVtu = new Promise(res => {
       res(AdminInstance.post("", VTU))
     })
@@ -87,38 +89,14 @@ const RetailerSingleHistory = () => {
   }, [])
   const HistoryColumn = [
     {
-      title: "Amount",
-      dataIndex: "amount",
-      key: "amount",
+      title: "TRANSACTION AMOUNT",
+      dataIndex: "total_sales",
+      key: "total_sales",
     },
     {
-      title: "Phone Number",
-      dataIndex: "loaded",
-      key: "loaded",
-    },
-    {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
-
-      render: text =>
-        text === 1 ? (
-          <p className="enabled">
-            <Green className="dotPosition" />
-            Successful
-          </p>
-        ) : (
-          <p className="disabled">
-            <Red className="dotPosition" />
-            Failed
-          </p>
-        ),
-    },
-
-    {
-      title: "Date Created/Time",
-      dataIndex: "created_at",
-      key: "created_at",
+      title: "TRANSACTION DATE",
+      dataIndex: "date(created_at)",
+      key: "date(created_at)",
     },
   ]
 
@@ -129,16 +107,14 @@ const RetailerSingleHistory = () => {
     </h4>
   )
   const headers = [
-    { label: "Amount", key: "amount" },
-    { label: "Phone Number", key: "phone" },
-    { label: "Status", key: "status" },
-    { label: "Date Created/Time", key: "created_at" },
+    { label: "TRANSACTION AMOUNT", key: "total_sales" },
+    { label: "TRANSACTION DATE", key: "date(created_at)" },
   ]
 
   const Vtu = []
 
   const Total = VtuHistory.reduce(
-    (prev, cur) => prev + Number(`${cur.amount}`),
+    (prev, cur) => prev + Number(`${cur.total_sales}`),
     0
   )
 

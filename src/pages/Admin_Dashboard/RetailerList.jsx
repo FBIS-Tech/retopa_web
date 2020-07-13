@@ -150,6 +150,7 @@ const Home = () => {
     })
     list.then(({ data }) => {
       if (data.status === "200") {
+        console.log(data)
         setRetailer(data.transaction)
         setLoading(false)
       } else {
@@ -164,11 +165,11 @@ const Home = () => {
 
   //**retailer table column */
   const ColumnsTwo = [
-    {
-      title: "TRANSACTION_DATE",
-      dataIndex: "created_at",
-      key: "created_at",
-    },
+    // {
+    //   title: "TRANSACTION_DATE",
+    //   dataIndex: "created_at",
+    //   key: "created_at",
+    // },
     {
       title: "RETAILER_MSISDN",
       dataIndex: "phone",
@@ -201,14 +202,15 @@ const Home = () => {
 
       render: (text, record) => (
         <a
-          id={record.id}
-          title={record.name}
+          id={record.r_id}
+          title={record.phone}
           className="enabledLog"
           onClick={e => {
             let details = {
-              user_id: e.currentTarget.id,
+              r_id: e.currentTarget.id,
               name: e.currentTarget.title,
-              tp_id,
+              start: start,
+              end: end,
             }
             dispatch(retailerDetails(details))
             navigate(`/Admin_Dashboard/RetailerHistory`)
@@ -222,7 +224,7 @@ const Home = () => {
 
   ///////////export to csv///////////////////////////////////////////////////
   const headers = [
-    { label: "TRANSACTION_DATE", key: "created_at" },
+    // { label: "TRANSACTION_DATE", key: "created_at" },
     { label: "RETAILER_MSISDN", key: "PHONE" },
     { label: "DEALER_CODE", key: "mtn_tp_code" },
     { label: "TRANSACTION_AMOUNT", key: "total_sales" },
@@ -249,6 +251,7 @@ const Home = () => {
       res(AdminInstance.post("", ussdReqst))
     })
     USSD.then(({ data }) => {
+      console.log(data)
       setLoading(false)
       setRetailer(data.transaction)
     })
