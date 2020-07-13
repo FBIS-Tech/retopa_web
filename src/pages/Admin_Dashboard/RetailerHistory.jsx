@@ -8,6 +8,7 @@ import {
   Tabs,
   Button,
   Spin,
+  Modal,
 } from "antd"
 import "../../scss/Table.scss"
 import "../../scss/Retailer.scss"
@@ -30,16 +31,18 @@ const RetailerSingleHistory = () => {
   const [DataHistory, setDataHistory] = useState([])
   const [AwufHistory, setAwufHistory] = useState([])
   const [VtuHistory, setVtuHistory] = useState([])
+  const [VtuHistory2, setVtuHistory2] = useState([])
   const [historyCredit, setHistoryDebit] = useState([])
   const [usernameH, setUsernameH] = useState([])
   const [filteredCredit, setFilteredCredit] = useState("")
   const [filteredDebit, setFilteredDebit] = useState("")
   const [spinning, setSpinning] = useState(true)
   const [dets, setDets] = useState([])
+  const [visible, setVisible] = useState(false)
 
   const [adminType, setAdminType] = useState("")
   const { retailer } = useSelector(state => state)
-  console.log(retailer)
+
   useEffect(() => {
     let onLogged = sessionStorage.getItem("persist:root")
       ? JSON.parse(sessionStorage.getItem("persist:root"))
@@ -76,7 +79,6 @@ const RetailerSingleHistory = () => {
       start: retailer.start,
       end: retailer.end,
     }
-    console.log(VTU)
     const requestVtu = new Promise(res => {
       res(AdminInstance.post("", VTU))
     })
@@ -88,6 +90,32 @@ const RetailerSingleHistory = () => {
       }
     })
   }, [])
+
+  const openModal = (tp_id, r_id) => {
+    setSpinning(true)
+    const query = {
+      serviceCode: "RTLT",
+      tp_id,
+      r_id,
+      username: dets[0],
+      password: dets[1],
+      start: retailer.start,
+      end: retailer.end,
+    }
+    console.log(query)
+    const log = new Promise(res => {
+      res(AdminInstance.post("", query))
+    })
+    log.then(({ data }) => {
+      console.log(data)
+      if (data.status === "200") {
+        setSpinning(false)
+        setVisible(true)
+        setVtuHistory2(data.transaction)
+      }
+    })
+  }
+
   const HistoryColumn = [
     {
       title: "TRANSACTION AMOUNT",
@@ -109,13 +137,65 @@ const RetailerSingleHistory = () => {
           id={record.r_id}
           title={record.phone}
           className="enabledLog"
-          // onClick={openModal}
+          onClick={() => {
+            openModal(record.tp_id, record.r_id)
+          }}
         >
-          View Log
+          View More
         </a>
       ),
     },
   ]
+  const HistoryColumn2 = [
+    {
+      title: "Amount",
+      dataIndex: "amount",
+      key: "amount",
+    },
+    {
+      title: "Phone Number",
+      dataIndex: "loaded",
+      key: "loaded",
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      render: text =>
+        text === 1 ? (
+          <p className="enabled">
+            <Green className="dotPosition" />
+            Successful
+          </p>
+        ) : (
+          <p className="disabled">
+            <Red className="dotPosition" />
+            Failed
+          </p>
+        ),
+    },
+    {
+      title: "Date Created/Time",
+      dataIndex: "created_at",
+      key: "created_at",
+    },
+  ]
+
+  // amount: "200.00"
+  // batch_id: null
+  // code: "254466"
+  // created_at: "2020-07-10 20:36:37"
+  // id: 18305
+  // loaded: "2348167760564"
+  // name: "Fusaha Ventures LTD"
+  // r_id: 89
+  // requested: "2348167760564"
+  // retailerName: "salmanu saeed"
+  // status: 1
+  // tp_id: 16
+  // type: 0
+  // updated_at: "2020-07-10 20:36:39"
+  // vend_type: null
 
   const title = (
     <h4>
@@ -184,6 +264,28 @@ const RetailerSingleHistory = () => {
           </Tabs>
         </div>
       </div>
+      <Modal
+        title="Log"
+        visible={visible}
+        onOk={() => {
+          setVisible(false)
+        }}
+        onCancel={() => {
+          setVisible(false)
+        }}
+      >
+        <div className="table_Group">
+          {/* <div className="table_header"></div> */}
+          <Spin spinning={spinning} size="large" delay={0}>
+            <Table
+              columns={HistoryColumn2}
+              dataSource={VtuHistory2}
+              bordered
+              size="small"
+            />
+          </Spin>
+        </div>
+      </Modal>
     </AdminLayout>
   )
 }
