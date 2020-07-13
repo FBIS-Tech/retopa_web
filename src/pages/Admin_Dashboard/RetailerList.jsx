@@ -117,6 +117,7 @@ const Home = () => {
         res(AdminInstance.post("", retailers))
       })
       retail.then(({ data }) => {
+        console.log(data)
         setRetailer(data.transaction)
 
         setLoading(false)
@@ -192,7 +193,7 @@ const Home = () => {
       title: "TRANSACTION_TYPE",
       dataIndex: "total_sales",
       key: "total_sales",
-      render: text => <p style={{ margin: 0, padding: 0 }}>Retopa Airtime</p>,
+      render: text => <p style={{ margin: 0, padding: 0 }}>Rtc Airtime</p>,
     },
 
     {
@@ -226,7 +227,7 @@ const Home = () => {
   ///////////export to csv///////////////////////////////////////////////////
   const headers = [
     // { label: "TRANSACTION_DATE", key: "created_at" },
-    { label: "RETAILER_MSISDN", key: "PHONE" },
+    { label: "RETAILER_MSISDN", key: "phone" },
     { label: "DEALER_CODE", key: "mtn_tp_code" },
     { label: "TRANSACTION_AMOUNT", key: "total_sales" },
   ]
