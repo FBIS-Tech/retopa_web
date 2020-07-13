@@ -235,8 +235,8 @@ const Home = () => {
     setLoading(true)
 
     let selectedDate = dateString
-    await setStart(selectedDate[0])
-    await setEnd(selectedDate[1])
+    setStart(selectedDate[0])
+    setEnd(selectedDate[1])
     // total USSD
     const ussdReqst = {
       serviceCode: "AADD",
