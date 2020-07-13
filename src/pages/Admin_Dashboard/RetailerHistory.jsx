@@ -181,21 +181,12 @@ const RetailerSingleHistory = () => {
     },
   ]
 
-  // amount: "200.00"
-  // batch_id: null
-  // code: "254466"
-  // created_at: "2020-07-10 20:36:37"
-  // id: 18305
-  // loaded: "2348167760564"
-  // name: "Fusaha Ventures LTD"
-  // r_id: 89
-  // requested: "2348167760564"
-  // retailerName: "salmanu saeed"
-  // status: 1
-  // tp_id: 16
-  // type: 0
-  // updated_at: "2020-07-10 20:36:39"
-  // vend_type: null
+  const headers1 = [
+    { label: "Amount", key: "amount" },
+    { label: "Phone Number", key: "phone" },
+    { label: "Status", key: "status" },
+    { label: "Date Created/Time", key: "created_at" },
+  ]
 
   const title = (
     <h4>
@@ -274,6 +265,17 @@ const RetailerSingleHistory = () => {
           setVisible(false)
         }}
       >
+        <Button style={{ backgroundColor: "green" }}>
+          <CSVLink
+            data={VtuHistory}
+            filename={"Retailer's log.csv"}
+            headers={headers1}
+            className="btn btn-success"
+            style={{ color: "white" }}
+          >
+            Export to CSV
+          </CSVLink>
+        </Button>
         <div className="table_Group">
           {/* <div className="table_header"></div> */}
           <Spin spinning={spinning} size="large" delay={0}>
