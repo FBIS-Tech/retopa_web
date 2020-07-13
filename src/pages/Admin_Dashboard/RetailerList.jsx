@@ -211,6 +211,7 @@ const Home = () => {
               name: e.currentTarget.title,
               start: start,
               end: end,
+              tp_id,
             }
             dispatch(retailerDetails(details))
             navigate(`/Admin_Dashboard/RetailerHistory`)

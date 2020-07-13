@@ -39,6 +39,7 @@ const RetailerSingleHistory = () => {
 
   const [adminType, setAdminType] = useState("")
   const { retailer } = useSelector(state => state)
+  console.log(retailer)
   useEffect(() => {
     let onLogged = sessionStorage.getItem("persist:root")
       ? JSON.parse(sessionStorage.getItem("persist:root"))
@@ -97,6 +98,22 @@ const RetailerSingleHistory = () => {
       title: "TRANSACTION DATE",
       dataIndex: "date(created_at)",
       key: "date(created_at)",
+    },
+    {
+      title: "Action",
+      dataIndex: "ussd_status",
+      key: "ussd_status",
+
+      render: (text, record) => (
+        <a
+          id={record.r_id}
+          title={record.phone}
+          className="enabledLog"
+          // onClick={openModal}
+        >
+          View Log
+        </a>
+      ),
     },
   ]
 
