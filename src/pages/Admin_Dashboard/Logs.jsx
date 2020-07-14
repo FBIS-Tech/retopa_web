@@ -454,9 +454,9 @@ const Log = () => {
               {view && (
                 <Button>
                   <CSVLink
-                    data={retailer}
-                    filename={"Retailers.csv"}
-                    headers={headers}
+                    data={log}
+                    filename={"log.csv"}
+                    headers={headers1}
                     style={{ color: "white" }}
                   >
                     Export to CSV
@@ -466,7 +466,7 @@ const Log = () => {
               {!view && (
                 <Button>
                   <CSVLink
-                    data={retailer}
+                    data={log}
                     filename={"Log.csv"}
                     headers={headers1}
                     style={{ color: "white" }}
