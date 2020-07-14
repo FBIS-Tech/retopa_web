@@ -125,24 +125,24 @@ const RetailerSingleHistory = () => {
       dataIndex: "date(created_at)",
       key: "date(created_at)",
     },
-    {
-      title: "Action",
-      dataIndex: "ussd_status",
-      key: "ussd_status",
+    // {
+    //   title: "Action",
+    //   dataIndex: "ussd_status",
+    //   key: "ussd_status",
 
-      render: (text, record) => (
-        <a
-          id={record.r_id}
-          title={record.phone}
-          className="enabledLog"
-          onClick={() => {
-            openModal(record.date(created_at))
-          }}
-        >
-          View More
-        </a>
-      ),
-    },
+    //   render: (text, record) => (
+    //     <a
+    //       id={record.r_id}
+    //       title={record.phone}
+    //       className="enabledLog"
+    //       onClick={() => {
+    //         // openModal(record.date(created_at))
+    //       }}
+    //     >
+    //       View More
+    //     </a>
+    //   ),
+    // },
   ]
   const HistoryColumn2 = [
     {
