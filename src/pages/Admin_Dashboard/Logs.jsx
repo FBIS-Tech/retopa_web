@@ -444,7 +444,7 @@ const Log = () => {
                 <label style={{ color: "#227f00", display: "block" }}>
                   Query Transaction by Date:
                 </label>
-                <RangePicker showTime onChange={onChange} />
+                <RangePicker showTime={false} onChange={onChange} />
               </div>
             </div>
           </div>
