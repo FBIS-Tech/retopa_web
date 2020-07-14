@@ -171,6 +171,16 @@ const AdminLayout = ({
           )}
 
           <Menu.Item
+            key="20"
+            onClick={() => {
+              navigate("/Admin_Dashboard/Logs")
+            }}
+            className={type === "finance" ? "" : "hide "}
+          >
+            <Dash_voucher_icon />
+            <span className="nav-text">Logs</span>
+          </Menu.Item>
+          <Menu.Item
             key="2"
             onClick={() => {
               navigate("/Admin_Dashboard/Retailers")

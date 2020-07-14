@@ -23,7 +23,7 @@ import Red from "../../../assets/red.svg"
 const { RangePicker } = DatePicker
 const { Option } = Select
 const { TabPane } = Tabs
-const Home = () => {
+const Log = () => {
   const [retailer, setRetailer] = useState([])
   const [vtu, setVtu] = useState("0")
   const [vtuData, setVtuData] = useState([])
@@ -45,10 +45,7 @@ const Home = () => {
   const [adminType, setAdminType] = useState("")
   const [month, setMonth] = useState([])
   const [filteredInfo, setFilteredInfo] = useState(null)
-  const [sortedInfo, setSortedInfo] = useState({
-    order: "descend",
-    columnKey: "ussd_status",
-  })
+  const [view, setView] = useState(false)
   const [todayy, setToday] = useState([])
 
   const dispatch = useDispatch()
@@ -97,7 +94,6 @@ const Home = () => {
       })
 
       setType("Admin")
-
       var date = new Date(),
         y = date.getFullYear(),
         m = date.getMonth()
@@ -122,37 +118,38 @@ const Home = () => {
         res(AdminInstance.post("", retailers))
       })
       retail.then(({ data }) => {
-        console.log(data)
         setRetailer(data.transaction)
-        setLoading(false)
       })
 
       //**raw log */
-      // const raw = {
-      //   serviceCode: "XXL",
-      //   username: usernameA,
-      //   password: passwordA,
-      // }
-      // console.log(raw)
-      // const logs = new Promise(res => {
-      //   res(AdminInstance.post("", raw))
-      // })
-      // logs.then(({ data }) => {
-      //   console.log(data)
-      //   setLog(data.transaction)
-      //   setLoading(false)
-      // })
+      const raw = {
+        serviceCode: "XXL",
+        username: usernameA,
+        password: passwordA,
+        start: moment(today).format(),
+        end: moment(today).format(),
+        filter: "filter",
+      }
+      const logs = new Promise(res => {
+        res(AdminInstance.post("", raw))
+      })
+      logs.then(({ data }) => {
+        setLog(data.transaction)
+        setLoading(false)
+      })
     }
   }, [])
 
   const handletp = value => {
-    setRetailer([])
-    // setTp_id(value)
-    setDealer(value)
-    setLoading(true)
-    if (value === "all") {
-      window.location.reload()
+    if (value == "all") {
+      setView(false)
     } else {
+      setView(true)
+      setRetailer([])
+
+      setDealer(value)
+      setLoading(true)
+
       var date = new Date(),
         y = date.getFullYear(),
         m = date.getMonth()
@@ -173,7 +170,6 @@ const Home = () => {
       })
       list.then(({ data }) => {
         if (data.status === "200") {
-          console.log(data)
           setRetailer(data.transaction)
           setLoading(false)
         } else {
@@ -189,11 +185,11 @@ const Home = () => {
 
   //**retailer table column */
   const ColumnsTwo = [
-    {
-      title: "TRANSACTION_DATE",
-      dataIndex: "date(ussd_transactions.created_at)",
-      key: "date(ussd_transactions.created_at)",
-    },
+    // {
+    //   title: "TRANSACTION_DATE",
+    //   dataIndex: "created_at",
+    //   key: "created_at",
+    // },
     {
       title: "RETAILER_MSISDN",
       dataIndex: "phone",
@@ -263,11 +259,6 @@ const Home = () => {
       key: "mtn_tp_code",
     },
     {
-      title: "DEALER",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
       title: "TRANSACTION_AMOUNT",
       dataIndex: "amount",
       key: "amount",
@@ -314,6 +305,13 @@ const Home = () => {
     { label: "DEALER_CODE", key: "mtn_tp_code" },
     { label: "TRANSACTION_AMOUNT", key: "total_sales" },
   ]
+  const headers1 = [
+    { label: "TRANSACTION_DATE", key: "created_at" },
+    { label: "RETAILER_MSISDN", key: "phone" },
+    { label: "DEALER_CODE", key: "mtn_tp_code" },
+    { label: "TRANSACTION_AMOUNT", key: "amount" },
+    { label: "TRANSACTION_TYPE", key: "description" },
+  ]
 
   //**query by date */
   const onChange = async (value, dateString) => {
@@ -323,7 +321,24 @@ const Home = () => {
     setEnd(selectedDate[1])
     // total USSD
 
-    if (dealer === "") {
+    if (!view) {
+      const ussdReqst = {
+        serviceCode: "XXL",
+        username: dets[0],
+        password: dets[1],
+        start: selectedDate[0],
+        end: selectedDate[1],
+        filter: "filter",
+      }
+
+      const USSD = new Promise(res => {
+        res(AdminInstance.post("", ussdReqst))
+      })
+      USSD.then(({ data }) => {
+        setLoading(false)
+        setLog(data.transaction)
+      })
+    } else if (dealer === "") {
       const ussdReqst = {
         serviceCode: "AADD",
         username: dets[0],
@@ -336,7 +351,6 @@ const Home = () => {
         res(AdminInstance.post("", ussdReqst))
       })
       USSD.then(({ data }) => {
-        console.log(data)
         setLoading(false)
         setRetailer(data.transaction)
       })
@@ -354,7 +368,6 @@ const Home = () => {
         res(AdminInstance.post("", ussdReqst))
       })
       USSD.then(({ data }) => {
-        console.log(data)
         setLoading(false)
         setRetailer(data.transaction)
       })
@@ -382,7 +395,7 @@ const Home = () => {
                 type === "Admin" ? "dash_dealer_top dealerTopLayer" : "hide"
               }
             >
-              <div className="select">
+              <div className="hide">
                 <label
                   style={{
                     color: "#227f00",
@@ -392,7 +405,7 @@ const Home = () => {
                   Select Trade Partner:
                 </label>
                 <Select
-                  defaultValue="All Trade Partner"
+                  defaultValue="Select Trade Partner"
                   onChange={value => {
                     handletp(value)
                   }}
@@ -401,7 +414,7 @@ const Home = () => {
                   <Option
                     value="all"
                     onClick={() => {
-                      setDealer()
+                      // setTp_id(data.id)
                     }}
                   >
                     All
@@ -421,12 +434,12 @@ const Home = () => {
                   })}
                 </Select>
               </div>
-              <h4
+              {/* <h4
                 style={{ margin: "0px", color: "#227f00" }}
                 className={loading ? "" : "hide"}
               >
                 Loading...
-              </h4>
+              </h4> */}
               <div className="selected">
                 <label style={{ color: "#227f00", display: "block" }}>
                   Query Transaction by Date:
@@ -438,12 +451,24 @@ const Home = () => {
           <div className="activity_container">
             <div className="top_activity_container">
               <h4>Activities</h4>
-              {retailer.length > 0 && (
+              {view && (
                 <Button>
                   <CSVLink
                     data={retailer}
                     filename={"Retailers.csv"}
                     headers={headers}
+                    style={{ color: "white" }}
+                  >
+                    Export to CSV
+                  </CSVLink>
+                </Button>
+              )}
+              {!view && (
+                <Button>
+                  <CSVLink
+                    data={retailer}
+                    filename={"Daily Summery.csv"}
+                    headers={headers1}
                     style={{ color: "white" }}
                   >
                     Export to CSV
@@ -468,21 +493,40 @@ const Home = () => {
 
               <div style={{ padding: "20px" }}>
                 <Tabs defaultActiveKey="1">
-                  <TabPane tab="Daily Summary" key="1">
-                    <div>
-                      <div className="table_Group">
-                        <div className="rowShow"></div>
-                        <Spin spinning={loading} size="large" delay={0}>
-                          <Table
-                            columns={ColumnsTwo}
-                            dataSource={retailer}
-                            bordered
-                            size="small"
-                          />
-                        </Spin>
+                  {!view && (
+                    <TabPane tab="Log" key="1">
+                      <div>
+                        <div className="table_Group">
+                          <div className="rowShow"></div>
+                          <Spin spinning={loading} size="large" delay={0}>
+                            <Table
+                              columns={Columns}
+                              dataSource={log}
+                              bordered
+                              size="small"
+                            />
+                          </Spin>
+                        </div>
                       </div>
-                    </div>
-                  </TabPane>
+                    </TabPane>
+                  )}
+                  {view && (
+                    <TabPane tab="Retailer List" key="1">
+                      <div>
+                        <div className="table_Group">
+                          <div className="rowShow"></div>
+                          <Spin spinning={loading} size="large" delay={0}>
+                            <Table
+                              columns={ColumnsTwo}
+                              dataSource={retailer}
+                              bordered
+                              size="small"
+                            />
+                          </Spin>
+                        </div>
+                      </div>
+                    </TabPane>
+                  )}
                 </Tabs>
               </div>
             </div>
@@ -493,4 +537,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Log

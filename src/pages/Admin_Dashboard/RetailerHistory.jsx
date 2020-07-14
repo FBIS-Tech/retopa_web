@@ -90,7 +90,8 @@ const RetailerSingleHistory = () => {
     })
   }, [])
 
-  const openModal = () => {
+  const openModal = date => {
+    console.log(date)
     setSpinning(true)
     const query = {
       serviceCode: "RTLT",
@@ -135,7 +136,7 @@ const RetailerSingleHistory = () => {
           title={record.phone}
           className="enabledLog"
           onClick={() => {
-            openModal(record.tp_id, record.r_id)
+            openModal(record.date(created_at))
           }}
         >
           View More
