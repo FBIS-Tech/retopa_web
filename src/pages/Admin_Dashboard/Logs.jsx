@@ -467,7 +467,7 @@ const Log = () => {
                 <Button>
                   <CSVLink
                     data={retailer}
-                    filename={"Daily Summery.csv"}
+                    filename={"Log.csv"}
                     headers={headers1}
                     style={{ color: "white" }}
                   >
