@@ -124,24 +124,24 @@ const RetailerSingleHistory = () => {
       dataIndex: "date(created_at)",
       key: "date(created_at)",
     },
-    // {
-    //   title: "Action",
-    //   dataIndex: "ussd_status",
-    //   key: "ussd_status",
+    {
+      title: "Action",
+      dataIndex: "ussd_status",
+      key: "ussd_status",
 
-    //   render: (text, record) => (
-    //     <a
-    //       id={record.r_id}
-    //       title={record.phone}
-    //       className="enabledLog"
-    //       onClick={() => {
-    //         openModal(record.tp_id, record.r_id)
-    //       }}
-    //     >
-    //       View More
-    //     </a>
-    //   ),
-    // },
+      render: (text, record) => (
+        <a
+          id={record.r_id}
+          title={record.phone}
+          className="enabledLog"
+          onClick={() => {
+            openModal(record.tp_id, record.r_id)
+          }}
+        >
+          View More
+        </a>
+      ),
+    },
   ]
   const HistoryColumn2 = [
     {
@@ -234,14 +234,14 @@ const RetailerSingleHistory = () => {
                   Export to CSV
                 </CSVLink>
               </Button>
-              <Button
+              {/* <Button
                 style={{ backgroundColor: "green", color: "#fff" }}
                 onClick={() => {
                   openModal()
                 }}
               >
                 View Detail Log
-              </Button>
+              </Button> */}
             </div>
           </div>
 

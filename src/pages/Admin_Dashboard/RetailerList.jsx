@@ -29,7 +29,7 @@ const Home = () => {
   const [vtuData, setVtuData] = useState([])
   const [message, setMessage] = useState(" ")
   const [ussd, setUssd] = useState("0")
-  const [ussdData, setUssdData] = useState([])
+  const [log, setLog] = useState([])
   const [data, setData] = useState("0")
   const [dataData, setDataData] = useState([])
   const [voucher, setVoucher] = useState("0")
@@ -45,10 +45,7 @@ const Home = () => {
   const [adminType, setAdminType] = useState("")
   const [month, setMonth] = useState([])
   const [filteredInfo, setFilteredInfo] = useState(null)
-  const [sortedInfo, setSortedInfo] = useState({
-    order: "descend",
-    columnKey: "ussd_status",
-  })
+  const [view, setView] = useState(false)
   const [todayy, setToday] = useState([])
 
   const dispatch = useDispatch()
@@ -89,8 +86,9 @@ const Home = () => {
       const tp = new Promise(res => {
         res(AdminInstance.post("", tpReqst))
       })
+
       tp.then(({ data }) => {
-        setLoading(false)
+        // setLoading(false)
         let Arry = data.tp_details
         setTps(Arry)
       })
@@ -119,49 +117,68 @@ const Home = () => {
       retail.then(({ data }) => {
         console.log(data)
         setRetailer(data.transaction)
+      })
 
+      //**raw log */
+      const raw = {
+        serviceCode: "XXL",
+        username: usernameA,
+        password: passwordA,
+      }
+      console.log(raw)
+      const logs = new Promise(res => {
+        res(AdminInstance.post("", raw))
+      })
+      logs.then(({ data }) => {
+        console.log(data)
+        setLog(data.transaction)
         setLoading(false)
       })
     }
   }, [])
 
   const handletp = value => {
-    setRetailer([])
-    // setTp_id(value)
-    setDealer(value)
-    setLoading(true)
+    if (value == "all") {
+      setView(false)
+    } else {
+      setView(true)
+      setRetailer([])
 
-    var date = new Date(),
-      y = date.getFullYear(),
-      m = date.getMonth()
-    var firstDay = new Date(y, m, 1)
-    var lastDay = new Date(y, m + 1, 0)
-    // total USSD
-    const RetailerReqst = {
-      serviceCode: "AADD",
-      username: dets[0],
-      password: dets[1],
-      dealer: value,
-      start: start,
-      end: end,
-    }
+      setDealer(value)
+      setLoading(true)
 
-    const list = new Promise(res => {
-      res(AdminInstance.post("", RetailerReqst))
-    })
-    list.then(({ data }) => {
-      if (data.status === "200") {
-        console.log(data)
-        setRetailer(data.transaction)
-        setLoading(false)
-      } else {
-        setLoading(false)
-        setMessage(data.message === "failled" ? "No Data Found" : " ")
-        setTimeout(() => {
-          setMessage(" ")
-        }, 5000)
+      var date = new Date(),
+        y = date.getFullYear(),
+        m = date.getMonth()
+      var firstDay = new Date(y, m, 1)
+      var lastDay = new Date(y, m + 1, 0)
+      // total USSD
+      const RetailerReqst = {
+        serviceCode: "AADD",
+        username: dets[0],
+        password: dets[1],
+        dealer: value,
+        start: start,
+        end: end,
       }
-    })
+
+      const list = new Promise(res => {
+        res(AdminInstance.post("", RetailerReqst))
+      })
+      list.then(({ data }) => {
+        if (data.status === "200") {
+          console.log(data)
+          setRetailer(data.transaction)
+          setLoading(false)
+        } else {
+          setLoading(false)
+          setMessage(data.message === "failled" ? "No Data Found" : " ")
+          setTimeout(() => {
+            setMessage(" ")
+          }, 5000)
+        }
+      })
+    }
   }
 
   //**retailer table column */
@@ -223,6 +240,66 @@ const Home = () => {
       ),
     },
   ]
+  const Columns = [
+    {
+      title: "TRANSACTION_DATE",
+      dataIndex: "created_at",
+      key: "created_at",
+    },
+    {
+      title: "RETAILER_MSISDN",
+      dataIndex: "phone",
+      key: "phone",
+    },
+    {
+      title: "DEALER_CODE",
+      dataIndex: "mtn_tp_code",
+      key: "mtn_tp_code",
+    },
+    {
+      title: "DEALER",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "TRANSACTION_AMOUNT",
+      dataIndex: "amount",
+      key: "amount",
+      // render: text => <a>{text}</a>,
+    },
+    {
+      title: "TRANSACTION_TYPE",
+      dataIndex: "description",
+      key: "description",
+    },
+
+    // {
+    //   title: "Action",
+    //   dataIndex: "ussd_status",
+    //   key: "ussd_status",
+
+    //   render: (text, record) => (
+    //     <a
+    //       id={record.r_id}
+    //       title={record.phone}
+    //       className="enabledLog"
+    //       onClick={e => {
+    //         let details = {
+    //           r_id: e.currentTarget.id,
+    //           name: e.currentTarget.title,
+    //           start: start,
+    //           end: end,
+    //           tp_id,
+    //         }
+    //         dispatch(retailerDetails(details))
+    //         navigate(`/Admin_Dashboard/RetailerHistory`)
+    //       }}
+    //     >
+    //       View Log
+    //     </a>
+    //   ),
+    // },
+  ]
 
   ///////////export to csv///////////////////////////////////////////////////
   const headers = [
@@ -231,32 +308,77 @@ const Home = () => {
     { label: "DEALER_CODE", key: "mtn_tp_code" },
     { label: "TRANSACTION_AMOUNT", key: "total_sales" },
   ]
+  const headers1 = [
+    { label: "TRANSACTION_DATE", key: "created_at" },
+    { label: "RETAILER_MSISDN", key: "phone" },
+    { label: "DEALER_CODE", key: "mtn_tp_code" },
+    { label: "TRANSACTION_AMOUNT", key: "amount" },
+    { label: "DEALER", key: "name" },
+    { label: "TRANSACTION_TYPE", key: "description" },
+  ]
 
   //**query by date */
   const onChange = async (value, dateString) => {
     setLoading(true)
-
     let selectedDate = dateString
     setStart(selectedDate[0])
     setEnd(selectedDate[1])
     // total USSD
-    const ussdReqst = {
-      serviceCode: "AADD",
-      username: dets[0],
-      password: dets[1],
-      dealer: dealer,
-      start: selectedDate[0],
-      end: selectedDate[1],
-    }
 
-    const USSD = new Promise(res => {
-      res(AdminInstance.post("", ussdReqst))
-    })
-    USSD.then(({ data }) => {
-      console.log(data)
-      setLoading(false)
-      setRetailer(data.transaction)
-    })
+    if (!view) {
+      const ussdReqst = {
+        serviceCode: "XXL",
+        username: dets[0],
+        password: dets[1],
+        start: selectedDate[0],
+        end: selectedDate[1],
+        filter: "filter",
+      }
+
+      const USSD = new Promise(res => {
+        res(AdminInstance.post("", ussdReqst))
+      })
+      USSD.then(({ data }) => {
+        console.log(data)
+        setLoading(false)
+        setLog(data.transaction)
+      })
+    } else if (dealer === "") {
+      const ussdReqst = {
+        serviceCode: "AADD",
+        username: dets[0],
+        password: dets[1],
+        start: selectedDate[0],
+        end: selectedDate[1],
+      }
+
+      const USSD = new Promise(res => {
+        res(AdminInstance.post("", ussdReqst))
+      })
+      USSD.then(({ data }) => {
+        console.log(data)
+        setLoading(false)
+        setRetailer(data.transaction)
+      })
+    } else {
+      const ussdReqst = {
+        serviceCode: "AADD",
+        username: dets[0],
+        password: dets[1],
+        dealer: dealer,
+        start: selectedDate[0],
+        end: selectedDate[1],
+      }
+
+      const USSD = new Promise(res => {
+        res(AdminInstance.post("", ussdReqst))
+      })
+      USSD.then(({ data }) => {
+        console.log(data)
+        setLoading(false)
+        setRetailer(data.transaction)
+      })
+    }
   }
 
   return (
@@ -290,12 +412,20 @@ const Home = () => {
                   Select Trade Partner:
                 </label>
                 <Select
-                  defaultValue="All Trade Partner"
+                  defaultValue="Select Trade Partner"
                   onChange={value => {
                     handletp(value)
                   }}
                   loading={loading}
                 >
+                  <Option
+                    value="all"
+                    onClick={() => {
+                      // setTp_id(data.id)
+                    }}
+                  >
+                    All
+                  </Option>
                   {tps.map(data => {
                     return (
                       <Option
@@ -328,12 +458,24 @@ const Home = () => {
           <div className="activity_container">
             <div className="top_activity_container">
               <h4>Activities</h4>
-              {retailer.length > 0 && (
+              {view && (
                 <Button>
                   <CSVLink
                     data={retailer}
                     filename={"Retailers.csv"}
                     headers={headers}
+                    style={{ color: "white" }}
+                  >
+                    Export to CSV
+                  </CSVLink>
+                </Button>
+              )}
+              {!view && (
+                <Button>
+                  <CSVLink
+                    data={retailer}
+                    filename={"Daily Summery.csv"}
+                    headers={headers1}
                     style={{ color: "white" }}
                   >
                     Export to CSV
@@ -358,21 +500,40 @@ const Home = () => {
 
               <div style={{ padding: "20px" }}>
                 <Tabs defaultActiveKey="1">
-                  <TabPane tab="Retailer List" key="1">
-                    <div>
-                      <div className="table_Group">
-                        <div className="rowShow"></div>
-                        <Spin spinning={loading} size="large" delay={0}>
-                          <Table
-                            columns={ColumnsTwo}
-                            dataSource={retailer}
-                            bordered
-                            size="small"
-                          />
-                        </Spin>
+                  {!view && (
+                    <TabPane tab="Daily Summary" key="1">
+                      <div>
+                        <div className="table_Group">
+                          <div className="rowShow"></div>
+                          <Spin spinning={loading} size="large" delay={0}>
+                            <Table
+                              columns={Columns}
+                              dataSource={log}
+                              bordered
+                              size="small"
+                            />
+                          </Spin>
+                        </div>
                       </div>
-                    </div>
-                  </TabPane>
+                    </TabPane>
+                  )}
+                  {view && (
+                    <TabPane tab="Retailer List" key="1">
+                      <div>
+                        <div className="table_Group">
+                          <div className="rowShow"></div>
+                          <Spin spinning={loading} size="large" delay={0}>
+                            <Table
+                              columns={ColumnsTwo}
+                              dataSource={retailer}
+                              bordered
+                              size="small"
+                            />
+                          </Spin>
+                        </div>
+                      </div>
+                    </TabPane>
+                  )}
                 </Tabs>
               </div>
             </div>
