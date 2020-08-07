@@ -155,12 +155,13 @@ const Home = () => {
       from_date: moment(firstDay).format(),
       to_date: moment(lastDay).format(),
     }
-
+    console.log(montReq)
     const thisMonth = new Promise(res => {
       res(AdminInstance.post("", montReq))
     })
     thisMonth
       .then(({ data }) => {
+        console.log(data)
         setMonth([
           {
             title: "Airtime Sales",
@@ -198,6 +199,7 @@ const Home = () => {
     })
     now
       .then(({ data }) => {
+        console.log(data)
         setToday([
           {
             title: "Airtime Sales",
@@ -282,6 +284,7 @@ const Home = () => {
       res(AdminInstance.post("", ussdReqst))
     })
     USSD.then(({ data }) => {
+      console.log(data)
       setMonth([
         {
           title: "Airtime Sales",

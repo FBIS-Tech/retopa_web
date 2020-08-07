@@ -48,7 +48,7 @@ const LoginCardTwo = ({
             <h4>
               New user? <Link to="/SignUp">Create an account</Link>
             </h4>
-            <Button onClick={handleSubmit} loading={loading}>
+            <Button onClick={handleSubmit} loading={loading} disabled={true}>
               Login
             </Button>
           </div>
