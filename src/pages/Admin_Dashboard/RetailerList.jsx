@@ -122,7 +122,6 @@ const Home = () => {
         res(AdminInstance.post("", retailers))
       })
       retail.then(({ data }) => {
-        console.log(data)
         setRetailer(data.transaction)
         setLoading(false)
       })
@@ -133,12 +132,10 @@ const Home = () => {
       //   username: usernameA,
       //   password: passwordA,
       // }
-      // console.log(raw)
       // const logs = new Promise(res => {
       //   res(AdminInstance.post("", raw))
       // })
       // logs.then(({ data }) => {
-      //   console.log(data)
       //   setLog(data.transaction)
       //   setLoading(false)
       // })
@@ -173,7 +170,6 @@ const Home = () => {
       })
       list.then(({ data }) => {
         if (data.status === "200") {
-          console.log(data)
           setRetailer(data.transaction)
           setLoading(false)
         } else {
@@ -214,7 +210,7 @@ const Home = () => {
     },
     {
       title: "TRANSACTION_TYPE",
-      dataIndex: "total_sales",
+      dataIndex: "description",
       key: "description",
     },
 
@@ -336,7 +332,6 @@ const Home = () => {
         res(AdminInstance.post("", ussdReqst))
       })
       USSD.then(({ data }) => {
-        console.log(data)
         setLoading(false)
         setRetailer(data.transaction)
       })
@@ -354,7 +349,6 @@ const Home = () => {
         res(AdminInstance.post("", ussdReqst))
       })
       USSD.then(({ data }) => {
-        console.log(data)
         setLoading(false)
         setRetailer(data.transaction)
       })
