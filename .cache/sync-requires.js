@@ -64,6 +64,7 @@ exports.components = {
   "component---src-pages-user-dashboard-user-airtime-jsx": hot(preferDefault(require("C:\\Users\\osisami olukayode\\Documents\\retopa\\src\\pages\\User_Dashboard\\User_Airtime.jsx"))),
   "component---src-pages-user-dashboard-user-billing-jsx": hot(preferDefault(require("C:\\Users\\osisami olukayode\\Documents\\retopa\\src\\pages\\User_Dashboard\\User_billing.jsx"))),
   "component---src-pages-user-dashboard-user-home-jsx": hot(preferDefault(require("C:\\Users\\osisami olukayode\\Documents\\retopa\\src\\pages\\User_Dashboard\\User_Home.jsx"))),
-  "component---src-pages-user-dashboard-user-payment-jsx": hot(preferDefault(require("C:\\Users\\osisami olukayode\\Documents\\retopa\\src\\pages\\User_Dashboard\\User_Payment.jsx")))
+  "component---src-pages-user-dashboard-user-payment-jsx": hot(preferDefault(require("C:\\Users\\osisami olukayode\\Documents\\retopa\\src\\pages\\User_Dashboard\\User_Payment.jsx"))),
+  "component---src-pages-admin-dashboard-top-ten-jsx": hot(preferDefault(require("C:\\Users\\osisami olukayode\\Documents\\retopa\\src\\pages\\Admin_Dashboard\\TopTen.jsx")))
 }
 

@@ -132,7 +132,7 @@ const AdminLayout = ({
           <span>{user.username === undefined ? "ADMIN" : user.username}</span>
         </div>
         <Menu mode="inline" defaultSelectedKeys={position}>
-          {type === "adminA" || type === "finance" ? (
+          {type === "adminA" || type === "finance" || type === "BDUTeam" ? (
             <Menu.Item
               key="1"
               onClick={() => {
@@ -155,7 +155,7 @@ const AdminLayout = ({
               <span className="nav-text">Transactions</span>
             </Menu.Item>
           )}
-          {type === "adminA" || type === "finance" ? (
+          {type === "adminA" || type === "finance" || type === "BDUTeam" ? (
             <Menu.Item
               key="3"
               onClick={() => {
@@ -179,6 +179,16 @@ const AdminLayout = ({
           >
             <Dash_voucher_icon />
             <span className="nav-text">Logs</span>
+          </Menu.Item>
+          <Menu.Item
+            key="21"
+            onClick={() => {
+              navigate("/Admin_Dashboard/TopTen")
+            }}
+            className={type === "BDUTeam" ? "" : "hide "}
+          >
+            <Dash_voucher_icon />
+            <span className="nav-text">Top 10 Retailers</span>
           </Menu.Item>
           <Menu.Item
             key="2"
