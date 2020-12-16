@@ -191,6 +191,46 @@ const AdminLayout = ({
             <span className="nav-text">Top 10 Retailers</span>
           </Menu.Item>
           <Menu.Item
+            key="22"
+            onClick={() => {
+              navigate("/Admin_Dashboard/TotalFundingByDealer")
+            }}
+            className={type === "BDUTeam" ? "" : "hide "}
+          >
+            <Dash_voucher_icon />
+            <span className="nav-text">Dealer funding</span>
+          </Menu.Item>
+          <Menu.Item
+            key="24"
+            onClick={() => {
+              navigate("/Admin_Dashboard/TotalSubDealerCount")
+            }}
+            className={type === "BDUTeam" ? "" : "hide "}
+          >
+            <Dash_voucher_icon />
+            <span className="nav-text">Sub-Dealer count</span>
+          </Menu.Item>
+          <Menu.Item
+            key="25"
+            onClick={() => {
+              navigate("/Admin_Dashboard/SuccessfulSales")
+            }}
+            className={type === "BDUTeam" ? "" : "hide "}
+          >
+            <Dash_voucher_icon />
+            <span className="nav-text">Successful Sales</span>
+          </Menu.Item>
+          <Menu.Item
+            key="23"
+            onClick={() => {
+              navigate("/Admin_Dashboard/FailedCount")
+            }}
+            className={type === "BDUTeam" ? "" : "hide "}
+          >
+            <Dash_voucher_icon />
+            <span className="nav-text">Failed Transaction Count</span>
+          </Menu.Item>
+          <Menu.Item
             key="2"
             onClick={() => {
               navigate("/Admin_Dashboard/Retailers")

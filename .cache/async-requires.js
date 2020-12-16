@@ -62,6 +62,10 @@ exports.components = {
   "component---src-pages-user-dashboard-user-home-jsx": () => import("../src/pages/User_Dashboard/User_Home.jsx" /* webpackChunkName: "component---src-pages-user-dashboard-user-home-jsx" */),
   "component---src-pages-user-dashboard-user-payment-jsx": () => import("../src/pages/User_Dashboard/User_Payment.jsx" /* webpackChunkName: "component---src-pages-user-dashboard-user-payment-jsx" */),
   "component---src-pages-admin-dashboard-logs-jsx": () => import("../src/pages/Admin_Dashboard/Logs.jsx" /* webpackChunkName: "component---src-pages-admin-dashboard-logs-jsx" */),
-  "component---src-pages-admin-dashboard-top-ten-jsx": () => import("../src/pages/Admin_Dashboard/TopTen.jsx" /* webpackChunkName: "component---src-pages-admin-dashboard-top-ten-jsx" */)
+  "component---src-pages-admin-dashboard-top-ten-jsx": () => import("../src/pages/Admin_Dashboard/TopTen.jsx" /* webpackChunkName: "component---src-pages-admin-dashboard-top-ten-jsx" */),
+  "component---src-pages-admin-dashboard-failed-count-jsx": () => import("../src/pages/Admin_Dashboard/FailedCount.jsx" /* webpackChunkName: "component---src-pages-admin-dashboard-failed-count-jsx" */),
+  "component---src-pages-admin-dashboard-total-funding-by-dealer-jsx": () => import("../src/pages/Admin_Dashboard/TotalFundingByDealer.jsx" /* webpackChunkName: "component---src-pages-admin-dashboard-total-funding-by-dealer-jsx" */),
+  "component---src-pages-admin-dashboard-total-sub-dealer-count-jsx": () => import("../src/pages/Admin_Dashboard/TotalSubDealerCount.jsx" /* webpackChunkName: "component---src-pages-admin-dashboard-total-sub-dealer-count-jsx" */),
+  "component---src-pages-admin-dashboard-successful-sales-jsx": () => import("../src/pages/Admin_Dashboard/SuccessfulSales.jsx" /* webpackChunkName: "component---src-pages-admin-dashboard-successful-sales-jsx" */)
 }
 
