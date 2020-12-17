@@ -441,7 +441,7 @@ const Home = () => {
                             size="small"
                           /> */}
                   <DealerActivities
-                    title="total Sub-Dealer count "
+                    title="Total successful sale count "
                     price={funding}
                   />
                 </Spin>
