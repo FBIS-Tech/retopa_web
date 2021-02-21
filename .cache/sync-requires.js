@@ -8,12 +8,18 @@ exports.components = {
   "component---cache-dev-404-page-js": hot(preferDefault(require("/Users/newuser/Documents/retopa/.cache/dev-404-page.js"))),
   "component---src-pages-404-js": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/404.js"))),
   "component---src-pages-admin-dashboard-dashboard-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/Admin_Dashboard/Dashboard.jsx"))),
+  "component---src-pages-admin-dashboard-failed-count-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/Admin_Dashboard/FailedCount.jsx"))),
   "component---src-pages-admin-dashboard-home-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/Admin_Dashboard/Home.jsx"))),
+  "component---src-pages-admin-dashboard-logs-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/Admin_Dashboard/Logs.jsx"))),
   "component---src-pages-admin-dashboard-retail-code-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/Admin_Dashboard/RetailCode.jsx"))),
   "component---src-pages-admin-dashboard-retailer-history-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/Admin_Dashboard/RetailerHistory.jsx"))),
   "component---src-pages-admin-dashboard-retailer-list-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/Admin_Dashboard/RetailerList.jsx"))),
   "component---src-pages-admin-dashboard-retailers-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/Admin_Dashboard/Retailers.jsx"))),
   "component---src-pages-admin-dashboard-settings-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/Admin_Dashboard/Settings.jsx"))),
+  "component---src-pages-admin-dashboard-successful-sales-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/Admin_Dashboard/SuccessfulSales.jsx"))),
+  "component---src-pages-admin-dashboard-top-ten-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/Admin_Dashboard/TopTen.jsx"))),
+  "component---src-pages-admin-dashboard-total-funding-by-dealer-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/Admin_Dashboard/TotalFundingByDealer.jsx"))),
+  "component---src-pages-admin-dashboard-total-sub-dealer-count-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/Admin_Dashboard/TotalSubDealerCount.jsx"))),
   "component---src-pages-admin-dashboard-transaction-details-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/Admin_Dashboard/Transaction_Details.jsx"))),
   "component---src-pages-admin-dashboard-transactions-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/Admin_Dashboard/Transactions.jsx"))),
   "component---src-pages-airtime-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/Airtime.jsx"))),
@@ -63,12 +69,6 @@ exports.components = {
   "component---src-pages-user-dashboard-user-airtime-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/User_Dashboard/User_Airtime.jsx"))),
   "component---src-pages-user-dashboard-user-billing-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/User_Dashboard/User_billing.jsx"))),
   "component---src-pages-user-dashboard-user-home-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/User_Dashboard/User_Home.jsx"))),
-  "component---src-pages-user-dashboard-user-payment-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/User_Dashboard/User_Payment.jsx"))),
-  "component---src-pages-admin-dashboard-logs-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/Admin_Dashboard/Logs.jsx"))),
-  "component---src-pages-admin-dashboard-top-ten-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/Admin_Dashboard/TopTen.jsx"))),
-  "component---src-pages-admin-dashboard-failed-count-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/Admin_Dashboard/FailedCount.jsx"))),
-  "component---src-pages-admin-dashboard-total-funding-by-dealer-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/Admin_Dashboard/TotalFundingByDealer.jsx"))),
-  "component---src-pages-admin-dashboard-total-sub-dealer-count-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/Admin_Dashboard/TotalSubDealerCount.jsx"))),
-  "component---src-pages-admin-dashboard-successful-sales-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/Admin_Dashboard/SuccessfulSales.jsx")))
+  "component---src-pages-user-dashboard-user-payment-jsx": hot(preferDefault(require("/Users/newuser/Documents/retopa/src/pages/User_Dashboard/User_Payment.jsx")))
 }
 
