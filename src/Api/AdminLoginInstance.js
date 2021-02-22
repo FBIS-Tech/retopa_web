@@ -1,6 +1,8 @@
-import axios from "axios"
-const proxyurl = "https://cors-anywhere.herokuapp.com/"
+import axios from "axios";
 
 export default axios.create({
-  baseURL: proxyurl + "https://retopin.com/retopa/public/api/admin_login",
-})
+  baseURL: "https://retopin.com/retopa/public/api/admin_login",
+  // headers: {
+  //   "Content-Type": "application/x-www-form-urlencoded",
+  // },
+});

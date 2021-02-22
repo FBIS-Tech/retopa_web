@@ -20,10 +20,12 @@ import moment from "moment"
 import AdminLayout from "../../components/Layout/AdminLayout"
 import Green from "../../../assets/green.svg"
 import Red from "../../../assets/red.svg"
+import TopInstance from "../../Api/TopInstance"
 const { RangePicker } = DatePicker
 const { Option } = Select
 const { TabPane } = Tabs
-const Home = () => {
+
+const TopTen = () => {
   const [retailer, setRetailer] = useState([])
   const [vtu, setVtu] = useState("0")
   const [vtuData, setVtuData] = useState([])
@@ -112,17 +114,19 @@ const Home = () => {
       setEnd(moment(today).format())
 
       const retailers = {
-        serviceCode: "AADD",
-        username: usernameA,
-        password: passwordA,
-        start: moment(today).format(),
-        end: moment(today).format(),
+        // serviceCode: "AADD",
+        // username: usernameA,
+        // password: passwordA,
+        filter: "",
+        date: moment(today).format(),
+        time: moment(today).format(),
       }
       const retail = new Promise(res => {
-        res(AdminInstance.post("", retailers))
+        res(TopInstance.post("", retailers))
       })
       retail.then(({ data }) => {
-        setRetailer(data.transaction)
+        console.log(data)
+        setRetailer(data.retailers)
         setLoading(false)
       })
 
@@ -186,92 +190,21 @@ const Home = () => {
   //**retailer table column */
   const ColumnsTwo = [
     {
-      title: "TRANSACTION_DATE",
-      dataIndex: "date(ussd_transactions.created_at)",
-      key: "date(ussd_transactions.created_at)",
-    },
-    {
-      title: "RETAILER_MSISDN",
-      dataIndex: "phone",
-      key: "phone",
-    },
-    {
-      title: "DEALER_CODE",
-      dataIndex: "mtn_tp_code",
-      key: "mtn_tp_code",
-
-      // render: text => <a>{text}</a>,
-    },
-    {
-      title: "TRANSACTION_AMOUNT",
-      dataIndex: "total_sales",
-      key: "total_sales",
-      // render: text => <a>{text}</a>,
-    },
-    {
-      title: "TRANSACTION_TYPE",
-      dataIndex: "description",
-      key: "description",
-    },
-
-    {
-      title: "Action",
-      dataIndex: "ussd_status",
-      key: "ussd_status",
-
-      render: (text, record) => (
-        <a
-          id={record.r_id}
-          title={record.phone}
-          className="enabledLog"
-          onClick={e => {
-            let details = {
-              r_id: e.currentTarget.id,
-              name: e.currentTarget.title,
-              start: start,
-              end: end,
-              tp_id,
-            }
-            dispatch(retailerDetails(details))
-            navigate(`/Admin_Dashboard/RetailerHistory`)
-          }}
-        >
-          View Log
-        </a>
-      ),
-    },
-  ]
-  const Columns = [
-    {
-      title: "TRANSACTION_DATE",
-      dataIndex: "created_at",
-      key: "created_at",
-    },
-    {
-      title: "RETAILER_MSISDN",
-      dataIndex: "phone",
-      key: "phone",
-    },
-    {
-      title: "DEALER_CODE",
-      dataIndex: "mtn_tp_code",
-      key: "mtn_tp_code",
-    },
-    {
-      title: "DEALER",
+      title: "Name",
       dataIndex: "name",
       key: "name",
     },
     {
-      title: "TRANSACTION_AMOUNT",
-      dataIndex: "amount",
-      key: "amount",
-      // render: text => <a>{text}</a>,
+      title: "Retailer Code",
+      dataIndex: "code",
+      key: "code",
     },
     {
-      title: "TRANSACTION_TYPE",
-      dataIndex: "description",
-      key: "description",
+      title: "Total Sales",
+      dataIndex: "total",
+      key: "total",
+
+      // render: text => <a>{text}</a>,
     },
 
     // {
@@ -321,19 +254,22 @@ const Home = () => {
 
     if (dealer === "") {
       const ussdReqst = {
-        serviceCode: "AADD",
-        username: dets[0],
-        password: dets[1],
-        start: selectedDate[0],
-        end: selectedDate[1],
+        // // serviceCode: "AADD",
+        // username: dets[0],
+        // password: dets[1],
+        filter: "filter",
+        date: selectedDate[0],
+        time: selectedDate[1],
       }
 
       const USSD = new Promise(res => {
-        res(AdminInstance.post("", ussdReqst))
+        res(TopInstance.post("", ussdReqst))
       })
+
       USSD.then(({ data }) => {
+        console.log(data)
         setLoading(false)
-        setRetailer(data.transaction)
+        setRetailer(data.retailers)
       })
     } else {
       const ussdReqst = {
@@ -376,44 +312,11 @@ const Home = () => {
                 type === "Admin" ? "dash_dealer_top dealerTopLayer" : "hide"
               }
             >
-              <div className="select">
-                <label
-                  style={{
-                    color: "#227f00",
-                    padding: "10px 0px",
-                  }}
-                >
-                  Select Trade Partner:
+              <div className="selected">
+                <label style={{ color: "#227f00", display: "block" }}>
+                  Query by Date:
                 </label>
-                <Select
-                  defaultValue="All Trade Partner"
-                  onChange={value => {
-                    handletp(value)
-                  }}
-                  loading={loading}
-                >
-                  <Option
-                    value="all"
-                    onClick={() => {
-                      setDealer()
-                    }}
-                  >
-                    All
-                  </Option>
-                  {tps.map(data => {
-                    return (
-                      <Option
-                        key={data.vendor_name}
-                        value={data.mtn_tp_code}
-                        onClick={() => {
-                          setTp_id(data.id)
-                        }}
-                      >
-                        {data.name}-{data.mtn_tp_code}
-                      </Option>
-                    )
-                  })}
-                </Select>
+                <RangePicker showTime={false} onChange={onChange} />
               </div>
               <h4
                 style={{ margin: "0px", color: "#227f00" }}
@@ -421,12 +324,6 @@ const Home = () => {
               >
                 Loading...
               </h4>
-              <div className="selected">
-                <label style={{ color: "#227f00", display: "block" }}>
-                  Query Transaction by Date:
-                </label>
-                <RangePicker showTime={false} onChange={onChange} />
-              </div>
             </div>
           </div>
           <div className="activity_container">
@@ -462,7 +359,7 @@ const Home = () => {
 
               <div style={{ padding: "20px" }}>
                 <Tabs defaultActiveKey="1">
-                  <TabPane tab="Daily Summary" key="1">
+                  <TabPane tab="Top Retailers" key="1">
                     <div>
                       <div className="table_Group">
                         <div className="rowShow"></div>
@@ -487,4 +384,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default TopTen

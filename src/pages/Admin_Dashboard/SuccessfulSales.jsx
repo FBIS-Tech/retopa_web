@@ -25,7 +25,7 @@ const { Option } = Select
 const { TabPane } = Tabs
 const Home = () => {
   const [retailer, setRetailer] = useState([])
-  const [vtu, setVtu] = useState("0")
+  const [funding, setFunding] = useState("0")
   const [vtuData, setVtuData] = useState([])
   const [message, setMessage] = useState(" ")
   const [ussd, setUssd] = useState("0")
@@ -79,7 +79,6 @@ const Home = () => {
     setDets([...dets, usernameA, passwordA])
 
     if (UserData.type === "Admin") {
-      setLoading(true)
       // trade Partners
       const tpReqst = {
         serviceCode: "TRAL",
@@ -110,21 +109,6 @@ const Home = () => {
 
       setStart(moment(today).format())
       setEnd(moment(today).format())
-
-      const retailers = {
-        serviceCode: "AADD",
-        username: usernameA,
-        password: passwordA,
-        start: moment(today).format(),
-        end: moment(today).format(),
-      }
-      const retail = new Promise(res => {
-        res(AdminInstance.post("", retailers))
-      })
-      retail.then(({ data }) => {
-        setRetailer(data.transaction)
-        setLoading(false)
-      })
 
       //**raw log */
       // const raw = {
@@ -157,28 +141,19 @@ const Home = () => {
       var lastDay = new Date(y, m + 1, 0)
       // total USSD
       const RetailerReqst = {
-        serviceCode: "AADD",
+        serviceCode: "DDCC",
         username: dets[0],
         password: dets[1],
-        dealer: value,
-        start: start,
-        end: end,
+        id: value,
       }
 
       const list = new Promise(res => {
         res(AdminInstance.post("", RetailerReqst))
       })
       list.then(({ data }) => {
-        if (data.status === "200") {
-          setRetailer(data.transaction)
-          setLoading(false)
-        } else {
-          setLoading(false)
-          setMessage(data.message === "failled" ? "No Data Found" : " ")
-          setTimeout(() => {
-            setMessage(" ")
-          }, 5000)
-        }
+        let k = data
+        setFunding(k["total successful sales count "])
+        setLoading(false)
       })
     }
   }
@@ -321,11 +296,10 @@ const Home = () => {
 
     if (dealer === "") {
       const ussdReqst = {
-        serviceCode: "AADD",
+        erviceCode: "DDCC",
         username: dets[0],
         password: dets[1],
-        start: selectedDate[0],
-        end: selectedDate[1],
+        id: dealer,
       }
 
       const USSD = new Promise(res => {
@@ -337,23 +311,27 @@ const Home = () => {
       })
     } else {
       const ussdReqst = {
-        serviceCode: "AADD",
+        serviceCode: "DDCC",
         username: dets[0],
         password: dets[1],
-        dealer: dealer,
-        start: selectedDate[0],
-        end: selectedDate[1],
+        id: dealer,
       }
 
       const USSD = new Promise(res => {
         res(AdminInstance.post("", ussdReqst))
       })
       USSD.then(({ data }) => {
+        console.log("TOTLA; FUNDS", data)
+        return
         setLoading(false)
         setRetailer(data.transaction)
       })
     }
   }
+
+  //   useEffect(() => {
+
+  //   }, [input]);
 
   return (
     <AdminLayout>
@@ -404,7 +382,7 @@ const Home = () => {
                     return (
                       <Option
                         key={data.vendor_name}
-                        value={data.mtn_tp_code}
+                        value={data.id}
                         onClick={() => {
                           setTp_id(data.id)
                         }}
@@ -421,12 +399,6 @@ const Home = () => {
               >
                 Loading...
               </h4>
-              <div className="selected">
-                <label style={{ color: "#227f00", display: "block" }}>
-                  Query Transaction by Date:
-                </label>
-                <RangePicker showTime={false} onChange={onChange} />
-              </div>
             </div>
           </div>
           <div className="activity_container">
@@ -461,23 +433,18 @@ const Home = () => {
               )}
 
               <div style={{ padding: "20px" }}>
-                <Tabs defaultActiveKey="1">
-                  <TabPane tab="Daily Summary" key="1">
-                    <div>
-                      <div className="table_Group">
-                        <div className="rowShow"></div>
-                        <Spin spinning={loading} size="large" delay={0}>
-                          <Table
+                <Spin spinning={loading} size="large" delay={0}>
+                  {/* <Table
                             columns={ColumnsTwo}
                             dataSource={retailer}
                             bordered
                             size="small"
-                          />
-                        </Spin>
-                      </div>
-                    </div>
-                  </TabPane>
-                </Tabs>
+                          /> */}
+                  <DealerActivities
+                    title="Total successful sale count "
+                    price={funding}
+                  />
+                </Spin>
               </div>
             </div>
           </div>

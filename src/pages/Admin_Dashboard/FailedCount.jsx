@@ -321,7 +321,7 @@ const Home = () => {
 
     if (dealer === "") {
       const ussdReqst = {
-        serviceCode: "AADD",
+        serviceCode: "FFTT",
         username: dets[0],
         password: dets[1],
         start: selectedDate[0],
@@ -337,18 +337,20 @@ const Home = () => {
       })
     } else {
       const ussdReqst = {
-        serviceCode: "AADD",
+        serviceCode: "FFTT",
         username: dets[0],
         password: dets[1],
-        dealer: dealer,
-        start: selectedDate[0],
-        end: selectedDate[1],
+        id: dealer,
+        month: "10",
+        year: "2020",
       }
 
       const USSD = new Promise(res => {
         res(AdminInstance.post("", ussdReqst))
       })
       USSD.then(({ data }) => {
+        console.log(data)
+        return
         setLoading(false)
         setRetailer(data.transaction)
       })

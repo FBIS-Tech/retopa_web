@@ -132,7 +132,7 @@ const AdminLayout = ({
           <span>{user.username === undefined ? "ADMIN" : user.username}</span>
         </div>
         <Menu mode="inline" defaultSelectedKeys={position}>
-          {type === "adminA" || type === "finance" ? (
+          {type === "adminA" || type === "finance" || type === "BDUTeam" ? (
             <Menu.Item
               key="1"
               onClick={() => {
@@ -155,7 +155,7 @@ const AdminLayout = ({
               <span className="nav-text">Transactions</span>
             </Menu.Item>
           )}
-          {type === "adminA" || type === "finance" ? (
+          {type === "adminA" || type === "finance" || type === "BDUTeam" ? (
             <Menu.Item
               key="3"
               onClick={() => {
@@ -170,6 +170,66 @@ const AdminLayout = ({
             ""
           )}
 
+          <Menu.Item
+            key="20"
+            onClick={() => {
+              navigate("/Admin_Dashboard/Logs")
+            }}
+            className={type === "finance" ? "" : "hide "}
+          >
+            <Dash_voucher_icon />
+            <span className="nav-text">Logs</span>
+          </Menu.Item>
+          <Menu.Item
+            key="21"
+            onClick={() => {
+              navigate("/Admin_Dashboard/TopTen")
+            }}
+            className={type === "BDUTeam" ? "" : "hide "}
+          >
+            <Dash_voucher_icon />
+            <span className="nav-text">Top 10 Retailers</span>
+          </Menu.Item>
+          <Menu.Item
+            key="22"
+            onClick={() => {
+              navigate("/Admin_Dashboard/TotalFundingByDealer")
+            }}
+            className={type === "BDUTeam" ? "" : "hide "}
+          >
+            <Dash_voucher_icon />
+            <span className="nav-text">Dealer funding</span>
+          </Menu.Item>
+          <Menu.Item
+            key="24"
+            onClick={() => {
+              navigate("/Admin_Dashboard/TotalSubDealerCount")
+            }}
+            className={type === "BDUTeam" ? "" : "hide "}
+          >
+            <Dash_voucher_icon />
+            <span className="nav-text">Sub-Dealer count</span>
+          </Menu.Item>
+          <Menu.Item
+            key="25"
+            onClick={() => {
+              navigate("/Admin_Dashboard/SuccessfulSales")
+            }}
+            className={type === "BDUTeam" ? "" : "hide "}
+          >
+            <Dash_voucher_icon />
+            <span className="nav-text">Successful Sales</span>
+          </Menu.Item>
+          <Menu.Item
+            key="23"
+            onClick={() => {
+              navigate("/Admin_Dashboard/FailedCount")
+            }}
+            className={type === "BDUTeam" ? "" : "hide "}
+          >
+            <Dash_voucher_icon />
+            <span className="nav-text">Failed Transaction Count</span>
+          </Menu.Item>
           <Menu.Item
             key="2"
             onClick={() => {

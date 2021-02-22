@@ -201,7 +201,7 @@ const Transactions = () => {
                   <div className="rowShow">
                     Date:{" "}
                     <RangePicker
-                      showTime
+                      showTime={false}
                       style={{ marginLeft: "5px" }}
                       onChange={onChange}
                     />

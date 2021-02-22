@@ -8,6 +8,7 @@ import {
   Tabs,
   Button,
   Spin,
+  Modal,
 } from "antd"
 import "../../scss/Table.scss"
 import "../../scss/Retailer.scss"
@@ -30,15 +31,18 @@ const RetailerSingleHistory = () => {
   const [DataHistory, setDataHistory] = useState([])
   const [AwufHistory, setAwufHistory] = useState([])
   const [VtuHistory, setVtuHistory] = useState([])
+  const [VtuHistory2, setVtuHistory2] = useState([])
   const [historyCredit, setHistoryDebit] = useState([])
   const [usernameH, setUsernameH] = useState([])
   const [filteredCredit, setFilteredCredit] = useState("")
   const [filteredDebit, setFilteredDebit] = useState("")
   const [spinning, setSpinning] = useState(true)
   const [dets, setDets] = useState([])
+  const [visible, setVisible] = useState(false)
 
   const [adminType, setAdminType] = useState("")
   const { retailer } = useSelector(state => state)
+
   useEffect(() => {
     let onLogged = sessionStorage.getItem("persist:root")
       ? JSON.parse(sessionStorage.getItem("persist:root"))
@@ -68,24 +72,79 @@ const RetailerSingleHistory = () => {
     }, 10000)
     ////////////log history/////////////////
     const VTU = {
-      serviceCode: "RTLT",
-      tp_id: retailer.tp_id,
+      serviceCode: "AABB",
+      retailer: retailer.r_id,
       username: usernameA,
       password: passwordA,
-      r_id: retailer.user_id,
+      start: retailer.start,
+      end: retailer.end,
     }
     const requestVtu = new Promise(res => {
       res(AdminInstance.post("", VTU))
     })
     requestVtu.then(({ data }) => {
-      console.log(data)
       if (data.status === "200") {
         setSpinning(false)
         setVtuHistory(data.transaction)
       }
     })
   }, [])
+
+  const openModal = date => {
+    console.log(date)
+    setSpinning(true)
+    const query = {
+      serviceCode: "RTLT",
+      tp_id: retailer.tp_id,
+      r_id: retailer.r_id,
+      username: dets[0],
+      password: dets[1],
+      start: retailer.start,
+      end: retailer.end,
+    }
+    const log = new Promise(res => {
+      res(AdminInstance.post("", query))
+    })
+    log.then(({ data }) => {
+      if (data.status === "200") {
+        setSpinning(false)
+        setVisible(true)
+        setVtuHistory2(data.transaction)
+      }
+    })
+  }
+
   const HistoryColumn = [
+    {
+      title: "TRANSACTION AMOUNT",
+      dataIndex: "total_sales",
+      key: "total_sales",
+    },
+    {
+      title: "TRANSACTION DATE",
+      dataIndex: "date(created_at)",
+      key: "date(created_at)",
+    },
+    // {
+    //   title: "Action",
+    //   dataIndex: "ussd_status",
+    //   key: "ussd_status",
+
+    //   render: (text, record) => (
+    //     <a
+    //       id={record.r_id}
+    //       title={record.phone}
+    //       className="enabledLog"
+    //       onClick={() => {
+    //         // openModal(record.date(created_at))
+    //       }}
+    //     >
+    //       View More
+    //     </a>
+    //   ),
+    // },
+  ]
+  const HistoryColumn2 = [
     {
       title: "Amount",
       dataIndex: "amount",
@@ -100,7 +159,6 @@ const RetailerSingleHistory = () => {
       title: "Status",
       dataIndex: "status",
       key: "status",
-
       render: text =>
         text === 1 ? (
           <p className="enabled">
@@ -114,12 +172,18 @@ const RetailerSingleHistory = () => {
           </p>
         ),
     },
-
     {
       title: "Date Created/Time",
       dataIndex: "created_at",
       key: "created_at",
     },
+  ]
+
+  const headers1 = [
+    { label: "Amount", key: "amount" },
+    { label: "Phone Number", key: "phone" },
+    { label: "Status", key: "status" },
+    { label: "Date Created/Time", key: "created_at" },
   ]
 
   const title = (
@@ -129,16 +193,14 @@ const RetailerSingleHistory = () => {
     </h4>
   )
   const headers = [
-    { label: "Amount", key: "amount" },
-    { label: "Phone Number", key: "phone" },
-    { label: "Status", key: "status" },
-    { label: "Date Created/Time", key: "created_at" },
+    { label: "TRANSACTION AMOUNT", key: "total_sales" },
+    { label: "TRANSACTION DATE", key: "date(created_at)" },
   ]
 
   const Vtu = []
 
   const Total = VtuHistory.reduce(
-    (prev, cur) => prev + Number(`${cur.amount}`),
+    (prev, cur) => prev + Number(`${cur.total_sales}`),
     0
   )
 
@@ -161,17 +223,27 @@ const RetailerSingleHistory = () => {
             <div style={{ color: "green", fontSize: "24px" }}>
               Total Transaction: ₦ {parseInt(`${Total}`).toLocaleString()}
             </div>
-            <Button style={{ backgroundColor: "green" }}>
-              <CSVLink
-                data={VtuHistory}
-                filename={"Retailer's log.csv"}
-                headers={headers}
-                className="btn btn-success"
-                style={{ color: "white" }}
+            <div>
+              <Button style={{ backgroundColor: "green", marginRight: "10px" }}>
+                <CSVLink
+                  data={VtuHistory}
+                  filename={"Retailer's log.csv"}
+                  headers={headers}
+                  className="btn btn-success"
+                  style={{ color: "white" }}
+                >
+                  Export to CSV
+                </CSVLink>
+              </Button>
+              {/* <Button
+                style={{ backgroundColor: "green", color: "#fff" }}
+                onClick={() => {
+                  openModal()
+                }}
               >
-                Export to CSV
-              </CSVLink>
-            </Button>
+                View Detail Log
+              </Button> */}
+            </div>
           </div>
 
           <Tabs defaultActiveKey="1">
@@ -191,6 +263,39 @@ const RetailerSingleHistory = () => {
           </Tabs>
         </div>
       </div>
+      <Modal
+        title="Log"
+        visible={visible}
+        onOk={() => {
+          setVisible(false)
+        }}
+        onCancel={() => {
+          setVisible(false)
+        }}
+      >
+        <Button style={{ backgroundColor: "green" }}>
+          <CSVLink
+            data={VtuHistory}
+            filename={"Retailer's log.csv"}
+            headers={headers1}
+            className="btn btn-success"
+            style={{ color: "white" }}
+          >
+            Export to CSV
+          </CSVLink>
+        </Button>
+        <div className="table_Group">
+          {/* <div className="table_header"></div> */}
+          <Spin spinning={spinning} size="large" delay={0}>
+            <Table
+              columns={HistoryColumn2}
+              dataSource={VtuHistory2}
+              bordered
+              size="small"
+            />
+          </Spin>
+        </div>
+      </Modal>
     </AdminLayout>
   )
 }
