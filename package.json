@@ -11,7 +11,7 @@
     "aos": "^2.3.4",
     "cors": "^2.8.5",
     "cryptr": "^6.0.1",
-    "gatsby": "^2.18.12",
+    "gatsby": "^4.25.7",
     "gatsby-image": "^2.2.37",
     "gatsby-plugin-antd": "^2.1.0",
     "gatsby-plugin-express": "^1.1.6",
